@@ -1,0 +1,146 @@
+name: aac_core
+description: A Package Core.
+version: 0.0.1
+homepage:
+
+environment:
+  sdk: '>=2.18.2 <3.0.0'
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  # Json auto gen
+  json_serializable: ^6.2.0
+  json_annotation: ^4.6.0
+
+  # Badge in app icon
+  flutter_app_badger: ^1.4.0
+  # Badge in bottom bar
+  badges: ^2.0.2
+  # bloc
+  bloc: ^8.0.0
+  flutter_bloc: ^8.0.0
+  # Equatable
+  equatable: ^2.0.3
+  # GraphQL
+  graphql: ^5.1.1
+  http: ^0.13.4
+  fresh: ^0.4.1
+  # DI
+  get_it: ^7.2.0
+  injectable: ^1.5.3
+  # Form validation
+  form_validator: ^1.0.2
+  # Action launchers
+  url_launcher: ^6.1.4
+  # Phone number format
+  phone_number: ^0.12.0+2
+  # Shared preferences
+  shared_preferences: ^2.0.13
+  # SVG Image
+  flutter_svg: ^1.0.0
+  # Provider for updating small widget
+  provider: ^6.0.2
+  # Alert
+  rflutter_alert: ^2.0.4
+  # String format
+  sprintf: ^6.0.0
+  # Stop watch timer
+  timer_count_down: ^2.2.1
+  # Rating bar
+  flutter_rating_bar: ^4.0.0
+  # Toast
+  fluttertoast: ^8.0.9
+  # Modal Bottom Sheet
+  modal_bottom_sheet: ^2.1.0
+  # Pull to Refresh
+  # pull_to_refresh: ^2.0.0
+  # Dio
+  dio: ^4.0.6
+  # Shimmer
+  shimmer: ^2.0.0
+  # Image Loader
+  extended_image: ^6.3.1
+  # Get Widget - https://docs.getwidget.dev/
+  getwidget: ^3.0.1
+  # Sizer for UI
+  sizer: ^2.0.15
+  # Money Formatter
+  money_formatter: ^0.0.3
+  # Flutter Keychain
+  #  flutter_keychain: ^2.2.1
+  # Hive
+  hive: ^2.2.2
+  hive_flutter: ^1.1.0
+  # Copy to Clipboard
+  clipboard: ^0.1.3
+  # Lat Lng
+  latlong2: ^0.8.1
+  # Location
+  location: ^4.4.0
+  # Text with link
+  flutter_linkify: ^5.0.2
+  # WebView
+  webview_flutter: ^3.0.4
+  # Share
+  share_plus: ^4.0.10
+  # Package info
+  package_info_plus: ^1.4.2
+  # Detect app installed from which source
+  store_checker: ^1.0.0
+  # Permission
+  permission_handler: ^9.2.0
+  # Route modular
+  flutter_modular: ^5.0.3
+  # Crypto
+  tuple: ^2.0.0
+  encrypt: ^5.0.1
+  # JWT Decode
+  jwt_decoder: ^2.0.1
+  # ImageView
+  photo_view: ^0.14.0
+  # Validator
+  validators: ^3.0.0
+  # Image Picker
+  image_picker: ^0.8.5+3
+  # File Path
+  path: ^1.8.1
+  # QR
+  qr_flutter: ^4.0.0
+  # External App Launcher
+  external_app_launcher: ^3.0.0
+  # Cupertino modal
+  cupertino_modal_sheet: ^1.0.0
+  # Calendar
+  table_calendar: ^3.0.6
+  # Group list
+  grouped_list: ^5.1.2
+  flutter_html: ^3.0.0-alpha.5
+
+  flutter_keyboard_visibility: ^5.3.0
+  http_parser: ^4.0.1
+  open_file_plus: ^3.3.0
+  dotted_border: ^2.0.0+2
+  pdf_render: ^1.3.4
+  flutter_cache_manager: ^3.3.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  # Build Runner
+  build_runner: ^2.1.10
+  # SVG Image
+#  flutter_svg: ^1.1.0
+
+# The following section is specific to Flutter packages.
+flutter:
+  uses-material-design: true
+
+
+  # Localization
+#  generate: true
+
