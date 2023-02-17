@@ -12,6 +12,7 @@ class InabeTextInput extends StatelessWidget {
   bool enable = true;
   int? maxLines;
   int? maxLength;
+  TextEditingController? controller;
   EdgeInsetsGeometry? contentPadding;
   TextInputType? keyboardType;
   OutlineInputBorder? border;
@@ -29,6 +30,7 @@ class InabeTextInput extends StatelessWidget {
       this.maxLines,
       this.maxLength,
       this.keyboardType,
+      this.controller,
       this.border,
       this.errorBorder,
       this.focusedBorder,
@@ -51,6 +53,7 @@ class InabeTextInput extends StatelessWidget {
             onValueChanged!(value);
           }
         },
+        controller: controller,
         style: textStyle.xMedium.w400,
         decoration: InputDecoration(
           hintText: hintText,

@@ -17,7 +17,9 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$SecondScreenUIState {
   int get counter => throw _privateConstructorUsedError;
-  List<String> get images => throw _privateConstructorUsedError;
+  List<ElectronicAppModel> get electronicApps =>
+      throw _privateConstructorUsedError;
+  String get errorMessage => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SecondScreenUIStateCopyWith<SecondScreenUIState> get copyWith =>
@@ -30,7 +32,10 @@ abstract class $SecondScreenUIStateCopyWith<$Res> {
           SecondScreenUIState value, $Res Function(SecondScreenUIState) then) =
       _$SecondScreenUIStateCopyWithImpl<$Res, SecondScreenUIState>;
   @useResult
-  $Res call({int counter, List<String> images});
+  $Res call(
+      {int counter,
+      List<ElectronicAppModel> electronicApps,
+      String errorMessage});
 }
 
 /// @nodoc
@@ -47,17 +52,22 @@ class _$SecondScreenUIStateCopyWithImpl<$Res, $Val extends SecondScreenUIState>
   @override
   $Res call({
     Object? counter = null,
-    Object? images = null,
+    Object? electronicApps = null,
+    Object? errorMessage = null,
   }) {
     return _then(_value.copyWith(
       counter: null == counter
           ? _value.counter
           : counter // ignore: cast_nullable_to_non_nullable
               as int,
-      images: null == images
-          ? _value.images
-          : images // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+      electronicApps: null == electronicApps
+          ? _value.electronicApps
+          : electronicApps // ignore: cast_nullable_to_non_nullable
+              as List<ElectronicAppModel>,
+      errorMessage: null == errorMessage
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -70,7 +80,10 @@ abstract class _$$_SecondScreenUIStateCopyWith<$Res>
       __$$_SecondScreenUIStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int counter, List<String> images});
+  $Res call(
+      {int counter,
+      List<ElectronicAppModel> electronicApps,
+      String errorMessage});
 }
 
 /// @nodoc
@@ -85,17 +98,22 @@ class __$$_SecondScreenUIStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? counter = null,
-    Object? images = null,
+    Object? electronicApps = null,
+    Object? errorMessage = null,
   }) {
     return _then(_$_SecondScreenUIState(
       counter: null == counter
           ? _value.counter
           : counter // ignore: cast_nullable_to_non_nullable
               as int,
-      images: null == images
-          ? _value._images
-          : images // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+      electronicApps: null == electronicApps
+          ? _value._electronicApps
+          : electronicApps // ignore: cast_nullable_to_non_nullable
+              as List<ElectronicAppModel>,
+      errorMessage: null == errorMessage
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -104,23 +122,29 @@ class __$$_SecondScreenUIStateCopyWithImpl<$Res>
 
 class _$_SecondScreenUIState implements _SecondScreenUIState {
   _$_SecondScreenUIState(
-      {this.counter = 0, final List<String> images = const []})
-      : _images = images;
+      {this.counter = 0,
+      final List<ElectronicAppModel> electronicApps = const [],
+      this.errorMessage = ''})
+      : _electronicApps = electronicApps;
 
   @override
   @JsonKey()
   final int counter;
-  final List<String> _images;
+  final List<ElectronicAppModel> _electronicApps;
   @override
   @JsonKey()
-  List<String> get images {
+  List<ElectronicAppModel> get electronicApps {
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_images);
+    return EqualUnmodifiableListView(_electronicApps);
   }
 
   @override
+  @JsonKey()
+  final String errorMessage;
+
+  @override
   String toString() {
-    return 'SecondScreenUIState(counter: $counter, images: $images)';
+    return 'SecondScreenUIState(counter: $counter, electronicApps: $electronicApps, errorMessage: $errorMessage)';
   }
 
   @override
@@ -129,12 +153,15 @@ class _$_SecondScreenUIState implements _SecondScreenUIState {
         (other.runtimeType == runtimeType &&
             other is _$_SecondScreenUIState &&
             (identical(other.counter, counter) || other.counter == counter) &&
-            const DeepCollectionEquality().equals(other._images, _images));
+            const DeepCollectionEquality()
+                .equals(other._electronicApps, _electronicApps) &&
+            (identical(other.errorMessage, errorMessage) ||
+                other.errorMessage == errorMessage));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, counter, const DeepCollectionEquality().hash(_images));
+  int get hashCode => Object.hash(runtimeType, counter,
+      const DeepCollectionEquality().hash(_electronicApps), errorMessage);
 
   @JsonKey(ignore: true)
   @override
@@ -145,13 +172,17 @@ class _$_SecondScreenUIState implements _SecondScreenUIState {
 }
 
 abstract class _SecondScreenUIState implements SecondScreenUIState {
-  factory _SecondScreenUIState({final int counter, final List<String> images}) =
-      _$_SecondScreenUIState;
+  factory _SecondScreenUIState(
+      {final int counter,
+      final List<ElectronicAppModel> electronicApps,
+      final String errorMessage}) = _$_SecondScreenUIState;
 
   @override
   int get counter;
   @override
-  List<String> get images;
+  List<ElectronicAppModel> get electronicApps;
+  @override
+  String get errorMessage;
   @override
   @JsonKey(ignore: true)
   _$$_SecondScreenUIStateCopyWith<_$_SecondScreenUIState> get copyWith =>

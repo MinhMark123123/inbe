@@ -1,26 +1,36 @@
 import 'package:aac_core/aac_core.dart';
+import 'package:dio/dio.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:inabe/src/data/model/electronic_app_model.dart';
+import 'package:inabe/src/di/di_config.dart';
 import 'package:inabe/src/presenter/toppage/home/presenter/ui_state.dart';
 
-final _secondScreenUiStateProvider = StateProvider.autoDispose<SecondScreenUIState>((ref) {
+final _secondScreenUiStateProvider =
+    StateProvider.autoDispose<SecondScreenUIState>((ref) {
   return SecondScreenUIState();
 });
-final secondScreenControllerProvider = Provider.autoDispose<HomePageViewModel>((ref) {
+final secondScreenControllerProvider =
+    Provider.autoDispose<HomePageViewModel>((ref) {
   return HomePageViewModel(
     uiState: ref.watch(_secondScreenUiStateProvider.notifier),
   );
 });
 
 class HomePageViewModel extends ViewModel {
+  AutoDisposeStateProvider<SecondScreenUIState> get ui =>
+      _secondScreenUiStateProvider;
 
-  AutoDisposeStateProvider<SecondScreenUIState> get ui => _secondScreenUiStateProvider;
+  ProviderListenable<int> get counterChange =>
+      ui.select((value) => value.counter);
 
-  ProviderListenable<int> get counterChange => ui.select((value) => value.counter);
+  ProviderListenable<List<ElectronicAppModel>> get electronicApps =>
+      ui.select((value) => value.electronicApps);
 
   final StateController<SecondScreenUIState> uiState;
 
   HomePageViewModel({required this.uiState}) {
     print("HomePageViewModel constructor");
+    getElectronicApps();
   }
 
   @override
@@ -73,4 +83,26 @@ class HomePageViewModel extends ViewModel {
     uiState.update((state) => state.copyWith(counter: counter + 1));
   }
 
+  void getElectronicApps() {
+    // restClient
+    //     .electronicApps()
+    //     .then((value) => {
+    //           uiState
+    //               .update((state) => state.copyWith(electronicApps: value.data))
+    //         })
+    //     .catchError((obj) {
+    //   switch (obj.runtimeType) {
+    //     case DioError:
+    //       final res = (obj as DioError).response;
+    //       print("Got error : ${res?.statusCode} : ${res?.statusMessage}");
+    //       uiState.update((state) => state.copyWith(
+    //           errorMessage: res?.statusMessage ?? "Request api error"));
+    //       break;
+    //     default:
+    //       uiState
+    //           .update((state) => state.copyWith(errorMessage: "Default error"));
+    //       break;
+    //   }
+    // });
+  }
 }

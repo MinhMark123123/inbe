@@ -137,7 +137,9 @@ class _LoginPageState extends State<LoginPage> {
           height: Dimens.size40,
         ),
         TextButton(
-          onPressed: () => {context.push("/${RouterConstants.forgotPw}")},
+          onPressed: () => {
+            context.go("/login/forgotPw"),
+          },
           child: Text(
             str.press_to_forgot_password,
             style: textStyle.medium.w400.fill(ColorName.carbonGrey),

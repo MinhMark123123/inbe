@@ -1,11 +1,18 @@
 abstract class BaseResponse<Model> {
   Model data;
-  String message;
-  int code;
+  String? message;
+  int? code;
 
   BaseResponse({
     required this.data,
-    required this.message,
-    required this.code,
+    this.message,
+    this.code,
   });
+}
+
+
+abstract class BaseData {
+  String? message;
+
+  BaseData({this.message});
 }

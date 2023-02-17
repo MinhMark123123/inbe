@@ -1,5 +1,4 @@
 import 'package:aac_core/aac_core.dart';
-import 'package:flutter/material.dart';
 
 class CustomAppBarWidget extends AppBar {
   bool showBack;
@@ -19,7 +18,7 @@ class CustomAppBarWidget extends AppBar {
     double? titleSpacing = 0.0,
     double? toolbarHeight,
     this.titleColor,
-    Color? backgroundColor = Colors.transparent,
+    Color? backgroundColor,
     List<Widget>? actions,
     this.onBackPressed,
     this.centerWidget,
@@ -29,7 +28,7 @@ class CustomAppBarWidget extends AppBar {
   }) : super(
           key: key,
           automaticallyImplyLeading: false,
-          backgroundColor: backgroundColor,
+          backgroundColor: backgroundColor ?? const Color(0xFFF7F3EF),
           centerTitle: centerTitle,
           elevation: elevation,
           toolbarHeight: toolbarHeight,
@@ -42,8 +41,8 @@ class CustomAppBarWidget extends AppBar {
                     backgroundColor: enableLeadingSplashRadiusBackground
                         ? Colors.white.withOpacity(0.2)
                         : Colors.transparent,
-                    child: leading ??
-                        Assets.images.icArrowBack.image(width: 16),
+                    child:
+                        leading ?? Assets.images.icArrowBack.image(width: 16),
                   ),
                   onPressed: onBackPressed ?? () => {})
               : null,

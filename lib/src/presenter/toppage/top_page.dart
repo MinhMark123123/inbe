@@ -1,39 +1,31 @@
 import 'package:aac_core/aac_core.dart';
-import 'package:flutter/material.dart';
+import 'package:inabe/src/presenter/toppage/component/bottom_navigation_widget.dart';
 import 'package:inabe_design/inabe_design.dart';
 
 class TopPage extends StatefulWidget {
-  const TopPage({Key? key}) : super(key: key);
+  const TopPage({Key? key, required this.child}) : super(key: key);
+
+  final Widget child;
 
   @override
   State<TopPage> createState() => _TopPageState();
 }
 
 class _TopPageState extends State<TopPage> {
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: _appBar(),
-      body: _buildHomeBody(),
-
-    );
-  }
-
-  PreferredSize _appBar() => PreferredSize(
-    preferredSize: AppBar().preferredSize,
-    child: CustomAppBarWidget(
-      title: "Top page",
-      titleColor: ColorName.carbonGrey,
-      elevation: 2,
-      backgroundColor: Colors.white,
-    ),
-  );
-
-  Widget _buildHomeBody() {
-    return Container(
-      color: Colors.white,
-      child: const Text("Top page"),
+      body: widget.child,
+      bottomNavigationBar: const BottomNavigationWidget()
     );
   }
 }

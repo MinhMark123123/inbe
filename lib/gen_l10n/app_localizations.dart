@@ -123,6 +123,42 @@ abstract class AppLocalizations {
   /// **'パスワード再設定'**
   String get change_password;
 
+  /// No description provided for @event_information.
+  ///
+  /// In en, this message translates to:
+  /// **'イベント情報'**
+  String get event_information;
+
+  /// No description provided for @convenience_book.
+  ///
+  /// In en, this message translates to:
+  /// **'くらしの便利帳'**
+  String get convenience_book;
+
+  /// No description provided for @magazine_link.
+  ///
+  /// In en, this message translates to:
+  /// **'広報誌Link'**
+  String get magazine_link;
+
+  /// No description provided for @electronic_app.
+  ///
+  /// In en, this message translates to:
+  /// **'電子申請'**
+  String get electronic_app;
+
+  /// No description provided for @electronic_library.
+  ///
+  /// In en, this message translates to:
+  /// **'電子図書館'**
+  String get electronic_library;
+
+  /// No description provided for @related_apps.
+  ///
+  /// In en, this message translates to:
+  /// **'関連アプリ'**
+  String get related_apps;
+
   /// No description provided for @change_password_desc.
   ///
   /// In en, this message translates to:
@@ -147,6 +183,42 @@ abstract class AppLocalizations {
   /// **'ご登録いただいているメールアドレスをご入力いただき、「送信」ボタンを押してください。\nパスワード再設定ページへのURLをメールにて送付します。'**
   String get forgot_password_desc;
 
+  /// No description provided for @forgot_password_success.
+  ///
+  /// In en, this message translates to:
+  /// **'パスワード再発行メール送信完了'**
+  String get forgot_password_success;
+
+  /// No description provided for @forgot_password_success_desc.
+  ///
+  /// In en, this message translates to:
+  /// **'ご登録いただいているメールアドレスへ\nパスワード再設定ページへのURLを送信しました。'**
+  String get forgot_password_success_desc;
+
+  /// No description provided for @forgot_password_success_process.
+  ///
+  /// In en, this message translates to:
+  /// **'登録の手続きはまだ完了していません。\n再設定メールに記載のURLから手続きを行ってください。\n※URLの有効期限は配信後30分です。'**
+  String get forgot_password_success_process;
+
+  /// No description provided for @resend_forget_mail.
+  ///
+  /// In en, this message translates to:
+  /// **'メールが届かない場合'**
+  String get resend_forget_mail;
+
+  /// No description provided for @forget_check_mail.
+  ///
+  /// In en, this message translates to:
+  /// **'メールが届かない場合は、下記をご確認ください'**
+  String get forget_check_mail;
+
+  /// No description provided for @resend_forget_mail_process_content.
+  ///
+  /// In en, this message translates to:
+  /// **'1.迷惑メールや別のフォルダに振り分けられていないかをご確認ください\nHotmailやGmailの場合、ほかのフォルダ特にGmailでは、「すべてのメール」フォルダの確認をお願いします。\n\n2.利用機器（スマートフォン等）の設定をご確認ください\n3.ご利用の機器、プロバイダー等のご契約内容をご確認ください\n4.@xxxxxxx.jpドメインからのメールが受け取れる状態であるかをご確認ください\n5.受信ボックス容量が一杯になっていないかをご確認ください\n6.入力されたメールアドレスが誤っていないかをご確認ください\nよくある入力間違い\n・～ne.jp → ～co.jp\n・ドット「. 」→カンマ「, 」\n・前後や途中に余分なスペースが入っている等'**
+  String get resend_forget_mail_process_content;
+
   /// No description provided for @send.
   ///
   /// In en, this message translates to:
@@ -164,6 +236,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'登録'**
   String get register;
+
+  /// No description provided for @field_required.
+  ///
+  /// In en, this message translates to:
+  /// **'Required field'**
+  String get field_required;
+
+  /// No description provided for @invalid_email.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid email'**
+  String get invalid_email;
+
+  /// No description provided for @invalid_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid password'**
+  String get invalid_password;
+
+  /// No description provided for @not_match_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Not match password'**
+  String get not_match_password;
 
   /// No description provided for @nickname.
   ///
@@ -218,6 +314,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'新規登録はこちら'**
   String get press_to_register;
+
+  /// No description provided for @notification.
+  ///
+  /// In en, this message translates to:
+  /// **'お知らせ'**
+  String get notification;
+
+  /// No description provided for @latest_news.
+  ///
+  /// In en, this message translates to:
+  /// **'新着のお知らせ'**
+  String get latest_news;
+
+  /// No description provided for @see_more.
+  ///
+  /// In en, this message translates to:
+  /// **'もっと見る'**
+  String get see_more;
+
+  /// No description provided for @turn_on_notification.
+  ///
+  /// In en, this message translates to:
+  /// **'お知らせ通知をオンにする'**
+  String get turn_on_notification;
+
+  /// No description provided for @turn_off_notification.
+  ///
+  /// In en, this message translates to:
+  /// **'お知らせ通知をオフにする'**
+  String get turn_off_notification;
+
+  /// No description provided for @home_tab.
+  ///
+  /// In en, this message translates to:
+  /// **'ホーム'**
+  String get home_tab;
+
+  /// No description provided for @email_tab.
+  ///
+  /// In en, this message translates to:
+  /// **'いなべ市生活情報\n（まいめる）'**
+  String get email_tab;
+
+  /// No description provided for @medicine_tab.
+  ///
+  /// In en, this message translates to:
+  /// **'医療救急情報'**
+  String get medicine_tab;
+
+  /// No description provided for @menu_tab.
+  ///
+  /// In en, this message translates to:
+  /// **'メニュー'**
+  String get menu_tab;
+
+  /// No description provided for @menu.
+  ///
+  /// In en, this message translates to:
+  /// **'メニュー'**
+  String get menu;
+
+  /// No description provided for @setting.
+  ///
+  /// In en, this message translates to:
+  /// **'設定'**
+  String get setting;
+
+  /// No description provided for @privacy_policy.
+  ///
+  /// In en, this message translates to:
+  /// **'プライバシーポリシー'**
+  String get privacy_policy;
+
+  /// No description provided for @logout.
+  ///
+  /// In en, this message translates to:
+  /// **'ログアウト'**
+  String get logout;
+
+  /// No description provided for @help.
+  ///
+  /// In en, this message translates to:
+  /// **'ヘルプ'**
+  String get help;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -14,15 +14,16 @@ class Configs {
   // Global Navigator Key
   static final GlobalKey<NavigatorState> navigatorKey =
       GlobalKey<NavigatorState>();
-  //
-  // // Global BuildContext
-  // static final BuildContext globalContext = navigatorKey.currentContext!;
+
+  // Global BuildContext
+  static final BuildContext globalContext = navigatorKey.currentContext!;
   //
   // // Theme
   // static const ThemeMode defaultTheme = ThemeMode.light;
 
   // Font
   static const String defaultFont = FontFamily.inter;
+
   //
   // Localization
   // static const localizationsDelegates = AppLocalizations.localizationsDelegates;

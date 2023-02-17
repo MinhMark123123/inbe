@@ -1,9 +1,12 @@
-import 'package:flutter/material.dart';
+import 'package:aac_core/aac_core.dart';
 import 'package:inabe/gen_l10n/app_localizations.dart';
 import 'package:inabe/src/navigation/app_routers.dart';
+
 //
-BuildContext? context = AppGoRouter().router.routerDelegate.navigatorKey.currentContext;
-AppLocalizations get str => AppLocalizations.of(context!);
+BuildContext? context =
+    AppGoRouter().router.routerDelegate.navigatorKey.currentContext;
+
+AppLocalizations get str => AppLocalizations.of(Configs.globalContext);
 //
 // extension AssetGenImageX on AssetGenImage {
 //   Widget decor({

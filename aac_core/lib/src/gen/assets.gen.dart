@@ -39,11 +39,23 @@ class $AssetsImagesGen {
   SvgGenImage get icDropdown =>
       const SvgGenImage('assets/images/ic_dropdown.svg');
 
-  /// File path: assets/images/ic_email.svg
-  SvgGenImage get icEmail => const SvgGenImage('assets/images/ic_email.svg');
+  /// File path: assets/images/ic_email.png
+  AssetGenImage get icEmail =>
+      const AssetGenImage('assets/images/ic_email.png');
 
-  /// File path: assets/images/ic_home.svg
-  SvgGenImage get icHome => const SvgGenImage('assets/images/ic_home.svg');
+  /// File path: assets/images/ic_email_active.png
+  AssetGenImage get icEmailActive =>
+      const AssetGenImage('assets/images/ic_email_active.png');
+
+  /// File path: assets/images/ic_help.png
+  AssetGenImage get icHelp => const AssetGenImage('assets/images/ic_help.png');
+
+  /// File path: assets/images/ic_home.png
+  AssetGenImage get icHome => const AssetGenImage('assets/images/ic_home.png');
+
+  /// File path: assets/images/ic_home_active.png
+  AssetGenImage get icHomeActive =>
+      const AssetGenImage('assets/images/ic_home_active.png');
 
   /// File path: assets/images/ic_instagram.png
   AssetGenImage get icInstagram =>
@@ -51,6 +63,10 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/ic_live.png
   AssetGenImage get icLive => const AssetGenImage('assets/images/ic_live.png');
+
+  /// File path: assets/images/ic_login.png
+  AssetGenImage get icLogin =>
+      const AssetGenImage('assets/images/ic_login.png');
 
   /// File path: assets/images/ic_logo_big.png
   AssetGenImage get icLogoBig =>
@@ -60,12 +76,24 @@ class $AssetsImagesGen {
   AssetGenImage get icLogoSmall =>
       const AssetGenImage('assets/images/ic_logo_small.png');
 
+  /// File path: assets/images/ic_medicine.png
+  AssetGenImage get icMedicine =>
+      const AssetGenImage('assets/images/ic_medicine.png');
+
   /// File path: assets/images/ic_medicine_cabinet.svg
   SvgGenImage get icMedicineCabinet =>
       const SvgGenImage('assets/images/ic_medicine_cabinet.svg');
 
-  /// File path: assets/images/ic_menu.svg
-  SvgGenImage get icMenu => const SvgGenImage('assets/images/ic_menu.svg');
+  /// File path: assets/images/ic_menu.png
+  AssetGenImage get icMenu => const AssetGenImage('assets/images/ic_menu.png');
+
+  /// File path: assets/images/ic_policy.png
+  AssetGenImage get icPolicy =>
+      const AssetGenImage('assets/images/ic_policy.png');
+
+  /// File path: assets/images/ic_setting.png
+  AssetGenImage get icSetting =>
+      const AssetGenImage('assets/images/ic_setting.png');
 
   /// File path: assets/images/ic_twitter.png
   AssetGenImage get icTwitter =>

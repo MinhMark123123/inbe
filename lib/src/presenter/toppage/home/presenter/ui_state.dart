@@ -9,15 +9,15 @@ class SecondScreenUIState {
 }
 */
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:inabe/src/data/model/electronic_app_model.dart';
+
 part 'ui_state.freezed.dart';
 
 @freezed
 class SecondScreenUIState with _$SecondScreenUIState {
   factory SecondScreenUIState({
-    @Default(0)
-    int counter,
-    @Default([])
-    List<String> images,
+    @Default(0) int counter,
+    @Default([]) List<ElectronicAppModel> electronicApps,
+    @Default('') String errorMessage,
   }) = _SecondScreenUIState;
-
 }

@@ -54,4 +54,7 @@ class ColorName {
 
   /// Color: #FFFFFF
   static const Color secondaryColor = Color(0xFFFFFFFF);
+
+  /// Color: #F7F3EF
+  static const Color skinF7 = Color(0xFFF7F3EF);
 }

@@ -10,50 +10,62 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
+  late Future<void> initBuilder;
+
+
   @override
   void initState() {
-    _initConfigs();
+    initBuilder = _initConfigs();
     super.initState();
   }
 
-  void _initConfigs() async {
+  Future<void> _initConfigs() async {
+    print("ttt _initConfigs");
+    await Future.delayed(Duration.zero);
     await AppConfigs.splashInit(context);
+    goToHome();
   }
 
   @override
   Widget build(BuildContext context) {
-    // goToHome();
-    return Scaffold(
-      appBar: AppBar(),
-      body: Column(
-        children: [
-          Expanded(
-            child: Container(
-              color: Colors.white,
-              child: Assets.images.icLogoBig.image(),
-              // const Image(
-              //   image: AssetImage('assets/images/ic_logo_big.png'),
+    return FutureBuilder(
+      future: initBuilder,
+      builder: (context, snapshot) {
+        return Scaffold(
+          body: Column(
+            children: [
+              Expanded(
+                child: Container(
+                  color: Colors.white,
+                  child: Assets.images.icLogoBig.image(),
+                  // const Image(
+                  //   image: AssetImage('assets/images/ic_logo_big.png'),
+                  // ),
+                ),
+              ),
+              // TextButton(
+              //   onPressed: () => {
+              //     // context.go("/${RouterConstants.login}"),
+              //     // context.replace("/${RouterConstants.login}"),
+              //   },
+              //   child: Text(
+              //     "Go S1",
+              //     style: textStyle.large.w700.fill(ColorName.boulder),
+              //   ),
               // ),
-            ),
+            ],
           ),
-          TextButton(
-            onPressed: () => {
-              // context.go("/${RouterConstants.login}"),
-              context.replace("/${RouterConstants.login}"),
-            },
-            child: Text(
-              "Go S1",
-              style: textStyle.large.w700.fill(ColorName.boulder),
-            ),
-          ),
-        ],
-      ),
+        );
+      }
     );
   }
 
-// void goToHome() {
-//   Future.delayed(const Duration(milliseconds: 3000), () {
-//     context.push("/${RouterConstants.login}");
-//   });
-// }
+void goToHome() {
+  Future.delayed(const Duration(milliseconds: 3000), () {
+    print("ttt go");
+    // context.go("/${RouterConstants.home}");
+    context.go("/${RouterConstants.register}");
+    // context.go("/${RouterConstants.login}");
+  });
+}
 }

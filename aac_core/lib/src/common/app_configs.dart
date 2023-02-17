@@ -34,12 +34,15 @@ class AppConfigs {
   // }
 
   static splashInit(BuildContext context) async {
+
     /// Init screen
     MediaQueryData mediaQueryData = MediaQuery.of(context);
     Configs.screenSize = mediaQueryData.size;
     Configs.screenWidth = mediaQueryData.size.width;
     Configs.screenHeight = mediaQueryData.size.height;
     Configs.screenPadding = mediaQueryData.padding;
+
+    print("ttt ${Configs.screenSize}");
 
     /// Api Service
     // await GraphQLConfig.init();

@@ -1,6 +1,7 @@
 import 'package:aac_core/aac_core.dart';
 import 'package:go_router/go_router.dart';
 import 'package:inabe/gen_l10n/app_localizations.dart';
+import 'package:inabe/src/navigation/routers.dart';
 import 'package:inabe/src/presenter/widget/inabe_text_input.dart';
 import 'package:inabe_design/inabe_design.dart';
 
@@ -91,7 +92,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       width: 200,
       child: ElevatedButton(
         onPressed: () => {
-          context.pop()
+          context.go("/login/${RouterConstants.forgotPwSuccess}")
         },
         style: ElevatedButton.styleFrom(backgroundColor: ColorName.greenSnake),
         child: Center(
