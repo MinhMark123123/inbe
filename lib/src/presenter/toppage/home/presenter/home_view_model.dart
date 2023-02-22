@@ -2,17 +2,19 @@ import 'package:aac_core/aac_core.dart';
 import 'package:dio/dio.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:inabe/src/data/model/electronic_app_model.dart';
-import 'package:inabe/src/di/di_config.dart';
+import 'package:inabe/src/data/repository/toppage/top_repository.dart';
 import 'package:inabe/src/presenter/toppage/home/presenter/ui_state.dart';
 
 final _secondScreenUiStateProvider =
     StateProvider.autoDispose<SecondScreenUIState>((ref) {
   return SecondScreenUIState();
 });
+
 final secondScreenControllerProvider =
     Provider.autoDispose<HomePageViewModel>((ref) {
   return HomePageViewModel(
     uiState: ref.watch(_secondScreenUiStateProvider.notifier),
+    topRepository: ref.read(topRepositoryProvider),
   );
 });
 
@@ -28,9 +30,13 @@ class HomePageViewModel extends ViewModel {
 
   final StateController<SecondScreenUIState> uiState;
 
-  HomePageViewModel({required this.uiState}) {
+  final TopRepository topRepository;
+
+  HomePageViewModel({
+    required this.uiState,
+    required this.topRepository,
+  }) {
     print("HomePageViewModel constructor");
-    getElectronicApps();
   }
 
   @override
@@ -39,6 +45,7 @@ class HomePageViewModel extends ViewModel {
   @override
   void onInitState() {
     super.onInitState();
+    getElectronicApps();
     print("on init state");
   }
 
@@ -84,25 +91,25 @@ class HomePageViewModel extends ViewModel {
   }
 
   void getElectronicApps() {
-    // restClient
-    //     .electronicApps()
-    //     .then((value) => {
-    //           uiState
-    //               .update((state) => state.copyWith(electronicApps: value.data))
-    //         })
-    //     .catchError((obj) {
-    //   switch (obj.runtimeType) {
-    //     case DioError:
-    //       final res = (obj as DioError).response;
-    //       print("Got error : ${res?.statusCode} : ${res?.statusMessage}");
-    //       uiState.update((state) => state.copyWith(
-    //           errorMessage: res?.statusMessage ?? "Request api error"));
-    //       break;
-    //     default:
-    //       uiState
-    //           .update((state) => state.copyWith(errorMessage: "Default error"));
-    //       break;
-    //   }
-    // });
+    topRepository
+        .getElectronicApps()
+        .then((value) => {
+              uiState
+                  .update((state) => state.copyWith(electronicApps: value.data))
+            })
+        .catchError((obj) {
+      switch (obj.runtimeType) {
+        case DioError:
+          final res = (obj as DioError).response;
+          print("Got error : ${res?.statusCode} : ${res?.statusMessage}");
+          uiState.update((state) => state.copyWith(
+              errorMessage: res?.statusMessage ?? "Request api error"));
+          break;
+        default:
+          uiState
+              .update((state) => state.copyWith(errorMessage: "Default error"));
+          break;
+      }
+    });
   }
 }

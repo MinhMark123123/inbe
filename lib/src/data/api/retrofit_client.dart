@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:inabe/src/data/dto/request/login_request.dart';
 import 'package:inabe/src/data/dto/request/user_request.dart';
@@ -6,7 +8,7 @@ import 'package:inabe/src/data/dto/response/interest_response.dart';
 import 'package:inabe/src/data/dto/response/living_guide_response.dart';
 import 'package:inabe/src/data/dto/response/other_app_response.dart';
 import 'package:inabe/src/data/dto/response/user_response.dart';
-import 'package:retrofit/http.dart';
+import 'package:retrofit/retrofit.dart';
 
 part 'retrofit_client.g.dart';
 
@@ -15,10 +17,10 @@ abstract class RestClient {
   factory RestClient(Dio dio, {String baseUrl}) = _RestClient;
 
   @POST("auth/sign_in")
-  Future<UseResponse> login(@Body() LoginRequest loginRequest);
+  Future<HttpResponse<UserResponse>> login(@Body() LoginRequest loginRequest);
 
   @POST("auth")
-  Future<UseResponse> register(@Body() UserRequest userRequest);
+  Future<UserResponse> register(@Body() UserRequest userRequest);
 
   @GET("interests")
   Future<InterestResponse> interests();

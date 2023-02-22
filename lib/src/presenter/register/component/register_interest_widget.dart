@@ -14,9 +14,6 @@ class RegisterInterestWidget
   @override
   Widget buildWidget(
       BuildContext context, WidgetRef ref, RegisterViewModel viewModel) {
-    // final interests = ref.watch(viewModel.interests);
-    // final checkBoxList = ref.watch(viewModel.checkBoxList);
-    // print("ttt $checkBoxList");
     ref.listen(viewModel.asynCagetory, (previous, next) {
       print("ttt asynCagetory ${previous} : $next");
 

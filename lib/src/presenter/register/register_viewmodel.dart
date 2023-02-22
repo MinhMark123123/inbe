@@ -1,11 +1,11 @@
 import 'package:aac_core/aac_core.dart';
 import 'package:dio/dio.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:inabe/src/data/api/retrofit_client.dart';
 import 'package:inabe/src/data/dto/request/user_request.dart';
 import 'package:inabe/src/data/dto/response/interest_response.dart';
 import 'package:inabe/src/data/model/interest_model.dart';
-import 'package:inabe/src/di/di_config.dart';
+import 'package:inabe/src/data/repository/toppage/top_repository.dart';
+import 'package:inabe/src/data/repository/user/user_repository.dart';
 import 'package:inabe/src/presenter/register/register_ui_state.dart';
 import 'package:inabe/src/utils/extensions/input_controller_extension.dart';
 
@@ -17,15 +17,26 @@ final registerPageControllerProvider =
     Provider.autoDispose<RegisterViewModel>((ref) {
   return RegisterViewModel(
     uiState: ref.watch(_registerPageUiStateProvider.notifier),
-    restClient: ref.read(apiClientProvider),
+    // restClient: ref.read(apiClientProvider),
+    userRepository: ref.read(userRepositoryProvider),
+    topRepository: ref.read(topRepositoryProvider),
   );
 });
 
 class RegisterViewModel extends ViewModel {
-  final RestClient restClient;
+  // final RestClient restClient;
+
+  final UserRepository userRepository;
+  final TopRepository topRepository;
 
   AutoDisposeStateProvider<RegisterUIState> get ui =>
       _registerPageUiStateProvider;
+
+  ProviderListenable<String> get errorPassword =>
+      ui.select((value) => value.errorPassword);
+
+  ProviderListenable<String> get errorConfirmPassword =>
+      ui.select((value) => value.errorConfirmPassword);
 
   ProviderListenable<String> get errorEmail =>
       ui.select((value) => value.errorMail);
@@ -54,8 +65,12 @@ class RegisterViewModel extends ViewModel {
   TextEditingController passwordController = TextEditingController();
   TextEditingController rePasswordController = TextEditingController();
 
-
-  RegisterViewModel({required this.restClient, required this.uiState}) {
+  RegisterViewModel({
+    required this.userRepository,
+    required this.topRepository,
+    // required this.restClient,
+    required this.uiState,
+  }) {
     print("RegisterViewModel constructor");
   }
 
@@ -74,7 +89,7 @@ class RegisterViewModel extends ViewModel {
         (state) => state.copyWith(checkBoxList: const AsyncValue.loading()),
       );
     });
-    restClient.interests().then(
+    topRepository.getInterestsApi().then(
       (value) {
         uiState.update((state) => state.copyWith(interests: value.data));
         uiState.update(
@@ -112,7 +127,7 @@ class RegisterViewModel extends ViewModel {
 
   void register(UserRequest userRequest) {
     // uiState.update((state) => )
-    restClient
+    userRepository
         .register(userRequest)
         .then((value) => {
               //show success
@@ -143,20 +158,91 @@ class RegisterViewModel extends ViewModel {
     uiState.update((state) => state.copyWith(isTurnOn: isTurnOn));
   }
 
-  void onChange() {
-    uiState
-        .update((state) => state.copyWith(errorMail: ''));
+  void onChangeEmail() {
+    uiState.update((state) => state.copyWith(errorMail: ''));
+  }
+
+  void onChangePassword() {
+    uiState.update((state) => state.copyWith(errorPassword: ''));
+  }
+
+  void onChangeConfirmPassword() {
+    uiState.update((state) => state.copyWith(errorConfirmPassword: ''));
   }
 
   Future<void> doRegister() async {
+    bool isError = false;
     String? formattedPhone = emailController.validateEmail();
-    // bool passwordValid = _passwordController.validatePassword();
+    String? passwordValid = passwordController.validatePassword();
+    String? confirmValid =
+        rePasswordController.validateConfirmPassword(passwordController.text);
     if (formattedPhone.isNotEmpty) {
-      uiState
-          .update((state) => state.copyWith(errorMail: formattedPhone));
+      isError = true;
+    }
+    uiState.update((state) => state.copyWith(errorMail: formattedPhone));
+    if (passwordValid.isNotEmpty) {
+      isError = true;
+    }
+    uiState.update((state) => state.copyWith(errorPassword: passwordValid));
+
+    if (confirmValid.isNotEmpty) {
+      isError = true;
+    }
+    uiState
+        .update((state) => state.copyWith(errorConfirmPassword: confirmValid));
+
+    if (isError) {
       return;
+    } else {
+      final categories = convertCategories();
+      // print("ttt categories = $categories");
+      // return;
+
+      final request = UserRequest(
+          email: emailController.text,
+          nickname: nicknameController.text,
+          password: passwordController.text,
+          pushNotifications: uiState.state.isTurnOn.toString(),
+          interestCategories: categories);
+
+      print("ttt resquest = $request\n"
+          "json = ${request.toJson()}");
+      // return;
+
+      userRepository.register(request).then(
+        (value) {
+          if (value.data != null) {
+            uiState.update((state) => state.copyWith(isSuccess: true));
+          }
+        },
+      ).catchError((obj) {
+        switch (obj.runtimeType) {
+          case DioError:
+            final res = (obj as DioError).response;
+            Map<String, dynamic> baseRes = res?.data;
+            print(
+                "Got error : ${res?.statusCode} : ${baseRes["error"]['message']}");
+            uiState.update((state) => state.copyWith(
+                errorMessage: res?.statusMessage ?? "Request api error"));
+            break;
+          default:
+            uiState.update(
+                (state) => state.copyWith(errorMessage: "Default error"));
+            break;
+        }
+      });
+    }
+  }
+
+  List<String> convertCategories() {
+    final list = uiState.state.listCheckBox.values.toList();
+    List<String> result = [];
+    for (int i = 0; i < list.length; i++) {
+      if (list[i]) {
+        result.add("${i + 1}");
+      }
     }
 
-
+    return result;
   }
 }

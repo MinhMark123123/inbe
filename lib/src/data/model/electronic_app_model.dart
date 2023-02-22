@@ -6,6 +6,7 @@ part 'electronic_app_model.g.dart';
 class ElectronicAppModel {
   int? id;
   String? name;
+  @JsonKey(name: 'middle_categories')
   List<MiddleCategories>? middleCategories;
 
   ElectronicAppModel({this.id, this.name, this.middleCategories});
@@ -42,7 +43,9 @@ class MiddleCategories {
 @JsonSerializable()
 class Procedures {
   String? name;
+  @JsonKey(name: 'detail_url')
   String? detailUrl;
+  @JsonKey(name: 'form_url')
   String? formUrl;
 
   Procedures({this.name, this.detailUrl, this.formUrl});

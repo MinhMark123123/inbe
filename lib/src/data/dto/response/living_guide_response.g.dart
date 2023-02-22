@@ -8,7 +8,9 @@ part of 'living_guide_response.dart';
 
 LivingGuideResponse _$LivingGuideResponseFromJson(Map<String, dynamic> json) =>
     LivingGuideResponse(
-      data: json['data'] as List<dynamic>,
+      data: (json['data'] as List<dynamic>)
+          .map((e) => LivingGuideModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
     )
       ..message = json['message'] as String?
       ..code = json['code'] as int?;

@@ -5,11 +5,11 @@ import 'package:inabe/src/navigation/go_routers_observer.dart';
 import 'package:inabe/src/navigation/routers.dart';
 import 'package:inabe/src/presenter/change_password/change_password_page.dart';
 import 'package:inabe/src/presenter/convenience_book/convenience_book_page.dart';
+import 'package:inabe/src/presenter/electronic_apps/electronic_apps_page.dart';
 import 'package:inabe/src/presenter/event/event_page.dart';
 import 'package:inabe/src/presenter/forgot_password/forgot_password_page.dart';
 import 'package:inabe/src/presenter/forgot_password/notify_forgot_password_success.dart';
 import 'package:inabe/src/presenter/login/login_page.dart';
-import 'package:inabe/src/presenter/magazine/magazine_link_page.dart';
 import 'package:inabe/src/presenter/notification/notification_list_page.dart';
 import 'package:inabe/src/presenter/register/register_page.dart';
 import 'package:inabe/src/presenter/related_apps/related_apps_page.dart';
@@ -109,31 +109,29 @@ class AppGoRouter {
                       return const ConvenienceBookPage();
                     },
                   ),
-                  GoRoute(
-                    name: "home/magazine",
-                    path: RouterConstants.magazine,
-                    builder: (context, state) {
-                      return const MagazineLinkPage();
-                    },
-                  ),
+                  // GoRoute(
+                  //   name: "home/magazine",
+                  //   path: RouterConstants.magazine,
+                  //   builder: (context, state) {
+                  //     return const MagazineLinkPage();
+                  //   },
+                  // ),
                   GoRoute(
                     name: "home/electronic_app",
                     path: RouterConstants.electronic_app,
                     builder: (context, state) {
-                      return NotificationDetailPage(
-                        notificationModel: state.extra! as NotificationModel,
-                      );
+                      return const ElectronicAppPage();
                     },
                   ),
-                  GoRoute(
-                    name: "home/electronic_lib",
-                    path: RouterConstants.electronic_lib,
-                    builder: (context, state) {
-                      return NotificationDetailPage(
-                        notificationModel: state.extra! as NotificationModel,
-                      );
-                    },
-                  ),
+                  // GoRoute(
+                  //   name: "home/electronic_lib",
+                  //   path: RouterConstants.electronic_lib,
+                  //   builder: (context, state) {
+                  //     return NotificationDetailPage(
+                  //       notificationModel: state.extra! as NotificationModel,
+                  //     );
+                  //   },
+                  // ),
                   GoRoute(
                     name: "home/related_apps",
                     path: RouterConstants.related_apps,
@@ -181,13 +179,13 @@ class AppGoRouter {
             name: "splash",
             path: RouterConstants.splash,
             // builder: (context, state) => const MyHomePage(title: 'Flutter Demo Home Page'),
-            builder: (context, state) => const SplashPage(),
+            builder: (context, state) => SplashPage(),
             routes: [
               GoRoute(
                 name: "settings",
                 path: RouterConstants.second,
                 builder: (context, state) {
-                  return const SplashPage();
+                  return SplashPage();
                 },
               ),
               GoRoute(
@@ -226,6 +224,6 @@ class AppGoRouter {
           //   ],
           // ),
         ],
-        errorBuilder: (context, state) => const SplashPage(),
+        errorBuilder: (context, state) => SplashPage(),
       );
 }

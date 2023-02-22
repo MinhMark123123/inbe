@@ -6,6 +6,10 @@ import 'package:inabe/src/navigation/app_routers.dart';
 BuildContext? context =
     AppGoRouter().router.routerDelegate.navigatorKey.currentContext;
 
+
+BuildContext? shellContext =
+    AppGoRouter().router.routerDelegate.navigatorKey.currentContext;
+
 AppLocalizations get str => AppLocalizations.of(Configs.globalContext);
 //
 // extension AssetGenImageX on AssetGenImage {

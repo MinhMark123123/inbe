@@ -24,6 +24,7 @@ mixin _$RegisterUIState {
   String get errorMessage => throw _privateConstructorUsedError;
   String get errorMail => throw _privateConstructorUsedError;
   String get errorPassword => throw _privateConstructorUsedError;
+  String get errorConfirmPassword => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $RegisterUIStateCopyWith<RegisterUIState> get copyWith =>
@@ -43,7 +44,8 @@ abstract class $RegisterUIStateCopyWith<$Res> {
       AsyncValue<Map<InterestModel, bool>> checkBoxList,
       String errorMessage,
       String errorMail,
-      String errorPassword});
+      String errorPassword,
+      String errorConfirmPassword});
 }
 
 /// @nodoc
@@ -66,6 +68,7 @@ class _$RegisterUIStateCopyWithImpl<$Res, $Val extends RegisterUIState>
     Object? errorMessage = null,
     Object? errorMail = null,
     Object? errorPassword = null,
+    Object? errorConfirmPassword = null,
   }) {
     return _then(_value.copyWith(
       isTurnOn: null == isTurnOn
@@ -96,6 +99,10 @@ class _$RegisterUIStateCopyWithImpl<$Res, $Val extends RegisterUIState>
           ? _value.errorPassword
           : errorPassword // ignore: cast_nullable_to_non_nullable
               as String,
+      errorConfirmPassword: null == errorConfirmPassword
+          ? _value.errorConfirmPassword
+          : errorConfirmPassword // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -115,7 +122,8 @@ abstract class _$$_RegisterUIStateCopyWith<$Res>
       AsyncValue<Map<InterestModel, bool>> checkBoxList,
       String errorMessage,
       String errorMail,
-      String errorPassword});
+      String errorPassword,
+      String errorConfirmPassword});
 }
 
 /// @nodoc
@@ -136,6 +144,7 @@ class __$$_RegisterUIStateCopyWithImpl<$Res>
     Object? errorMessage = null,
     Object? errorMail = null,
     Object? errorPassword = null,
+    Object? errorConfirmPassword = null,
   }) {
     return _then(_$_RegisterUIState(
       isTurnOn: null == isTurnOn
@@ -166,6 +175,10 @@ class __$$_RegisterUIStateCopyWithImpl<$Res>
           ? _value.errorPassword
           : errorPassword // ignore: cast_nullable_to_non_nullable
               as String,
+      errorConfirmPassword: null == errorConfirmPassword
+          ? _value.errorConfirmPassword
+          : errorConfirmPassword // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -180,7 +193,8 @@ class _$_RegisterUIState implements _RegisterUIState {
       this.checkBoxList = const AsyncValue.loading(),
       this.errorMessage = '',
       this.errorMail = '',
-      this.errorPassword = ''})
+      this.errorPassword = '',
+      this.errorConfirmPassword = ''})
       : _interests = interests;
 
   @override
@@ -209,10 +223,13 @@ class _$_RegisterUIState implements _RegisterUIState {
   @override
   @JsonKey()
   final String errorPassword;
+  @override
+  @JsonKey()
+  final String errorConfirmPassword;
 
   @override
   String toString() {
-    return 'RegisterUIState(isTurnOn: $isTurnOn, isSuccess: $isSuccess, interests: $interests, checkBoxList: $checkBoxList, errorMessage: $errorMessage, errorMail: $errorMail, errorPassword: $errorPassword)';
+    return 'RegisterUIState(isTurnOn: $isTurnOn, isSuccess: $isSuccess, interests: $interests, checkBoxList: $checkBoxList, errorMessage: $errorMessage, errorMail: $errorMail, errorPassword: $errorPassword, errorConfirmPassword: $errorConfirmPassword)';
   }
 
   @override
@@ -233,7 +250,9 @@ class _$_RegisterUIState implements _RegisterUIState {
             (identical(other.errorMail, errorMail) ||
                 other.errorMail == errorMail) &&
             (identical(other.errorPassword, errorPassword) ||
-                other.errorPassword == errorPassword));
+                other.errorPassword == errorPassword) &&
+            (identical(other.errorConfirmPassword, errorConfirmPassword) ||
+                other.errorConfirmPassword == errorConfirmPassword));
   }
 
   @override
@@ -245,7 +264,8 @@ class _$_RegisterUIState implements _RegisterUIState {
       checkBoxList,
       errorMessage,
       errorMail,
-      errorPassword);
+      errorPassword,
+      errorConfirmPassword);
 
   @JsonKey(ignore: true)
   @override
@@ -262,7 +282,8 @@ abstract class _RegisterUIState implements RegisterUIState {
       final AsyncValue<Map<InterestModel, bool>> checkBoxList,
       final String errorMessage,
       final String errorMail,
-      final String errorPassword}) = _$_RegisterUIState;
+      final String errorPassword,
+      final String errorConfirmPassword}) = _$_RegisterUIState;
 
   @override
   bool get isTurnOn;
@@ -278,6 +299,8 @@ abstract class _RegisterUIState implements RegisterUIState {
   String get errorMail;
   @override
   String get errorPassword;
+  @override
+  String get errorConfirmPassword;
   @override
   @JsonKey(ignore: true)
   _$$_RegisterUIStateCopyWith<_$_RegisterUIState> get copyWith =>

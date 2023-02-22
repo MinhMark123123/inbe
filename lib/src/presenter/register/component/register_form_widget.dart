@@ -13,6 +13,8 @@ class RegisterFormWidget extends ConsumerViewModelWidget<RegisterViewModel> {
   Widget buildWidget(
       BuildContext context, WidgetRef ref, RegisterViewModel viewModel) {
     final errorMail = ref.watch(viewModel.errorEmail);
+    final errorPw = ref.watch(viewModel.errorPassword);
+    final errorConfirmPw = ref.watch(viewModel.errorConfirmPassword);
     print("ttt errorMail $errorMail");
 
     return Column(
@@ -62,9 +64,7 @@ class RegisterFormWidget extends ConsumerViewModelWidget<RegisterViewModel> {
           hintText: str.email,
           controller: viewModel.emailController,
           contentPadding: const EdgeInsets.symmetric(horizontal: Dimens.size6),
-          onValueChanged: (value) => {
-            viewModel.onChange()
-          },
+          onValueChanged: (value) => {viewModel.onChangeEmail()},
         ),
         Visibility(
             visible: errorMail.isNotEmpty,
@@ -86,9 +86,15 @@ class RegisterFormWidget extends ConsumerViewModelWidget<RegisterViewModel> {
           hintText: str.password,
           controller: viewModel.passwordController,
           contentPadding: const EdgeInsets.symmetric(horizontal: Dimens.size6),
-          onValueChanged: (value) => {},
+          onValueChanged: (value) => {viewModel.onChangePassword()},
           obscure: true,
         ),
+        Visibility(
+            visible: errorPw.isNotEmpty,
+            child: Text(
+              errorPw,
+              style: textStyle.xSmall.w400.fill(Colors.red),
+            )),
         const SizedBox(
           height: Dimens.size40,
         ),
@@ -103,9 +109,15 @@ class RegisterFormWidget extends ConsumerViewModelWidget<RegisterViewModel> {
           hintText: str.confirm_password,
           controller: viewModel.rePasswordController,
           contentPadding: const EdgeInsets.symmetric(horizontal: Dimens.size6),
-          onValueChanged: (value) => {},
+          onValueChanged: (value) => {viewModel.onChangeConfirmPassword()},
           obscure: true,
         ),
+        Visibility(
+            visible: errorConfirmPw.isNotEmpty,
+            child: Text(
+              errorConfirmPw,
+              style: textStyle.xSmall.w400.fill(Colors.red),
+            )),
       ],
     );
   }

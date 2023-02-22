@@ -69,7 +69,7 @@ dependencies:
   # Money Formatter
   money_formatter: ^0.0.3
   # Flutter Keychain
-  #  flutter_keychain: ^2.2.1
+  flutter_keychain: ^2.2.1
   # Hive
   hive: ^2.2.2
   hive_flutter: ^1.1.0

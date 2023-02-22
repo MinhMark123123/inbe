@@ -315,6 +315,78 @@ abstract class AppLocalizations {
   /// **'新規登録はこちら'**
   String get press_to_register;
 
+  /// No description provided for @electronic_app_please_check_info.
+  ///
+  /// In en, this message translates to:
+  /// **'電子申請を行う場合は以下をご確認ください'**
+  String get electronic_app_please_check_info;
+
+  /// No description provided for @electronic_app_overview_system.
+  ///
+  /// In en, this message translates to:
+  /// **'電子申請システムの概要'**
+  String get electronic_app_overview_system;
+
+  /// No description provided for @electronic_app_term_of_use.
+  ///
+  /// In en, this message translates to:
+  /// **'電子申請 利用規約'**
+  String get electronic_app_term_of_use;
+
+  /// No description provided for @electronic_app_policy.
+  ///
+  /// In en, this message translates to:
+  /// **'電子申請 個人情報保護方針（プライバシーポリシー）'**
+  String get electronic_app_policy;
+
+  /// No description provided for @electronic_app_external_link.
+  ///
+  /// In en, this message translates to:
+  /// **'【外部リンク】マイナポータル ぴったりサービス'**
+  String get electronic_app_external_link;
+
+  /// No description provided for @electronic_app_choose_category.
+  ///
+  /// In en, this message translates to:
+  /// **'電子申請を行いたいカテゴリーを選択してください'**
+  String get electronic_app_choose_category;
+
+  /// No description provided for @please_select_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'選択してください'**
+  String get please_select_hint;
+
+  /// No description provided for @electronic_app_choose_medium_category.
+  ///
+  /// In en, this message translates to:
+  /// **'続いて中カテゴリーを選択してください'**
+  String get electronic_app_choose_medium_category;
+
+  /// No description provided for @electronic_app_list_procedures.
+  ///
+  /// In en, this message translates to:
+  /// **'電子申請が可能な手続き一覧'**
+  String get electronic_app_list_procedures;
+
+  /// No description provided for @electronic_app_form.
+  ///
+  /// In en, this message translates to:
+  /// **'電子申請フォーム'**
+  String get electronic_app_form;
+
+  /// No description provided for @procedure_information.
+  ///
+  /// In en, this message translates to:
+  /// **'手続きの詳細はこちら'**
+  String get procedure_information;
+
+  /// No description provided for @electronic_app_empty_form.
+  ///
+  /// In en, this message translates to:
+  /// **'現在、電子申請が可能な手続きはありません'**
+  String get electronic_app_empty_form;
+
   /// No description provided for @notification.
   ///
   /// In en, this message translates to:
@@ -392,6 +464,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'ログアウト'**
   String get logout;
+
+  /// No description provided for @close.
+  ///
+  /// In en, this message translates to:
+  /// **'閉じる'**
+  String get close;
 
   /// No description provided for @help.
   ///

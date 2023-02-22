@@ -4,10 +4,12 @@
     <color name="secondaryColor">#FFFFFF</color>
 
     <color name="main">#F7F3EF</color>
+    <color name="black32">#323232</color>
     <color name="primaryGreen">#8DC63F</color>
     <color name="primaryBlue">#1C3185</color>
     <color name="secondaryBlue">#415DF6</color>
     <color name="primaryRed">#FF5152</color>
+    <color name="green_D6">#D6F0A9</color>
     <color name="green_B7">#B7D77F</color>
     <color name="green_snake">#7DBC3B</color>
     <color name="boulder">#757575</color>

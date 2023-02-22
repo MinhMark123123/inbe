@@ -24,6 +24,7 @@ enum UtilityItem {
   RELATED_APPS,
 }
 
+//Todo change link
 final conveniences = {
   ConvenienceModel(
       id: 0,
@@ -36,7 +37,8 @@ final conveniences = {
   ConvenienceModel(
       id: 2,
       name: str.magazine_link,
-      path: "/${RouterConstants.home}/${RouterConstants.magazine}"),
+      path: "https://www.catapoke.com/search/?keyword=inabe-city"),
+      // path: "/${RouterConstants.home}/${RouterConstants.magazine}"),
   ConvenienceModel(
       id: 3,
       name: str.electronic_app,
@@ -44,7 +46,7 @@ final conveniences = {
   ConvenienceModel(
       id: 4,
       name: str.electronic_library,
-      path: "/${RouterConstants.home}/${RouterConstants.electronic_lib}"),
+      path: "https://www.catapoke.com/search/?keyword=electronic%20library"),
   ConvenienceModel(
       id: 5,
       name: str.related_apps,

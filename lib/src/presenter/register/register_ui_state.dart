@@ -15,6 +15,7 @@ class RegisterUIState with _$RegisterUIState {
     @Default('') String errorMessage,
     @Default('') String errorMail,
     @Default('') String errorPassword,
+    @Default('') String errorConfirmPassword,
   }) = _RegisterUIState;
 
 // factory RegisterUIState.loading() = Loading;

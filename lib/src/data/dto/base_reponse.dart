@@ -1,15 +1,14 @@
 abstract class BaseResponse<Model> {
-  Model data;
+  Model? data;
   String? message;
   int? code;
 
   BaseResponse({
-    required this.data,
+    this.data,
     this.message,
     this.code,
   });
 }
-
 
 abstract class BaseData {
   String? message;

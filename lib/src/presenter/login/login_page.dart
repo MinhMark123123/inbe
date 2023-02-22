@@ -1,28 +1,24 @@
 import 'package:aac_core/aac_core.dart';
-import 'package:go_router/go_router.dart';
-import 'package:inabe/gen_l10n/app_localizations.dart';
-import 'package:inabe/src/navigation/routers.dart';
-import 'package:inabe/src/presenter/widget/inabe_text_input.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:inabe/src/presenter/login/component/login_action_widget.dart';
+import 'package:inabe/src/presenter/login/component/login_input_form.dart';
+import 'package:inabe/src/presenter/login/login_view_model.dart';
+import 'package:inabe/src/state/riverpod_ui_support.dart';
+import 'package:inabe/src/utils/extensions/asset_extension.dart';
+import 'package:inabe/src/utils/popup_utils.dart';
 import 'package:inabe_design/inabe_design.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginPage extends ConsumerViewModelWidget<LoginViewModel> {
   const LoginPage({Key? key}) : super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
-  late AppLocalizations str;
-
-  @override
-  void initState() {
-    super.initState();
+  AutoDisposeProvider<LoginViewModel> viewModelProvider() {
+    return loginPageControllerProvider;
   }
 
   @override
-  Widget build(BuildContext context) {
-    str = AppLocalizations.of(context);
+  Widget buildWidget(
+      BuildContext context, WidgetRef ref, LoginViewModel viewModel) {
     return Scaffold(
       appBar: CustomAppBarWidget(
         title: str.login,
@@ -32,124 +28,13 @@ class _LoginPageState extends State<LoginPage> {
         child: Padding(
           padding: const EdgeInsets.all(Dimens.size10),
           child: Column(
-            children: [
-              buildInputForm(),
-              buildAction(),
+            children: const [
+              LoginInputFormWidget(),
+              LoginActionWidget(),
             ],
           ),
         ),
       ),
-    );
-  }
-
-  Widget buildInputForm() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          str.login,
-          style: textStyle.medium.w700.fill(ColorName.carbonGrey),
-        ),
-        const SizedBox(
-          height: Dimens.materialSmall,
-        ),
-        const Divider(
-          height: 1,
-          color: ColorName.dividerGray,
-        ),
-        const SizedBox(
-          height: Dimens.materialLarge,
-        ),
-        Text(
-          str.email,
-          style: textStyle.medium.w700.fill(ColorName.carbonGrey),
-        ),
-        const SizedBox(
-          height: Dimens.size10,
-        ),
-        InabeTextInput(
-          hintText: str.email,
-          contentPadding: const EdgeInsets.symmetric(horizontal: Dimens.size6),
-          onValueChanged: (value) => {},
-        ),
-        const SizedBox(
-          height: Dimens.size40,
-        ),
-        Text(
-          str.password,
-          style: textStyle.medium.w700.fill(ColorName.carbonGrey),
-        ),
-        const SizedBox(
-          height: Dimens.size10,
-        ),
-        InabeTextInput(
-          obscure: true,
-          contentPadding: const EdgeInsets.symmetric(horizontal: Dimens.size6),
-          onValueChanged: (value) => {},
-        ),
-      ],
-    );
-  }
-
-  Widget buildButtonLogin() {
-    return SizedBox(
-      width: 200,
-      child: ElevatedButton(
-        onPressed: () => {},
-        style: ElevatedButton.styleFrom(backgroundColor: ColorName.greenSnake),
-        child: Center(
-          child: Text(
-            str.login,
-            style: textStyle.medium.w700.fill(Colors.white),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget buildButtonRegister() {
-    return SizedBox(
-      width: 200,
-      child: OutlinedButton(
-        onPressed: () => {context.push("/${RouterConstants.register}")},
-        style: OutlinedButton.styleFrom(
-          side: const BorderSide(color: ColorName.greenSnake),
-        ),
-        child: Center(
-          child: Text(
-            str.press_to_register,
-            style: textStyle.medium.w400.fill(ColorName.carbonGrey),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget buildAction() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        const SizedBox(
-          height: Dimens.size40,
-        ),
-        buildButtonLogin(),
-        const SizedBox(
-          height: Dimens.size40,
-        ),
-        TextButton(
-          onPressed: () => {
-            context.go("/login/forgotPw"),
-          },
-          child: Text(
-            str.press_to_forgot_password,
-            style: textStyle.medium.w400.fill(ColorName.carbonGrey),
-          ),
-        ),
-        const SizedBox(
-          height: Dimens.size40,
-        ),
-        buildButtonRegister(),
-      ],
     );
   }
 }

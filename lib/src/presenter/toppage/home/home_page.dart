@@ -10,6 +10,7 @@ import 'package:inabe/src/presenter/toppage/home/presenter/notification_item.dar
 import 'package:inabe/src/presenter/toppage/home/presenter/slider_item.dart';
 import 'package:inabe/src/state/riverpod_ui_support.dart';
 import 'package:inabe/src/utils/extensions/asset_extension.dart';
+import 'package:inabe/src/utils/uri_utils.dart';
 import 'package:inabe/src/utils/utils.dart';
 import 'package:inabe_design/inabe_design.dart';
 
@@ -18,9 +19,6 @@ class HomePage extends ConsumerViewModelWidget<HomePageViewModel> {
   int _current = 0;
 
   HomePage({Key? key}) : super(key: key);
-
-  // @override
-  // State<HomePage> createState() => _HomePageState();
 
   @override
   AutoDisposeProvider<HomePageViewModel> viewModelProvider() =>
@@ -34,12 +32,9 @@ class HomePage extends ConsumerViewModelWidget<HomePageViewModel> {
     return Scaffold(
       appBar: AppBar(
         leadingWidth: 100,
-        leading: Container(
-          // color: Colors.red,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: Dimens.size10),
-            child: Assets.images.icLogoSmall.image(width: 100, height: 34),
-          ),
+        leading: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: Dimens.size10),
+          child: Assets.images.icLogoSmall.image(width: 100, height: 34),
         ),
         actions: [
           Padding(
@@ -99,19 +94,31 @@ class HomePage extends ConsumerViewModelWidget<HomePageViewModel> {
                       ),
                       Text(
                         data.name,
-                        style: textStyle.large.w700.fill(ColorName.boulder),
+                        style: textStyle.large.w700.fill(ColorName.black32),
                       ),
                     ],
                   ),
-                ).onPressedInkWell(() => {context!.go(data.path)}).decor(
-                      boxDecoration: boxDecoration.round(Dimens.size10),
-                    );
+                ).onPressedInkWell(
+                  () {
+                    _handleClickConvenience(data);
+                  },
+                ).decor(
+                  boxDecoration: boxDecoration.round(Dimens.size10),
+                );
               },
             ),
           ),
         ],
       ),
     );
+  }
+
+  void _handleClickConvenience(ConvenienceModel data) {
+    if (data.id == 2 || data.id == 4) {
+      UriUtils.launchActionOutside(data: data.path);
+    } else {
+      context!.go(data.path);
+    }
   }
 
   Widget buildTopCarousel() {
@@ -146,7 +153,9 @@ class HomePage extends ConsumerViewModelWidget<HomePageViewModel> {
                       vertical: Dimens.mediumPadding, horizontal: 3.0),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: _current == entry.key ? ColorName.greenB7 : const Color(0xFFF5F5F5),
+                    color: _current == entry.key
+                        ? ColorName.greenB7
+                        : const Color(0xFFF5F5F5),
                   ),
                 ),
               ),
@@ -233,23 +242,6 @@ class HomePage extends ConsumerViewModelWidget<HomePageViewModel> {
     );
   }
 
-// Widget buildBody(WidgetRef ref) {
-//   return Column(
-//     children: [
-//       const Expanded(child: Center(child: CounterText())),
-//       Padding(
-//         padding: const EdgeInsets.all(16),
-//         child: MaterialButton(
-//           onPressed: () {
-//             viewModel(ref).increaseCounter();
-//           },
-//           child: const Text("+"),
-//         ),
-//       )
-//     ],
-//   );
-// }
-
   Map<UtilityItem, String> getValue() {
     return {
       UtilityItem.EVENT: str.event_information,
@@ -260,19 +252,18 @@ class HomePage extends ConsumerViewModelWidget<HomePageViewModel> {
       UtilityItem.RELATED_APPS: str.related_apps,
     };
   }
-}
 
-class CounterText extends ConsumerViewModelWidget<HomePageViewModel> {
-  const CounterText({Key? key}) : super(key: key);
-
-  @override
-  Widget buildWidget(
-      BuildContext context, WidgetRef ref, HomePageViewModel viewModel) {
-    final counterState = ref.watch(viewModel.counterChange);
-    return Text("Your are pressed $counterState ");
+  Map<UtilityItem, Image> getImage() {
+    return {
+      UtilityItem.EVENT: Assets.images.icEvent.image(),
+      UtilityItem.BOOK: Assets.images.icBook.image(),
+      UtilityItem.MAGAZING: Assets.images.icMagazine.image(),
+      UtilityItem.ELECTRONIC_APP: Assets.images.icElectronicApp.image(),
+      UtilityItem.ELECTRONIC_LIB: Assets.images.icElectronicLib.image(),
+      UtilityItem.RELATED_APPS: Assets.images.icRelatedApps.image(),
+    };
   }
-
-  @override
-  AutoDisposeProvider<HomePageViewModel> viewModelProvider() =>
-      secondScreenControllerProvider;
+// Map<ConvenienceModel, Image> getImageConvenience() {
+//   conveniences.
+// }
 }

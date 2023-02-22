@@ -1,6 +1,10 @@
 import 'package:aac_core/aac_core.dart';
 import 'package:inabe/src/utils/extensions/asset_extension.dart';
 
+const passwordRegexValidation =
+    // r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+    r'^(?=.*?[A-Za-z])(?=.*?[0-9])[A-Za-z0-9]{8,}$';
+
 extension TextEditingControllerX on TextEditingController {
   String get text => this.text.trim();
 
@@ -54,6 +58,25 @@ extension TextEditingControllerX on TextEditingController {
   //     str.invalid_password
   //   ]);
   // }
+  String validateConfirmPassword(String password) {
+    String confirm = text;
+    if (confirm != password) return str.not_match_password;
+    return '';
+  }
+
+  /// check if string [str] matches the [pattern].
+  bool matches(String str, pattern) {
+    RegExp re = RegExp(pattern);
+    return re.hasMatch(str);
+  }
+
+  String validatePassword() {
+    String password = text;
+    print("ttt pw $password");
+    if (password.isEmpty) return str.field_required;
+    if (!matches(password, passwordRegexValidation)) return str.invalid_password;
+    return '';
+  }
 
   String validateEmail() {
     String email = text;

@@ -1,4 +1,5 @@
 import 'package:aac_core/aac_core.dart';
+import 'package:go_router/go_router.dart';
 import 'package:inabe/src/presenter/toppage/component/bottom_navigation_widget.dart';
 import 'package:inabe_design/inabe_design.dart';
 
@@ -12,12 +13,10 @@ class TopPage extends StatefulWidget {
 }
 
 class _TopPageState extends State<TopPage> {
-  int _selectedIndex = 0;
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+  @override
+  void initState() {
+    super.initState();
   }
 
   @override

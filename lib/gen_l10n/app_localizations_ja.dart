@@ -116,6 +116,42 @@ class AppLocalizationsJa extends AppLocalizations {
   String get press_to_register => '新規登録はこちら';
 
   @override
+  String get electronic_app_please_check_info => '電子申請を行う場合は以下をご確認ください';
+
+  @override
+  String get electronic_app_overview_system => '電子申請システムの概要';
+
+  @override
+  String get electronic_app_term_of_use => '電子申請 利用規約';
+
+  @override
+  String get electronic_app_policy => '電子申請 個人情報保護方針（プライバシーポリシー）';
+
+  @override
+  String get electronic_app_external_link => '【外部リンク】マイナポータル ぴったりサービス';
+
+  @override
+  String get electronic_app_choose_category => '電子申請を行いたいカテゴリーを選択してください';
+
+  @override
+  String get please_select_hint => '選択してください';
+
+  @override
+  String get electronic_app_choose_medium_category => '続いて中カテゴリーを選択してください';
+
+  @override
+  String get electronic_app_list_procedures => '電子申請が可能な手続き一覧';
+
+  @override
+  String get electronic_app_form => '電子申請フォーム';
+
+  @override
+  String get procedure_information => '手続きの詳細はこちら';
+
+  @override
+  String get electronic_app_empty_form => '現在、電子申請が可能な手続きはありません';
+
+  @override
   String get notification => 'お知らせ';
 
   @override
@@ -153,6 +189,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get logout => 'ログアウト';
+
+  @override
+  String get close => '閉じる';
 
   @override
   String get help => 'ヘルプ';

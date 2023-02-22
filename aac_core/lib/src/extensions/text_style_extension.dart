@@ -66,6 +66,8 @@ extension TextStyleX on TextStyle {
 
   TextStyle get w500 => copyWith(fontWeight: FontWeight.w500);
 
+  TextStyle get w600 => copyWith(fontWeight: FontWeight.w600);
+
   TextStyle get w700 => copyWith(fontWeight: FontWeight.w700);
 
   TextStyle get lineThrough => copyWith(decoration: TextDecoration.lineThrough);

@@ -7,7 +7,9 @@ class UserRequest {
   String email;
   String nickname;
   String password;
+  @JsonKey(name: "push_notifications")
   String pushNotifications;
+  @JsonKey(name: "interest_categories")
   List<String> interestCategories;
 
   UserRequest({

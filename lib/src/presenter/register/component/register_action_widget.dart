@@ -15,6 +15,8 @@ class RegisterActionWidget extends ConsumerViewModelWidget<RegisterViewModel> {
   Widget buildWidget(
       BuildContext context, WidgetRef ref, RegisterViewModel viewModel) {
     final errorMail = ref.watch(viewModel.errorEmail);
+    final errorPassWord = ref.watch(viewModel.errorPassword);
+    final errorConfirm = ref.watch(viewModel.errorConfirmPassword);
     // print("ttt errorMail $errorMail");
 
     ref.listen(viewModel.isSuccess, (previous, next) {
@@ -25,19 +27,22 @@ class RegisterActionWidget extends ConsumerViewModelWidget<RegisterViewModel> {
     });
 
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        const SizedBox(
+          height: Dimens.size20,
+        ),
         Visibility(
           visible: errorMail.isNotEmpty,
           child: Text(
-            errorMail,
+            "$errorMail\n$errorPassWord\n$errorConfirm",
             style: textStyle.xSmall.w400.fill(Colors.red),
           ),
         ),
         const SizedBox(
-          height: Dimens.size40,
+          height: Dimens.size20,
         ),
-        buildButtonRegister(viewModel),
+        Center(child: buildButtonRegister(viewModel)),
         const SizedBox(
           height: Dimens.size40,
         ),

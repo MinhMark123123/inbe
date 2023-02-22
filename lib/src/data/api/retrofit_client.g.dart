@@ -21,14 +21,14 @@ class _RestClient implements RestClient {
   String? baseUrl;
 
   @override
-  Future<UseResponse> login(loginRequest) async {
+  Future<HttpResponse<UserResponse>> login(loginRequest) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(loginRequest.toJson());
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<UseResponse>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<HttpResponse<UserResponse>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -40,19 +40,20 @@ class _RestClient implements RestClient {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = UseResponse.fromJson(_result.data!);
-    return value;
+    final value = UserResponse.fromJson(_result.data!);
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
   }
 
   @override
-  Future<UseResponse> register(userRequest) async {
+  Future<UserResponse> register(userRequest) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(userRequest.toJson());
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<UseResponse>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<UserResponse>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -64,7 +65,7 @@ class _RestClient implements RestClient {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = UseResponse.fromJson(_result.data!);
+    final value = UserResponse.fromJson(_result.data!);
     return value;
   }
 

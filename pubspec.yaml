@@ -53,6 +53,11 @@ dependencies:
   json_serializable: ^6.2.0
   json_annotation: ^4.6.0
 
+  flutter_keychain: ^2.2.1
+
+  # Action launchers
+  url_launcher: ^6.1.4
+
   aac_core:
     path: ./aac_core
   inabe_design:

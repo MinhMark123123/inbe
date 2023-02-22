@@ -58,6 +58,7 @@ class Dimens {
   static const double size40 = 40;
   static const double size44 = 44;
   static const double size50 = 50;
+  static const double size60 = 60;
   static const double size64 = 64;
   static const double toolBarWidgetHeight = 70;
   static const double materialMediumRadius = materialSmall;

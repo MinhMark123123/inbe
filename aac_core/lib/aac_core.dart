@@ -37,3 +37,5 @@ export 'src/flavor/environment.dart';
 //Validator input text
 export 'package:validators/sanitizers.dart';
 export 'package:validators/validators.dart';
+//Shared
+export 'package:shared_preferences/shared_preferences.dart';

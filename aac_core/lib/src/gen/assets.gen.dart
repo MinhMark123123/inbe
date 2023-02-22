@@ -31,6 +31,9 @@ class $AssetsImagesGen {
   AssetGenImage get icArrowBack =>
       const AssetGenImage('assets/images/ic_arrow_back.png');
 
+  /// File path: assets/images/ic_book.png
+  AssetGenImage get icBook => const AssetGenImage('assets/images/ic_book.png');
+
   /// File path: assets/images/ic_close.png
   AssetGenImage get icClose =>
       const AssetGenImage('assets/images/ic_close.png');
@@ -39,6 +42,18 @@ class $AssetsImagesGen {
   SvgGenImage get icDropdown =>
       const SvgGenImage('assets/images/ic_dropdown.svg');
 
+  /// File path: assets/images/ic_dropdown_bottom.png
+  AssetGenImage get icDropdownBottom =>
+      const AssetGenImage('assets/images/ic_dropdown_bottom.png');
+
+  /// File path: assets/images/ic_electronic_app.png
+  AssetGenImage get icElectronicApp =>
+      const AssetGenImage('assets/images/ic_electronic_app.png');
+
+  /// File path: assets/images/ic_electronic_lib.png
+  AssetGenImage get icElectronicLib =>
+      const AssetGenImage('assets/images/ic_electronic_lib.png');
+
   /// File path: assets/images/ic_email.png
   AssetGenImage get icEmail =>
       const AssetGenImage('assets/images/ic_email.png');
@@ -46,6 +61,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/ic_email_active.png
   AssetGenImage get icEmailActive =>
       const AssetGenImage('assets/images/ic_email_active.png');
+
+  /// File path: assets/images/ic_event.png
+  AssetGenImage get icEvent =>
+      const AssetGenImage('assets/images/ic_event.png');
 
   /// File path: assets/images/ic_help.png
   AssetGenImage get icHelp => const AssetGenImage('assets/images/ic_help.png');
@@ -76,6 +95,10 @@ class $AssetsImagesGen {
   AssetGenImage get icLogoSmall =>
       const AssetGenImage('assets/images/ic_logo_small.png');
 
+  /// File path: assets/images/ic_magazine.png
+  AssetGenImage get icMagazine =>
+      const AssetGenImage('assets/images/ic_magazine.png');
+
   /// File path: assets/images/ic_medicine.png
   AssetGenImage get icMedicine =>
       const AssetGenImage('assets/images/ic_medicine.png');
@@ -91,6 +114,10 @@ class $AssetsImagesGen {
   AssetGenImage get icPolicy =>
       const AssetGenImage('assets/images/ic_policy.png');
 
+  /// File path: assets/images/ic_related_apps.png
+  AssetGenImage get icRelatedApps =>
+      const AssetGenImage('assets/images/ic_related_apps.png');
+
   /// File path: assets/images/ic_setting.png
   AssetGenImage get icSetting =>
       const AssetGenImage('assets/images/ic_setting.png');
@@ -102,6 +129,14 @@ class $AssetsImagesGen {
   /// File path: assets/images/ic_youtube.png
   AssetGenImage get icYoutube =>
       const AssetGenImage('assets/images/ic_youtube.png');
+
+  /// File path: assets/images/img_button_app_store.png
+  AssetGenImage get imgButtonAppStore =>
+      const AssetGenImage('assets/images/img_button_app_store.png');
+
+  /// File path: assets/images/img_button_google_play.png
+  AssetGenImage get imgButtonGooglePlay =>
+      const AssetGenImage('assets/images/img_button_google_play.png');
 }
 
 class Assets {

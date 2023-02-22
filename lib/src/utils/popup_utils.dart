@@ -5,6 +5,8 @@ import 'package:inabe_design/inabe_design.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class PopupUtils {
+  PopupUtils._();
+
   static const LOADING_DIALOG_ID = 'id-loading-dialog';
   static String? _currentDialogId;
 
@@ -38,8 +40,15 @@ class PopupUtils {
 
   static hideLoadingDialog(BuildContext context) {
     print('PopupUtils hideLoadingDialog ------ $_currentDialogId');
+    // var currentRoute = GoRouter.of(context);
+    // var currentRoute = ModalRoute.of(context);
+    // print('PopupUtils hideLoadingDialog ------ ${currentRoute}');
     try {
-      if (!context.isCurrentScreen && _currentDialogId == LOADING_DIALOG_ID) {
+      // if (!context.isCurrentScreen && _currentDialogId == LOADING_DIALOG_ID) {
+      //   context.pop();
+      //   _currentDialogId = null;
+      // }
+      if (_currentDialogId == LOADING_DIALOG_ID) {
         context.pop();
         _currentDialogId = null;
       }
@@ -128,9 +137,7 @@ class PopupUtils {
                             context.pop();
                           },
                       child: ElevatedButton(
-                        onPressed: () => {
-                        context.pop()
-                        },
+                        onPressed: () => {context.pop()},
                         style: ElevatedButton.styleFrom(
                             backgroundColor: ColorName.greenSnake),
                         child: Center(
