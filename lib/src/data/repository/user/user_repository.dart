@@ -2,7 +2,11 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:inabe/src/data/api/append_user_intercepter.dart';
 import 'package:inabe/src/data/api/retrofit_client.dart';
 import 'package:inabe/src/data/constants/constants.dart';
+import 'package:inabe/src/data/dto/request/forgot_password_request.dart';
 import 'package:inabe/src/data/dto/request/login_request.dart';
+import 'package:inabe/src/data/dto/request/otp_request.dart';
+import 'package:inabe/src/data/dto/request/update_user_info_request.dart';
+import 'package:inabe/src/data/dto/request/update_user_request.dart';
 import 'package:inabe/src/data/dto/request/user_request.dart';
 import 'package:inabe/src/data/dto/response/user_response.dart';
 import 'package:inabe/src/data/sources/local/key_data_source.dart';
@@ -10,6 +14,10 @@ import 'package:inabe/src/di/di_config.dart';
 import 'package:retrofit/retrofit.dart';
 
 abstract class UserRepository {
+  Future<UserResponse> updateUser(UpdateUserRequest request);
+
+  Future<UserResponse> updateLoginInfo(UpdateUserInfoRequest request);
+
   Future<UserResponse> register(UserRequest request);
 
   Future<HttpResponse<UserResponse>> login(LoginRequest request);
@@ -18,12 +26,25 @@ abstract class UserRepository {
       Function(dynamic) onError);
 
   bool isLoggedIn();
-}
 
-// final _registerPageUiStateProvider =
-// StateProvider.autoDispose<UserRetrofitService>((ref) {
-//   return UserRetrofitService();
-// });
+  Future<UserResponse> getBasicInfo();
+
+  Future<UserResponse> requestForgotPasswordOTP(String email);
+
+  Future<UserResponse> validForgotPasswordOTP(ForgotPasswordRequest request);
+
+  Future<UserResponse> resetPassword(ForgotPasswordRequest request);
+
+  Future<UserResponse> requestAccountOTP();
+
+  Future<UserResponse> validAccountOTP(OTPRequest request);
+
+  Future<UserResponse> updateAccount(UpdateUserInfoRequest request);
+
+  Future<UserResponse> doLogout();
+
+  Future<void> clearDataUser();
+}
 
 final userRepositoryProvider = Provider.autoDispose<UserRepository>((ref) {
   return _UserRepositoryDefault(
@@ -72,8 +93,64 @@ class _UserRepositoryDefault extends UserRepository {
       keyDataSource.set(PrefKeys.keyClient, headers.value(clientKey));
       keyDataSource.set(PrefKeys.keyUid, headers.value(uidKey));
       onSuccess.call(value.data);
-    }).catchError((onError) {
-      onError.call(onError);
+    }).catchError((e) {
+      onError.call(e);
     });
+  }
+
+  @override
+  Future<UserResponse> updateUser(UpdateUserRequest request) {
+    return restClient.updateUser(request);
+  }
+
+  @override
+  Future<UserResponse> updateLoginInfo(UpdateUserInfoRequest request) {
+    return restClient.updateLoginInfo(request);
+  }
+
+  @override
+  Future<UserResponse> getBasicInfo() {
+    return restClient.getUserInfo();
+  }
+
+  @override
+  Future<UserResponse> requestAccountOTP() {
+    return restClient.requestOTP();
+  }
+
+  @override
+  Future<UserResponse> validAccountOTP(OTPRequest request) {
+    return restClient.validateOTP(request);
+  }
+
+  @override
+  Future<UserResponse> updateAccount(UpdateUserInfoRequest request) {
+    return restClient.updateLoginInfo(request);
+  }
+
+  @override
+  Future<UserResponse> doLogout() {
+    return restClient.logout();
+  }
+
+  @override
+  Future<void> clearDataUser() {
+    keyDataSource.delete(PrefKeys.keyToken);
+    return keyDataSource.clear();
+  }
+
+  @override
+  Future<UserResponse> requestForgotPasswordOTP(String email) {
+    return restClient.recoverPassword(email);
+  }
+
+  @override
+  Future<UserResponse> resetPassword(ForgotPasswordRequest request) {
+    return restClient.resetPassword(request);
+  }
+
+  @override
+  Future<UserResponse> validForgotPasswordOTP(ForgotPasswordRequest request) {
+    return restClient.validOTPPassword(request);
   }
 }

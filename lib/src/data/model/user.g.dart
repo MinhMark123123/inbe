@@ -7,10 +7,16 @@ part of 'user.dart';
 // **************************************************************************
 
 UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
-      name: json['name'] as String?,
+      nickname: json['nickname'] as String?,
+      pushNotifications: json['push_notifications'] as bool?,
+      interestCategories: (json['interest_categories'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
     )..message = json['message'] as String?;
 
 Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
       'message': instance.message,
-      'name': instance.name,
+      'nickname': instance.nickname,
+      'push_notifications': instance.pushNotifications,
+      'interest_categories': instance.interestCategories,
     };

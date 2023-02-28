@@ -102,9 +102,7 @@ class LoginViewModel extends ViewModel {
           email: emailController.text, password: passwordController.text);
 
       repository.loginApi(request, (userResponse) {
-        if (userResponse.data != null) {
-          uiState.update((state) => state.copyWith(isSuccess: true));
-        }
+        uiState.update((state) => state.copyWith(isSuccess: true));
       }, (obj) {
         ApiError(obj, errorData: (code, msg) {
           uiState

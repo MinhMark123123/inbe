@@ -18,9 +18,11 @@ class TopBodyWidget extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 18),
-            child: Text(
-              title,
-              style: textStyle.large.w700.fill(ColorName.greenSnake),
+            child: Center(
+              child: Text(
+                title,
+                style: textStyle.large.w700.fill(ColorName.greenSnake),
+              ),
             ),
           ),
           const Divider(

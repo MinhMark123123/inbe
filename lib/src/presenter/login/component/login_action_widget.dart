@@ -2,6 +2,7 @@ import 'package:aac_core/aac_core.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:inabe/src/data/api/append_user_intercepter.dart';
+import 'package:inabe/src/data/api/retrofit_config.dart';
 import 'package:inabe/src/data/constants/constants.dart';
 import 'package:inabe/src/di/di_config.dart';
 import 'package:inabe/src/navigation/routers.dart';
@@ -36,9 +37,10 @@ class LoginActionWidget extends ConsumerViewModelWidget<LoginViewModel> {
               fontSize: 14,
               fontWeight: FontWeight.w400,
               color: ColorName.carbonGrey),
-        ).onPressedInkWell(() => {
-              context.go("/login/forgotPw"),
-            }),
+        ).onPressedInkWell(
+          () => context.go(
+              "/${RouterConstants.menu}/${RouterConstants.login}/${RouterConstants.forgotPw}"),
+        ),
         const SizedBox(
           height: Dimens.size40,
         ),
@@ -57,16 +59,8 @@ class LoginActionWidget extends ConsumerViewModelWidget<LoginViewModel> {
       }
     });
     ref.listen(viewModel.isLoginSuccess, (previous, next) {
-      ref.read(dioStateProvider.state).update((state) {
-        final database = ref.read(keyDataSourceProvider);
-        final accessToken = database.get(PrefKeys.keyToken);
-        final uid = database.get(PrefKeys.keyUid);
-        final client = database.get(PrefKeys.keyClient);
-        print("ttt $accessToken::: $uid::: $client");
-        state.interceptors.add(AppendUserInterceptor(accessToken, uid, client));
-        return state;
-      });
-      context.go("/${RouterConstants.home}");
+      updateDioProvider(ref);
+      context.go("/${RouterConstants.menu}");
     });
   }
 
@@ -75,7 +69,7 @@ class LoginActionWidget extends ConsumerViewModelWidget<LoginViewModel> {
       width: 200,
       height: Dimens.size40,
       child: ElevatedButton(
-        onPressed: () => {viewModel.doLogin()},
+        onPressed: () => {viewModel.doLoginAndUpdate()},
         style: ElevatedButton.styleFrom(
             minimumSize: Size.zero, backgroundColor: ColorName.greenSnake),
         child: Center(
@@ -93,7 +87,10 @@ class LoginActionWidget extends ConsumerViewModelWidget<LoginViewModel> {
       width: 200,
       height: Dimens.size40,
       child: OutlinedButton(
-        onPressed: () => {context?.push("/${RouterConstants.register}")},
+        onPressed: () => {
+          context?.go(
+              "/${RouterConstants.menu}/${RouterConstants.login}/${RouterConstants.register}")
+        },
         style: OutlinedButton.styleFrom(
           minimumSize: Size.zero,
           side: const BorderSide(width: 2, color: ColorName.greenSnake),

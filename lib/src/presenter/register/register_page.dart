@@ -20,7 +20,6 @@ class RegisterPage extends ConsumerViewModelWidget<RegisterViewModel> {
       BuildContext context, WidgetRef ref, RegisterViewModel viewModel) {
     return Scaffold(
       appBar: CustomAppBarWidget(
-        title: str.register_label,
         backgroundColor: ColorName.main,
         onBackPressed: () => {context.pop()},
       ),

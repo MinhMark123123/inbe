@@ -1,11 +1,11 @@
 import 'package:aac_core/aac_core.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:inabe/src/presenter/login/component/login_action_widget.dart';
 import 'package:inabe/src/presenter/login/component/login_input_form.dart';
 import 'package:inabe/src/presenter/login/login_view_model.dart';
 import 'package:inabe/src/state/riverpod_ui_support.dart';
 import 'package:inabe/src/utils/extensions/asset_extension.dart';
-import 'package:inabe/src/utils/popup_utils.dart';
 import 'package:inabe_design/inabe_design.dart';
 
 class LoginPage extends ConsumerViewModelWidget<LoginViewModel> {
@@ -21,8 +21,8 @@ class LoginPage extends ConsumerViewModelWidget<LoginViewModel> {
       BuildContext context, WidgetRef ref, LoginViewModel viewModel) {
     return Scaffold(
       appBar: CustomAppBarWidget(
-        title: str.login,
         backgroundColor: ColorName.main,
+        onBackPressed: () => context.pop(),
       ),
       body: SingleChildScrollView(
         child: Padding(

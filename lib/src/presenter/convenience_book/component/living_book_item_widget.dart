@@ -24,12 +24,12 @@ class LivingBookItemWidget extends StatelessWidget {
           children: [
             ImageViewWidget(
               livingGuideModel.icon ?? '',
-              height: Dimens.size60,
+              height: Configs.screenWidth * 60 / 375,
               errorHolder: Assets.images.icLive.image(width: 80),
             ),
             Padding(
               padding: const EdgeInsets.only(
-                  top: Dimens.size10, bottom: Dimens.size6),
+                  top: Dimens.mediumPadding, bottom: Dimens.size6),
               child: Text(
                 livingGuideModel.name ?? '',
                 style: textStyle.small.w600.fill(ColorName.carbonGrey),

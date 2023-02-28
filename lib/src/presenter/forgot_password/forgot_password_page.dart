@@ -1,66 +1,53 @@
 import 'package:aac_core/aac_core.dart';
+import 'package:flutter_riverpod/src/consumer.dart';
 import 'package:go_router/go_router.dart';
-import 'package:inabe/gen_l10n/app_localizations.dart';
 import 'package:inabe/src/navigation/routers.dart';
+import 'package:inabe/src/presenter/forgot_password/forgot_password_viewmodel.dart';
 import 'package:inabe/src/presenter/widget/inabe_text_input.dart';
+import 'package:inabe/src/presenter/widget/top_body_widget.dart';
+import 'package:inabe/src/state/riverpod_ui_support.dart';
+import 'package:inabe/src/utils/extensions/asset_extension.dart';
 import 'package:inabe_design/inabe_design.dart';
+import 'package:riverpod/src/provider.dart';
 
-class ForgotPasswordPage extends StatefulWidget {
+class ForgotPasswordPage
+    extends ConsumerViewModelWidget<ForgotPasswordViewModel> {
   const ForgotPasswordPage({Key? key}) : super(key: key);
 
   @override
-  State<ForgotPasswordPage> createState() => _ForgotPasswordPageState();
-}
+  Widget buildWidget(
+      BuildContext context, WidgetRef ref, ForgotPasswordViewModel viewModel) {
+    ref.listen(viewModel.isSuccess, (previous, next) {
+      context.go(
+          "/${RouterConstants.menu}/${RouterConstants.login}/${RouterConstants.forgotPwOTP}",
+          extra: viewModel.emailController.text);
+    });
+    final errorEmail = ref.watch(viewModel.errorEmail);
 
-class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
-  late AppLocalizations str;
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    str = AppLocalizations.of(context);
     return Scaffold(
       appBar: CustomAppBarWidget(
-        title: str.forgot_password,
         backgroundColor: ColorName.main,
+        onBackPressed: () => context.pop(),
       ),
-      body: buildPage(),
-    );
-  }
-
-  Widget buildPage() {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(Dimens.size10),
-        child: Column(
-          children: [
-            buildInputForm(),
-            buildAction(),
-          ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(Dimens.size10),
+          child: Column(
+            children: [
+              buildInputForm(viewModel, errorEmail),
+              buildAction(context, viewModel),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget buildInputForm() {
+  Widget buildInputForm(ForgotPasswordViewModel viewModel, String errorEmail) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          str.forgot_password,
-          style: textStyle.medium.w700.fill(ColorName.carbonGrey),
-        ),
-        const SizedBox(
-          height: Dimens.materialSmall,
-        ),
-        const Divider(
-          height: 1,
-          color: ColorName.dividerGray,
-        ),
+        TopBodyWidget(title: str.forgot_password),
         const SizedBox(
           height: Dimens.size20,
         ),
@@ -80,20 +67,31 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         ),
         InabeTextInput(
           hintText: str.email,
+          controller: viewModel.emailController,
           contentPadding: const EdgeInsets.symmetric(horizontal: Dimens.size6),
-          onValueChanged: (value) => {},
+          onValueChanged: (value) => {
+            viewModel.resetError()
+          },
         ),
+        const SizedBox(
+          height: Dimens.size4,
+        ),
+        Visibility(
+            visible: errorEmail.isNotEmpty,
+            child: Text(
+              errorEmail,
+              style: textStyle.xSmall.w400.fill(Colors.red),
+            )),
       ],
     );
   }
 
-  Widget buildButtonSend() {
+  Widget buildButtonSend(
+      BuildContext context, ForgotPasswordViewModel viewModel) {
     return SizedBox(
       width: 200,
       child: ElevatedButton(
-        onPressed: () => {
-          context.go("/login/${RouterConstants.forgotPwSuccess}")
-        },
+        onPressed: () => {viewModel.doRecoverPassword()},
         style: ElevatedButton.styleFrom(backgroundColor: ColorName.greenSnake),
         child: Center(
           child: Text(
@@ -105,18 +103,23 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     );
   }
 
-  Widget buildAction() {
+  Widget buildAction(BuildContext context, ForgotPasswordViewModel viewModel) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         const SizedBox(
           height: Dimens.size40,
         ),
-        buildButtonSend(),
+        buildButtonSend(context, viewModel),
         const SizedBox(
           height: Dimens.size40,
         ),
       ],
     );
+  }
+
+  @override
+  AutoDisposeProvider<ForgotPasswordViewModel> viewModelProvider() {
+    return forgotPasswordPageControllerProvider;
   }
 }

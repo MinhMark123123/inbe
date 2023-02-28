@@ -7,13 +7,16 @@ class RouterConstants{
   static const home = "home";
   static const email = "email";
   static const medicine = "medicine";
+  static const policy = "policy";
   static const login = "login";
   static const register = "register";
   static const forgotPw = "forgotPw";
   static const forgotPwSuccess = "forgotPwSuccess";
-  static const changePw = "changePw";
+  static const forgotPwOTP = "forgotPwOTP";
+  static const resetPw = "resetPw";
   static const menu = "menu";
   static const setting = "setting";
+  static const faq = "faq";
   static const second = "second";
   static const notificationDetail = "notificationDetail";
   static const notificationList = "notificationList";
@@ -24,4 +27,7 @@ class RouterConstants{
   static const electronic_app = "electronic_app";
   static const electronic_lib = "electronic_lib";
   static const related_apps = "related_apps";
+
+  static const accountOtp = "accountOtp";
+  static const updateAccount = "updateAccount";
 }

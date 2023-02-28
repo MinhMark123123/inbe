@@ -50,13 +50,31 @@ class AppLocalizationsJa extends AppLocalizations {
   String get forgot_password_desc => 'ご登録いただいているメールアドレスをご入力いただき、「送信」ボタンを押してください。\nパスワード再設定ページへのURLをメールにて送付します。';
 
   @override
-  String get forgot_password_success => 'パスワード再発行メール送信完了';
+  String get forgot_password_otp_title => 'パスワード再発行メール送信完了';
 
   @override
-  String get forgot_password_success_desc => 'ご登録いただいているメールアドレスへ\nパスワード再設定ページへのURLを送信しました。';
+  String get forgot_password_otp_desc => 'ご登録いただいているメールアドレスへ\nワンタイムパスワードを送信しました。\n以下に入力の上、パスワード再設定を行って下さい。';
+
+  @override
+  String get forgot_password_otp_time => '登録の手続きはまだ完了していません。\n※ワンタイムパスワードの有効期限は配信後30分です。';
+
+  @override
+  String get forgot_password_enter_password => 'パスワードの再設定をします。\n新しいパスワードを入力し、「パスワード再設定」ボタンを押してください。';
 
   @override
   String get forgot_password_success_process => '登録の手続きはまだ完了していません。\n再設定メールに記載のURLから手続きを行ってください。\n※URLの有効期限は配信後30分です。';
+
+  @override
+  String get forgot_password_success_title => 'パスワード再設定完了';
+
+  @override
+  String get forgot_password_success_guide => 'パスワードの再設定が完了しました。\nご登録情報はメニューの「設定」からいつでも変更できます。';
+
+  @override
+  String get login_here => 'ログインはこちら';
+
+  @override
+  String get reset_forgot_password_otp => 'メールが届かない場合はこちら';
 
   @override
   String get resend_forget_mail => 'メールが届かない場合';
@@ -185,6 +203,36 @@ class AppLocalizationsJa extends AppLocalizations {
   String get setting => '設定';
 
   @override
+  String get update => '更新';
+
+  @override
+  String get change_email_and_password => 'メールアドレス・パスワードの変更はこちら';
+
+  @override
+  String get change_email_and_password_short => 'メールアドレス・パスワードの変更';
+
+  @override
+  String get change_email_and_password_otp_title => 'メールアドレス・パスワード変更\nメール送信完了';
+
+  @override
+  String get change_email_and_password_follow => 'ご登録いただいているメールアドレスへ\nワンタイムパスワードを送信しました。\n以下に入力の上、パスワード再設定を行って下さい。';
+
+  @override
+  String get change_email_and_password_time => '登録の手続きはまだ完了していません。\n※ワンタイムパスワードの有効期限は配信後30分です。';
+
+  @override
+  String get change_email_and_password_guide => 'メールが届かない場合はこちら';
+
+  @override
+  String get change_email_and_password_otp => 'ワンタイムパスワード';
+
+  @override
+  String get change_email_and_password_title_success => '設定変更が完了しました';
+
+  @override
+  String get change_email_and_password_desc_success => '設定変更完了メールを\nメールアドレスへ送信しました';
+
+  @override
   String get privacy_policy => 'プライバシーポリシー';
 
   @override
@@ -194,5 +242,5 @@ class AppLocalizationsJa extends AppLocalizations {
   String get close => '閉じる';
 
   @override
-  String get help => 'ヘルプ';
+  String get help => 'アプリの説明';
 }

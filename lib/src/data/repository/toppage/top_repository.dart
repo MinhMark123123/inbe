@@ -1,6 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:inabe/src/data/api/retrofit_client.dart';
 import 'package:inabe/src/data/dto/response/electronic_app_response.dart';
+import 'package:inabe/src/data/dto/response/faq_response.dart';
 import 'package:inabe/src/data/dto/response/interest_response.dart';
 import 'package:inabe/src/data/dto/response/living_guide_response.dart';
 import 'package:inabe/src/data/dto/response/other_app_response.dart';
@@ -20,6 +21,8 @@ abstract class TopRepository {
   Future<ElectronicAppResponse> getElectronicApps();
 
   Future<OtherAppResponse> getOtherApps();
+
+  Future<FAQResponse> getFAQs();
 }
 
 class _TopRepositoryDefault extends TopRepository {
@@ -45,5 +48,10 @@ class _TopRepositoryDefault extends TopRepository {
   @override
   Future<OtherAppResponse> getOtherApps() {
     return restClient.otherApps();
+  }
+
+  @override
+  Future<FAQResponse> getFAQs() {
+    return restClient.faqs();
   }
 }

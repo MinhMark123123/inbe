@@ -119,37 +119,6 @@ class RegisterViewModel extends ViewModel {
         value.data, List.generate(value.data.length, (index) => false));
   }
 
-  void validateData(String? value) {
-    if (value != null) {
-      uiState.update((state) => state.copyWith(errorMail: "map"));
-    }
-  }
-
-  void register(UserRequest userRequest) {
-    // uiState.update((state) => )
-    userRepository
-        .register(userRequest)
-        .then((value) => {
-              //show success
-              //     uiState
-              //         .update((state) => state.copyWith(electronicApps: value.data))
-            })
-        .catchError((obj) {
-      switch (obj.runtimeType) {
-        case DioError:
-          final res = (obj as DioError).response;
-          print("Got error : ${res?.statusCode} : ${res?.statusMessage}");
-          uiState.update((state) => state.copyWith(
-              errorMessage: res?.statusMessage ?? "Request api error"));
-          break;
-        default:
-          uiState
-              .update((state) => state.copyWith(errorMessage: "Default error"));
-          break;
-      }
-    });
-  }
-
   void selectedCategory(InterestModel interestModel, bool isChecked) {
     uiState.update((state) => state.selectedCategory(interestModel, isChecked));
   }
@@ -195,8 +164,6 @@ class RegisterViewModel extends ViewModel {
       return;
     } else {
       final categories = convertCategories();
-      // print("ttt categories = $categories");
-      // return;
 
       final request = UserRequest(
           email: emailController.text,

@@ -183,23 +183,59 @@ abstract class AppLocalizations {
   /// **'ご登録いただいているメールアドレスをご入力いただき、「送信」ボタンを押してください。\nパスワード再設定ページへのURLをメールにて送付します。'**
   String get forgot_password_desc;
 
-  /// No description provided for @forgot_password_success.
+  /// No description provided for @forgot_password_otp_title.
   ///
   /// In en, this message translates to:
   /// **'パスワード再発行メール送信完了'**
-  String get forgot_password_success;
+  String get forgot_password_otp_title;
 
-  /// No description provided for @forgot_password_success_desc.
+  /// No description provided for @forgot_password_otp_desc.
   ///
   /// In en, this message translates to:
-  /// **'ご登録いただいているメールアドレスへ\nパスワード再設定ページへのURLを送信しました。'**
-  String get forgot_password_success_desc;
+  /// **'ご登録いただいているメールアドレスへ\nワンタイムパスワードを送信しました。\n以下に入力の上、パスワード再設定を行って下さい。'**
+  String get forgot_password_otp_desc;
+
+  /// No description provided for @forgot_password_otp_time.
+  ///
+  /// In en, this message translates to:
+  /// **'登録の手続きはまだ完了していません。\n※ワンタイムパスワードの有効期限は配信後30分です。'**
+  String get forgot_password_otp_time;
+
+  /// No description provided for @forgot_password_enter_password.
+  ///
+  /// In en, this message translates to:
+  /// **'パスワードの再設定をします。\n新しいパスワードを入力し、「パスワード再設定」ボタンを押してください。'**
+  String get forgot_password_enter_password;
 
   /// No description provided for @forgot_password_success_process.
   ///
   /// In en, this message translates to:
   /// **'登録の手続きはまだ完了していません。\n再設定メールに記載のURLから手続きを行ってください。\n※URLの有効期限は配信後30分です。'**
   String get forgot_password_success_process;
+
+  /// No description provided for @forgot_password_success_title.
+  ///
+  /// In en, this message translates to:
+  /// **'パスワード再設定完了'**
+  String get forgot_password_success_title;
+
+  /// No description provided for @forgot_password_success_guide.
+  ///
+  /// In en, this message translates to:
+  /// **'パスワードの再設定が完了しました。\nご登録情報はメニューの「設定」からいつでも変更できます。'**
+  String get forgot_password_success_guide;
+
+  /// No description provided for @login_here.
+  ///
+  /// In en, this message translates to:
+  /// **'ログインはこちら'**
+  String get login_here;
+
+  /// No description provided for @reset_forgot_password_otp.
+  ///
+  /// In en, this message translates to:
+  /// **'メールが届かない場合はこちら'**
+  String get reset_forgot_password_otp;
 
   /// No description provided for @resend_forget_mail.
   ///
@@ -453,6 +489,66 @@ abstract class AppLocalizations {
   /// **'設定'**
   String get setting;
 
+  /// No description provided for @update.
+  ///
+  /// In en, this message translates to:
+  /// **'更新'**
+  String get update;
+
+  /// No description provided for @change_email_and_password.
+  ///
+  /// In en, this message translates to:
+  /// **'メールアドレス・パスワードの変更はこちら'**
+  String get change_email_and_password;
+
+  /// No description provided for @change_email_and_password_short.
+  ///
+  /// In en, this message translates to:
+  /// **'メールアドレス・パスワードの変更'**
+  String get change_email_and_password_short;
+
+  /// No description provided for @change_email_and_password_otp_title.
+  ///
+  /// In en, this message translates to:
+  /// **'メールアドレス・パスワード変更\nメール送信完了'**
+  String get change_email_and_password_otp_title;
+
+  /// No description provided for @change_email_and_password_follow.
+  ///
+  /// In en, this message translates to:
+  /// **'ご登録いただいているメールアドレスへ\nワンタイムパスワードを送信しました。\n以下に入力の上、パスワード再設定を行って下さい。'**
+  String get change_email_and_password_follow;
+
+  /// No description provided for @change_email_and_password_time.
+  ///
+  /// In en, this message translates to:
+  /// **'登録の手続きはまだ完了していません。\n※ワンタイムパスワードの有効期限は配信後30分です。'**
+  String get change_email_and_password_time;
+
+  /// No description provided for @change_email_and_password_guide.
+  ///
+  /// In en, this message translates to:
+  /// **'メールが届かない場合はこちら'**
+  String get change_email_and_password_guide;
+
+  /// No description provided for @change_email_and_password_otp.
+  ///
+  /// In en, this message translates to:
+  /// **'ワンタイムパスワード'**
+  String get change_email_and_password_otp;
+
+  /// No description provided for @change_email_and_password_title_success.
+  ///
+  /// In en, this message translates to:
+  /// **'設定変更が完了しました'**
+  String get change_email_and_password_title_success;
+
+  /// No description provided for @change_email_and_password_desc_success.
+  ///
+  /// In en, this message translates to:
+  /// **'設定変更完了メールを\nメールアドレスへ送信しました'**
+  String get change_email_and_password_desc_success;
+
   /// No description provided for @privacy_policy.
   ///
   /// In en, this message translates to:
@@ -474,7 +570,7 @@ abstract class AppLocalizations {
   /// No description provided for @help.
   ///
   /// In en, this message translates to:
-  /// **'ヘルプ'**
+  /// **'アプリの説明'**
   String get help;
 }
 

@@ -2,6 +2,7 @@ import 'package:aac_core/aac_core.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:inabe/src/presenter/register/register_viewmodel.dart';
 import 'package:inabe/src/presenter/widget/inabe_text_input.dart';
+import 'package:inabe/src/presenter/widget/top_body_widget.dart';
 import 'package:inabe/src/state/riverpod_ui_support.dart';
 import 'package:inabe/src/utils/extensions/asset_extension.dart';
 import 'package:inabe_design/dimens.dart';
@@ -20,17 +21,7 @@ class RegisterFormWidget extends ConsumerViewModelWidget<RegisterViewModel> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          str.register_label,
-          style: textStyle.medium.w700.fill(ColorName.carbonGrey),
-        ),
-        const SizedBox(
-          height: Dimens.materialSmall,
-        ),
-        const Divider(
-          height: 1,
-          color: ColorName.dividerGray,
-        ),
+        TopBodyWidget(title: str.register_label),
         const SizedBox(
           height: Dimens.materialLarge,
         ),

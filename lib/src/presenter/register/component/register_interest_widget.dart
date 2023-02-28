@@ -4,7 +4,6 @@ import 'package:inabe/src/data/model/interest_model.dart';
 import 'package:inabe/src/presenter/register/register_viewmodel.dart';
 import 'package:inabe/src/state/riverpod_ui_support.dart';
 import 'package:inabe/src/utils/extensions/asset_extension.dart';
-import 'package:inabe/src/utils/popup_utils.dart';
 import 'package:inabe_design/dimens.dart';
 
 class RegisterInterestWidget
@@ -14,33 +13,6 @@ class RegisterInterestWidget
   @override
   Widget buildWidget(
       BuildContext context, WidgetRef ref, RegisterViewModel viewModel) {
-    ref.listen(viewModel.asynCagetory, (previous, next) {
-      print("ttt asynCagetory ${previous} : $next");
-
-      if(next.isLoading) {
-        print("ttt loading oooo");
-        PopupUtils.showLoadingDialog(context);
-      } else {
-        print("ttt hide oooo");
-        PopupUtils.hideLoadingDialog(context);
-      }
-
-      // next.when(
-      //   data: (data) {
-      //     PopupUtils.hideLoadingDialog(context);
-      //   },
-      //   error: (o, s) {
-      //     PopupUtils.hideLoadingDialog(context);
-      //   },
-      //   loading: () {
-      //     print("ttt loading");
-      //     PopupUtils.showLoadingDialog(context);
-      //   },
-      // );
-    });
-    final listNotification =
-        {str.turn_on_notification, str.turn_off_notification}.toList();
-
     final async = ref.watch(viewModel.asynCagetory);
     return async.when(data: (data) {
       return Column(

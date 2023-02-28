@@ -28,6 +28,12 @@ class ColorName {
   /// Color: #0672BE
   static const Color frenchBlue = Color(0xFF0672BE);
 
+  /// Color: #C9C9C9
+  static const Color grayC9 = Color(0xFFC9C9C9);
+
+  /// Color: #F5F5F5
+  static const Color grayF5 = Color(0xFFF5F5F5);
+
   /// Color: #B7D77F
   static const Color greenB7 = Color(0xFFB7D77F);
 

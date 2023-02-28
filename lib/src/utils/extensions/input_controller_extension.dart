@@ -78,11 +78,19 @@ extension TextEditingControllerX on TextEditingController {
     return '';
   }
 
+  String validateEmpty() {
+    String value = text;
+    if (value.isEmpty) return str.field_required;
+    return '';
+  }
+
   String validateEmail() {
     String email = text;
     if (email.isEmpty) return str.field_required;
     if (!isEmail(email)) return str.invalid_email;
     return '';
+
+
 
     // return validate(
     //     conditions: [email.isEmpty, !isEmail(email)],

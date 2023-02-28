@@ -200,6 +200,8 @@ class ElectronicAppDropdownWidget
                 ),
                 child: Text(
                   str.procedure_information,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: textStyle.medium.w400.fill(ColorName.carbonGrey),
                 ),
               ),

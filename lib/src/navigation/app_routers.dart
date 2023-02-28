@@ -1,69 +1,130 @@
 import 'package:aac_core/aac_core.dart';
 import 'package:go_router/go_router.dart';
+import 'package:inabe/src/data/dto/request/forgot_password_request.dart';
 import 'package:inabe/src/data/model/notification_model.dart';
 import 'package:inabe/src/navigation/go_routers_observer.dart';
 import 'package:inabe/src/navigation/routers.dart';
-import 'package:inabe/src/presenter/change_password/change_password_page.dart';
 import 'package:inabe/src/presenter/convenience_book/convenience_book_page.dart';
 import 'package:inabe/src/presenter/electronic_apps/electronic_apps_page.dart';
 import 'package:inabe/src/presenter/event/event_page.dart';
+import 'package:inabe/src/presenter/faq/faq_page.dart';
 import 'package:inabe/src/presenter/forgot_password/forgot_password_page.dart';
-import 'package:inabe/src/presenter/forgot_password/notify_forgot_password_success.dart';
+import 'package:inabe/src/presenter/forgot_password/otp/forgot_password_otp_page.dart';
+import 'package:inabe/src/presenter/forgot_password/forgot_password_success_page.dart';
+import 'package:inabe/src/presenter/forgot_password/reset/reset_password_page.dart';
 import 'package:inabe/src/presenter/login/login_page.dart';
 import 'package:inabe/src/presenter/notification/notification_list_page.dart';
+import 'package:inabe/src/presenter/policy/policy_page.dart';
 import 'package:inabe/src/presenter/register/register_page.dart';
 import 'package:inabe/src/presenter/related_apps/related_apps_page.dart';
+import 'package:inabe/src/presenter/setting/setting_page.dart';
 import 'package:inabe/src/presenter/splash/splash_page.dart';
 import 'package:inabe/src/presenter/toppage/email/email_page.dart';
 import 'package:inabe/src/presenter/toppage/home/home_page.dart';
 import 'package:inabe/src/presenter/toppage/home/presenter/notification_detail/notification_detail_page.dart';
 import 'package:inabe/src/presenter/toppage/medicine/medicine_page.dart';
 import 'package:inabe/src/presenter/toppage/menu/menu_page.dart';
-import 'package:inabe/src/presenter/toppage/menu/setting_page.dart';
 import 'package:inabe/src/presenter/toppage/top_page.dart';
+import 'package:inabe/src/presenter/update_account/otp/update_account_otp_page.dart';
+import 'package:inabe/src/presenter/update_account/update_account_page.dart';
 
 class AppGoRouter {
   final _shellNavigatorKey = GlobalKey<NavigatorState>(debugLabel: "shell");
   GoRoute loginRouter = GoRoute(
       name: RouterConstants.login,
-      path: "/${RouterConstants.login}",
+      path: RouterConstants.login,
       builder: (context, state) {
         return const LoginPage();
       },
       routes: [
         GoRoute(
           name: RouterConstants.forgotPw,
-          path: "forgotPw",
+          path: RouterConstants.forgotPw,
           builder: (context, state) {
             return const ForgotPasswordPage();
+          },
+        ),
+        GoRoute(
+          name: RouterConstants.forgotPwOTP,
+          path: RouterConstants.forgotPwOTP,
+          builder: (context, state) {
+            return ForgotPasswordOTPPage(email: state.extra as String);
           },
         ),
         GoRoute(
           name: RouterConstants.forgotPwSuccess,
           path: RouterConstants.forgotPwSuccess,
           builder: (context, state) {
-            return const NotifyForgotPasswordSuccess();
+            return const ForgotPasswordSuccessPage();
+          },
+        ),
+        GoRoute(
+          name: RouterConstants.register,
+          path: RouterConstants.register,
+          builder: (context, state) {
+            return const RegisterPage();
+          },
+        ),
+        GoRoute(
+          name: RouterConstants.resetPw,
+          path: RouterConstants.resetPw,
+          builder: (context, state) {
+            return ResetPasswordPage(request: state.extra as ForgotPasswordRequest);
           },
         ),
       ]);
 
-  GoRoute menuRouter = GoRoute(
-      name: RouterConstants.menu,
-      path: "/${RouterConstants.menu}",
-      builder: (context, state) {
-        return MenuPage(
-          isLogin: false,
-        );
-      },
-      routes: [
-        GoRoute(
-          name: RouterConstants.setting,
-          path: RouterConstants.setting,
+  GoRoute get menuRouter => GoRoute(
+          name: RouterConstants.menu,
+          path: "/${RouterConstants.menu}",
           builder: (context, state) {
-            return const SettingPage();
+            return const MenuPage();
           },
-        ),
-      ]);
+          routes: [
+            GoRoute(
+              name: RouterConstants.setting,
+              path: RouterConstants.setting,
+              builder: (context, state) {
+                return const SettingPage();
+              },
+            ),
+            GoRoute(
+              name: RouterConstants.faq,
+              path: RouterConstants.faq,
+              builder: (context, state) {
+                return const FAQPage();
+              },
+            ),
+            loginRouter,
+            // GoRoute(
+            //   name: "menu/${RouterConstants.login}",
+            //   path: RouterConstants.login,
+            //   builder: (context, state) {
+            //     return const LoginPage();
+            //   },
+            // ),
+            GoRoute(
+              name: RouterConstants.policy,
+              path: RouterConstants.policy,
+              builder: (context, state) {
+                return const PolicyPage();
+              },
+            ),
+            GoRoute(
+              name: RouterConstants.accountOtp,
+              path: RouterConstants.accountOtp,
+              builder: (context, state) {
+                return const UpdateAccountOTPPage();
+              },
+            ),
+            GoRoute(
+              name: RouterConstants.updateAccount,
+              path: RouterConstants.updateAccount,
+              builder: (context, state) {
+                return UpdateAccountPage(otp: state.extra! as String);
+              },
+            ),
+          ]);
 
   ShellRoute get topRouter => ShellRoute(
           navigatorKey: _shellNavigatorKey,
@@ -158,11 +219,9 @@ class AppGoRouter {
               name: "top/menu",
               path: "/${RouterConstants.menu}",
               pageBuilder: (context, state) {
-                return NoTransitionPage(
-                    child: MenuPage(
-                  isLogin: false,
-                ));
+                return NoTransitionPage(child: MenuPage());
               },
+              routes: menuRouter.routes,
             ),
           ]);
 
@@ -181,32 +240,32 @@ class AppGoRouter {
             // builder: (context, state) => const MyHomePage(title: 'Flutter Demo Home Page'),
             builder: (context, state) => SplashPage(),
             routes: [
-              GoRoute(
-                name: "settings",
-                path: RouterConstants.second,
-                builder: (context, state) {
-                  return SplashPage();
-                },
-              ),
-              GoRoute(
-                name: RouterConstants.register,
-                path: "register",
-                builder: (context, state) {
-                  return const RegisterPage();
-                },
-              ),
-              GoRoute(
-                name: RouterConstants.changePw,
-                path: "changePw",
-                builder: (context, state) {
-                  return const ChangePasswordPage();
-                },
-              ),
+              // GoRoute(
+              //   name: "settings",
+              //   path: RouterConstants.second,
+              //   builder: (context, state) {
+              //     return SplashPage();
+              //   },
+              // ),
+              // GoRoute(
+              //   name: RouterConstants.register,
+              //   path: "register",
+              //   builder: (context, state) {
+              //     return const RegisterPage();
+              //   },
+              // ),
+              // GoRoute(
+              //   name: RouterConstants.changePw,
+              //   path: "changePw",
+              //   builder: (context, state) {
+              //     return const ChangePasswordPage();
+              //   },
+              // ),
             ],
           ),
           topRouter,
-          loginRouter,
-          menuRouter,
+          // loginRouter,
+          // menuRouter,
           // GoRoute(
           //   name: "top",
           //   path: "/${RouterConstants.top}",
