@@ -18,10 +18,12 @@ class RouterConstants{
   static const setting = "setting";
   static const faq = "faq";
   static const second = "second";
+  static const emailDetail = "emailDetail";
   static const notificationDetail = "notificationDetail";
   static const notificationList = "notificationList";
 
   static const event = "event";
+  static const eventDetail = "eventDetail";
   static const book = "book";
   static const magazine = "magazine";
   static const electronic_app = "electronic_app";
@@ -30,4 +32,6 @@ class RouterConstants{
 
   static const accountOtp = "accountOtp";
   static const updateAccount = "updateAccount";
+  static const webpage = "webpage";
+  static String  webpageChild(String prePath) => "/${prePath}/$webpage";
 }

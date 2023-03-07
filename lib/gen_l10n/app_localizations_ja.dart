@@ -206,6 +206,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get update => '更新';
 
   @override
+  String get email_information => 'いなべ市生活情報（まいめる）';
+
+  @override
   String get change_email_and_password => 'メールアドレス・パスワードの変更はこちら';
 
   @override

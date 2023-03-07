@@ -29,7 +29,6 @@ class _NotificationDetailPageState extends State<NotificationDetailPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: CustomAppBarWidget(
-        title: "Detail",
         onBackPressed: () => {context.pop()},
       ),
       body: _buildInformation(),

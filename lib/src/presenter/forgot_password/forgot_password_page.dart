@@ -1,6 +1,6 @@
 import 'package:aac_core/aac_core.dart';
-import 'package:flutter_riverpod/src/consumer.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:inabe/src/navigation/routers.dart';
 import 'package:inabe/src/presenter/forgot_password/forgot_password_viewmodel.dart';
 import 'package:inabe/src/presenter/widget/inabe_text_input.dart';
@@ -8,7 +8,6 @@ import 'package:inabe/src/presenter/widget/top_body_widget.dart';
 import 'package:inabe/src/state/riverpod_ui_support.dart';
 import 'package:inabe/src/utils/extensions/asset_extension.dart';
 import 'package:inabe_design/inabe_design.dart';
-import 'package:riverpod/src/provider.dart';
 
 class ForgotPasswordPage
     extends ConsumerViewModelWidget<ForgotPasswordViewModel> {
@@ -19,7 +18,7 @@ class ForgotPasswordPage
       BuildContext context, WidgetRef ref, ForgotPasswordViewModel viewModel) {
     ref.listen(viewModel.isSuccess, (previous, next) {
       context.go(
-          "/${RouterConstants.menu}/${RouterConstants.login}/${RouterConstants.forgotPwOTP}",
+          "/${RouterConstants.login}/${RouterConstants.forgotPwOTP}",
           extra: viewModel.emailController.text);
     });
     final errorEmail = ref.watch(viewModel.errorEmail);
@@ -69,9 +68,7 @@ class ForgotPasswordPage
           hintText: str.email,
           controller: viewModel.emailController,
           contentPadding: const EdgeInsets.symmetric(horizontal: Dimens.size6),
-          onValueChanged: (value) => {
-            viewModel.resetError()
-          },
+          onValueChanged: (value) => {viewModel.resetError()},
         ),
         const SizedBox(
           height: Dimens.size4,
@@ -89,7 +86,7 @@ class ForgotPasswordPage
   Widget buildButtonSend(
       BuildContext context, ForgotPasswordViewModel viewModel) {
     return SizedBox(
-      width: 200,
+      width: Dimens.widthButton,
       child: ElevatedButton(
         onPressed: () => {viewModel.doRecoverPassword()},
         style: ElevatedButton.styleFrom(backgroundColor: ColorName.greenSnake),

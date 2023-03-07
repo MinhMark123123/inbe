@@ -8,6 +8,7 @@ class NotificationModel {
   String? date;
   String? title;
   String? type;
+  String? link;
 
   factory NotificationModel.fromJson(Map<String, dynamic> json) =>
       _$NotificationModelFromJson(json);
@@ -23,5 +24,6 @@ class NotificationModel {
     this.date,
     this.title,
     this.type,
+    this.link,
   });
 }

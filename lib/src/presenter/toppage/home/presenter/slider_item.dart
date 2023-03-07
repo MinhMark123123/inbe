@@ -1,5 +1,6 @@
 import 'package:aac_core/aac_core.dart';
 import 'package:inabe/src/data/model/slider_model.dart';
+import 'package:inabe/src/data/model/top_slider_model.dart';
 import 'package:inabe_design/inabe_design.dart';
 
 class SliderHomeItem extends StatelessWidget {
@@ -8,7 +9,7 @@ class SliderHomeItem extends StatelessWidget {
     required this.sliderModel,
   }) : super(key: key);
 
-  final SliderModel sliderModel;
+  final TopSliderModel sliderModel;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class SliderHomeItem extends StatelessWidget {
         child: Stack(
           children: <Widget>[
             ImageViewWidget(
-              sliderModel.link,
+              sliderModel.src ?? '',
               width: Configs.screenWidth,
               height: (Configs.screenWidth * 9 / 16),
               fit: BoxFit.cover,
@@ -37,29 +38,29 @@ class SliderHomeItem extends StatelessWidget {
               },
             ),
             // Image.network(item, fit: BoxFit.cover, width: 1000.0),
-            Positioned(
-              bottom: 0.0,
-              left: 0.0,
-              right: 0.0,
-              child: Container(
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      Color.fromARGB(200, 0, 0, 0),
-                      Color.fromARGB(0, 0, 0, 0)
-                    ],
-                    begin: Alignment.bottomCenter,
-                    end: Alignment.topCenter,
-                  ),
-                ),
-                padding: const EdgeInsets.symmetric(
-                    vertical: Dimens.size10, horizontal: Dimens.size20),
-                child: Text(
-                  'No ${sliderModel.id}: ${sliderModel.name}',
-                  style: textStyle.x5Large.w700.fill(Colors.white),
-                ),
-              ),
-            ),
+            // Positioned(
+            //   bottom: 0.0,
+            //   left: 0.0,
+            //   right: 0.0,
+            //   child: Container(
+            //     decoration: const BoxDecoration(
+            //       gradient: LinearGradient(
+            //         colors: [
+            //           Color.fromARGB(200, 0, 0, 0),
+            //           Color.fromARGB(0, 0, 0, 0)
+            //         ],
+            //         begin: Alignment.bottomCenter,
+            //         end: Alignment.topCenter,
+            //       ),
+            //     ),
+            //     padding: const EdgeInsets.symmetric(
+            //         vertical: Dimens.size10, horizontal: Dimens.size20),
+            //     child: Text(
+            //       '${sliderModel.alt}',
+            //       style: textStyle.x5Large.w700.fill(Colors.white),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),

@@ -6,10 +6,12 @@ import 'package:inabe/src/data/dto/request/update_user_info_request.dart';
 import 'package:inabe/src/data/dto/request/update_user_request.dart';
 import 'package:inabe/src/data/dto/request/user_request.dart';
 import 'package:inabe/src/data/dto/response/electronic_app_response.dart';
+import 'package:inabe/src/data/dto/response/email_response.dart';
 import 'package:inabe/src/data/dto/response/faq_response.dart';
 import 'package:inabe/src/data/dto/response/interest_response.dart';
 import 'package:inabe/src/data/dto/response/living_guide_response.dart';
 import 'package:inabe/src/data/dto/response/other_app_response.dart';
+import 'package:inabe/src/data/dto/response/top_slider_response.dart';
 import 'package:inabe/src/data/dto/response/user_response.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -76,7 +78,14 @@ abstract class RestClient {
   @GET("faqs")
   Future<FAQResponse> faqs();
 
-  @GET("my_emails")
-  Future<FAQResponse> getMyEmails(
+  @GET("my_mails")
+  Future<EmailResponse> getMyEmails(
       @Query("page") int page, @Query("per_page") int perPage);
+
+  @GET("top_slides")
+  Future<TopSliderResponse> getTopSlides();
+
+  @GET("news")
+  @Header("Content-Type: text/xml")
+  Future<String> getNews();
 }

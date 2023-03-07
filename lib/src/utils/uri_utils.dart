@@ -19,6 +19,8 @@ enum LaunchActionType {
 }
 
 class UriUtils {
+  UriUtils._();
+
   static launchActionOutside(
       {dynamic data, Uri? uri, String? backup, LaunchActionType? type}) async {
     try {

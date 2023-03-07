@@ -2,6 +2,7 @@ import 'package:aac_core/aac_core.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:inabe/src/presenter/login/login_view_model.dart';
 import 'package:inabe/src/presenter/widget/inabe_text_input.dart';
+import 'package:inabe/src/presenter/widget/top_body_widget.dart';
 import 'package:inabe/src/state/riverpod_ui_support.dart';
 import 'package:inabe/src/utils/extensions/asset_extension.dart';
 import 'package:inabe_design/inabe_design.dart';
@@ -23,21 +24,9 @@ class LoginInputFormWidget extends ConsumerViewModelWidget<LoginViewModel> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Center(
-          child: Text(
-            str.login,
-            style: textStyle.large.w700.fill(ColorName.greenSnake),
-          ),
-        ),
+        TopBodyWidget(title: str.login),
         const SizedBox(
-          height: Dimens.materialSmall,
-        ),
-        const Divider(
-          height: 1,
-          color: ColorName.dividerGray,
-        ),
-        const SizedBox(
-          height: Dimens.materialLarge,
+          height: Dimens.size20,
         ),
         Text(
           str.email,

@@ -52,11 +52,11 @@ class _ForgotPasswordSuccessPageState extends State<ForgotPasswordSuccessPage> {
         ),
         Center(
           child: SizedBox(
-            width: 200,
+            width: Dimens.widthButton,
             height: Dimens.size40,
             child: OutlinedButton(
               onPressed: () => {
-                context.go("/${RouterConstants.menu}/${RouterConstants.login}")
+                context.go("/${RouterConstants.login}")
               },
               style: OutlinedButton.styleFrom(
                 minimumSize: Size.zero,
@@ -79,7 +79,7 @@ class _ForgotPasswordSuccessPageState extends State<ForgotPasswordSuccessPage> {
             style: textStyle.underline.medium.w400.fill(ColorName.carbonGrey),
           ).onPressedInkWell(
             () => context.go(
-                "/${RouterConstants.menu}/${RouterConstants.login}/${RouterConstants.forgotPw}"),
+                "/${RouterConstants.login}/${RouterConstants.forgotPw}"),
           ),
         ),
         const SizedBox(

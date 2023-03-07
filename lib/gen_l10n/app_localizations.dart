@@ -495,6 +495,12 @@ abstract class AppLocalizations {
   /// **'更新'**
   String get update;
 
+  /// No description provided for @email_information.
+  ///
+  /// In en, this message translates to:
+  /// **'いなべ市生活情報（まいめる）'**
+  String get email_information;
+
   /// No description provided for @change_email_and_password.
   ///
   /// In en, this message translates to:

@@ -82,7 +82,7 @@ dependencies:
   # Text with link
   flutter_linkify: ^5.0.2
   # WebView
-  webview_flutter: ^3.0.4
+  webview_flutter: ^4.0.5
   # Share
   share_plus: ^4.0.10
   # Package info

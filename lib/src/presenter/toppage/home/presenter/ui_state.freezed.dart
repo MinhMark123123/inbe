@@ -15,33 +15,37 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$SecondScreenUIState {
-  int get counter => throw _privateConstructorUsedError;
-  List<ElectronicAppModel> get electronicApps =>
+mixin _$HomeUIState {
+  List<TopSliderModel> get topSlides => throw _privateConstructorUsedError;
+  List<String> get images => throw _privateConstructorUsedError;
+  List<NotificationModel> get notifications =>
       throw _privateConstructorUsedError;
+  List<ConvenienceModel> get conveniences => throw _privateConstructorUsedError;
   String get errorMessage => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $SecondScreenUIStateCopyWith<SecondScreenUIState> get copyWith =>
+  $HomeUIStateCopyWith<HomeUIState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $SecondScreenUIStateCopyWith<$Res> {
-  factory $SecondScreenUIStateCopyWith(
-          SecondScreenUIState value, $Res Function(SecondScreenUIState) then) =
-      _$SecondScreenUIStateCopyWithImpl<$Res, SecondScreenUIState>;
+abstract class $HomeUIStateCopyWith<$Res> {
+  factory $HomeUIStateCopyWith(
+          HomeUIState value, $Res Function(HomeUIState) then) =
+      _$HomeUIStateCopyWithImpl<$Res, HomeUIState>;
   @useResult
   $Res call(
-      {int counter,
-      List<ElectronicAppModel> electronicApps,
+      {List<TopSliderModel> topSlides,
+      List<String> images,
+      List<NotificationModel> notifications,
+      List<ConvenienceModel> conveniences,
       String errorMessage});
 }
 
 /// @nodoc
-class _$SecondScreenUIStateCopyWithImpl<$Res, $Val extends SecondScreenUIState>
-    implements $SecondScreenUIStateCopyWith<$Res> {
-  _$SecondScreenUIStateCopyWithImpl(this._value, this._then);
+class _$HomeUIStateCopyWithImpl<$Res, $Val extends HomeUIState>
+    implements $HomeUIStateCopyWith<$Res> {
+  _$HomeUIStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -51,19 +55,29 @@ class _$SecondScreenUIStateCopyWithImpl<$Res, $Val extends SecondScreenUIState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? counter = null,
-    Object? electronicApps = null,
+    Object? topSlides = null,
+    Object? images = null,
+    Object? notifications = null,
+    Object? conveniences = null,
     Object? errorMessage = null,
   }) {
     return _then(_value.copyWith(
-      counter: null == counter
-          ? _value.counter
-          : counter // ignore: cast_nullable_to_non_nullable
-              as int,
-      electronicApps: null == electronicApps
-          ? _value.electronicApps
-          : electronicApps // ignore: cast_nullable_to_non_nullable
-              as List<ElectronicAppModel>,
+      topSlides: null == topSlides
+          ? _value.topSlides
+          : topSlides // ignore: cast_nullable_to_non_nullable
+              as List<TopSliderModel>,
+      images: null == images
+          ? _value.images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      notifications: null == notifications
+          ? _value.notifications
+          : notifications // ignore: cast_nullable_to_non_nullable
+              as List<NotificationModel>,
+      conveniences: null == conveniences
+          ? _value.conveniences
+          : conveniences // ignore: cast_nullable_to_non_nullable
+              as List<ConvenienceModel>,
       errorMessage: null == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
@@ -73,43 +87,55 @@ class _$SecondScreenUIStateCopyWithImpl<$Res, $Val extends SecondScreenUIState>
 }
 
 /// @nodoc
-abstract class _$$_SecondScreenUIStateCopyWith<$Res>
-    implements $SecondScreenUIStateCopyWith<$Res> {
-  factory _$$_SecondScreenUIStateCopyWith(_$_SecondScreenUIState value,
-          $Res Function(_$_SecondScreenUIState) then) =
-      __$$_SecondScreenUIStateCopyWithImpl<$Res>;
+abstract class _$$_HomeUIStateCopyWith<$Res>
+    implements $HomeUIStateCopyWith<$Res> {
+  factory _$$_HomeUIStateCopyWith(
+          _$_HomeUIState value, $Res Function(_$_HomeUIState) then) =
+      __$$_HomeUIStateCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {int counter,
-      List<ElectronicAppModel> electronicApps,
+      {List<TopSliderModel> topSlides,
+      List<String> images,
+      List<NotificationModel> notifications,
+      List<ConvenienceModel> conveniences,
       String errorMessage});
 }
 
 /// @nodoc
-class __$$_SecondScreenUIStateCopyWithImpl<$Res>
-    extends _$SecondScreenUIStateCopyWithImpl<$Res, _$_SecondScreenUIState>
-    implements _$$_SecondScreenUIStateCopyWith<$Res> {
-  __$$_SecondScreenUIStateCopyWithImpl(_$_SecondScreenUIState _value,
-      $Res Function(_$_SecondScreenUIState) _then)
+class __$$_HomeUIStateCopyWithImpl<$Res>
+    extends _$HomeUIStateCopyWithImpl<$Res, _$_HomeUIState>
+    implements _$$_HomeUIStateCopyWith<$Res> {
+  __$$_HomeUIStateCopyWithImpl(
+      _$_HomeUIState _value, $Res Function(_$_HomeUIState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? counter = null,
-    Object? electronicApps = null,
+    Object? topSlides = null,
+    Object? images = null,
+    Object? notifications = null,
+    Object? conveniences = null,
     Object? errorMessage = null,
   }) {
-    return _then(_$_SecondScreenUIState(
-      counter: null == counter
-          ? _value.counter
-          : counter // ignore: cast_nullable_to_non_nullable
-              as int,
-      electronicApps: null == electronicApps
-          ? _value._electronicApps
-          : electronicApps // ignore: cast_nullable_to_non_nullable
-              as List<ElectronicAppModel>,
+    return _then(_$_HomeUIState(
+      topSlides: null == topSlides
+          ? _value._topSlides
+          : topSlides // ignore: cast_nullable_to_non_nullable
+              as List<TopSliderModel>,
+      images: null == images
+          ? _value._images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      notifications: null == notifications
+          ? _value._notifications
+          : notifications // ignore: cast_nullable_to_non_nullable
+              as List<NotificationModel>,
+      conveniences: null == conveniences
+          ? _value._conveniences
+          : conveniences // ignore: cast_nullable_to_non_nullable
+              as List<ConvenienceModel>,
       errorMessage: null == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
@@ -120,22 +146,48 @@ class __$$_SecondScreenUIStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SecondScreenUIState implements _SecondScreenUIState {
-  _$_SecondScreenUIState(
-      {this.counter = 0,
-      final List<ElectronicAppModel> electronicApps = const [],
+class _$_HomeUIState implements _HomeUIState {
+  _$_HomeUIState(
+      {final List<TopSliderModel> topSlides = const [],
+      final List<String> images = const [],
+      final List<NotificationModel> notifications = const [],
+      final List<ConvenienceModel> conveniences = const [],
       this.errorMessage = ''})
-      : _electronicApps = electronicApps;
+      : _topSlides = topSlides,
+        _images = images,
+        _notifications = notifications,
+        _conveniences = conveniences;
 
+  final List<TopSliderModel> _topSlides;
   @override
   @JsonKey()
-  final int counter;
-  final List<ElectronicAppModel> _electronicApps;
-  @override
-  @JsonKey()
-  List<ElectronicAppModel> get electronicApps {
+  List<TopSliderModel> get topSlides {
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_electronicApps);
+    return EqualUnmodifiableListView(_topSlides);
+  }
+
+  final List<String> _images;
+  @override
+  @JsonKey()
+  List<String> get images {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_images);
+  }
+
+  final List<NotificationModel> _notifications;
+  @override
+  @JsonKey()
+  List<NotificationModel> get notifications {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_notifications);
+  }
+
+  final List<ConvenienceModel> _conveniences;
+  @override
+  @JsonKey()
+  List<ConvenienceModel> get conveniences {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_conveniences);
   }
 
   @override
@@ -144,47 +196,61 @@ class _$_SecondScreenUIState implements _SecondScreenUIState {
 
   @override
   String toString() {
-    return 'SecondScreenUIState(counter: $counter, electronicApps: $electronicApps, errorMessage: $errorMessage)';
+    return 'HomeUIState(topSlides: $topSlides, images: $images, notifications: $notifications, conveniences: $conveniences, errorMessage: $errorMessage)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SecondScreenUIState &&
-            (identical(other.counter, counter) || other.counter == counter) &&
+            other is _$_HomeUIState &&
             const DeepCollectionEquality()
-                .equals(other._electronicApps, _electronicApps) &&
+                .equals(other._topSlides, _topSlides) &&
+            const DeepCollectionEquality().equals(other._images, _images) &&
+            const DeepCollectionEquality()
+                .equals(other._notifications, _notifications) &&
+            const DeepCollectionEquality()
+                .equals(other._conveniences, _conveniences) &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, counter,
-      const DeepCollectionEquality().hash(_electronicApps), errorMessage);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_topSlides),
+      const DeepCollectionEquality().hash(_images),
+      const DeepCollectionEquality().hash(_notifications),
+      const DeepCollectionEquality().hash(_conveniences),
+      errorMessage);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SecondScreenUIStateCopyWith<_$_SecondScreenUIState> get copyWith =>
-      __$$_SecondScreenUIStateCopyWithImpl<_$_SecondScreenUIState>(
-          this, _$identity);
+  _$$_HomeUIStateCopyWith<_$_HomeUIState> get copyWith =>
+      __$$_HomeUIStateCopyWithImpl<_$_HomeUIState>(this, _$identity);
 }
 
-abstract class _SecondScreenUIState implements SecondScreenUIState {
-  factory _SecondScreenUIState(
-      {final int counter,
-      final List<ElectronicAppModel> electronicApps,
-      final String errorMessage}) = _$_SecondScreenUIState;
+abstract class _HomeUIState implements HomeUIState {
+  factory _HomeUIState(
+      {final List<TopSliderModel> topSlides,
+      final List<String> images,
+      final List<NotificationModel> notifications,
+      final List<ConvenienceModel> conveniences,
+      final String errorMessage}) = _$_HomeUIState;
 
   @override
-  int get counter;
+  List<TopSliderModel> get topSlides;
   @override
-  List<ElectronicAppModel> get electronicApps;
+  List<String> get images;
+  @override
+  List<NotificationModel> get notifications;
+  @override
+  List<ConvenienceModel> get conveniences;
   @override
   String get errorMessage;
   @override
   @JsonKey(ignore: true)
-  _$$_SecondScreenUIStateCopyWith<_$_SecondScreenUIState> get copyWith =>
+  _$$_HomeUIStateCopyWith<_$_HomeUIState> get copyWith =>
       throw _privateConstructorUsedError;
 }

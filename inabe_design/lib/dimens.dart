@@ -79,6 +79,7 @@ class Dimens {
   static const double imageSizeSuccessIcon = 60;
   static const double attachFileHeight = 106;
   static const double changeAcceptanceHeight = 28;
+  static const double widthButton = 180;
 
   static const double dashWidth = 2;
 }

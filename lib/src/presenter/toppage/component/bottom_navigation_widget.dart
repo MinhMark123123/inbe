@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:inabe/src/navigation/routers.dart';
 import 'package:inabe/src/presenter/controller/top_page_controller.dart';
+import 'package:inabe/src/utils/extensions/asset_extension.dart';
 
 class BottomNavigationWidget extends ConsumerStatefulWidget {
   const BottomNavigationWidget({Key? key}) : super(key: key);
@@ -19,6 +20,7 @@ class _BottomNavigationWidgetState
     final position = ref.watch(topControllerProvider);
 
     return BottomNavigationBar(
+      type: BottomNavigationBarType.fixed,
       currentIndex: position,
       selectedItemColor: ColorName.greenSnake,
       selectedLabelStyle: textStyle.xSmall.w500.fill(ColorName.greenSnake),
@@ -26,22 +28,22 @@ class _BottomNavigationWidgetState
       onTap: _onItemTapped,
       items: [
         BottomNavigationBarItem(
-          label: "Home",
+          label: str.home_tab,
           activeIcon: Assets.images.icHomeActive.image(width: 24),
           icon: Assets.images.icHome.image(width: 24),
         ),
         BottomNavigationBarItem(
-          label: "Email",
+          label: str.email_tab,
           activeIcon: Assets.images.icEmailActive.image(width: 24),
           icon: Assets.images.icEmail.image(width: 24),
         ),
         BottomNavigationBarItem(
-          label: "Medicine",
+          label: str.medicine_tab,
           activeIcon: Assets.images.icMedicine.image(width: 24),
           icon: Assets.images.icMedicine.image(width: 24),
         ),
         BottomNavigationBarItem(
-          label: "Menu",
+          label: str.menu_tab,
           activeIcon: Assets.images.icMenu.image(width: 24),
           icon: Assets.images.icMenu.image(width: 24),
         ),
@@ -50,19 +52,20 @@ class _BottomNavigationWidgetState
   }
 
   void _onItemTapped(int index) {
-    ref.read(topControllerProvider.notifier).setPosition(index);
+    final position = (index == 2 || index == 3) ? 0 : index;
+    ref.read(topControllerProvider.notifier).setPosition(position);
     switch (index) {
       case 0:
-        context.go('/home');
+        context?.go('/${RouterConstants.home}');
         break;
       case 1:
-        context.go("/${RouterConstants.email}");
+        context?.go("/${RouterConstants.email}");
         break;
       case 2:
-        context.go("/${RouterConstants.medicine}");
+        context?.go("/${RouterConstants.medicine}");
         break;
       case 3:
-        context.go("/${RouterConstants.menu}");
+        context?.go("/${RouterConstants.menu}");
         break;
       default:
     }

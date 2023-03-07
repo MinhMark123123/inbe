@@ -19,8 +19,7 @@ class ConvenienceBookPage extends ConsumerViewModelWidget<LivingBookViewModel> {
 
     return Scaffold(
       appBar: CustomAppBarWidget(
-        title: str.convenience_book,
-        onBackPressed: () => {context.pop()},
+        onBackPressed: () => context.pop(),
       ),
       body: Column(
         children: [

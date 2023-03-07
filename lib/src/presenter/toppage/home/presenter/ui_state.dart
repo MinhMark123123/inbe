@@ -9,15 +9,20 @@ class SecondScreenUIState {
 }
 */
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:inabe/src/data/model/convenience_model.dart';
 import 'package:inabe/src/data/model/electronic_app_model.dart';
+import 'package:inabe/src/data/model/notification_model.dart';
+import 'package:inabe/src/data/model/top_slider_model.dart';
 
 part 'ui_state.freezed.dart';
 
 @freezed
-class SecondScreenUIState with _$SecondScreenUIState {
-  factory SecondScreenUIState({
-    @Default(0) int counter,
-    @Default([]) List<ElectronicAppModel> electronicApps,
+class HomeUIState with _$HomeUIState {
+  factory HomeUIState({
+    @Default([]) List<TopSliderModel> topSlides,
+    @Default([]) List<String> images,
+    @Default([]) List<NotificationModel> notifications,
+    @Default([]) List<ConvenienceModel> conveniences,
     @Default('') String errorMessage,
-  }) = _SecondScreenUIState;
+  }) = _HomeUIState;
 }

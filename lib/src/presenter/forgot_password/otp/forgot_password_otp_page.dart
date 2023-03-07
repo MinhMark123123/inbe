@@ -110,7 +110,7 @@ class ForgotPasswordOTPPage
 
   Widget buildButtonUpdate(WidgetRef ref) {
     return SizedBox(
-      width: 200,
+      width: Dimens.widthButton,
       child: ElevatedButton(
         onPressed: () => viewModel(ref).validatePasswordOTP(),
         style: ElevatedButton.styleFrom(backgroundColor: ColorName.greenSnake),
@@ -178,7 +178,7 @@ class ForgotPasswordOTPPage
     ref.listen(viewModel.isSuccess, (previous, next) {
       if (next) {
         context.go(
-          "/${RouterConstants.menu}/${RouterConstants.login}/${RouterConstants.resetPw}",
+          "/${RouterConstants.login}/${RouterConstants.resetPw}",
           extra: ForgotPasswordRequest(
               email: email, otp: viewModel.otpController.text.trim()),
         );

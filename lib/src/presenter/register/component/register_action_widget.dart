@@ -57,7 +57,7 @@ class RegisterActionWidget extends ConsumerViewModelWidget<RegisterViewModel> {
 
   Widget buildButtonRegister(RegisterViewModel viewModel) {
     return SizedBox(
-      width: 200,
+      width: Dimens.widthButton,
       child: ElevatedButton(
         onPressed: () => {viewModel.doRegister()},
         style: ElevatedButton.styleFrom(backgroundColor: ColorName.greenSnake),

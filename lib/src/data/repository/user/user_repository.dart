@@ -25,7 +25,7 @@ abstract class UserRepository {
   Future<void> loginApi(LoginRequest request, Function(UserResponse) onSuccess,
       Function(dynamic) onError);
 
-  bool isLoggedIn();
+  Future<bool> isLoggedIn();
 
   Future<UserResponse> getBasicInfo();
 
@@ -76,8 +76,8 @@ class _UserRepositoryDefault extends UserRepository {
   }
 
   @override
-  bool isLoggedIn() {
-    String token = keyDataSource.get(PrefKeys.keyToken);
+  Future<bool> isLoggedIn() async {
+    String token = await keyDataSource.getSecure(PrefKeys.keyToken);
     return token.isNotEmpty;
   }
 
@@ -89,9 +89,9 @@ class _UserRepositoryDefault extends UserRepository {
       print("ttt $value ::: ${headers.value("access-token")}");
       print("ttt $value ::: ${headers.value("uid")}");
       print("ttt $value ::: ${headers.value("client")}");
-      keyDataSource.set(PrefKeys.keyToken, headers.value(accessTokenKey));
-      keyDataSource.set(PrefKeys.keyClient, headers.value(clientKey));
-      keyDataSource.set(PrefKeys.keyUid, headers.value(uidKey));
+      keyDataSource.setSecure(PrefKeys.keyToken, headers.value(accessTokenKey));
+      keyDataSource.setSecure(PrefKeys.keyClient, headers.value(clientKey));
+      keyDataSource.setSecure(PrefKeys.keyUid, headers.value(uidKey));
       onSuccess.call(value.data);
     }).catchError((e) {
       onError.call(e);

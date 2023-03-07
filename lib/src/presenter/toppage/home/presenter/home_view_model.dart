@@ -1,34 +1,37 @@
 import 'package:aac_core/aac_core.dart';
-import 'package:dio/dio.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:inabe/src/data/model/electronic_app_model.dart';
+import 'package:inabe/src/data/api/api_error.dart';
+import 'package:inabe/src/data/model/convenience_model.dart';
+import 'package:inabe/src/data/model/notification_model.dart';
+import 'package:inabe/src/data/model/top_slider_model.dart';
 import 'package:inabe/src/data/repository/toppage/top_repository.dart';
 import 'package:inabe/src/presenter/toppage/home/presenter/ui_state.dart';
 
-final _secondScreenUiStateProvider =
-    StateProvider.autoDispose<SecondScreenUIState>((ref) {
-  return SecondScreenUIState();
+final _homeUiStateProvider = StateProvider.autoDispose<HomeUIState>((ref) {
+  return HomeUIState();
 });
 
-final secondScreenControllerProvider =
+final homePageControllerProvider =
     Provider.autoDispose<HomePageViewModel>((ref) {
   return HomePageViewModel(
-    uiState: ref.watch(_secondScreenUiStateProvider.notifier),
+    uiState: ref.watch(_homeUiStateProvider.notifier),
     topRepository: ref.read(topRepositoryProvider),
   );
 });
 
 class HomePageViewModel extends ViewModel {
-  AutoDisposeStateProvider<SecondScreenUIState> get ui =>
-      _secondScreenUiStateProvider;
+  AutoDisposeStateProvider<HomeUIState> get ui => _homeUiStateProvider;
 
-  ProviderListenable<int> get counterChange =>
-      ui.select((value) => value.counter);
+  final StateController<HomeUIState> uiState;
 
-  ProviderListenable<List<ElectronicAppModel>> get electronicApps =>
-      ui.select((value) => value.electronicApps);
+  ProviderListenable<List<TopSliderModel>> get topSlides =>
+      ui.select((value) => value.topSlides);
 
-  final StateController<SecondScreenUIState> uiState;
+  ProviderListenable<List<NotificationModel>> get notifications =>
+      ui.select((value) => value.notifications);
+
+  ProviderListenable<List<ConvenienceModel>> get conveniences =>
+      ui.select((value) => value.conveniences);
 
   final TopRepository topRepository;
 
@@ -45,8 +48,8 @@ class HomePageViewModel extends ViewModel {
   @override
   void onInitState() {
     super.onInitState();
-    getElectronicApps();
     print("on init state");
+    viewModelScope(() => _getDataTop());
   }
 
   @override
@@ -85,31 +88,46 @@ class HomePageViewModel extends ViewModel {
     super.onDetached();
   }
 
-  void increaseCounter() {
-    final counter = uiState.state.counter;
-    uiState.update((state) => state.copyWith(counter: counter + 1));
+  Future<void> _getTopSlides() async {
+    topRepository
+        .getTopSlides()
+        .then((value) =>
+            uiState.update((state) => state.copyWith(topSlides: value)))
+        .catchError((error) {
+      ApiError(error,
+          errorData: (code, msg) => uiState
+              .update((state) => state.copyWith(errorMessage: "$code\n$msg")));
+    });
   }
 
-  void getElectronicApps() {
-    topRepository
-        .getElectronicApps()
-        .then((value) => {
-              uiState
-                  .update((state) => state.copyWith(electronicApps: value.data))
-            })
-        .catchError((obj) {
-      switch (obj.runtimeType) {
-        case DioError:
-          final res = (obj as DioError).response;
-          print("Got error : ${res?.statusCode} : ${res?.statusMessage}");
-          uiState.update((state) => state.copyWith(
-              errorMessage: res?.statusMessage ?? "Request api error"));
-          break;
-        default:
-          uiState
-              .update((state) => state.copyWith(errorMessage: "Default error"));
-          break;
+  Future<void> _getNews() async {
+    topRepository.getNews().then((value) {
+      if (value == null) {
+        uiState.update((state) => state.copyWith(errorMessage: "No data"));
+      } else {
+        uiState.update(
+            (state) => state.copyWith(notifications: value.take(3).toList()));
       }
+    }).catchError((error) {
+      final appError = ApiError(error, errorData: (_,__){}).pretty();
+      uiState.update((state) => state.copyWith(errorMessage: "${appError.code}\n${appError.message}"));
+      // ApiError(error, errorData: (code, msg) {
+      //   if (uiState.mounted) {
+      //     uiState
+      //         .update((state) => state.copyWith(errorMessage: "$code\n$msg"));
+      //   }
+      // });
     });
+  }
+
+  Future<void> _getConvenience() async {
+    uiState
+        .update((state) => state.copyWith(conveniences: defaultConveniences));
+  }
+
+  Future<void> _getDataTop() async {
+    await _getTopSlides();
+    await _getNews();
+    await _getConvenience();
   }
 }

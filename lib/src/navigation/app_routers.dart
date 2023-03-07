@@ -1,6 +1,7 @@
 import 'package:aac_core/aac_core.dart';
 import 'package:go_router/go_router.dart';
 import 'package:inabe/src/data/dto/request/forgot_password_request.dart';
+import 'package:inabe/src/data/model/email_model.dart';
 import 'package:inabe/src/data/model/notification_model.dart';
 import 'package:inabe/src/navigation/go_routers_observer.dart';
 import 'package:inabe/src/navigation/routers.dart';
@@ -9,16 +10,17 @@ import 'package:inabe/src/presenter/electronic_apps/electronic_apps_page.dart';
 import 'package:inabe/src/presenter/event/event_page.dart';
 import 'package:inabe/src/presenter/faq/faq_page.dart';
 import 'package:inabe/src/presenter/forgot_password/forgot_password_page.dart';
-import 'package:inabe/src/presenter/forgot_password/otp/forgot_password_otp_page.dart';
 import 'package:inabe/src/presenter/forgot_password/forgot_password_success_page.dart';
+import 'package:inabe/src/presenter/forgot_password/otp/forgot_password_otp_page.dart';
 import 'package:inabe/src/presenter/forgot_password/reset/reset_password_page.dart';
 import 'package:inabe/src/presenter/login/login_page.dart';
-import 'package:inabe/src/presenter/notification/notification_list_page.dart';
+import 'package:inabe/src/presenter/notification/news_page.dart';
 import 'package:inabe/src/presenter/policy/policy_page.dart';
 import 'package:inabe/src/presenter/register/register_page.dart';
 import 'package:inabe/src/presenter/related_apps/related_apps_page.dart';
 import 'package:inabe/src/presenter/setting/setting_page.dart';
 import 'package:inabe/src/presenter/splash/splash_page.dart';
+import 'package:inabe/src/presenter/toppage/email/detail/email_detail_page.dart';
 import 'package:inabe/src/presenter/toppage/email/email_page.dart';
 import 'package:inabe/src/presenter/toppage/home/home_page.dart';
 import 'package:inabe/src/presenter/toppage/home/presenter/notification_detail/notification_detail_page.dart';
@@ -27,12 +29,22 @@ import 'package:inabe/src/presenter/toppage/menu/menu_page.dart';
 import 'package:inabe/src/presenter/toppage/top_page.dart';
 import 'package:inabe/src/presenter/update_account/otp/update_account_otp_page.dart';
 import 'package:inabe/src/presenter/update_account/update_account_page.dart';
+import 'package:inabe/src/presenter/webview/webview_page.dart';
 
 class AppGoRouter {
   final _shellNavigatorKey = GlobalKey<NavigatorState>(debugLabel: "shell");
+
+  GoRoute webpage = GoRoute(
+    name: RouterConstants.webpage,
+    path: RouterConstants.webpage,
+    builder: (context, state) {
+      return WebviewPage(url: state.extra! as String);
+    },
+  );
+
   GoRoute loginRouter = GoRoute(
       name: RouterConstants.login,
-      path: RouterConstants.login,
+      path: "/${RouterConstants.login}",
       builder: (context, state) {
         return const LoginPage();
       },
@@ -69,7 +81,8 @@ class AppGoRouter {
           name: RouterConstants.resetPw,
           path: RouterConstants.resetPw,
           builder: (context, state) {
-            return ResetPasswordPage(request: state.extra as ForgotPasswordRequest);
+            return ResetPasswordPage(
+                request: state.extra as ForgotPasswordRequest);
           },
         ),
       ]);
@@ -95,7 +108,7 @@ class AppGoRouter {
                 return const FAQPage();
               },
             ),
-            loginRouter,
+            // loginRouter,
             // GoRoute(
             //   name: "menu/${RouterConstants.login}",
             //   path: RouterConstants.login,
@@ -140,11 +153,12 @@ class AppGoRouter {
                   return NoTransitionPage(child: HomePage());
                 },
                 routes: [
+                  webpage,
                   GoRoute(
                     name: "home/notificationList",
                     path: RouterConstants.notificationList,
                     builder: (context, state) {
-                      return const NotificationListPage();
+                      return const NewsPage();
                     },
                   ),
                   GoRoute(
@@ -161,6 +175,13 @@ class AppGoRouter {
                     path: RouterConstants.event,
                     builder: (context, state) {
                       return const EventPage();
+                    },
+                  ),
+                  GoRoute(
+                    name: RouterConstants.eventDetail,
+                    path: RouterConstants.eventDetail,
+                    builder: (context, state) {
+                      return EventPage();
                     },
                   ),
                   GoRoute(
@@ -202,12 +223,22 @@ class AppGoRouter {
                   ),
                 ]),
             GoRoute(
-              name: "top/email",
-              path: "/${RouterConstants.email}",
-              pageBuilder: (context, state) {
-                return const NoTransitionPage(child: EmailPage());
-              },
-            ),
+                name: "top/email",
+                path: "/${RouterConstants.email}",
+                pageBuilder: (context, state) {
+                  return const NoTransitionPage(child: EmailPage());
+                },
+                routes: [
+                  GoRoute(
+                    name: "email/detail",
+                    path: RouterConstants.emailDetail,
+                    builder: (context, state) {
+                      return EmailDetailPage(
+                        emailModel: state.extra! as EmailModel,
+                      );
+                    },
+                  ),
+                ]),
             GoRoute(
               name: "top/medicine",
               path: "/${RouterConstants.medicine}",
@@ -264,25 +295,13 @@ class AppGoRouter {
             ],
           ),
           topRouter,
-          // loginRouter,
-          // menuRouter,
-          // GoRoute(
-          //   name: "top",
-          //   path: "/${RouterConstants.top}",
-          //   builder: (context, state) {
-          //     return const TopPage();
-          //   },
-          //   routes: [
-          //     GoRoute(
-          //       name: "top/home",
-          //       path: RouterConstants.home,
-          //       builder: (context, state) {
-          //         return const HomePage();
-          //       },
-          //     ),
-          //   ],
-          // ),
+          loginRouter,
         ],
         errorBuilder: (context, state) => SplashPage(),
       );
+}
+
+void launchWebPage(BuildContext context, String? url) {
+  context.push("/${RouterConstants.home}/${RouterConstants.webpage}",
+      extra: url ?? '');
 }

@@ -25,6 +25,7 @@ class LivingBookItemWidget extends StatelessWidget {
             ImageViewWidget(
               livingGuideModel.icon ?? '',
               height: Configs.screenWidth * 60 / 375,
+              fit: BoxFit.fitHeight,
               errorHolder: Assets.images.icLive.image(width: 80),
             ),
             Padding(

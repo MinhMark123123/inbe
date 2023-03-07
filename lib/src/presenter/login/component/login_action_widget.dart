@@ -1,10 +1,6 @@
 import 'package:aac_core/aac_core.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:inabe/src/data/api/append_user_intercepter.dart';
-import 'package:inabe/src/data/api/retrofit_config.dart';
-import 'package:inabe/src/data/constants/constants.dart';
-import 'package:inabe/src/di/di_config.dart';
 import 'package:inabe/src/navigation/routers.dart';
 import 'package:inabe/src/presenter/login/login_view_model.dart';
 import 'package:inabe/src/state/riverpod_ui_support.dart';
@@ -38,8 +34,8 @@ class LoginActionWidget extends ConsumerViewModelWidget<LoginViewModel> {
               fontWeight: FontWeight.w400,
               color: ColorName.carbonGrey),
         ).onPressedInkWell(
-          () => context.go(
-              "/${RouterConstants.menu}/${RouterConstants.login}/${RouterConstants.forgotPw}"),
+          () => context
+              .go("/${RouterConstants.login}/${RouterConstants.forgotPw}"),
         ),
         const SizedBox(
           height: Dimens.size40,
@@ -59,14 +55,14 @@ class LoginActionWidget extends ConsumerViewModelWidget<LoginViewModel> {
       }
     });
     ref.listen(viewModel.isLoginSuccess, (previous, next) {
-      updateDioProvider(ref);
-      context.go("/${RouterConstants.menu}");
+      // updateDioProvider(ref);
+      context.go("/${RouterConstants.home}");
     });
   }
 
   Widget buildButtonLogin(LoginViewModel viewModel) {
     return SizedBox(
-      width: 200,
+      width: Dimens.widthButton,
       height: Dimens.size40,
       child: ElevatedButton(
         onPressed: () => {viewModel.doLoginAndUpdate()},
@@ -84,12 +80,11 @@ class LoginActionWidget extends ConsumerViewModelWidget<LoginViewModel> {
 
   Widget buildButtonRegister() {
     return SizedBox(
-      width: 200,
+      width: Dimens.widthButton,
       height: Dimens.size40,
       child: OutlinedButton(
         onPressed: () => {
-          context?.go(
-              "/${RouterConstants.menu}/${RouterConstants.login}/${RouterConstants.register}")
+          context?.go("/${RouterConstants.login}/${RouterConstants.register}")
         },
         style: OutlinedButton.styleFrom(
           minimumSize: Size.zero,

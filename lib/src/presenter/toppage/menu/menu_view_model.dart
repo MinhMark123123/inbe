@@ -34,17 +34,32 @@ class MenuViewModel extends ViewModel {
   }
 
   @override
+  void onResumed() {
+    checkLoggedIn();
+    super.onResumed();
+  }
+
+  late final StreamDataViewModel<bool> _isLoginLive =
+      StreamDataViewModel(defaultValue: false, viewModel: this);
+
+  StreamData<bool> get isLoginLive => _isLoginLive;
+
+  @override
   void onInitState() {
     print("ttt onInitState");
     super.onInitState();
-  }
-
-  bool checkLoggedIn() {
-    return userRepository.isLoggedIn();
+    checkLoggedIn();
   }
 
   @override
   bool enableBindAppLifeCycle() => true;
+
+  Future<bool> checkLoggedIn() async {
+    final isLogin = await userRepository.isLoggedIn();
+    _isLoginLive.postValue(isLogin);
+    return isLogin;
+    //return userRepository.isLoggedIn();
+  }
 
   void doLogout() {
     userRepository

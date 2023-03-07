@@ -7,7 +7,6 @@ class SecureKeys {
   static const keyLoginPassword = 'keyLoginPassword';
 }
 
-
 class PrefKeys {
   static const keyToken = 'keyToken';
   static const keyUid = 'keyUid';

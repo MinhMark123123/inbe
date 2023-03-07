@@ -23,7 +23,7 @@ class UpdateAccountOTPPage
     return Scaffold(
       appBar: CustomAppBarWidget(
         backgroundColor: ColorName.main,
-        onBackPressed: () => {context.pop()},
+        onBackPressed: () => context.pop(),
       ),
       body: buildPage(context, ref),
     );
@@ -98,7 +98,7 @@ class UpdateAccountOTPPage
 
   Widget buildButtonUpdate(WidgetRef ref) {
     return SizedBox(
-      width: 200,
+      width: Dimens.widthButton,
       child: ElevatedButton(
         onPressed: () => viewModel(ref).validOTP(),
         style: ElevatedButton.styleFrom(backgroundColor: ColorName.greenSnake),

@@ -1,4 +1,5 @@
 import 'package:aac_core/aac_core.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:inabe/src/data/model/other_app_model.dart';
 import 'package:inabe/src/presenter/related_apps/component/related_item_widget.dart';
@@ -19,7 +20,7 @@ class RelatedAppPage extends ConsumerViewModelWidget<RelatedViewModel> {
 
     return Scaffold(
       appBar: CustomAppBarWidget(
-        title: str.related_apps,
+        onBackPressed: () => context.pop(),
       ),
       body: otherAppModels.when(data: (data) {
         PopupUtils.hideLoadingDialog(context);

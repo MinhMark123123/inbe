@@ -71,7 +71,7 @@ class SettingNotificationWidget
         ),
         Center(
           child: SizedBox(
-            width: 200,
+            width: Dimens.widthButton,
             child: ElevatedButton(
               onPressed: () => {viewModel.doUpdateUser()},
               style: ElevatedButton.styleFrom(backgroundColor: ColorName.greenSnake),

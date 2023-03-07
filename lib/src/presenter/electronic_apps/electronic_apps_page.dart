@@ -22,7 +22,6 @@ class ElectronicAppPage
       BuildContext context, WidgetRef ref, ElectronicAppViewModel viewModel) {
     return Scaffold(
       appBar: CustomAppBarWidget(
-        title: str.related_apps,
         onBackPressed: () => {context.pop()},
       ),
       body: SingleChildScrollView(

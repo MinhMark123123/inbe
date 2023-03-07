@@ -5,7 +5,6 @@ import 'package:inabe/src/presenter/login/component/login_action_widget.dart';
 import 'package:inabe/src/presenter/login/component/login_input_form.dart';
 import 'package:inabe/src/presenter/login/login_view_model.dart';
 import 'package:inabe/src/state/riverpod_ui_support.dart';
-import 'package:inabe/src/utils/extensions/asset_extension.dart';
 import 'package:inabe_design/inabe_design.dart';
 
 class LoginPage extends ConsumerViewModelWidget<LoginViewModel> {
@@ -20,17 +19,16 @@ class LoginPage extends ConsumerViewModelWidget<LoginViewModel> {
   Widget buildWidget(
       BuildContext context, WidgetRef ref, LoginViewModel viewModel) {
     return Scaffold(
-      appBar: CustomAppBarWidget(
-        backgroundColor: ColorName.main,
-        onBackPressed: () => context.pop(),
-      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(Dimens.size10),
           child: Column(
-            children: const [
-              LoginInputFormWidget(),
-              LoginActionWidget(),
+            children: [
+              Container(
+                margin: const EdgeInsets.only(top: 100, bottom: 40),
+                  child: Assets.images.icLogoBig.image(width: 160)),
+              const LoginInputFormWidget(),
+              const LoginActionWidget(),
             ],
           ),
         ),

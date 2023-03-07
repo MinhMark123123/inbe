@@ -19,7 +19,7 @@ class ResetPasswordActionWidget
       print("ttt ResetPasswordActionWidget isSuccess p=$previous:::n=$next");
       if (next == true) {
         context.go(
-            "/${RouterConstants.menu}/${RouterConstants.login}/${RouterConstants.forgotPwSuccess}");
+            "/${RouterConstants.login}/${RouterConstants.forgotPwSuccess}");
       }
     });
 
@@ -47,7 +47,7 @@ class ResetPasswordActionWidget
 
   Widget buildButtonResetPassword(ResetPasswordViewModel viewModel) {
     return SizedBox(
-      width: 200,
+      width: Dimens.widthButton,
       child: ElevatedButton(
         onPressed: () => viewModel.resetPassword(),
         style: ElevatedButton.styleFrom(backgroundColor: ColorName.greenSnake),

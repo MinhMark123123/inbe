@@ -46,7 +46,7 @@ class UpdateAccountActionWidget
 
   Widget buildButtonRegister(UpdateAccountViewModel viewModel) {
     return SizedBox(
-      width: 200,
+      width: Dimens.widthButton,
       child: ElevatedButton(
         onPressed: () => {viewModel.doUpdateAccount()},
         style: ElevatedButton.styleFrom(backgroundColor: ColorName.greenSnake),
