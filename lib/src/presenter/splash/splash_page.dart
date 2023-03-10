@@ -23,8 +23,37 @@ class _SplashPageState extends State<SplashPage> {
   Future<void> _initConfigs() async {
     await Future.delayed(Duration.zero);
     await AppConfigs.splashInit(context);
+    // callRegisterTask();
     goToHome(context);
   }
+
+  //
+  // void callRegisterTask() {
+  //   Workmanager().cancelAll();
+  //   int day = DateTime.now().day;
+  //   int hour = DateTime.now().hour;
+  //   DateTime today = DateTime.now();
+  //   DateTime triggerD;
+  //   int d = DateTime.now().toUtc().millisecondsSinceEpoch;
+  //   int trigger;
+  //   print("ttt time::: $hour::$d");
+  //
+  //   if (hour < 23) {
+  //     triggerD = today.copyWith(hour: 23, minute: 0, second: 0);
+  //     trigger = triggerD.toUtc().millisecondsSinceEpoch;
+  //   } else {
+  //     triggerD = today.copyWith(day: (day + 1), hour: 23, minute: 0, second: 0);
+  //     trigger = triggerD.toUtc().millisecondsSinceEpoch;
+  //   }
+  //   print("ttt time::: $hour::::${trigger - d}");
+  //
+  //   // Workmanager().registerPeriodicTask(
+  //   //     simpleTaskKey,
+  //   //     simpleTaskKey,
+  //   //     initialDelay: const Duration(seconds: 30),
+  //   //     frequency: const Duration(days: 1)
+  //   // );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +81,7 @@ class _SplashPageState extends State<SplashPage> {
       final token = await keyDataSource.getSecure(PrefKeys.keyToken);
       print("ttt token: $token");
 
-      if(mounted) {
+      if (mounted) {
         if (token.isEmpty) {
           context.go("/${RouterConstants.login}");
         } else {

@@ -35,7 +35,7 @@ class AppGoRouter {
   final _shellNavigatorKey = GlobalKey<NavigatorState>(debugLabel: "shell");
 
   GoRoute webpage = GoRoute(
-    name: RouterConstants.webpage,
+    parentNavigatorKey: Configs.navigatorKey,
     path: RouterConstants.webpage,
     builder: (context, state) {
       return WebviewPage(url: state.extra! as String);
@@ -155,12 +155,14 @@ class AppGoRouter {
                 routes: [
                   webpage,
                   GoRoute(
-                    name: "home/notificationList",
-                    path: RouterConstants.notificationList,
-                    builder: (context, state) {
-                      return const NewsPage();
-                    },
-                  ),
+                      name: "home/notificationList",
+                      path: RouterConstants.notificationList,
+                      builder: (context, state) {
+                        return const NewsPage();
+                      },
+                      routes: [
+                        webpage,
+                      ]),
                   GoRoute(
                     name: "home/detail",
                     path: RouterConstants.notificationDetail,
@@ -171,19 +173,14 @@ class AppGoRouter {
                     },
                   ),
                   GoRoute(
-                    name: "home/event",
-                    path: RouterConstants.event,
-                    builder: (context, state) {
-                      return const EventPage();
-                    },
-                  ),
-                  GoRoute(
-                    name: RouterConstants.eventDetail,
-                    path: RouterConstants.eventDetail,
-                    builder: (context, state) {
-                      return EventPage();
-                    },
-                  ),
+                      name: "home/event",
+                      path: RouterConstants.event,
+                      builder: (context, state) {
+                        return const EventPage();
+                      },
+                      routes: [
+                        webpage,
+                      ]),
                   GoRoute(
                     name: "home/book",
                     path: RouterConstants.book,
@@ -191,13 +188,6 @@ class AppGoRouter {
                       return const ConvenienceBookPage();
                     },
                   ),
-                  // GoRoute(
-                  //   name: "home/magazine",
-                  //   path: RouterConstants.magazine,
-                  //   builder: (context, state) {
-                  //     return const MagazineLinkPage();
-                  //   },
-                  // ),
                   GoRoute(
                     name: "home/electronic_app",
                     path: RouterConstants.electronic_app,
@@ -301,7 +291,8 @@ class AppGoRouter {
       );
 }
 
-void launchWebPage(BuildContext context, String? url) {
-  context.push("/${RouterConstants.home}/${RouterConstants.webpage}",
-      extra: url ?? '');
+void launchWebPage(BuildContext context, String from, String? url) {
+  // context.push("/${RouterConstants.home}/${RouterConstants.webpage}",
+  //     extra: url ?? '');
+  context.go("/$from/${RouterConstants.webpage}", extra: url ?? '');
 }

@@ -21,6 +21,7 @@ class TopBodyWidget extends StatelessWidget {
             child: Center(
               child: Text(
                 title,
+                textAlign: TextAlign.center,
                 style: textStyle.large.w700.fill(ColorName.greenSnake),
               ),
             ),

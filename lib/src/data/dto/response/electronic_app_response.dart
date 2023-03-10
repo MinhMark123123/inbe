@@ -1,4 +1,5 @@
 import 'package:inabe/src/data/dto/base_list_reponse.dart';
+import 'package:inabe/src/data/dto/response/meta_data_list.dart';
 import 'package:inabe/src/data/model/electronic_app_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 

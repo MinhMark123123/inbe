@@ -31,7 +31,7 @@ class MenuPage extends ConsumerViewModelWidget<MenuViewModel> {
 
     return Scaffold(
       appBar: CustomAppBarWidget(
-        onBackPressed: () => context.pop(),
+        onBackPressed: () => context.go("/${RouterConstants.home}"),
       ),
       body: Container(
         margin: const EdgeInsets.symmetric(horizontal: Dimens.size10),

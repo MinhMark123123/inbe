@@ -23,7 +23,6 @@ class RouterConstants{
   static const notificationList = "notificationList";
 
   static const event = "event";
-  static const eventDetail = "eventDetail";
   static const book = "book";
   static const magazine = "magazine";
   static const electronic_app = "electronic_app";

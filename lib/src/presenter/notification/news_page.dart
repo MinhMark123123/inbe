@@ -1,5 +1,4 @@
 import 'package:aac_core/aac_core.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:inabe/src/data/model/notification_model.dart';
@@ -11,7 +10,6 @@ import 'package:inabe/src/presenter/widget/top_body_widget.dart';
 import 'package:inabe/src/state/riverpod_ui_support.dart';
 import 'package:inabe/src/utils/extensions/asset_extension.dart';
 import 'package:inabe/src/utils/popup_utils.dart';
-import 'package:inabe/src/utils/uri_utils.dart';
 import 'package:inabe_design/inabe_design.dart';
 
 class NewsPage extends ConsumerViewModelWidget<NewsViewModel> {
@@ -59,9 +57,11 @@ class NewsPage extends ConsumerViewModelWidget<NewsViewModel> {
           dividerColor: ColorName.dividerGray,
           onClickItem: (index, item) {
             // UriUtils.launchActionOutside(data: item.link ?? '');
-            launchWebPage(context, item.link);
-            // context.go("/${RouterConstants.home}/${RouterConstants.webpage}",
-            //     extra: item.link ?? '');
+            launchWebPage(
+              context,
+              "${RouterConstants.home}/${RouterConstants.notificationList}",
+              item.link,
+            );
           },
         ),
       ),

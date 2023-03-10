@@ -1,10 +1,9 @@
 import 'package:aac_core/aac_core.dart';
-import 'package:flutter_riverpod/src/consumer.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:inabe/src/presenter/register/register_viewmodel.dart';
 import 'package:inabe/src/state/riverpod_ui_support.dart';
 import 'package:inabe/src/utils/extensions/asset_extension.dart';
 import 'package:inabe_design/dimens.dart';
-import 'package:riverpod/src/provider.dart';
 
 class RegisterNotificationWidget
     extends ConsumerViewModelWidget<RegisterViewModel> {

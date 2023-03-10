@@ -9,6 +9,7 @@ class EmailUIState with _$EmailUIState {
   factory EmailUIState({
     @Default(false) bool isSuccess,
     @Default('') String errorMessage,
+    @Default([]) List<EmailModel> dataList,
     @Default(AsyncValue.loading()) AsyncValue<List<EmailModel>> emails,
   }) = _EmailUIState;
 }

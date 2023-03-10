@@ -17,4 +17,4 @@ export 'package:inabe_design/base_component/input_forms/text_input_widget.dart';
 export 'package:inabe_design/base_component/center_mess_widget.dart';
 export 'package:flutter/material.dart';
 export 'package:carousel_slider/carousel_slider.dart';
-// export 'package:inabe_design/base_component/input_forms/email_input_widget.dart';
+export 'package:inabe_design/base_component/refresh_indicator_data_list_widget.dart';

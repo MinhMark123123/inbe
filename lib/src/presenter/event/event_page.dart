@@ -64,7 +64,11 @@ class EventPage extends ConsumerViewModelWidget<EventViewModel> {
             // UriUtils.launchActionOutside(data: "${DomainConst.URL}${item.url}");
             // context.go("/${RouterConstants.home}/${RouterConstants.webpage}",
             //     extra: item.url ?? '');
-            launchWebPage(context, item.url);
+            launchWebPage(
+              context,
+              "${RouterConstants.home}/${RouterConstants.event}",
+              item.url,
+            );
           },
         ),
       ),

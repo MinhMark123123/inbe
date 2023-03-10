@@ -456,7 +456,7 @@ abstract class AppLocalizations {
   /// No description provided for @home_tab.
   ///
   /// In en, this message translates to:
-  /// **'ホーム'**
+  /// **'ホーム\n'**
   String get home_tab;
 
   /// No description provided for @email_tab.
@@ -468,13 +468,13 @@ abstract class AppLocalizations {
   /// No description provided for @medicine_tab.
   ///
   /// In en, this message translates to:
-  /// **'医療救急情報'**
+  /// **'医療救急情報\n'**
   String get medicine_tab;
 
   /// No description provided for @menu_tab.
   ///
   /// In en, this message translates to:
-  /// **'メニュー'**
+  /// **'メニュー\n'**
   String get menu_tab;
 
   /// No description provided for @menu.

@@ -185,16 +185,16 @@ class AppLocalizationsJa extends AppLocalizations {
   String get turn_off_notification => 'お知らせ通知をオフにする';
 
   @override
-  String get home_tab => 'ホーム';
+  String get home_tab => 'ホーム\n';
 
   @override
   String get email_tab => 'いなべ市生活情報\n（まいめる）';
 
   @override
-  String get medicine_tab => '医療救急情報';
+  String get medicine_tab => '医療救急情報\n';
 
   @override
-  String get menu_tab => 'メニュー';
+  String get menu_tab => 'メニュー\n';
 
   @override
   String get menu => 'メニュー';

@@ -1,3 +1,5 @@
+import 'package:inabe/src/data/dto/response/meta_data_list.dart';
+
 abstract class BaseListResponse<Model> {
   List<Model> data;
   String? message;
