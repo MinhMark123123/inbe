@@ -107,30 +107,38 @@ class MenuPage extends ConsumerViewModelWidget<MenuViewModel> {
           child: Assets.images.icLogoSmall.image(width: 100, height: 34),
         ),
         const Spacer(),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: Dimens.size10),
-          child: Assets.images.icLive.image(width: Dimens.size30).onPressed(
-              () => {UriUtils.launchActionOutside(data: DomainConst.URL)}),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: Dimens.size10),
-          child: Assets.images.icInstagram
-              .image(width: Dimens.size30)
-              .onPressed(
-                  () => {UriUtils.launchActionOutside(data: DomainConst.URL)}),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: Dimens.size10),
-          child: Assets.images.icYoutube.image(width: Dimens.size30).onPressed(
-              () => {UriUtils.launchActionOutside(data: DomainConst.URL)}),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: Dimens.size10),
-          child: Assets.images.icTwitter.image(width: Dimens.size30).onPressed(
-              () => {UriUtils.launchActionOutside(data: DomainConst.URL)}),
-        ),
+        ..._buildListAction(),
       ],
     );
+  }
+
+  List<Widget> _buildListAction() {
+    return [
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: Dimens.size10),
+        child: Assets.images.icLive.image(width: 30).onPressed(() => {
+          UriUtils.launchActionOutside(data: DomainConst.topLiveUrl)
+        }),
+      ),
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: Dimens.size10),
+        child: Assets.images.icInstagram.image(width: 30).onPressed(() => {
+          UriUtils.launchActionOutside(data: DomainConst.topInstagramUrl)
+        }),
+      ),
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: Dimens.size10),
+        child: Assets.images.icYoutube.image(width: 30).onPressed(() => {
+          UriUtils.launchActionOutside(data: DomainConst.topYoutubeUrl)
+        }),
+      ),
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: Dimens.size10),
+        child: Assets.images.icTwitter.image(width: 30).onPressed(() => {
+          UriUtils.launchActionOutside(data: DomainConst.topTwitterUrl)
+        }),
+      ),
+    ];
   }
 
   Widget _rowMenu(String title, Image icon, dynamic action) {

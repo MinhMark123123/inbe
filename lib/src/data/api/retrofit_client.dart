@@ -27,7 +27,7 @@ abstract class RestClient {
 
   //Sign up
   @POST("auth")
-  Future<UserResponse> register(@Body() UserRequest userRequest);
+  Future<HttpResponse<UserResponse>> register(@Body() UserRequest userRequest);
 
   //logout
   @DELETE("auth/sign_out")

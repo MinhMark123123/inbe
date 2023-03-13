@@ -1,6 +1,7 @@
 import 'package:aac_core/aac_core.dart';
 import 'package:alarm/alarm.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:inabe/gen_l10n/app_localizations.dart';
 import 'package:inabe/src/navigation/app_routers.dart';
@@ -12,6 +13,7 @@ const simplePeriodicTask =
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await ScreenUtil.ensureScreenSize();
   await Alarm.init();
   await Workmanager().initialize(callbackDispatcher, isInDebugMode: true);
   callRegisterTask();
@@ -76,16 +78,23 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerConfig: AppGoRouter().router,
-      title: "Go router",
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      theme: CustomAppTheme.lightTheme,
+    return ScreenUtilInit(
+      designSize: const Size(375, 812),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        return MaterialApp.router(
+          routerConfig: AppGoRouter().router,
+          title: "Go router",
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          theme: CustomAppTheme.lightTheme,
+        );
+      },
     );
   }
 }

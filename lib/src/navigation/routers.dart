@@ -6,7 +6,6 @@ class RouterConstants{
   static const top = "top";
   static const home = "home";
   static const email = "email";
-  static const medicine = "medicine";
   static const policy = "policy";
   static const login = "login";
   static const register = "register";

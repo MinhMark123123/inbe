@@ -1,4 +1,5 @@
 import 'package:aac_core/aac_core.dart';
+import 'package:inabe/src/data/constants/domains.dart';
 import 'package:inabe/src/navigation/routers.dart';
 import 'package:inabe/src/utils/extensions/asset_extension.dart';
 
@@ -97,7 +98,7 @@ final defaultConveniences = {
       id: 2,
       name: str.magazine_link,
       type: UtilityItem.MAGAZING,
-      path: "https://www.catapoke.com/search/?keyword=inabe-city"),
+      path: DomainConst.topMagazineUrl),
   // path: "/${RouterConstants.home}/${RouterConstants.magazine}"),
   ConvenienceModel(
       id: 3,
@@ -108,7 +109,7 @@ final defaultConveniences = {
       id: 4,
       name: str.electronic_library,
       type: UtilityItem.ELECTRONIC_LIB,
-      path: "https://www.catapoke.com/search/?keyword=electronic%20library"),
+      path: DomainConst.topLibraryUrl),
   ConvenienceModel(
       id: 5,
       name: str.related_apps,

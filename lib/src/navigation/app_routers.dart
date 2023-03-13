@@ -24,7 +24,6 @@ import 'package:inabe/src/presenter/toppage/email/detail/email_detail_page.dart'
 import 'package:inabe/src/presenter/toppage/email/email_page.dart';
 import 'package:inabe/src/presenter/toppage/home/home_page.dart';
 import 'package:inabe/src/presenter/toppage/home/presenter/notification_detail/notification_detail_page.dart';
-import 'package:inabe/src/presenter/toppage/medicine/medicine_page.dart';
 import 'package:inabe/src/presenter/toppage/menu/menu_page.dart';
 import 'package:inabe/src/presenter/toppage/top_page.dart';
 import 'package:inabe/src/presenter/update_account/otp/update_account_otp_page.dart';
@@ -213,28 +212,22 @@ class AppGoRouter {
                   ),
                 ]),
             GoRoute(
-                name: "top/email",
-                path: "/${RouterConstants.email}",
-                pageBuilder: (context, state) {
-                  return const NoTransitionPage(child: EmailPage());
-                },
-                routes: [
-                  GoRoute(
-                    name: "email/detail",
-                    path: RouterConstants.emailDetail,
-                    builder: (context, state) {
-                      return EmailDetailPage(
-                        emailModel: state.extra! as EmailModel,
-                      );
-                    },
-                  ),
-                ]),
-            GoRoute(
-              name: "top/medicine",
-              path: "/${RouterConstants.medicine}",
+              name: "top/email",
+              path: "/${RouterConstants.email}",
               pageBuilder: (context, state) {
-                return const NoTransitionPage(child: MedicinePage());
+                return const NoTransitionPage(child: EmailPage());
               },
+              routes: [
+                GoRoute(
+                  name: "email/detail",
+                  path: RouterConstants.emailDetail,
+                  builder: (context, state) {
+                    return EmailDetailPage(
+                      emailModel: state.extra! as EmailModel,
+                    );
+                  },
+                ),
+              ],
             ),
             GoRoute(
               name: "top/menu",

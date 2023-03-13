@@ -80,6 +80,10 @@ class $AssetsImagesGen {
   AssetGenImage get icInstagram =>
       const AssetGenImage('assets/images/ic_instagram.png');
 
+  /// File path: assets/images/ic_link_library.png
+  AssetGenImage get icLinkLibrary =>
+      const AssetGenImage('assets/images/ic_link_library.png');
+
   /// File path: assets/images/ic_live.png
   AssetGenImage get icLive => const AssetGenImage('assets/images/ic_live.png');
 

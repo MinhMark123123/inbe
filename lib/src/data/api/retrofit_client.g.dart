@@ -46,14 +46,14 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<UserResponse> register(userRequest) async {
+  Future<HttpResponse<UserResponse>> register(userRequest) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(userRequest.toJson());
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<UserResponse>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<HttpResponse<UserResponse>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -66,7 +66,8 @@ class _RestClient implements RestClient {
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = UserResponse.fromJson(_result.data!);
-    return value;
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
   }
 
   @override

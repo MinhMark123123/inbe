@@ -1,5 +1,7 @@
 import 'package:aac_core/aac_core.dart';
+import 'package:inabe/src/data/constants/domains.dart';
 import 'package:inabe/src/utils/extensions/asset_extension.dart';
+import 'package:inabe/src/utils/uri_utils.dart';
 import 'package:inabe_design/inabe_design.dart';
 
 class ElectronicAppInfoWidget extends StatelessWidget {
@@ -11,61 +13,84 @@ class ElectronicAppInfoWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: Dimens.size10),
       margin: const EdgeInsets.only(top: Dimens.size6),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: Dimens.size10),
-            child: Text(
-              str.electronic_app_please_check_info,
-              style: textStyle.medium.w700.fill(ColorName.carbonGrey),
-            ),
-          ),
-          const Divider(
-            height: 1,
-            color: ColorName.dividerGray,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: Dimens.size10),
-            child: Text(
-              str.electronic_app_overview_system,
-              style: textStyle.medium.w400.fill(ColorName.carbonGrey),
-            ),
-          ),
-          const Divider(
-            height: 1,
-            color: ColorName.dividerGray,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: Dimens.size10),
-            child: Text(
-              str.electronic_app_term_of_use,
-              style: textStyle.medium.w400.fill(ColorName.carbonGrey),
-            ),
-          ),
-          const Divider(
-            height: 1,
-            color: ColorName.dividerGray,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: Dimens.size10),
-            child: Text(
-              str.electronic_app_policy,
-              style: textStyle.medium.w400.fill(ColorName.carbonGrey),
-            ),
-          ),
-          const Divider(
-            height: 1,
-            color: ColorName.dividerGray,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: Dimens.size20),
-            child: Text(
-              str.electronic_app_external_link,
-              style: textStyle.medium.w400.fill(ColorName.carbonGrey),
-            ),
-          ),
-        ],
+        children: _buildListLink(),
       ),
     );
+  }
+
+  List<Widget> _buildListLink() {
+    return [
+      Padding(
+        padding: const EdgeInsets.symmetric(vertical: Dimens.size10),
+        child: Text(
+          str.electronic_app_please_check_info,
+          style: textStyle.medium.w700.fill(ColorName.carbonGrey),
+        ),
+      ),
+      const Divider(
+        height: 1,
+        color: ColorName.dividerGray,
+      ),
+      Container(
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(vertical: Dimens.size10),
+        child: Text(
+          str.electronic_app_overview_system,
+          style: textStyle.medium.w400.fill(ColorName.carbonGrey),
+        ),
+      ).onPressedInkWell(() =>
+          {UriUtils.launchActionOutside(data: DomainConst.libraryOverviewUrl)}),
+      const Divider(
+        height: 1,
+        color: ColorName.dividerGray,
+      ),
+      Container(
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(vertical: Dimens.size10),
+        child: Text(
+          str.electronic_app_term_of_use,
+          style: textStyle.medium.w400.fill(ColorName.carbonGrey),
+        ),
+      ).onPressedInkWell(() =>
+          {UriUtils.launchActionOutside(data: DomainConst.libraryTermUrl)}),
+      const Divider(
+        height: 1,
+        color: ColorName.dividerGray,
+      ),
+      Container(
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(vertical: Dimens.size10),
+        child: Text(
+          str.electronic_app_policy,
+          style: textStyle.medium.w400.fill(ColorName.carbonGrey),
+        ),
+      ).onPressedInkWell(() =>
+          {UriUtils.launchActionOutside(data: DomainConst.libraryPolicyUrl)}),
+      const Divider(
+        height: 1,
+        color: ColorName.dividerGray,
+      ),
+      _buildItemServiceLink(),
+    ];
+  }
+
+  Widget _buildItemServiceLink() {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(vertical: Dimens.size20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            str.electronic_app_external_link,
+            style: textStyle.medium.w400.fill(ColorName.carbonGrey),
+          ),
+          Assets.images.icLinkLibrary.image(width: Dimens.materialMedium)
+        ],
+      ),
+    ).onPressedInkWell(() =>
+        {UriUtils.launchActionOutside(data: DomainConst.libraryServiceUrl)});
   }
 }

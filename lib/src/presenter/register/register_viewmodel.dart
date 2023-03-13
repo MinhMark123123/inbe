@@ -178,9 +178,9 @@ class RegisterViewModel extends ViewModel {
 
       userRepository.register(request).then(
         (value) {
-          if (value.data != null) {
-            uiState.update((state) => state.copyWith(isSuccess: true));
-          }
+          final headers = value.response.headers;
+          userRepository.saveDataLogin(headers);
+          uiState.update((state) => state.copyWith(isSuccess: true));
         },
       ).catchError((obj) {
         switch (obj.runtimeType) {

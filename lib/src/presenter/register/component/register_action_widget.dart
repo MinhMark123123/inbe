@@ -88,7 +88,7 @@ class RegisterActionWidget extends ConsumerViewModelWidget<RegisterViewModel> {
           ),
           actions: [
             OutlinedButton(
-              onPressed: () => {context.go('/${RouterConstants.login}')},
+              onPressed: () => {context.go('/${RouterConstants.home}')},
               style: OutlinedButton.styleFrom(
                 side: const BorderSide(color: ColorName.dividerGray),
               ),

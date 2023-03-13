@@ -12,13 +12,15 @@ import 'package:inabe/src/data/dto/response/user_response.dart';
 import 'package:inabe/src/data/sources/local/key_data_source.dart';
 import 'package:inabe/src/di/di_config.dart';
 import 'package:retrofit/retrofit.dart';
+import 'package:dio/dio.dart' as header;
+
 
 abstract class UserRepository {
   Future<UserResponse> updateUser(UpdateUserRequest request);
 
   Future<UserResponse> updateLoginInfo(UpdateUserInfoRequest request);
 
-  Future<UserResponse> register(UserRequest request);
+  Future<HttpResponse<UserResponse>> register(UserRequest request);
 
   Future<HttpResponse<UserResponse>> login(LoginRequest request);
 
@@ -44,6 +46,8 @@ abstract class UserRepository {
   Future<UserResponse> doLogout();
 
   Future<void> clearDataUser();
+
+  Future<void> saveDataLogin(header.Headers headers);
 }
 
 final userRepositoryProvider = Provider.autoDispose<UserRepository>((ref) {
@@ -71,7 +75,7 @@ class _UserRepositoryDefault extends UserRepository {
   }
 
   @override
-  Future<UserResponse> register(UserRequest request) {
+  Future<HttpResponse<UserResponse>> register(UserRequest request) {
     return restClient.register(request);
   }
 
@@ -86,16 +90,18 @@ class _UserRepositoryDefault extends UserRepository {
       Function(dynamic) onError) {
     return restClient.login(request).then((value) {
       final headers = value.response.headers;
-      print("ttt $value ::: ${headers.value("access-token")}");
-      print("ttt $value ::: ${headers.value("uid")}");
-      print("ttt $value ::: ${headers.value("client")}");
-      keyDataSource.setSecure(PrefKeys.keyToken, headers.value(accessTokenKey));
-      keyDataSource.setSecure(PrefKeys.keyClient, headers.value(clientKey));
-      keyDataSource.setSecure(PrefKeys.keyUid, headers.value(uidKey));
+      saveDataLogin(headers);
       onSuccess.call(value.data);
     }).catchError((e) {
       onError.call(e);
     });
+  }
+
+  @override
+  Future<void> saveDataLogin(header.Headers headers) async {
+    keyDataSource.setSecure(PrefKeys.keyToken, headers.value(accessTokenKey));
+    keyDataSource.setSecure(PrefKeys.keyClient, headers.value(clientKey));
+    keyDataSource.setSecure(PrefKeys.keyUid, headers.value(uidKey));
   }
 
   @override
