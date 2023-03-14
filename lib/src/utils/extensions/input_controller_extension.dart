@@ -60,7 +60,7 @@ extension TextEditingControllerX on TextEditingController {
   // }
   String validateConfirmPassword(String password) {
     String confirm = text;
-    if (confirm != password) return str.not_match_password;
+    if (confirm != password) return str.error_password_not_match;
     return '';
   }
 
@@ -73,21 +73,21 @@ extension TextEditingControllerX on TextEditingController {
   String validatePassword() {
     String password = text;
     print("ttt pw $password");
-    if (password.isEmpty) return str.field_required;
-    if (!matches(password, passwordRegexValidation)) return str.invalid_password;
+    if (password.isEmpty) return str.error_password_empty;
+    if (!matches(password, passwordRegexValidation)) return str.error_password_format;
     return '';
   }
 
   String validateEmpty() {
     String value = text;
-    if (value.isEmpty) return str.field_required;
+    if (value.isEmpty) return "str.field_required";
     return '';
   }
 
   String validateEmail() {
     String email = text;
-    if (email.isEmpty) return str.field_required;
-    if (!isEmail(email)) return str.invalid_email;
+    if (email.isEmpty) return str.error_email_empty;
+    if (!isEmail(email)) return str.error_email_format;
     return '';
 
 

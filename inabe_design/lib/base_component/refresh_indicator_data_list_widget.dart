@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:aac_core/aac_core.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:inabe_design/base_component/base_refresh_indicator_widget.dart';
 import 'package:inabe_design/base_component/refresh_indicator_controller.dart';
 import 'package:inabe_design/base_component/refresh_indicator_cupertino_controller.dart';
@@ -44,7 +44,10 @@ class RefreshIndicatorDataListWidget<T> extends BaseRefreshIndicatorWidget {
         ) {
     if (separatorBuilder == null && dividerHeight > 0) {
       separatorBuilder = (index) => Divider(
-          height: dividerHeight, thickness: dividerHeight, color: dividerColor);
+            height: dividerHeight,
+            /*thickness: dividerHeight,*/
+            color: dividerColor,
+          );
     }
   }
 

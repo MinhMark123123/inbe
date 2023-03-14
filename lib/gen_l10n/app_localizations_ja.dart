@@ -95,18 +95,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get register => '登録';
 
   @override
-  String get field_required => 'Required field';
-
-  @override
-  String get invalid_email => 'Invalid email';
-
-  @override
-  String get invalid_password => 'Invalid password';
-
-  @override
-  String get not_match_password => 'Not match password';
-
-  @override
   String get nickname => 'ニックネーム';
 
   @override
@@ -188,7 +176,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get home_tab => 'ホーム\n';
 
   @override
-  String get email_tab => 'いなべ市生活情報\n（まいめる）';
+  String get email_tab => 'いなべ市生活情報\n    （まいめる）';
 
   @override
   String get medicine_tab => '医療救急情報\n';
@@ -204,6 +192,24 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get update => '更新';
+
+  @override
+  String get error_email_empty => 'メールアドレスを入力してください';
+
+  @override
+  String get error_email_format => 'メールアドレスを正しく入力してください';
+
+  @override
+  String get error_password_empty => 'パスワードを入力してください';
+
+  @override
+  String get error_password_format => '半角英数字8文字から16文字で入力してください';
+
+  @override
+  String get error_password_not_match => 'パスワードが一致しません';
+
+  @override
+  String get error_nickname_empty => 'ニックネームを入力してください';
 
   @override
   String get email_information => 'いなべ市生活情報（まいめる）';

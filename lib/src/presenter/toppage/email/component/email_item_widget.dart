@@ -10,30 +10,22 @@ class EmailItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: Dimens.size10),
+      padding: const EdgeInsets.only(
+          top: Dimens.size10, bottom: Dimens.materialSmall),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Text(
-                emailModel.publishedAt ?? '',
-                style: textStyle.medium.w500.fill(ColorName.boulder),
-              ),
-              const SizedBox(width: Dimens.size10),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: Dimens.size4, vertical: 2),
-                child: Text(
-                  emailModel.categoryName ?? '',
-                  style: textStyle.small.w500.fill(Colors.white),
-                ),
-              ).decor(background: Colors.red),
-            ],
-          ),
-          const SizedBox(height: Dimens.size4),
           Text(
-            emailModel.title ?? '',
-            style: textStyle.medium.w700.fill(ColorName.carbonGrey),
+            emailModel.publishedAt ?? '',
+            style: textStyle.medium.w500.fill(ColorName.boulder),
+          ),
+          const SizedBox(height: 3),
+          SizedBox(
+            width: double.infinity,
+            child: Text(
+              emailModel.title ?? '',
+              style: textStyle.medium.w700.fill(ColorName.carbonGrey),
+            ),
           ),
         ],
       ),

@@ -8,15 +8,19 @@ class PageIndicatorWidget extends StatelessWidget {
   double dotWidth;
   double dotHeight;
   double spacing;
+  Function(int)? onTap;
 
-  PageIndicatorWidget(this.currentIndex, this.count,
-      {Key? key,
-      this.currentColor,
-      this.backgroundColor,
-      this.dotWidth = 13,
-      this.dotHeight = 4.5,
-      this.spacing = 6})
-      : super(key: key);
+  PageIndicatorWidget(
+    this.currentIndex,
+    this.count, {
+    Key? key,
+    this.currentColor,
+    this.backgroundColor,
+    this.dotWidth = 13,
+    this.dotHeight = 4.5,
+    this.onTap,
+    this.spacing = 6,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +45,6 @@ class PageIndicatorWidget extends StatelessWidget {
             .circle()
             .fill((index == currentIndex) ? currentColor : backgroundColor),
       ),
-    );
+    ).onPressed(() => onTap?.call(index));
   }
 }

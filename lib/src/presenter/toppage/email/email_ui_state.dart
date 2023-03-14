@@ -7,9 +7,9 @@ part 'email_ui_state.freezed.dart';
 @freezed
 class EmailUIState with _$EmailUIState {
   factory EmailUIState({
+    @Default(true) bool isLoadedPage,
     @Default(false) bool isSuccess,
     @Default('') String errorMessage,
     @Default([]) List<EmailModel> dataList,
-    @Default(AsyncValue.loading()) AsyncValue<List<EmailModel>> emails,
   }) = _EmailUIState;
 }

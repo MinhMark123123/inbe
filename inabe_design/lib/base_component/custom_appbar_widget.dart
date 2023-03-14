@@ -16,7 +16,7 @@ class CustomAppBarWidget extends AppBar {
     bool centerTitle = true,
     double elevation = 0.0,
     double? titleSpacing = 0.0,
-    double? toolbarHeight,
+    double toolbarHeight = 46.0,
     this.titleColor,
     Color? backgroundColor,
     List<Widget>? actions,

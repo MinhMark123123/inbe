@@ -23,110 +23,39 @@ class _BottomNavigationWidgetState
 
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
-      showSelectedLabels: false,
-      showUnselectedLabels: false,
       currentIndex: position,
       selectedItemColor: ColorName.greenSnake,
-      selectedLabelStyle: textStyle.xSmall.w500.fill(ColorName.greenSnake),
-      unselectedLabelStyle: textStyle.xSmall.w500.fill(ColorName.dividerGray),
+      selectedLabelStyle:
+          textStyle.xSmall.w500.fill(ColorName.greenSnake).copyWith(
+                overflow: TextOverflow.visible,
+              ),
+      unselectedLabelStyle:
+          textStyle.xSmall.w500.fill(ColorName.dividerGray).copyWith(
+                overflow: TextOverflow.visible,
+              ),
       onTap: _onItemTapped,
       items: [
-        // buildItemNavigation(),
-        // buildItemNavigation(),
-        // buildItemNavigation(),
-        // buildItemNavigation(),
-        buildItemNavigation2(),
-        buildItemNavigation1(),
-        buildItemNavigation1(),
-        buildItemNavigation1(),
-        // BottomNavigationBarItem(
-        //   label: str.email_tab,
-        //   activeIcon: Assets.images.icEmailActive.image(width: 24),
-        //   icon: Assets.images.icEmail.image(width: 24),
-        // ),
-        // BottomNavigationBarItem(
-        //   label: str.medicine_tab,
-        //   activeIcon: Assets.images.icMedicine.image(width: 24),
-        //   icon: Assets.images.icMedicine.image(width: 24),
-        // ),
-        // BottomNavigationBarItem(
-        //   label: str.menu_tab,
-        //   activeIcon: Assets.images.icMenu.image(width: 24),
-        //   icon: Assets.images.icMenu.image(width: 24),
-        // ),
+        BottomNavigationBarItem(
+          label: str.home_tab,
+          activeIcon: Assets.images.icHomeActive.image(width: 24),
+          icon: Assets.images.icHome.image(width: 24),
+        ),
+        BottomNavigationBarItem(
+          label: str.email_tab,
+          activeIcon: Assets.images.icEmailActive.image(width: 24),
+          icon: Assets.images.icEmail.image(width: 24),
+        ),
+        BottomNavigationBarItem(
+          label: str.medicine_tab,
+          activeIcon: Assets.images.icMedicine.image(width: 24),
+          icon: Assets.images.icMedicine.image(width: 24),
+        ),
+        BottomNavigationBarItem(
+          label: str.menu_tab,
+          activeIcon: Assets.images.icMenu.image(width: 24),
+          icon: Assets.images.icMenu.image(width: 24),
+        ),
       ],
-    );
-  }
-
-  BottomNavigationBarItem buildItemNavigation() {
-    return BottomNavigationBarItem(
-      label: str.home_tab,
-      activeIcon: Assets.images.icHomeActive.image(width: 24),
-      icon: Assets.images.icHome.image(width: 24),
-    );
-  }
-
-  BottomNavigationBarItem buildItemNavigation1() {
-    return BottomNavigationBarItem(
-      // label: str.home_tab,
-      label: "いなべ市生活情報\n（まいめる）",
-      activeIcon: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Assets.images.icHomeActive.image(width: 24),
-          Text(
-            "いなべ市生活情報\n（まいめる）",
-            textAlign: TextAlign.center,
-            style: textStyle.w500.xSmall.fill(ColorName.greenSnake).copyWith(height: 1)
-            ,
-          )
-        ],
-      ),
-
-      icon: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Assets.images.icHome.image(width: 24),
-          Text(
-            // str.home_tab,
-            "いなべ市生活情報\n（まいめる）",
-            textAlign: TextAlign.center,
-            style: textStyle.w500.xSmall.fill(ColorName.greenSnake),
-          )
-        ],
-      ),
-    );
-  }
-
-  BottomNavigationBarItem buildItemNavigation2() {
-    return BottomNavigationBarItem(
-      // label: str.home_tab,
-      label: "Home",
-      activeIcon: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Assets.images.icHomeActive.image(width: 24),
-          Text(
-            "Home",
-            textAlign: TextAlign.center,
-            style: textStyle.w500.xSmall.fill(ColorName.greenSnake).copyWith(height: 1)
-            ,
-          )
-        ],
-      ),
-
-      icon: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Assets.images.icHome.image(width: 24),
-          Text(
-            // str.home_tab,
-            "Home",
-            textAlign: TextAlign.center,
-            style: textStyle.w500.xSmall.fill(ColorName.greenSnake),
-          )
-        ],
-      ),
     );
   }
 

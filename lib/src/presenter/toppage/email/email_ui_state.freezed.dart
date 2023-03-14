@@ -16,10 +16,10 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$EmailUIState {
+  bool get isLoadedPage => throw _privateConstructorUsedError;
   bool get isSuccess => throw _privateConstructorUsedError;
   String get errorMessage => throw _privateConstructorUsedError;
   List<EmailModel> get dataList => throw _privateConstructorUsedError;
-  AsyncValue<List<EmailModel>> get emails => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $EmailUIStateCopyWith<EmailUIState> get copyWith =>
@@ -33,10 +33,10 @@ abstract class $EmailUIStateCopyWith<$Res> {
       _$EmailUIStateCopyWithImpl<$Res, EmailUIState>;
   @useResult
   $Res call(
-      {bool isSuccess,
+      {bool isLoadedPage,
+      bool isSuccess,
       String errorMessage,
-      List<EmailModel> dataList,
-      AsyncValue<List<EmailModel>> emails});
+      List<EmailModel> dataList});
 }
 
 /// @nodoc
@@ -52,12 +52,16 @@ class _$EmailUIStateCopyWithImpl<$Res, $Val extends EmailUIState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isLoadedPage = null,
     Object? isSuccess = null,
     Object? errorMessage = null,
     Object? dataList = null,
-    Object? emails = null,
   }) {
     return _then(_value.copyWith(
+      isLoadedPage: null == isLoadedPage
+          ? _value.isLoadedPage
+          : isLoadedPage // ignore: cast_nullable_to_non_nullable
+              as bool,
       isSuccess: null == isSuccess
           ? _value.isSuccess
           : isSuccess // ignore: cast_nullable_to_non_nullable
@@ -70,10 +74,6 @@ class _$EmailUIStateCopyWithImpl<$Res, $Val extends EmailUIState>
           ? _value.dataList
           : dataList // ignore: cast_nullable_to_non_nullable
               as List<EmailModel>,
-      emails: null == emails
-          ? _value.emails
-          : emails // ignore: cast_nullable_to_non_nullable
-              as AsyncValue<List<EmailModel>>,
     ) as $Val);
   }
 }
@@ -87,10 +87,10 @@ abstract class _$$_EmailUIStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {bool isSuccess,
+      {bool isLoadedPage,
+      bool isSuccess,
       String errorMessage,
-      List<EmailModel> dataList,
-      AsyncValue<List<EmailModel>> emails});
+      List<EmailModel> dataList});
 }
 
 /// @nodoc
@@ -104,12 +104,16 @@ class __$$_EmailUIStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isLoadedPage = null,
     Object? isSuccess = null,
     Object? errorMessage = null,
     Object? dataList = null,
-    Object? emails = null,
   }) {
     return _then(_$_EmailUIState(
+      isLoadedPage: null == isLoadedPage
+          ? _value.isLoadedPage
+          : isLoadedPage // ignore: cast_nullable_to_non_nullable
+              as bool,
       isSuccess: null == isSuccess
           ? _value.isSuccess
           : isSuccess // ignore: cast_nullable_to_non_nullable
@@ -122,10 +126,6 @@ class __$$_EmailUIStateCopyWithImpl<$Res>
           ? _value._dataList
           : dataList // ignore: cast_nullable_to_non_nullable
               as List<EmailModel>,
-      emails: null == emails
-          ? _value.emails
-          : emails // ignore: cast_nullable_to_non_nullable
-              as AsyncValue<List<EmailModel>>,
     ));
   }
 }
@@ -134,12 +134,15 @@ class __$$_EmailUIStateCopyWithImpl<$Res>
 
 class _$_EmailUIState implements _EmailUIState {
   _$_EmailUIState(
-      {this.isSuccess = false,
+      {this.isLoadedPage = true,
+      this.isSuccess = false,
       this.errorMessage = '',
-      final List<EmailModel> dataList = const [],
-      this.emails = const AsyncValue.loading()})
+      final List<EmailModel> dataList = const []})
       : _dataList = dataList;
 
+  @override
+  @JsonKey()
+  final bool isLoadedPage;
   @override
   @JsonKey()
   final bool isSuccess;
@@ -155,12 +158,8 @@ class _$_EmailUIState implements _EmailUIState {
   }
 
   @override
-  @JsonKey()
-  final AsyncValue<List<EmailModel>> emails;
-
-  @override
   String toString() {
-    return 'EmailUIState(isSuccess: $isSuccess, errorMessage: $errorMessage, dataList: $dataList, emails: $emails)';
+    return 'EmailUIState(isLoadedPage: $isLoadedPage, isSuccess: $isSuccess, errorMessage: $errorMessage, dataList: $dataList)';
   }
 
   @override
@@ -168,17 +167,18 @@ class _$_EmailUIState implements _EmailUIState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_EmailUIState &&
+            (identical(other.isLoadedPage, isLoadedPage) ||
+                other.isLoadedPage == isLoadedPage) &&
             (identical(other.isSuccess, isSuccess) ||
                 other.isSuccess == isSuccess) &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage) &&
-            const DeepCollectionEquality().equals(other._dataList, _dataList) &&
-            (identical(other.emails, emails) || other.emails == emails));
+            const DeepCollectionEquality().equals(other._dataList, _dataList));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isSuccess, errorMessage,
-      const DeepCollectionEquality().hash(_dataList), emails);
+  int get hashCode => Object.hash(runtimeType, isLoadedPage, isSuccess,
+      errorMessage, const DeepCollectionEquality().hash(_dataList));
 
   @JsonKey(ignore: true)
   @override
@@ -189,19 +189,19 @@ class _$_EmailUIState implements _EmailUIState {
 
 abstract class _EmailUIState implements EmailUIState {
   factory _EmailUIState(
-      {final bool isSuccess,
+      {final bool isLoadedPage,
+      final bool isSuccess,
       final String errorMessage,
-      final List<EmailModel> dataList,
-      final AsyncValue<List<EmailModel>> emails}) = _$_EmailUIState;
+      final List<EmailModel> dataList}) = _$_EmailUIState;
 
+  @override
+  bool get isLoadedPage;
   @override
   bool get isSuccess;
   @override
   String get errorMessage;
   @override
   List<EmailModel> get dataList;
-  @override
-  AsyncValue<List<EmailModel>> get emails;
   @override
   @JsonKey(ignore: true)
   _$$_EmailUIStateCopyWith<_$_EmailUIState> get copyWith =>

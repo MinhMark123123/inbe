@@ -1,5 +1,6 @@
 import 'package:aac_core/aac_core.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:inabe/src/data/model/top_slider_model.dart';
 import 'package:inabe/src/presenter/toppage/home/presenter/home_view_model.dart';
 import 'package:inabe/src/presenter/toppage/home/presenter/slider_item.dart';
 import 'package:inabe/src/state/riverpod_ui_support.dart';
@@ -9,7 +10,7 @@ class HomeCarouselWidget extends ConsumerViewModelWidget<HomePageViewModel> {
   HomeCarouselWidget({Key? key}) : super(key: key);
 
   final CarouselController _controller = CarouselController();
-  int _current = 0;
+  final ValueNotifier<int> _currentValue = ValueNotifier(0);
 
   @override
   Widget buildWidget(
@@ -27,38 +28,36 @@ class HomeCarouselWidget extends ConsumerViewModelWidget<HomePageViewModel> {
               autoPlay: true,
               enlargeCenterPage: false,
               viewportFraction: 1,
-              aspectRatio: 1.75,
+              aspectRatio: 1.76,
               onPageChanged: (index, reason) {
-                _current = index;
+                _currentValue.value = index;
                 //no-op
               }),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: data.asMap().entries.map((entry) {
-            return GestureDetector(
-              onTap: () => _controller.animateToPage(entry.key),
-              child: Padding(
-                padding: const EdgeInsets.all(2.0),
-                child: Container(
-                  width: Dimens.size10,
-                  height: Dimens.size10,
-                  margin: const EdgeInsets.symmetric(
-                      vertical: Dimens.mediumPadding, horizontal: 3.0),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: _current == entry.key
-                        ? ColorName.greenB7
-                        : const Color(0xFFF5F5F5),
-                  ),
-                ),
-              ),
-            );
-          }).toList(),
+        Padding(
+          padding: const EdgeInsets.all(Dimens.size10),
+          child: ValueListenableBuilder<int>(
+            valueListenable: _currentValue,
+            builder: (context, index, child) {
+              return PageIndicatorWidget(
+                index,
+                data.length,
+                spacing: Dimens.size10,
+                dotWidth: Dimens.size10,
+                dotHeight: Dimens.size10,
+                currentColor: ColorName.greenSnake,
+                backgroundColor: ColorName.grayF5,
+                onTap: (index) => {
+                  _controller.animateToPage(index)
+                },
+              );
+            },
+          ),
         ),
       ],
     );
   }
+
 
   @override
   AutoDisposeProvider<HomePageViewModel> viewModelProvider() {

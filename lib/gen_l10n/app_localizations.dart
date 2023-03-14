@@ -273,30 +273,6 @@ abstract class AppLocalizations {
   /// **'登録'**
   String get register;
 
-  /// No description provided for @field_required.
-  ///
-  /// In en, this message translates to:
-  /// **'Required field'**
-  String get field_required;
-
-  /// No description provided for @invalid_email.
-  ///
-  /// In en, this message translates to:
-  /// **'Invalid email'**
-  String get invalid_email;
-
-  /// No description provided for @invalid_password.
-  ///
-  /// In en, this message translates to:
-  /// **'Invalid password'**
-  String get invalid_password;
-
-  /// No description provided for @not_match_password.
-  ///
-  /// In en, this message translates to:
-  /// **'Not match password'**
-  String get not_match_password;
-
   /// No description provided for @nickname.
   ///
   /// In en, this message translates to:
@@ -462,7 +438,7 @@ abstract class AppLocalizations {
   /// No description provided for @email_tab.
   ///
   /// In en, this message translates to:
-  /// **'いなべ市生活情報\n（まいめる）'**
+  /// **'いなべ市生活情報\n    （まいめる）'**
   String get email_tab;
 
   /// No description provided for @medicine_tab.
@@ -494,6 +470,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'更新'**
   String get update;
+
+  /// No description provided for @error_email_empty.
+  ///
+  /// In en, this message translates to:
+  /// **'メールアドレスを入力してください'**
+  String get error_email_empty;
+
+  /// No description provided for @error_email_format.
+  ///
+  /// In en, this message translates to:
+  /// **'メールアドレスを正しく入力してください'**
+  String get error_email_format;
+
+  /// No description provided for @error_password_empty.
+  ///
+  /// In en, this message translates to:
+  /// **'パスワードを入力してください'**
+  String get error_password_empty;
+
+  /// No description provided for @error_password_format.
+  ///
+  /// In en, this message translates to:
+  /// **'半角英数字8文字から16文字で入力してください'**
+  String get error_password_format;
+
+  /// No description provided for @error_password_not_match.
+  ///
+  /// In en, this message translates to:
+  /// **'パスワードが一致しません'**
+  String get error_password_not_match;
+
+  /// No description provided for @error_nickname_empty.
+  ///
+  /// In en, this message translates to:
+  /// **'ニックネームを入力してください'**
+  String get error_nickname_empty;
 
   /// No description provided for @email_information.
   ///

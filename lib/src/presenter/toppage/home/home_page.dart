@@ -1,4 +1,5 @@
 import 'package:aac_core/aac_core.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:inabe/src/data/constants/domains.dart';
 import 'package:inabe/src/presenter/toppage/home/component/home_carousel_widget.dart';
@@ -18,7 +19,12 @@ class HomePage extends ConsumerViewModelWidget<HomePageViewModel> {
 
   @override
   Widget buildWidget(
-      BuildContext context, WidgetRef ref, HomePageViewModel viewModel) {
+    BuildContext context,
+    WidgetRef ref,
+    HomePageViewModel viewModel,
+  ) {
+    useAutomaticKeepAlive(wantKeepAlive: true);
+
     return Scaffold(
       appBar: AppBar(
         leadingWidth: 100,
@@ -34,31 +40,27 @@ class HomePage extends ConsumerViewModelWidget<HomePageViewModel> {
 
   List<Widget> _buildListAction() {
     return [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: Dimens.size10),
-          child: Assets.images.icLive.image(width: 30).onPressed(() => {
-            UriUtils.launchActionOutside(data: DomainConst.topLiveUrl)
-          }),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: Dimens.size10),
-          child: Assets.images.icInstagram.image(width: 30).onPressed(() => {
-            UriUtils.launchActionOutside(data: DomainConst.topInstagramUrl)
-          }),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: Dimens.size10),
-          child: Assets.images.icYoutube.image(width: 30).onPressed(() => {
-            UriUtils.launchActionOutside(data: DomainConst.topYoutubeUrl)
-          }),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: Dimens.size10),
-          child: Assets.images.icTwitter.image(width: 30).onPressed(() => {
-            UriUtils.launchActionOutside(data: DomainConst.topTwitterUrl)
-          }),
-        ),
-      ];
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: Dimens.size10),
+        child: Assets.images.icLive.image(width: 30).onPressed(
+            () => {UriUtils.launchActionOutside(data: DomainConst.topLiveUrl)}),
+      ),
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: Dimens.size10),
+        child: Assets.images.icInstagram.image(width: 30).onPressed(() =>
+            {UriUtils.launchActionOutside(data: DomainConst.topInstagramUrl)}),
+      ),
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: Dimens.size10),
+        child: Assets.images.icYoutube.image(width: 30).onPressed(() =>
+            {UriUtils.launchActionOutside(data: DomainConst.topYoutubeUrl)}),
+      ),
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: Dimens.size10),
+        child: Assets.images.icTwitter.image(width: 30).onPressed(() =>
+            {UriUtils.launchActionOutside(data: DomainConst.topTwitterUrl)}),
+      ),
+    ];
   }
 
   Widget buildBodyHome(WidgetRef ref) {

@@ -1,5 +1,7 @@
 import 'package:aac_core/aac_core.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/src/consumer.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:inabe/src/data/constants/domains.dart';
 import 'package:inabe/src/navigation/routers.dart';
@@ -23,78 +25,77 @@ class MenuPage extends ConsumerViewModelWidget<MenuViewModel> {
 
   @override
   Widget buildWidget(
-      BuildContext context, WidgetRef ref, MenuViewModel viewModel) {
+    BuildContext context,
+    WidgetRef ref,
+    MenuViewModel viewModel,
+  ) {
+    useAutomaticKeepAlive(wantKeepAlive: true);
     viewModel.checkLoggedIn();
-    final isSuccess = ref.watch(viewModel.isSuccess);
-
-    print("ttt buildWidget menu_page::: $isSuccess");
 
     return Scaffold(
       appBar: CustomAppBarWidget(
+        toolbarHeight: 46,
         onBackPressed: () => context.go("/${RouterConstants.home}"),
       ),
-      body: Container(
-        margin: const EdgeInsets.symmetric(horizontal: Dimens.size10),
-        child: StreamDataConsumer<bool>(
-          streamData: viewModel.isLoginLive,
-          builder: (context, isLogin) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                TopBodyWidget(title: str.menu),
-                if (isLogin)
-                  _rowMenu(
-                    str.setting,
-                    Assets.images.icSetting.image(width: 16),
-                    () => {
+      body: StreamDataConsumer<bool>(
+        streamData: viewModel.isLoginLive,
+        builder: (context, isLogin) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TopBodyWidget(title: str.menu),
+              if (isLogin)
+                _rowMenu(
+                  str.setting,
+                  Assets.images.icSetting.image(width: Dimens.size22),
+                  () => {
+                    context.go(
+                      "/${RouterConstants.menu}/${RouterConstants.setting}",
+                    )
+                  },
+                ),
+              _rowMenu(
+                str.help,
+                Assets.images.icHelp.image(width: Dimens.size22),
+                () => {
+                  context.go(
+                    "/${RouterConstants.menu}/${RouterConstants.faq}",
+                  )
+                },
+              ),
+              _rowPolicy(
+                str.privacy_policy,
+                Assets.images.icPolicy.image(width: Dimens.size26, height: 22),
+                () => {
+                  context.go(
+                    "/${RouterConstants.menu}/${RouterConstants.policy}",
+                  )
+                },
+              ),
+              _rowMenu(
+                isLogin ? str.logout : str.login,
+                Assets.images.icLogin.image(width: Dimens.size22),
+                () => {
+                  if (!isLogin)
+                    {
                       context.go(
-                        "/${RouterConstants.menu}/${RouterConstants.setting}",
+                        "/${RouterConstants.login}",
                       )
-                    },
-                  ),
-                _rowMenu(
-                  str.help,
-                  Assets.images.icHelp.image(width: 16),
-                  () => {
-                    context.go(
-                      "/${RouterConstants.menu}/${RouterConstants.faq}",
-                    )
-                  },
-                ),
-                _rowMenu(
-                  str.privacy_policy,
-                  Assets.images.icPolicy.image(width: 16),
-                  () => {
-                    context.go(
-                      "/${RouterConstants.menu}/${RouterConstants.policy}",
-                    )
-                  },
-                ),
-                _rowMenu(
-                  isLogin ? str.logout : str.login,
-                  Assets.images.icLogin.image(width: 16),
-                  () => {
-                    if (!isLogin)
-                      {
-                        context.go(
-                          "/${RouterConstants.login}",
-                        )
-                      }
-                    else
-                      {
-                        showDialogConfirm(context, ref),
-                      }
-                  },
-                ),
-                const Spacer(),
-                _buildBottomRow(),
-                const SizedBox(
-                  height: Dimens.materialMedium,
-                )
-              ],
-            );
-          },
-        ),
+                    }
+                  else
+                    {
+                      showDialogConfirm(context, ref),
+                    }
+                },
+              ),
+              const Spacer(),
+              _buildBottomRow(),
+              const SizedBox(
+                height: Dimens.materialMedium,
+              )
+            ],
+          );
+        },
       ),
     );
   }
@@ -103,7 +104,7 @@ class MenuPage extends ConsumerViewModelWidget<MenuViewModel> {
     return Row(
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: Dimens.size10),
+          padding: EdgeInsets.symmetric(horizontal: SizeExtension(10).w),
           child: Assets.images.icLogoSmall.image(width: 100, height: 34),
         ),
         const Spacer(),
@@ -116,54 +117,84 @@ class MenuPage extends ConsumerViewModelWidget<MenuViewModel> {
     return [
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: Dimens.size10),
-        child: Assets.images.icLive.image(width: 30).onPressed(() => {
-          UriUtils.launchActionOutside(data: DomainConst.topLiveUrl)
-        }),
+        child: Assets.images.icLive.image(width: 30).onPressed(
+            () => {UriUtils.launchActionOutside(data: DomainConst.topLiveUrl)}),
       ),
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: Dimens.size10),
-        child: Assets.images.icInstagram.image(width: 30).onPressed(() => {
-          UriUtils.launchActionOutside(data: DomainConst.topInstagramUrl)
-        }),
+        child: Assets.images.icInstagram.image(width: 30).onPressed(() =>
+            {UriUtils.launchActionOutside(data: DomainConst.topInstagramUrl)}),
       ),
       Padding(
-        padding: const EdgeInsets.symmetric(horizontal: Dimens.size10),
-        child: Assets.images.icYoutube.image(width: 30).onPressed(() => {
-          UriUtils.launchActionOutside(data: DomainConst.topYoutubeUrl)
-        }),
+        padding: EdgeInsets.symmetric(horizontal: SizeExtension(10).w),
+        child: Assets.images.icYoutube.image(width: 30).onPressed(() =>
+            {UriUtils.launchActionOutside(data: DomainConst.topYoutubeUrl)}),
       ),
       Padding(
-        padding: const EdgeInsets.symmetric(horizontal: Dimens.size10),
-        child: Assets.images.icTwitter.image(width: 30).onPressed(() => {
-          UriUtils.launchActionOutside(data: DomainConst.topTwitterUrl)
-        }),
+        padding: EdgeInsets.symmetric(horizontal: SizeExtension(10).w),
+        child: Assets.images.icTwitter.image(width: 30).onPressed(() =>
+            {UriUtils.launchActionOutside(data: DomainConst.topTwitterUrl)}),
       ),
     ];
   }
 
   Widget _rowMenu(String title, Image icon, dynamic action) {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: Dimens.size10),
-          child: Row(
-            children: [
-              icon,
-              const SizedBox(
-                width: Dimens.size10,
-              ),
-              Text(
-                title,
-                style: textStyle.medium.w700.fill(ColorName.boulder),
-              )
-            ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: Dimens.size10),
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(
+                horizontal: Dimens.size10, vertical: Dimens.materialSmall),
+            child: Row(
+              children: [
+                icon,
+                const SizedBox(
+                  width: 14,
+                ),
+                Text(
+                  title,
+                  style: textStyle.large.w700.fill(ColorName.boulder),
+                )
+              ],
+            ),
+          ).onPressed(action),
+          Divider(
+            height: SizeExtension(2).w,
+            color: ColorName.dividerGray,
           ),
-        ).onPressed(action),
-        const Divider(
-          height: 2,
-          color: ColorName.dividerGray,
-        ),
-      ],
+        ],
+      ),
+    );
+  }
+
+  Widget _rowPolicy(String title, Image icon, dynamic action) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: Dimens.size10),
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(
+                horizontal: Dimens.size10, vertical: Dimens.materialSmall),
+            child: Row(
+              children: [
+                icon,
+                const SizedBox(
+                  width: Dimens.size10,
+                ),
+                Text(
+                  title,
+                  style: textStyle.large.w700.fill(ColorName.boulder),
+                )
+              ],
+            ),
+          ).onPressed(action),
+          Divider(
+            height: SizeExtension(2).w,
+            color: ColorName.dividerGray,
+          ),
+        ],
+      ),
     );
   }
 

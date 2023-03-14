@@ -27,7 +27,7 @@ class TopBodyWidget extends StatelessWidget {
             ),
           ),
           const Divider(
-            height: 1,
+            height: 2,
             color: ColorName.dividerGray,
           ),
         ],
