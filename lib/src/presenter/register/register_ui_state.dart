@@ -9,13 +9,11 @@ class RegisterUIState with _$RegisterUIState {
   factory RegisterUIState({
     @Default(true) bool isTurnOn,
     @Default(false) bool isSuccess,
+    @Default(true) bool disableButton,
     @Default([]) List<InterestModel> interests,
     @Default(AsyncValue.loading())
         AsyncValue<Map<InterestModel, bool>> checkBoxList,
     @Default('') String errorMessage,
-    @Default('') String errorMail,
-    @Default('') String errorPassword,
-    @Default('') String errorConfirmPassword,
   }) = _RegisterUIState;
 
 // factory RegisterUIState.loading() = Loading;

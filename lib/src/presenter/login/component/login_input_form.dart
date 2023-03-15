@@ -1,7 +1,8 @@
 import 'package:aac_core/aac_core.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:inabe/src/presenter/login/login_view_model.dart';
-import 'package:inabe/src/presenter/widget/inabe_text_input.dart';
+import 'package:inabe/src/presenter/widget/input_forms/inabe_email_input_widget.dart';
+import 'package:inabe/src/presenter/widget/input_forms/inabe_password_input_widget.dart';
 import 'package:inabe/src/presenter/widget/top_body_widget.dart';
 import 'package:inabe/src/state/riverpod_ui_support.dart';
 import 'package:inabe/src/utils/extensions/asset_extension.dart';
@@ -18,8 +19,7 @@ class LoginInputFormWidget extends ConsumerViewModelWidget<LoginViewModel> {
   @override
   Widget buildWidget(
       BuildContext context, WidgetRef ref, LoginViewModel viewModel) {
-    final errorMail = ref.watch(viewModel.errorEmail);
-    final errorPassword = ref.watch(viewModel.errorPassword);
+    print("ttt build Login form");
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,21 +35,12 @@ class LoginInputFormWidget extends ConsumerViewModelWidget<LoginViewModel> {
         const SizedBox(
           height: Dimens.size10,
         ),
-        InabeTextInput(
-          hintText: str.email,
+        InabeEmailInputWidget(
           controller: viewModel.emailController,
-          contentPadding: const EdgeInsets.symmetric(horizontal: Dimens.size6),
-          onValueChanged: (value) => {},
+          onValueChanged: (value) => {
+            // print("ttt $value")
+          },
         ),
-        const SizedBox(
-          height: Dimens.size4,
-        ),
-        Visibility(
-            visible: errorMail.isNotEmpty,
-            child: Text(
-              errorMail,
-              style: textStyle.xSmall.w400.fill(Colors.red),
-            )),
         const SizedBox(
           height: Dimens.size30,
         ),
@@ -60,21 +51,12 @@ class LoginInputFormWidget extends ConsumerViewModelWidget<LoginViewModel> {
         const SizedBox(
           height: Dimens.size10,
         ),
-        InabeTextInput(
-          obscure: true,
+        InabePasswordInputWidget(
           controller: viewModel.passwordController,
-          contentPadding: const EdgeInsets.symmetric(horizontal: Dimens.size6),
-          onValueChanged: (value) => {},
+          onValueChanged: (value) => {
+            // print("ttt $value")
+          },
         ),
-        const SizedBox(
-          height: Dimens.size4,
-        ),
-        Visibility(
-            visible: errorPassword.isNotEmpty,
-            child: Text(
-              errorPassword,
-              style: textStyle.xSmall.w400.fill(Colors.red),
-            )),
       ],
     );
   }

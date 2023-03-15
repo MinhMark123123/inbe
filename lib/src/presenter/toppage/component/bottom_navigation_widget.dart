@@ -73,7 +73,15 @@ class _BottomNavigationWidgetState
         UriUtils.launchActionOutside(data: DomainConst.tabMedicineUrl);
         break;
       case 3:
-        context?.go("/${RouterConstants.menu}");
+        if (context != null) {
+          var path = GoRouter.of(context!).location;
+          print("ttt path : $path");
+          if (path.contains(RouterConstants.menu)) {
+            context?.go("/${RouterConstants.home}");
+          } else {
+            context?.go("/${RouterConstants.menu}");
+          }
+        }
         break;
       default:
     }

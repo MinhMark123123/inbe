@@ -1,8 +1,10 @@
 import 'package:aac_core/aac_core.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:inabe/src/data/api/api_error.dart';
 import 'package:inabe/src/data/repository/user/user_repository.dart';
 import 'package:inabe/src/presenter/toppage/menu/menu_ui_state.dart';
+import 'package:inabe/src/utils/extensions/asset_extension.dart';
 
 final _menuUiStateProvider = StateProvider.autoDispose<MenuUIState>((ref) {
   return MenuUIState();
@@ -19,6 +21,9 @@ class MenuViewModel extends ViewModel {
   final StateController<MenuUIState> uiState;
 
   AutoDisposeStateProvider<MenuUIState> get ui => _menuUiStateProvider;
+
+  ProviderListenable<bool> get isSignOutProvider =>
+      ui.select((value) => value.isSignOut);
 
   ProviderListenable<String> get errorMsg =>
       ui.select((value) => value.errorMsg);
@@ -76,6 +81,7 @@ class MenuViewModel extends ViewModel {
   void clearDataStorage() {
     userRepository.clearDataUser().then((value) {
       uiState.update((state) => state.copyWith(isSuccess: true));
+      uiState.update((state) => state.copyWith(isSignOut: true));
     });
   }
 }

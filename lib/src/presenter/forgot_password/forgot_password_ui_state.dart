@@ -7,6 +7,5 @@ class ForgotPasswordUIState with _$ForgotPasswordUIState {
   factory ForgotPasswordUIState({
     @Default(false) bool isSuccess,
     @Default('') String errorMsg,
-    @Default('') String errorEmail,
   }) = _ForgotPasswordUIState;
 }

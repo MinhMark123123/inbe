@@ -26,9 +26,6 @@ class ForgotPasswordViewModel extends ViewModel {
   ProviderListenable<String> get errorMsg =>
       ui.select((value) => value.errorMsg);
 
-  ProviderListenable<String> get errorEmail =>
-      ui.select((value) => value.errorEmail);
-
   ProviderListenable<bool> get isSuccess =>
       ui.select((value) => value.isSuccess);
 
@@ -40,7 +37,7 @@ class ForgotPasswordViewModel extends ViewModel {
     required this.userRepository,
     required this.uiState,
   }) {
-    print("SettingViewModel constructor");
+    print("ForgotPasswordViewModel constructor");
   }
 
   @override
@@ -57,9 +54,7 @@ class ForgotPasswordViewModel extends ViewModel {
   }
 
   Future<void> doRecoverPassword() async {
-    final email = emailController.validateEmail();
-    uiState.update((state) => state.copyWith(errorEmail: email));
-    if (email.isNotEmpty) {
+    if (emailController.validateEmail().isNotEmpty) {
       return;
     }
 
@@ -74,7 +69,7 @@ class ForgotPasswordViewModel extends ViewModel {
     });
   }
 
-  void resetError() {
-    uiState.update((state) => state.copyWith(errorEmail: ''));
+  void resetErrorMsg() {
+    uiState.update((state) => state.copyWith(errorMsg: ''));
   }
 }

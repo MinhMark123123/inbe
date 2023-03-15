@@ -7,7 +7,6 @@ import 'package:inabe/src/presenter/toppage/home/presenter/home_view_model.dart'
 import 'package:inabe/src/presenter/toppage/home/presenter/notification_item.dart';
 import 'package:inabe/src/state/riverpod_ui_support.dart';
 import 'package:inabe/src/utils/extensions/asset_extension.dart';
-import 'package:inabe/src/utils/uri_utils.dart';
 import 'package:inabe_design/inabe_design.dart';
 
 class HomeNewsWidget extends ConsumerViewModelWidget<HomePageViewModel> {
@@ -30,7 +29,7 @@ class HomeNewsWidget extends ConsumerViewModelWidget<HomePageViewModel> {
         children: [
           _buildNotificationHeader(),
           const Divider(
-            height: 1,
+            height: 2,
             color: ColorName.dividerGray,
           ),
           _buildListNotification(data)
@@ -41,7 +40,10 @@ class HomeNewsWidget extends ConsumerViewModelWidget<HomePageViewModel> {
 
   Widget _buildListNotification(List<NotificationModel> data) {
     return Padding(
-      padding: const EdgeInsets.all(Dimens.size10),
+      padding: const EdgeInsets.symmetric(
+        horizontal: Dimens.size10,
+        vertical: Dimens.materialSmall,
+      ),
       child: ListWidget<NotificationModel>(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
@@ -54,7 +56,7 @@ class HomeNewsWidget extends ConsumerViewModelWidget<HomePageViewModel> {
             onItemClick: (data, index) async {
               _context.go(
                 RouterConstants.webpageChild(RouterConstants.home),
-              extra: data.link,
+                extra: data.link,
               );
             },
           );

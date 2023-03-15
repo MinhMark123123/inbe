@@ -55,9 +55,11 @@ void callRegisterTask() {
   }
   print("ttt time::: $hour::::${trigger - d}");
 
-  Workmanager().registerPeriodicTask(simpleTaskKey, simpleTaskKey,
-      initialDelay: Duration(milliseconds: trigger - d),
-      frequency: const Duration(days: 1));
+  Workmanager().registerOneOffTask(
+    simpleTaskKey,
+    simpleTaskKey,
+    initialDelay: Duration(milliseconds: trigger - d),
+  );
 }
 
 Future<void> showAlarm() async {

@@ -16,6 +16,14 @@ class LoginActionWidget extends ConsumerViewModelWidget<LoginViewModel> {
       BuildContext context, WidgetRef ref, LoginViewModel viewModel) {
     addListener(ref, viewModel, context);
 
+    ref.listen(viewModel.isLoadingProvider, (previous, next) {
+      if (next) {
+        PopupUtils.showLoadingDialog(context);
+      } else {
+        PopupUtils.hideLoadingDialog(context);
+      }
+    });
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -34,13 +42,15 @@ class LoginActionWidget extends ConsumerViewModelWidget<LoginViewModel> {
               fontWeight: FontWeight.w400,
               color: ColorName.carbonGrey),
         ).onPressedInkWell(
-          () => context
-              .go("/${RouterConstants.login}/${RouterConstants.forgotPw}"),
+          () {
+            viewModel.resetFormLogin();
+            context.go("/${RouterConstants.login}/${RouterConstants.forgotPw}");
+          },
         ),
         const SizedBox(
           height: Dimens.size40,
         ),
-        buildButtonRegister(),
+        buildButtonRegister(viewModel),
       ],
     );
   }
@@ -78,13 +88,14 @@ class LoginActionWidget extends ConsumerViewModelWidget<LoginViewModel> {
     );
   }
 
-  Widget buildButtonRegister() {
+  Widget buildButtonRegister(LoginViewModel viewModel) {
     return SizedBox(
       width: Dimens.widthButton,
       height: Dimens.size40,
       child: OutlinedButton(
-        onPressed: () => {
-          context?.go("/${RouterConstants.login}/${RouterConstants.register}")
+        onPressed: () {
+          viewModel.resetFormLogin();
+          context?.go("/${RouterConstants.login}/${RouterConstants.register}");
         },
         style: OutlinedButton.styleFrom(
           minimumSize: Size.zero,

@@ -83,7 +83,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get forget_check_mail => 'メールが届かない場合は、下記をご確認ください';
 
   @override
-  String get resend_forget_mail_process_content => '1.迷惑メールや別のフォルダに振り分けられていないかをご確認ください\nHotmailやGmailの場合、ほかのフォルダ特にGmailでは、「すべてのメール」フォルダの確認をお願いします。\n\n2.利用機器（スマートフォン等）の設定をご確認ください\n3.ご利用の機器、プロバイダー等のご契約内容をご確認ください\n4.@xxxxxxx.jpドメインからのメールが受け取れる状態であるかをご確認ください\n5.受信ボックス容量が一杯になっていないかをご確認ください\n6.入力されたメールアドレスが誤っていないかをご確認ください\nよくある入力間違い\n・～ne.jp → ～co.jp\n・ドット「. 」→カンマ「, 」\n・前後や途中に余分なスペースが入っている等';
+  String get resend_forget_mail_process_content => '1.迷惑メールや別のフォルダに振り分けられていないかをご確認ください\nHotmailやGmailの場合、ほかのフォルダ特にGmailでは、「すべてのメール」フォルダの確認をお願いします。\n\n2.利用機器（スマートフォン等）の設定をご確認ください\n\n3.ご利用の機器、プロバイダー等のご契約内容をご確認ください\n\n4.@xxxxxxx.jpドメインからのメールが受け取れる状態であるかをご確認ください\n\n5.受信ボックス容量が一杯になっていないかをご確認ください\n\n6.入力されたメールアドレスが誤っていないかをご確認ください\nよくある入力間違い\n・～ne.jp → ～co.jp\n・ドット「. 」→カンマ「, 」\n・前後や途中に余分なスペースが入っている等';
+
+  @override
+  String get resend_forget_mail_process_rich_1 => 'HotmailやGmailの場合、ほかのフォルダ特にGmailでは、「すべてのメール」フォルダの確認をお願いします。';
+
+  @override
+  String get resend_forget_mail_process_rich_2 => '・～ne.jp → ～co.jp\n・ドット「. 」→カンマ「, 」\n・前後や途中に余分なスペースが入っている等';
 
   @override
   String get send => '送信';
@@ -93,6 +99,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get register => '登録';
+
+  @override
+  String get register_success => '新規登録が完了しました';
+
+  @override
+  String get register_description_success => '登録完了メールをメールアドレスへ送信しました引き続き、いなべ市アプリをご利用下さい。';
 
   @override
   String get nickname => 'ニックネーム';
@@ -194,22 +206,25 @@ class AppLocalizationsEn extends AppLocalizations {
   String get update => '更新';
 
   @override
-  String get error_email_empty => 'メールアドレスを入力してください';
+  String get error_email_empty => 'メールは必須情報です。';
 
   @override
-  String get error_email_format => 'メールアドレスを正しく入力してください';
+  String get error_email_format => 'メールの形式が正しくありません。';
 
   @override
-  String get error_password_empty => 'パスワードを入力してください';
+  String get error_password_empty => 'パスワードが入力されていません。';
 
   @override
-  String get error_password_format => '半角英数字8文字から16文字で入力してください';
+  String get error_password_format => 'パスワードの形式が正しくありません。パスワードは8文字以上、アルファベットと数字の組み合わせである必要があります。';
 
   @override
-  String get error_password_not_match => 'パスワードが一致しません';
+  String get error_password_not_match => 'パスワードが一致しません。';
 
   @override
-  String get error_nickname_empty => 'ニックネームを入力してください';
+  String get error_nickname_empty => 'ニックネームは必須情報です。';
+
+  @override
+  String get error_otp_empty => 'ワンタイムパスワードを入力してください。';
 
   @override
   String get email_information => 'いなべ市生活情報（まいめる）';
@@ -249,6 +264,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get close => '閉じる';
+
+  @override
+  String get confirm_error => 'ご確認';
 
   @override
   String get help => 'アプリの説明';

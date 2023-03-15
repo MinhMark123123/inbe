@@ -18,7 +18,6 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ForgotPasswordOTPUIState {
   bool get isSuccess => throw _privateConstructorUsedError;
   String get errorMsg => throw _privateConstructorUsedError;
-  String get errorEmail => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ForgotPasswordOTPUIStateCopyWith<ForgotPasswordOTPUIState> get copyWith =>
@@ -31,7 +30,7 @@ abstract class $ForgotPasswordOTPUIStateCopyWith<$Res> {
           $Res Function(ForgotPasswordOTPUIState) then) =
       _$ForgotPasswordOTPUIStateCopyWithImpl<$Res, ForgotPasswordOTPUIState>;
   @useResult
-  $Res call({bool isSuccess, String errorMsg, String errorEmail});
+  $Res call({bool isSuccess, String errorMsg});
 }
 
 /// @nodoc
@@ -50,7 +49,6 @@ class _$ForgotPasswordOTPUIStateCopyWithImpl<$Res,
   $Res call({
     Object? isSuccess = null,
     Object? errorMsg = null,
-    Object? errorEmail = null,
   }) {
     return _then(_value.copyWith(
       isSuccess: null == isSuccess
@@ -60,10 +58,6 @@ class _$ForgotPasswordOTPUIStateCopyWithImpl<$Res,
       errorMsg: null == errorMsg
           ? _value.errorMsg
           : errorMsg // ignore: cast_nullable_to_non_nullable
-              as String,
-      errorEmail: null == errorEmail
-          ? _value.errorEmail
-          : errorEmail // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -78,7 +72,7 @@ abstract class _$$_ForgotPasswordOTPUIStateCopyWith<$Res>
       __$$_ForgotPasswordOTPUIStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isSuccess, String errorMsg, String errorEmail});
+  $Res call({bool isSuccess, String errorMsg});
 }
 
 /// @nodoc
@@ -95,7 +89,6 @@ class __$$_ForgotPasswordOTPUIStateCopyWithImpl<$Res>
   $Res call({
     Object? isSuccess = null,
     Object? errorMsg = null,
-    Object? errorEmail = null,
   }) {
     return _then(_$_ForgotPasswordOTPUIState(
       isSuccess: null == isSuccess
@@ -106,10 +99,6 @@ class __$$_ForgotPasswordOTPUIStateCopyWithImpl<$Res>
           ? _value.errorMsg
           : errorMsg // ignore: cast_nullable_to_non_nullable
               as String,
-      errorEmail: null == errorEmail
-          ? _value.errorEmail
-          : errorEmail // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -117,8 +106,7 @@ class __$$_ForgotPasswordOTPUIStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_ForgotPasswordOTPUIState implements _ForgotPasswordOTPUIState {
-  _$_ForgotPasswordOTPUIState(
-      {this.isSuccess = false, this.errorMsg = '', this.errorEmail = ''});
+  _$_ForgotPasswordOTPUIState({this.isSuccess = false, this.errorMsg = ''});
 
   @override
   @JsonKey()
@@ -126,13 +114,10 @@ class _$_ForgotPasswordOTPUIState implements _ForgotPasswordOTPUIState {
   @override
   @JsonKey()
   final String errorMsg;
-  @override
-  @JsonKey()
-  final String errorEmail;
 
   @override
   String toString() {
-    return 'ForgotPasswordOTPUIState(isSuccess: $isSuccess, errorMsg: $errorMsg, errorEmail: $errorEmail)';
+    return 'ForgotPasswordOTPUIState(isSuccess: $isSuccess, errorMsg: $errorMsg)';
   }
 
   @override
@@ -143,13 +128,11 @@ class _$_ForgotPasswordOTPUIState implements _ForgotPasswordOTPUIState {
             (identical(other.isSuccess, isSuccess) ||
                 other.isSuccess == isSuccess) &&
             (identical(other.errorMsg, errorMsg) ||
-                other.errorMsg == errorMsg) &&
-            (identical(other.errorEmail, errorEmail) ||
-                other.errorEmail == errorEmail));
+                other.errorMsg == errorMsg));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isSuccess, errorMsg, errorEmail);
+  int get hashCode => Object.hash(runtimeType, isSuccess, errorMsg);
 
   @JsonKey(ignore: true)
   @override
@@ -162,15 +145,12 @@ class _$_ForgotPasswordOTPUIState implements _ForgotPasswordOTPUIState {
 abstract class _ForgotPasswordOTPUIState implements ForgotPasswordOTPUIState {
   factory _ForgotPasswordOTPUIState(
       {final bool isSuccess,
-      final String errorMsg,
-      final String errorEmail}) = _$_ForgotPasswordOTPUIState;
+      final String errorMsg}) = _$_ForgotPasswordOTPUIState;
 
   @override
   bool get isSuccess;
   @override
   String get errorMsg;
-  @override
-  String get errorEmail;
   @override
   @JsonKey(ignore: true)
   _$$_ForgotPasswordOTPUIStateCopyWith<_$_ForgotPasswordOTPUIState>

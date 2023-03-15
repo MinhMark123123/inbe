@@ -9,6 +9,7 @@ part 'menu_ui_state.freezed.dart';
 @freezed
 class MenuUIState with _$MenuUIState {
   factory MenuUIState({
+    @Default(false) bool isSignOut,
     @Default(false) bool isSuccess,
     @Default('') String errorMsg,
   }) = _MenuUIState;

@@ -1,5 +1,6 @@
 import 'package:aac_core/aac_core.dart';
 import 'package:inabe/src/data/model/notification_model.dart';
+import 'package:inabe/src/utils/date_time_utils.dart';
 import 'package:inabe_design/dimens.dart';
 
 class NotificationItem extends StatelessWidget {
@@ -20,11 +21,15 @@ class NotificationItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            notificationModel.date ?? "14-01",
-            style: textStyle.xSmall.w500.fill(ColorName.boulder),
+            DateTimeUtils.convert(
+              notificationModel.date,
+              DateTimeUtils.utcFormat,
+              DateTimeUtils.formatJP,
+            ),
+            style: textStyle.medium.w500.fill(ColorName.boulder),
           ),
           const SizedBox(
-            height: Dimens.size4,
+            height: 2,
           ),
           Text(
             notificationModel.title ?? "title",

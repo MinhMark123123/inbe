@@ -76,13 +76,14 @@ class SettingViewModel extends ViewModel {
     var response = await userRepository.getBasicInfo();
 
     nicknameController.text = response.data.nickname ?? '';
-    setDataCategory(response.data.interestCategories);
+    _setDataCategory(response.data.interestCategories);
     setDataTurnOn(response.data.pushNotifications ?? true);
 
     print("ttt $response");
   }
 
-  void setDataCategory(List<String>? categories) {
+  void _setDataCategory(List<String>? categories) {
+    userRepository.saveListCategory(categories);
     if (categories == null) return;
     final data = uiState.state.mapInterestModel.value;
     if (data != null) {

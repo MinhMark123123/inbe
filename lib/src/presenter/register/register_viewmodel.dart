@@ -1,6 +1,6 @@
 import 'package:aac_core/aac_core.dart';
-import 'package:dio/dio.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:inabe/src/data/api/api_error.dart';
 import 'package:inabe/src/data/dto/request/user_request.dart';
 import 'package:inabe/src/data/dto/response/interest_response.dart';
 import 'package:inabe/src/data/model/interest_model.dart';
@@ -17,29 +17,20 @@ final registerPageControllerProvider =
     Provider.autoDispose<RegisterViewModel>((ref) {
   return RegisterViewModel(
     uiState: ref.watch(_registerPageUiStateProvider.notifier),
-    // restClient: ref.read(apiClientProvider),
     userRepository: ref.read(userRepositoryProvider),
     topRepository: ref.read(topRepositoryProvider),
   );
 });
 
 class RegisterViewModel extends ViewModel {
-  // final RestClient restClient;
-
   final UserRepository userRepository;
   final TopRepository topRepository;
 
   AutoDisposeStateProvider<RegisterUIState> get ui =>
       _registerPageUiStateProvider;
 
-  ProviderListenable<String> get errorPassword =>
-      ui.select((value) => value.errorPassword);
-
-  ProviderListenable<String> get errorConfirmPassword =>
-      ui.select((value) => value.errorConfirmPassword);
-
-  ProviderListenable<String> get errorEmail =>
-      ui.select((value) => value.errorMail);
+  ProviderListenable<bool> get disableButtonProvider =>
+      ui.select((value) => value.disableButton);
 
   ProviderListenable<String> get errorMsg =>
       ui.select((value) => value.errorMessage);
@@ -53,9 +44,6 @@ class RegisterViewModel extends ViewModel {
   ProviderListenable<List<InterestModel>> get interests =>
       ui.select((value) => value.interests);
 
-  ProviderListenable<Map<InterestModel, bool>> get checkBoxList =>
-      ui.select((value) => value.listCheckBox);
-
   ProviderListenable<bool> get isTurnOn => ui.select((value) => value.isTurnOn);
 
   final StateController<RegisterUIState> uiState;
@@ -64,6 +52,7 @@ class RegisterViewModel extends ViewModel {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController rePasswordController = TextEditingController();
+  bool isValidPassword = false;
 
   RegisterViewModel({
     required this.userRepository,
@@ -99,18 +88,13 @@ class RegisterViewModel extends ViewModel {
         );
       },
     ).catchError((obj) {
-      switch (obj.runtimeType) {
-        case DioError:
-          final res = (obj as DioError).response;
-          print("Got error : ${res?.statusCode} : ${res?.statusMessage}");
-          uiState.update((state) => state.copyWith(
-              errorMessage: res?.statusMessage ?? "Request api error"));
-          break;
-        default:
-          uiState
-              .update((state) => state.copyWith(errorMessage: "Default error"));
-          break;
-      }
+      ApiError(
+        obj,
+        errorData: (int? code, String? message) {
+          uiState.update(
+              (state) => state.copyWith(errorMessage: "$code\n$message"));
+        },
+      );
     });
   }
 
@@ -128,77 +112,52 @@ class RegisterViewModel extends ViewModel {
   }
 
   void onChangeEmail() {
-    uiState.update((state) => state.copyWith(errorMail: ''));
+    isValidateData(updateUI: true);
   }
 
-  void onChangePassword() {
-    uiState.update((state) => state.copyWith(errorPassword: ''));
+  void onChangeNickname() {
+    isValidateData(updateUI: true);
   }
 
-  void onChangeConfirmPassword() {
-    uiState.update((state) => state.copyWith(errorConfirmPassword: ''));
+  bool isValidateData({bool updateUI = false}) {
+    bool isError = emailController.validateEmail().isNotEmpty ||
+        nicknameController.validateNickname().isNotEmpty ||
+        !isValidPassword;
+    if (updateUI) {
+      print("ttt $isError");
+      uiState.update((state) => state.copyWith(disableButton: isError));
+    }
+    return !isError;
   }
 
   Future<void> doRegister() async {
-    bool isError = false;
-    String? formattedPhone = emailController.validateEmail();
-    String? passwordValid = passwordController.validatePassword();
-    String? confirmValid =
-        rePasswordController.validateConfirmPassword(passwordController.text);
-    if (formattedPhone.isNotEmpty) {
-      isError = true;
-    }
-    uiState.update((state) => state.copyWith(errorMail: formattedPhone));
-    if (passwordValid.isNotEmpty) {
-      isError = true;
-    }
-    uiState.update((state) => state.copyWith(errorPassword: passwordValid));
+    final categories = convertCategories();
+    final request = UserRequest(
+        email: emailController.text,
+        nickname: nicknameController.text,
+        password: passwordController.text,
+        pushNotifications: uiState.state.isTurnOn.toString(),
+        interestCategories: categories);
 
-    if (confirmValid.isNotEmpty) {
-      isError = true;
-    }
-    uiState
-        .update((state) => state.copyWith(errorConfirmPassword: confirmValid));
+    print("ttt resquest = $request\n"
+        "json = ${request.toJson()}");
+    // return;
 
-    if (isError) {
-      return;
-    } else {
-      final categories = convertCategories();
-
-      final request = UserRequest(
-          email: emailController.text,
-          nickname: nicknameController.text,
-          password: passwordController.text,
-          pushNotifications: uiState.state.isTurnOn.toString(),
-          interestCategories: categories);
-
-      print("ttt resquest = $request\n"
-          "json = ${request.toJson()}");
-      // return;
-
-      userRepository.register(request).then(
-        (value) {
-          final headers = value.response.headers;
-          userRepository.saveDataLogin(headers);
-          uiState.update((state) => state.copyWith(isSuccess: true));
+    userRepository.register(request).then(
+      (value) {
+        final headers = value.response.headers;
+        userRepository.saveDataLogin(headers);
+        uiState.update((state) => state.copyWith(isSuccess: true));
+      },
+    ).catchError((obj) {
+      ApiError(
+        obj,
+        errorData: (int? code, String? message) {
+          uiState.update(
+              (state) => state.copyWith(errorMessage: "$code\n$message"));
         },
-      ).catchError((obj) {
-        switch (obj.runtimeType) {
-          case DioError:
-            final res = (obj as DioError).response;
-            Map<String, dynamic> baseRes = res?.data;
-            print(
-                "Got error : ${res?.statusCode} : ${baseRes["error"]['message']}");
-            uiState.update((state) => state.copyWith(
-                errorMessage: res?.statusMessage ?? "Request api error"));
-            break;
-          default:
-            uiState.update(
-                (state) => state.copyWith(errorMessage: "Default error"));
-            break;
-        }
-      });
-    }
+      );
+    });
   }
 
   List<String> convertCategories() {
@@ -211,5 +170,22 @@ class RegisterViewModel extends ViewModel {
     }
 
     return result;
+  }
+
+  void setValidPassword(bool isValid) {
+    isValidPassword = isValid;
+    isValidateData(updateUI: true);
+  }
+
+  @override
+  void onDispose() {
+    nicknameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    super.onDispose();
+  }
+
+  void resetErrorMsg() {
+    uiState.update((state) => state.copyWith(errorMessage: ''));
   }
 }

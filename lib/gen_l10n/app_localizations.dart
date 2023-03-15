@@ -252,8 +252,20 @@ abstract class AppLocalizations {
   /// No description provided for @resend_forget_mail_process_content.
   ///
   /// In en, this message translates to:
-  /// **'1.迷惑メールや別のフォルダに振り分けられていないかをご確認ください\nHotmailやGmailの場合、ほかのフォルダ特にGmailでは、「すべてのメール」フォルダの確認をお願いします。\n\n2.利用機器（スマートフォン等）の設定をご確認ください\n3.ご利用の機器、プロバイダー等のご契約内容をご確認ください\n4.@xxxxxxx.jpドメインからのメールが受け取れる状態であるかをご確認ください\n5.受信ボックス容量が一杯になっていないかをご確認ください\n6.入力されたメールアドレスが誤っていないかをご確認ください\nよくある入力間違い\n・～ne.jp → ～co.jp\n・ドット「. 」→カンマ「, 」\n・前後や途中に余分なスペースが入っている等'**
+  /// **'1.迷惑メールや別のフォルダに振り分けられていないかをご確認ください\nHotmailやGmailの場合、ほかのフォルダ特にGmailでは、「すべてのメール」フォルダの確認をお願いします。\n\n2.利用機器（スマートフォン等）の設定をご確認ください\n\n3.ご利用の機器、プロバイダー等のご契約内容をご確認ください\n\n4.@xxxxxxx.jpドメインからのメールが受け取れる状態であるかをご確認ください\n\n5.受信ボックス容量が一杯になっていないかをご確認ください\n\n6.入力されたメールアドレスが誤っていないかをご確認ください\nよくある入力間違い\n・～ne.jp → ～co.jp\n・ドット「. 」→カンマ「, 」\n・前後や途中に余分なスペースが入っている等'**
   String get resend_forget_mail_process_content;
+
+  /// No description provided for @resend_forget_mail_process_rich_1.
+  ///
+  /// In en, this message translates to:
+  /// **'HotmailやGmailの場合、ほかのフォルダ特にGmailでは、「すべてのメール」フォルダの確認をお願いします。'**
+  String get resend_forget_mail_process_rich_1;
+
+  /// No description provided for @resend_forget_mail_process_rich_2.
+  ///
+  /// In en, this message translates to:
+  /// **'・～ne.jp → ～co.jp\n・ドット「. 」→カンマ「, 」\n・前後や途中に余分なスペースが入っている等'**
+  String get resend_forget_mail_process_rich_2;
 
   /// No description provided for @send.
   ///
@@ -272,6 +284,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'登録'**
   String get register;
+
+  /// No description provided for @register_success.
+  ///
+  /// In en, this message translates to:
+  /// **'新規登録が完了しました'**
+  String get register_success;
+
+  /// No description provided for @register_description_success.
+  ///
+  /// In en, this message translates to:
+  /// **'登録完了メールをメールアドレスへ送信しました引き続き、いなべ市アプリをご利用下さい。'**
+  String get register_description_success;
 
   /// No description provided for @nickname.
   ///
@@ -474,38 +498,44 @@ abstract class AppLocalizations {
   /// No description provided for @error_email_empty.
   ///
   /// In en, this message translates to:
-  /// **'メールアドレスを入力してください'**
+  /// **'メールは必須情報です。'**
   String get error_email_empty;
 
   /// No description provided for @error_email_format.
   ///
   /// In en, this message translates to:
-  /// **'メールアドレスを正しく入力してください'**
+  /// **'メールの形式が正しくありません。'**
   String get error_email_format;
 
   /// No description provided for @error_password_empty.
   ///
   /// In en, this message translates to:
-  /// **'パスワードを入力してください'**
+  /// **'パスワードが入力されていません。'**
   String get error_password_empty;
 
   /// No description provided for @error_password_format.
   ///
   /// In en, this message translates to:
-  /// **'半角英数字8文字から16文字で入力してください'**
+  /// **'パスワードの形式が正しくありません。パスワードは8文字以上、アルファベットと数字の組み合わせである必要があります。'**
   String get error_password_format;
 
   /// No description provided for @error_password_not_match.
   ///
   /// In en, this message translates to:
-  /// **'パスワードが一致しません'**
+  /// **'パスワードが一致しません。'**
   String get error_password_not_match;
 
   /// No description provided for @error_nickname_empty.
   ///
   /// In en, this message translates to:
-  /// **'ニックネームを入力してください'**
+  /// **'ニックネームは必須情報です。'**
   String get error_nickname_empty;
+
+  /// No description provided for @error_otp_empty.
+  ///
+  /// In en, this message translates to:
+  /// **'ワンタイムパスワードを入力してください。'**
+  String get error_otp_empty;
 
   /// No description provided for @email_information.
   ///
@@ -584,6 +614,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'閉じる'**
   String get close;
+
+  /// No description provided for @confirm_error.
+  ///
+  /// In en, this message translates to:
+  /// **'ご確認'**
+  String get confirm_error;
 
   /// No description provided for @help.
   ///

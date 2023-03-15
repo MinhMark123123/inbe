@@ -1,7 +1,9 @@
 import 'package:aac_core/aac_core.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:inabe/src/presenter/register/register_viewmodel.dart';
-import 'package:inabe/src/presenter/widget/inabe_text_input.dart';
+import 'package:inabe/src/presenter/widget/input_forms/inabe_confirm_password_input_widget.dart';
+import 'package:inabe/src/presenter/widget/input_forms/inabe_email_input_widget.dart';
+import 'package:inabe/src/presenter/widget/input_forms/inabe_nickname_input_widget.dart';
 import 'package:inabe/src/presenter/widget/top_body_widget.dart';
 import 'package:inabe/src/state/riverpod_ui_support.dart';
 import 'package:inabe/src/utils/extensions/asset_extension.dart';
@@ -13,10 +15,7 @@ class RegisterFormWidget extends ConsumerViewModelWidget<RegisterViewModel> {
   @override
   Widget buildWidget(
       BuildContext context, WidgetRef ref, RegisterViewModel viewModel) {
-    final errorMail = ref.watch(viewModel.errorEmail);
-    final errorPw = ref.watch(viewModel.errorPassword);
-    final errorConfirmPw = ref.watch(viewModel.errorConfirmPassword);
-    print("ttt errorMail $errorMail");
+    print("ttt build RegisterFormWidget");
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,17 +31,12 @@ class RegisterFormWidget extends ConsumerViewModelWidget<RegisterViewModel> {
         const SizedBox(
           height: Dimens.size10,
         ),
-        InabeTextInput(
-          hintText: str.nickname,
+        InabeNicknameInputWidget(
           controller: viewModel.nicknameController,
-          contentPadding: const EdgeInsets.symmetric(horizontal: Dimens.size6),
-          // controller: ,
-          // onValueChanged: (value) => {
-          //   viewModel.validateData(value)
-          // },
+          onValueChanged: (value) => {viewModel.onChangeNickname()},
         ),
         const SizedBox(
-          height: Dimens.size40,
+          height: Dimens.size30,
         ),
         Text(
           str.email,
@@ -51,64 +45,17 @@ class RegisterFormWidget extends ConsumerViewModelWidget<RegisterViewModel> {
         const SizedBox(
           height: Dimens.size10,
         ),
-        InabeTextInput(
-          hintText: str.email,
+        InabeEmailInputWidget(
           controller: viewModel.emailController,
-          contentPadding: const EdgeInsets.symmetric(horizontal: Dimens.size6),
           onValueChanged: (value) => {viewModel.onChangeEmail()},
         ),
-        Visibility(
-            visible: errorMail.isNotEmpty,
-            child: Text(
-              errorMail,
-              style: textStyle.xSmall.w400.fill(Colors.red),
-            )),
         const SizedBox(
-          height: Dimens.size40,
+          height: Dimens.size30,
         ),
-        Text(
-          str.password,
-          style: textStyle.medium.w700.fill(ColorName.carbonGrey),
-        ),
-        const SizedBox(
-          height: Dimens.size10,
-        ),
-        InabeTextInput(
-          hintText: str.password,
+        InabePasswordAndConfirmWidget(
           controller: viewModel.passwordController,
-          contentPadding: const EdgeInsets.symmetric(horizontal: Dimens.size6),
-          onValueChanged: (value) => {viewModel.onChangePassword()},
-          obscure: true,
+          onValidate: (isValid) => viewModel.setValidPassword(isValid),
         ),
-        Visibility(
-            visible: errorPw.isNotEmpty,
-            child: Text(
-              errorPw,
-              style: textStyle.xSmall.w400.fill(Colors.red),
-            )),
-        const SizedBox(
-          height: Dimens.size40,
-        ),
-        Text(
-          str.confirm_password,
-          style: textStyle.medium.w700.fill(ColorName.carbonGrey),
-        ),
-        const SizedBox(
-          height: Dimens.size10,
-        ),
-        InabeTextInput(
-          hintText: str.confirm_password,
-          controller: viewModel.rePasswordController,
-          contentPadding: const EdgeInsets.symmetric(horizontal: Dimens.size6),
-          onValueChanged: (value) => {viewModel.onChangeConfirmPassword()},
-          obscure: true,
-        ),
-        Visibility(
-            visible: errorConfirmPw.isNotEmpty,
-            child: Text(
-              errorConfirmPw,
-              style: textStyle.xSmall.w400.fill(Colors.red),
-            )),
       ],
     );
   }

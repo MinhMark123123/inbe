@@ -18,8 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$LoginUIState {
   bool get isSuccess => throw _privateConstructorUsedError;
   String get errorMessage => throw _privateConstructorUsedError;
-  String get errorMail => throw _privateConstructorUsedError;
-  String get errorPassword => throw _privateConstructorUsedError;
+  bool get isLoading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $LoginUIStateCopyWith<LoginUIState> get copyWith =>
@@ -32,11 +31,7 @@ abstract class $LoginUIStateCopyWith<$Res> {
           LoginUIState value, $Res Function(LoginUIState) then) =
       _$LoginUIStateCopyWithImpl<$Res, LoginUIState>;
   @useResult
-  $Res call(
-      {bool isSuccess,
-      String errorMessage,
-      String errorMail,
-      String errorPassword});
+  $Res call({bool isSuccess, String errorMessage, bool isLoading});
 }
 
 /// @nodoc
@@ -54,8 +49,7 @@ class _$LoginUIStateCopyWithImpl<$Res, $Val extends LoginUIState>
   $Res call({
     Object? isSuccess = null,
     Object? errorMessage = null,
-    Object? errorMail = null,
-    Object? errorPassword = null,
+    Object? isLoading = null,
   }) {
     return _then(_value.copyWith(
       isSuccess: null == isSuccess
@@ -66,14 +60,10 @@ class _$LoginUIStateCopyWithImpl<$Res, $Val extends LoginUIState>
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String,
-      errorMail: null == errorMail
-          ? _value.errorMail
-          : errorMail // ignore: cast_nullable_to_non_nullable
-              as String,
-      errorPassword: null == errorPassword
-          ? _value.errorPassword
-          : errorPassword // ignore: cast_nullable_to_non_nullable
-              as String,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -86,11 +76,7 @@ abstract class _$$_LoginUIStateCopyWith<$Res>
       __$$_LoginUIStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {bool isSuccess,
-      String errorMessage,
-      String errorMail,
-      String errorPassword});
+  $Res call({bool isSuccess, String errorMessage, bool isLoading});
 }
 
 /// @nodoc
@@ -106,8 +92,7 @@ class __$$_LoginUIStateCopyWithImpl<$Res>
   $Res call({
     Object? isSuccess = null,
     Object? errorMessage = null,
-    Object? errorMail = null,
-    Object? errorPassword = null,
+    Object? isLoading = null,
   }) {
     return _then(_$_LoginUIState(
       isSuccess: null == isSuccess
@@ -118,14 +103,10 @@ class __$$_LoginUIStateCopyWithImpl<$Res>
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String,
-      errorMail: null == errorMail
-          ? _value.errorMail
-          : errorMail // ignore: cast_nullable_to_non_nullable
-              as String,
-      errorPassword: null == errorPassword
-          ? _value.errorPassword
-          : errorPassword // ignore: cast_nullable_to_non_nullable
-              as String,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -134,10 +115,7 @@ class __$$_LoginUIStateCopyWithImpl<$Res>
 
 class _$_LoginUIState implements _LoginUIState {
   _$_LoginUIState(
-      {this.isSuccess = false,
-      this.errorMessage = '',
-      this.errorMail = '',
-      this.errorPassword = ''});
+      {this.isSuccess = false, this.errorMessage = '', this.isLoading = false});
 
   @override
   @JsonKey()
@@ -147,14 +125,11 @@ class _$_LoginUIState implements _LoginUIState {
   final String errorMessage;
   @override
   @JsonKey()
-  final String errorMail;
-  @override
-  @JsonKey()
-  final String errorPassword;
+  final bool isLoading;
 
   @override
   String toString() {
-    return 'LoginUIState(isSuccess: $isSuccess, errorMessage: $errorMessage, errorMail: $errorMail, errorPassword: $errorPassword)';
+    return 'LoginUIState(isSuccess: $isSuccess, errorMessage: $errorMessage, isLoading: $isLoading)';
   }
 
   @override
@@ -166,15 +141,13 @@ class _$_LoginUIState implements _LoginUIState {
                 other.isSuccess == isSuccess) &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage) &&
-            (identical(other.errorMail, errorMail) ||
-                other.errorMail == errorMail) &&
-            (identical(other.errorPassword, errorPassword) ||
-                other.errorPassword == errorPassword));
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, isSuccess, errorMessage, errorMail, errorPassword);
+  int get hashCode =>
+      Object.hash(runtimeType, isSuccess, errorMessage, isLoading);
 
   @JsonKey(ignore: true)
   @override
@@ -187,17 +160,14 @@ abstract class _LoginUIState implements LoginUIState {
   factory _LoginUIState(
       {final bool isSuccess,
       final String errorMessage,
-      final String errorMail,
-      final String errorPassword}) = _$_LoginUIState;
+      final bool isLoading}) = _$_LoginUIState;
 
   @override
   bool get isSuccess;
   @override
   String get errorMessage;
   @override
-  String get errorMail;
-  @override
-  String get errorPassword;
+  bool get isLoading;
   @override
   @JsonKey(ignore: true)
   _$$_LoginUIStateCopyWith<_$_LoginUIState> get copyWith =>

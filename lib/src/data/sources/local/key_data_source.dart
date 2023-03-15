@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:aac_core/aac_core.dart';
 import 'package:flutter_keychain/flutter_keychain.dart';
 import 'package:inabe/src/data/constants/constants.dart';
@@ -102,5 +104,15 @@ class KeyDataSource {
 
   Future<String> getLoginPassword() async {
     return await getSecure(SecureKeys.keyLoginPassword);
+  }
+
+  Future<void> setListCategory(List<String> values) async {
+    var encode = jsonEncode(values);
+    return await setSecure(SecureKeys.keyListCategory, encode);
+  }
+
+  Future<List<String>> getListCategory() async {
+    var value = await getSecure(SecureKeys.keyListCategory);
+    return jsonDecode(value);
   }
 }

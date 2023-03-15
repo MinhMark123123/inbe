@@ -1,15 +1,13 @@
 import 'package:aac_core/aac_core.dart';
 import 'package:inabe/src/data/api/api_error.dart';
-import 'package:inabe/src/data/api/retrofit_client.dart';
 import 'package:inabe/src/data/dto/request/login_request.dart';
 import 'package:inabe/src/data/repository/user/user_repository.dart';
-import 'package:inabe/src/di/di_config.dart';
 import 'package:inabe/src/presenter/login/login_ui_state.dart';
 import 'package:inabe/src/utils/extensions/input_controller_extension.dart';
 import 'package:riverpod/riverpod.dart';
 
 final _loginPageUiStateProvider =
-StateProvider.autoDispose<LoginUIState>((ref) {
+    StateProvider.autoDispose<LoginUIState>((ref) {
   return LoginUIState();
 });
 final loginPageControllerProvider = Provider.autoDispose<LoginViewModel>((ref) {
@@ -26,11 +24,8 @@ class LoginViewModel extends ViewModel {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  ProviderListenable<String> get errorPassword =>
-      ui.select((value) => value.errorPassword);
-
-  ProviderListenable<String> get errorEmail =>
-      ui.select((value) => value.errorMail);
+  ProviderListenable<bool> get isLoadingProvider =>
+      ui.select((value) => value.isLoading);
 
   ProviderListenable<String> get errorMsg =>
       ui.select((value) => value.errorMessage);
@@ -44,7 +39,6 @@ class LoginViewModel extends ViewModel {
     required this.uiState,
     required this.repository,
   });
-
 
   Future<void> doLogin() async {
     bool isError = validateDataLogin();
@@ -77,19 +71,8 @@ class LoginViewModel extends ViewModel {
   }
 
   bool validateDataLogin() {
-    String? validateEmail = emailController.validateEmail();
-    String? validatePassword = passwordController.validatePassword();
-
-    bool isError = false;
-    if (validateEmail.isNotEmpty) {
-      isError = true;
-    }
-    uiState.update((state) => state.copyWith(errorMail: validateEmail));
-    if (validatePassword.isNotEmpty) {
-      isError = true;
-    }
-    uiState.update((state) => state.copyWith(errorPassword: validatePassword));
-    return isError;
+    return emailController.validateEmail().isNotEmpty ||
+        passwordController.validatePassword().isNotEmpty;
   }
 
   Future<void> doLoginAndUpdate() async {
@@ -98,12 +81,15 @@ class LoginViewModel extends ViewModel {
     if (isError) {
       return;
     } else {
+      _isShowLoading(true);
       final request = LoginRequest(
           email: emailController.text, password: passwordController.text);
 
       repository.loginApi(request, (userResponse) {
         uiState.update((state) => state.copyWith(isSuccess: true));
+        _isShowLoading(false);
       }, (obj) {
+        _isShowLoading(false);
         ApiError(obj, errorData: (code, msg) {
           uiState
               .update((state) => state.copyWith(errorMessage: "$code\n$msg"));
@@ -112,8 +98,23 @@ class LoginViewModel extends ViewModel {
     }
   }
 
+  void _isShowLoading(bool isLoading) {
+    uiState.update((state) => state.copyWith(isLoading: isLoading));
+  }
+
   void resetState() {
-    uiState
-        .update((state) => state.copyWith(errorMessage: ''));
+    uiState.update((state) => state.copyWith(errorMessage: ''));
+  }
+
+  void resetFormLogin() {
+    emailController.clear();
+    passwordController.clear();
+  }
+
+  @override
+  void onDispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.onDispose();
   }
 }

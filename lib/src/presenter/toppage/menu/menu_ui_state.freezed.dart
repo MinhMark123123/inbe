@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$MenuUIState {
+  bool get isSignOut => throw _privateConstructorUsedError;
   bool get isSuccess => throw _privateConstructorUsedError;
   String get errorMsg => throw _privateConstructorUsedError;
 
@@ -30,7 +31,7 @@ abstract class $MenuUIStateCopyWith<$Res> {
           MenuUIState value, $Res Function(MenuUIState) then) =
       _$MenuUIStateCopyWithImpl<$Res, MenuUIState>;
   @useResult
-  $Res call({bool isSuccess, String errorMsg});
+  $Res call({bool isSignOut, bool isSuccess, String errorMsg});
 }
 
 /// @nodoc
@@ -46,10 +47,15 @@ class _$MenuUIStateCopyWithImpl<$Res, $Val extends MenuUIState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isSignOut = null,
     Object? isSuccess = null,
     Object? errorMsg = null,
   }) {
     return _then(_value.copyWith(
+      isSignOut: null == isSignOut
+          ? _value.isSignOut
+          : isSignOut // ignore: cast_nullable_to_non_nullable
+              as bool,
       isSuccess: null == isSuccess
           ? _value.isSuccess
           : isSuccess // ignore: cast_nullable_to_non_nullable
@@ -70,7 +76,7 @@ abstract class _$$_MenuUIStateCopyWith<$Res>
       __$$_MenuUIStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isSuccess, String errorMsg});
+  $Res call({bool isSignOut, bool isSuccess, String errorMsg});
 }
 
 /// @nodoc
@@ -84,10 +90,15 @@ class __$$_MenuUIStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isSignOut = null,
     Object? isSuccess = null,
     Object? errorMsg = null,
   }) {
     return _then(_$_MenuUIState(
+      isSignOut: null == isSignOut
+          ? _value.isSignOut
+          : isSignOut // ignore: cast_nullable_to_non_nullable
+              as bool,
       isSuccess: null == isSuccess
           ? _value.isSuccess
           : isSuccess // ignore: cast_nullable_to_non_nullable
@@ -103,8 +114,12 @@ class __$$_MenuUIStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_MenuUIState implements _MenuUIState {
-  _$_MenuUIState({this.isSuccess = false, this.errorMsg = ''});
+  _$_MenuUIState(
+      {this.isSignOut = false, this.isSuccess = false, this.errorMsg = ''});
 
+  @override
+  @JsonKey()
+  final bool isSignOut;
   @override
   @JsonKey()
   final bool isSuccess;
@@ -114,7 +129,7 @@ class _$_MenuUIState implements _MenuUIState {
 
   @override
   String toString() {
-    return 'MenuUIState(isSuccess: $isSuccess, errorMsg: $errorMsg)';
+    return 'MenuUIState(isSignOut: $isSignOut, isSuccess: $isSuccess, errorMsg: $errorMsg)';
   }
 
   @override
@@ -122,6 +137,8 @@ class _$_MenuUIState implements _MenuUIState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MenuUIState &&
+            (identical(other.isSignOut, isSignOut) ||
+                other.isSignOut == isSignOut) &&
             (identical(other.isSuccess, isSuccess) ||
                 other.isSuccess == isSuccess) &&
             (identical(other.errorMsg, errorMsg) ||
@@ -129,7 +146,7 @@ class _$_MenuUIState implements _MenuUIState {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isSuccess, errorMsg);
+  int get hashCode => Object.hash(runtimeType, isSignOut, isSuccess, errorMsg);
 
   @JsonKey(ignore: true)
   @override
@@ -139,9 +156,13 @@ class _$_MenuUIState implements _MenuUIState {
 }
 
 abstract class _MenuUIState implements MenuUIState {
-  factory _MenuUIState({final bool isSuccess, final String errorMsg}) =
-      _$_MenuUIState;
+  factory _MenuUIState(
+      {final bool isSignOut,
+      final bool isSuccess,
+      final String errorMsg}) = _$_MenuUIState;
 
+  @override
+  bool get isSignOut;
   @override
   bool get isSuccess;
   @override

@@ -19,6 +19,7 @@ class InabeTextInput extends StatelessWidget {
   OutlineInputBorder? focusedBorder;
   OutlineInputBorder? errorBorder;
   OnValueChanged? onValueChanged;
+  dynamic onEditingComplete;
 
   InabeTextInput(
       {Key? key,
@@ -35,6 +36,7 @@ class InabeTextInput extends StatelessWidget {
       this.errorBorder,
       this.focusedBorder,
       this.onValueChanged,
+      this.onEditingComplete,
       this.contentPadding})
       : super(key: key) {
     height ??= Dimens.size30;
@@ -66,6 +68,10 @@ class InabeTextInput extends StatelessWidget {
         enableSuggestions: false,
         autocorrect: false,
         maxLines: 1,
+        onEditingComplete: () {
+          FocusScope.of(context).nextFocus();
+          onEditingComplete;
+        },
       ),
     );
   }

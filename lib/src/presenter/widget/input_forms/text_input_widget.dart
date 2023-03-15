@@ -1,6 +1,6 @@
 import 'package:aac_core/aac_core.dart';
-import 'package:inabe_design/base_component/input_forms/input_form_controller.dart';
-import 'package:inabe_design/inabe_design.dart';
+import 'package:inabe/src/presenter/widget/input_forms/input_form_controller.dart';
+import 'package:inabe_design/dimens.dart';
 
 typedef OnValueChanged = void Function(String? value);
 
@@ -174,17 +174,17 @@ class TextInputWidget extends StatelessWidget {
     );
   }
 
-  // Widget get _buildValidation => Visibility(
-  //       visible: TextUtils.isNotEmpty(inputFormController?.validation),
-  //       child: Container(
-  //         padding: const EdgeInsets.only(top: 5),
-  //         child: Align(
-  //           alignment: Alignment.topLeft,
-  //           child: Text(
-  //             '${inputFormController?.validation}',
-  //             style: textStyle.small.fill(ColorName.errorRed),
-  //           ),
-  //         ),
-  //       ),
-  //     );
+Widget get _buildValidation => Visibility(
+      visible: TextUtils.isNotEmpty(inputFormController?.validation),
+      child: Container(
+        padding: const EdgeInsets.only(top: 5),
+        child: Align(
+          alignment: Alignment.topLeft,
+          child: Text(
+            '${inputFormController?.validation}',
+            style: textStyle.small.fill(Colors.red),
+          ),
+        ),
+      ),
+    );
 }

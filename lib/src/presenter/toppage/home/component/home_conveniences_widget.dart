@@ -1,4 +1,5 @@
 import 'package:aac_core/aac_core.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:inabe/src/data/model/convenience_model.dart';
@@ -29,8 +30,8 @@ class HomeConveniencesWidget
         childAspectRatio: 1.41,
         physics: const NeverScrollableScrollPhysics(),
         crossAxisCount: 2,
-        crossAxisSpacing: Dimens.materialMedium,
-        mainAxisSpacing: Dimens.size20,
+        crossAxisSpacing: SizeExtension(10).w,
+        mainAxisSpacing: SizeExtension(15).w,
         dataList: data,
         itemBuilder: (index, data) {
           return Container(

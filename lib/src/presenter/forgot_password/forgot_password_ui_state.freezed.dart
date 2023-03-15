@@ -18,7 +18,6 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ForgotPasswordUIState {
   bool get isSuccess => throw _privateConstructorUsedError;
   String get errorMsg => throw _privateConstructorUsedError;
-  String get errorEmail => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ForgotPasswordUIStateCopyWith<ForgotPasswordUIState> get copyWith =>
@@ -31,7 +30,7 @@ abstract class $ForgotPasswordUIStateCopyWith<$Res> {
           $Res Function(ForgotPasswordUIState) then) =
       _$ForgotPasswordUIStateCopyWithImpl<$Res, ForgotPasswordUIState>;
   @useResult
-  $Res call({bool isSuccess, String errorMsg, String errorEmail});
+  $Res call({bool isSuccess, String errorMsg});
 }
 
 /// @nodoc
@@ -50,7 +49,6 @@ class _$ForgotPasswordUIStateCopyWithImpl<$Res,
   $Res call({
     Object? isSuccess = null,
     Object? errorMsg = null,
-    Object? errorEmail = null,
   }) {
     return _then(_value.copyWith(
       isSuccess: null == isSuccess
@@ -60,10 +58,6 @@ class _$ForgotPasswordUIStateCopyWithImpl<$Res,
       errorMsg: null == errorMsg
           ? _value.errorMsg
           : errorMsg // ignore: cast_nullable_to_non_nullable
-              as String,
-      errorEmail: null == errorEmail
-          ? _value.errorEmail
-          : errorEmail // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -77,7 +71,7 @@ abstract class _$$_ForgotPasswordUIStateCopyWith<$Res>
       __$$_ForgotPasswordUIStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isSuccess, String errorMsg, String errorEmail});
+  $Res call({bool isSuccess, String errorMsg});
 }
 
 /// @nodoc
@@ -93,7 +87,6 @@ class __$$_ForgotPasswordUIStateCopyWithImpl<$Res>
   $Res call({
     Object? isSuccess = null,
     Object? errorMsg = null,
-    Object? errorEmail = null,
   }) {
     return _then(_$_ForgotPasswordUIState(
       isSuccess: null == isSuccess
@@ -104,10 +97,6 @@ class __$$_ForgotPasswordUIStateCopyWithImpl<$Res>
           ? _value.errorMsg
           : errorMsg // ignore: cast_nullable_to_non_nullable
               as String,
-      errorEmail: null == errorEmail
-          ? _value.errorEmail
-          : errorEmail // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -115,8 +104,7 @@ class __$$_ForgotPasswordUIStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_ForgotPasswordUIState implements _ForgotPasswordUIState {
-  _$_ForgotPasswordUIState(
-      {this.isSuccess = false, this.errorMsg = '', this.errorEmail = ''});
+  _$_ForgotPasswordUIState({this.isSuccess = false, this.errorMsg = ''});
 
   @override
   @JsonKey()
@@ -124,13 +112,10 @@ class _$_ForgotPasswordUIState implements _ForgotPasswordUIState {
   @override
   @JsonKey()
   final String errorMsg;
-  @override
-  @JsonKey()
-  final String errorEmail;
 
   @override
   String toString() {
-    return 'ForgotPasswordUIState(isSuccess: $isSuccess, errorMsg: $errorMsg, errorEmail: $errorEmail)';
+    return 'ForgotPasswordUIState(isSuccess: $isSuccess, errorMsg: $errorMsg)';
   }
 
   @override
@@ -141,13 +126,11 @@ class _$_ForgotPasswordUIState implements _ForgotPasswordUIState {
             (identical(other.isSuccess, isSuccess) ||
                 other.isSuccess == isSuccess) &&
             (identical(other.errorMsg, errorMsg) ||
-                other.errorMsg == errorMsg) &&
-            (identical(other.errorEmail, errorEmail) ||
-                other.errorEmail == errorEmail));
+                other.errorMsg == errorMsg));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isSuccess, errorMsg, errorEmail);
+  int get hashCode => Object.hash(runtimeType, isSuccess, errorMsg);
 
   @JsonKey(ignore: true)
   @override
@@ -159,16 +142,12 @@ class _$_ForgotPasswordUIState implements _ForgotPasswordUIState {
 
 abstract class _ForgotPasswordUIState implements ForgotPasswordUIState {
   factory _ForgotPasswordUIState(
-      {final bool isSuccess,
-      final String errorMsg,
-      final String errorEmail}) = _$_ForgotPasswordUIState;
+      {final bool isSuccess, final String errorMsg}) = _$_ForgotPasswordUIState;
 
   @override
   bool get isSuccess;
   @override
   String get errorMsg;
-  @override
-  String get errorEmail;
   @override
   @JsonKey(ignore: true)
   _$$_ForgotPasswordUIStateCopyWith<_$_ForgotPasswordUIState> get copyWith =>

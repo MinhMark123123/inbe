@@ -1,5 +1,4 @@
 import 'package:aac_core/aac_core.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:inabe/src/navigation/routers.dart';
@@ -73,7 +72,7 @@ class UpdateAccountOTPPage
         Text(
           str.change_email_and_password_guide,
           style: textStyle.underline.medium.w400.fill(ColorName.carbonGrey),
-        ).onPressedInkWell(() => buildShowPopupGuide(context)),
+        ).onPressedInkWell(() => PopupUtils.buildShowPopupGuide(context)),
         const SizedBox(
           height: Dimens.size40,
         ),
@@ -112,49 +111,6 @@ class UpdateAccountOTPPage
     );
   }
 
-  Future<void> buildShowPopupGuide(BuildContext context) {
-    return showCupertinoDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Center(
-            child: Text(
-              str.resend_forget_mail,
-              style: textStyle.large.w700.fill(ColorName.carbonGrey),
-            ),
-          ),
-          content: Column(
-            children: [
-              Text(
-                str.forget_check_mail,
-                style: textStyle.medium.w400.fill(ColorName.carbonGrey),
-              ),
-              const SizedBox(
-                height: Dimens.size40,
-              ),
-              Text(
-                str.resend_forget_mail_process_content,
-                style: textStyle.medium.w400.fill(ColorName.carbonGrey),
-              ),
-            ],
-          ),
-          actions: [
-            OutlinedButton(
-              onPressed: () => {context.pop()},
-              style: OutlinedButton.styleFrom(
-                side: const BorderSide(color: ColorName.dividerGray),
-              ),
-              child: Text(
-                "Close/閉じる",
-                style: textStyle.medium.w400.fill(ColorName.carbonGrey),
-              ),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   Widget buildAction(WidgetRef ref) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -177,8 +133,7 @@ class UpdateAccountOTPPage
 
     ref.listen(viewModel.isSuccess, (previous, next) {
       if (next) {
-        context.go(
-            "/${RouterConstants.menu}/${RouterConstants.updateAccount}",
+        context.go("/${RouterConstants.menu}/${RouterConstants.updateAccount}",
             extra: viewModel.otpController.text);
       }
     });

@@ -3,14 +3,13 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/src/consumer.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:inabe/src/data/constants/domains.dart';
 import 'package:inabe/src/navigation/routers.dart';
 import 'package:inabe/src/presenter/toppage/menu/menu_view_model.dart';
+import 'package:inabe/src/presenter/widget/link_media_widget.dart';
 import 'package:inabe/src/presenter/widget/top_body_widget.dart';
 import 'package:inabe/src/state/riverpod_ui_support.dart';
 import 'package:inabe/src/utils/extensions/asset_extension.dart';
 import 'package:inabe/src/utils/popup_utils.dart';
-import 'package:inabe/src/utils/uri_utils.dart';
 import 'package:inabe_design/base_component/custom_appbar_widget.dart';
 import 'package:inabe_design/dimens.dart';
 import 'package:riverpod/src/provider.dart';
@@ -31,6 +30,13 @@ class MenuPage extends ConsumerViewModelWidget<MenuViewModel> {
   ) {
     useAutomaticKeepAlive(wantKeepAlive: true);
     viewModel.checkLoggedIn();
+    ref.listen(viewModel.isSignOutProvider, (previous, next) {
+      if (next) {
+        context.go(
+          "/${RouterConstants.login}",
+        );
+      }
+    });
 
     return Scaffold(
       appBar: CustomAppBarWidget(
@@ -66,10 +72,10 @@ class MenuPage extends ConsumerViewModelWidget<MenuViewModel> {
               _rowPolicy(
                 str.privacy_policy,
                 Assets.images.icPolicy.image(width: Dimens.size26, height: 22),
-                () => {
+                () {
                   context.go(
                     "/${RouterConstants.menu}/${RouterConstants.policy}",
-                  )
+                  );
                 },
               ),
               _rowMenu(
@@ -89,7 +95,7 @@ class MenuPage extends ConsumerViewModelWidget<MenuViewModel> {
                 },
               ),
               const Spacer(),
-              _buildBottomRow(),
+              const LinkMediaWidget(),
               const SizedBox(
                 height: Dimens.materialMedium,
               )
@@ -98,44 +104,6 @@ class MenuPage extends ConsumerViewModelWidget<MenuViewModel> {
         },
       ),
     );
-  }
-
-  Widget _buildBottomRow() {
-    return Row(
-      children: [
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: SizeExtension(10).w),
-          child: Assets.images.icLogoSmall.image(width: 100, height: 34),
-        ),
-        const Spacer(),
-        ..._buildListAction(),
-      ],
-    );
-  }
-
-  List<Widget> _buildListAction() {
-    return [
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: Dimens.size10),
-        child: Assets.images.icLive.image(width: 30).onPressed(
-            () => {UriUtils.launchActionOutside(data: DomainConst.topLiveUrl)}),
-      ),
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: Dimens.size10),
-        child: Assets.images.icInstagram.image(width: 30).onPressed(() =>
-            {UriUtils.launchActionOutside(data: DomainConst.topInstagramUrl)}),
-      ),
-      Padding(
-        padding: EdgeInsets.symmetric(horizontal: SizeExtension(10).w),
-        child: Assets.images.icYoutube.image(width: 30).onPressed(() =>
-            {UriUtils.launchActionOutside(data: DomainConst.topYoutubeUrl)}),
-      ),
-      Padding(
-        padding: EdgeInsets.symmetric(horizontal: SizeExtension(10).w),
-        child: Assets.images.icTwitter.image(width: 30).onPressed(() =>
-            {UriUtils.launchActionOutside(data: DomainConst.topTwitterUrl)}),
-      ),
-    ];
   }
 
   Widget _rowMenu(String title, Image icon, dynamic action) {

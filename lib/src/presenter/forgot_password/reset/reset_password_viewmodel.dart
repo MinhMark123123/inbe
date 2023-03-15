@@ -41,6 +41,7 @@ class ResetPasswordViewModel extends ViewModel {
   TextEditingController passwordController = TextEditingController();
   TextEditingController rePasswordController = TextEditingController();
   late ForgotPasswordRequest forgotPasswordRequest;
+  bool isSubmit = false;
 
   ResetPasswordViewModel({
     required this.userRepository,
@@ -53,31 +54,27 @@ class ResetPasswordViewModel extends ViewModel {
   @override
   bool enableBindAppLifeCycle() => true;
 
-  void onChangePassword() {
-    uiState.update((state) => state.copyWith(errorPassword: ''));
-  }
-
   void onChangeConfirmPassword() {
     uiState.update((state) => state.copyWith(errorConfirmPassword: ''));
   }
 
   Future<void> resetPassword() async {
-    bool isError = false;
-    String? passwordValid = passwordController.validatePassword();
-    String? confirmValid =
-        rePasswordController.validateConfirmPassword(passwordController.text);
-    if (passwordValid.isNotEmpty) {
-      isError = true;
-    }
-    uiState.update((state) => state.copyWith(errorPassword: passwordValid));
+    // bool isError = false;
+    // String? passwordValid = passwordController.validatePassword();
+    // String? confirmValid =
+    //     rePasswordController.validateConfirmPassword(passwordController.text);
+    // if (passwordValid.isNotEmpty) {
+    //   isError = true;
+    // }
+    // uiState.update((state) => state.copyWith(errorPassword: passwordValid));
+    //
+    // if (confirmValid.isNotEmpty) {
+    //   isError = true;
+    // }
+    // uiState
+    //     .update((state) => state.copyWith(errorConfirmPassword: confirmValid));
 
-    if (confirmValid.isNotEmpty) {
-      isError = true;
-    }
-    uiState
-        .update((state) => state.copyWith(errorConfirmPassword: confirmValid));
-
-    if (isError) {
+    if (!isSubmit) {
       return;
     } else {
       final request = ForgotPasswordRequest(
@@ -100,6 +97,10 @@ class ResetPasswordViewModel extends ViewModel {
                 });
       });
     }
+  }
+
+  void setSubmit(bool isSubmit) {
+    this.isSubmit = isSubmit;
   }
 
   void setDataRequest(ForgotPasswordRequest request) {

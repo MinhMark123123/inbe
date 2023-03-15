@@ -1,5 +1,6 @@
 import 'package:aac_core/aac_core.dart';
 import 'package:inabe/src/data/model/email_model.dart';
+import 'package:inabe/src/utils/date_time_utils.dart';
 import 'package:inabe_design/inabe_design.dart';
 
 class EmailItemWidget extends StatelessWidget {
@@ -16,7 +17,11 @@ class EmailItemWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            emailModel.publishedAt ?? '',
+            DateTimeUtils.convert(
+              emailModel.publishedAt,
+              DateTimeUtils.emailDateFormat,
+              DateTimeUtils.formatJP,
+            ),
             style: textStyle.medium.w500.fill(ColorName.boulder),
           ),
           const SizedBox(height: 3),

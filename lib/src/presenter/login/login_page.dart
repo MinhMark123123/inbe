@@ -1,5 +1,4 @@
 import 'package:aac_core/aac_core.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:inabe/src/presenter/login/component/login_action_widget.dart';
 import 'package:inabe/src/presenter/login/component/login_input_form.dart';

@@ -1,6 +1,8 @@
 import 'package:aac_core/aac_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
+import 'package:inabe/src/presenter/widget/rich_text_span_widget.dart';
+import 'package:inabe/src/utils/extensions/asset_extension.dart';
 import 'package:inabe_design/inabe_design.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
@@ -97,8 +99,132 @@ class PopupUtils {
     });
   }
 
+
+  static Future<void> buildShowPopupGuide(BuildContext context) {
+    return showCupertinoDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          insetPadding: const EdgeInsets.all(Dimens.size12),
+          title: Center(
+            child: Text(
+              str.resend_forget_mail,
+              style: textStyle.large.w700.fill(ColorName.carbonGrey),
+            ),
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Text(
+                  str.forget_check_mail,
+                  style: textStyle.medium.w400.fill(ColorName.carbonGrey),
+                ),
+              ),
+              const SizedBox(
+                height: Dimens.size40,
+              ),
+              RichTextSpanWidget(
+                str.resend_forget_mail_process_content,
+                textAlign: TextAlign.start,
+                richTextColor: ColorName.carbonGrey,
+                normalTextStyle:
+                textStyle.medium.w700.fill(ColorName.carbonGrey),
+                fontWeightRichText: FontWeight.w400,
+                spanTexts: [
+                  str.resend_forget_mail_process_rich_1,
+                  str.resend_forget_mail_process_rich_2,
+                ],
+              ),
+            ],
+          ),
+          actions: [
+            Center(
+              child: SizedBox(
+                width: 170,
+                child: OutlinedButton(
+                  onPressed: () => {context.pop()},
+                  style: OutlinedButton.styleFrom(
+                    side: const BorderSide(color: ColorName.dividerGray),
+                  ),
+                  child: Text(
+                    str.close,
+                    style: textStyle.medium.w400.fill(ColorName.carbonGrey),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+
+  static showSimpleInformation(
+      BuildContext context, {
+        Color? colorTitle,
+        String? title,
+        Widget? content,
+        String? message,
+        Widget? logo,
+        bool barrierDismissible = true,
+        dynamic onDismiss,
+        List<Widget>? customButtonActions
+      }) async {
+    final _newDialogId = 'id-simple-dialog-$title-$message';
+    if (_currentDialogShowing(context, _newDialogId)) {
+      return;
+    }
+    _resetOverlay(context, _newDialogId);
+
+    showDialog(
+      context: context,
+      barrierDismissible: barrierDismissible,
+      builder: (context) {
+        return AlertDialog(
+          title: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (logo != null)
+                Padding(
+                  padding: const EdgeInsets.all(Dimens.normalPadding * 2),
+                  child: logo,
+                ),
+              if (title != null)
+                Text(title,
+                    textAlign: TextAlign.center,
+                    style: textStyle.xLarge.fill(colorTitle ?? ColorName.primaryColor)),
+            ],
+          ),
+          content: Text(message ?? '',
+              textAlign: TextAlign.center,
+              style: textStyle.large.w400.fill(ColorName.carbonGrey)),
+          titlePadding: const EdgeInsets.all(Dimens.normalPadding),
+          contentPadding: const EdgeInsets.all(Dimens.normalPadding),
+          buttonPadding:
+          const EdgeInsets.symmetric(horizontal: Dimens.normalPadding / 2),
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10))),
+          actions: customButtonActions,
+          actionsPadding:
+          const EdgeInsets.only(bottom: Dimens.normalPadding / 2),
+          actionsAlignment: MainAxisAlignment.center,
+        );
+      },
+    ).whenComplete(() {
+      _currentDialogId = null;
+      if (onDismiss != null) {
+        onDismiss();
+      }
+    });
+  }
+
   static showSimpleAlert(
     BuildContext context, {
+      Color? colorTitle,
     String? title,
     String? message,
     Widget? logo,
@@ -153,50 +279,7 @@ class PopupUtils {
                 .toList()
             : customButtonActions;
         if (actionButtonsDirection == Axis.horizontal) {
-          return AlertDialog(
-            title: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                if (logo != null)
-                  Padding(
-                    padding: const EdgeInsets.all(Dimens.normalPadding * 2),
-                    child: logo,
-                  ),
-                if (title != null)
-                  Text(title,
-                      textAlign: TextAlign.center,
-                      style: textStyle.xLarge.fill(ColorName.primaryColor)),
-              ],
-            ),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: Dimens.normalPadding / 2),
-                  child: Text(message ?? '',
-                      textAlign: TextAlign.center,
-                      style: textStyle.large.w400.fill(ColorName.boulder)),
-                ),
-                const SizedBox(height: Dimens.normalPadding),
-                Row(
-                  children:
-                      finalActions?.map((e) => Flexible(child: e)).toList() ??
-                          [],
-                ),
-              ],
-            ),
-            titlePadding: const EdgeInsets.all(Dimens.normalPadding),
-            contentPadding: const EdgeInsets.all(Dimens.normalPadding / 2),
-            buttonPadding: const EdgeInsets.symmetric(
-                horizontal: Dimens.normalPadding / 2),
-            shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(10))),
-            actions: null,
-            actionsPadding: EdgeInsets.zero,
-            actionsAlignment: MainAxisAlignment.center,
-          );
+          return _alertDialogHorizontal(logo, title, message, finalActions);
         }
         return AlertDialog(
           title: Column(
@@ -211,7 +294,7 @@ class PopupUtils {
               if (title != null)
                 Text(title,
                     textAlign: TextAlign.center,
-                    style: textStyle.xLarge.fill(ColorName.primaryColor)),
+                    style: textStyle.xLarge.fill(colorTitle ?? ColorName.primaryColor)),
             ],
           ),
           content: Text(message ?? '',
@@ -235,6 +318,53 @@ class PopupUtils {
         onDismiss();
       }
     });
+  }
+
+  static AlertDialog _alertDialogHorizontal(Widget? logo, String? title, String? message, List<Widget>? finalActions) {
+    return AlertDialog(
+          title: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (logo != null)
+                Padding(
+                  padding: const EdgeInsets.all(Dimens.normalPadding * 2),
+                  child: logo,
+                ),
+              if (title != null)
+                Text(title,
+                    textAlign: TextAlign.center,
+                    style: textStyle.xLarge.fill(ColorName.primaryColor)),
+            ],
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: Dimens.normalPadding / 2),
+                child: Text(message ?? '',
+                    textAlign: TextAlign.center,
+                    style: textStyle.large.w400.fill(ColorName.boulder)),
+              ),
+              const SizedBox(height: Dimens.normalPadding),
+              Row(
+                children:
+                    finalActions?.map((e) => Flexible(child: e)).toList() ??
+                        [],
+              ),
+            ],
+          ),
+          titlePadding: const EdgeInsets.all(Dimens.normalPadding),
+          contentPadding: const EdgeInsets.all(Dimens.normalPadding / 2),
+          buttonPadding: const EdgeInsets.symmetric(
+              horizontal: Dimens.normalPadding / 2),
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10))),
+          actions: null,
+          actionsPadding: EdgeInsets.zero,
+          actionsAlignment: MainAxisAlignment.center,
+        );
   }
 
   // static showModalSheet(
@@ -410,9 +540,10 @@ class PopupUtils {
     message.isNotEmpty
         ? showSimpleAlert(
             context,
-            title: 'Notification',
+            colorTitle: Colors.red,
+            title: str.confirm_error,
             message: message,
-            alertButtonActions: [AlertButtonAction('Close')],
+            alertButtonActions: [AlertButtonAction(str.close)],
           )
         : null;
   }

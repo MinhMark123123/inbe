@@ -7,6 +7,5 @@ class ForgotPasswordOTPUIState with _$ForgotPasswordOTPUIState {
   factory ForgotPasswordOTPUIState({
     @Default(false) bool isSuccess,
     @Default('') String errorMsg,
-    @Default('') String errorEmail,
   }) = _ForgotPasswordOTPUIState;
 }

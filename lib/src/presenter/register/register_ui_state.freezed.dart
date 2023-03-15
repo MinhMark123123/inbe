@@ -18,13 +18,11 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$RegisterUIState {
   bool get isTurnOn => throw _privateConstructorUsedError;
   bool get isSuccess => throw _privateConstructorUsedError;
+  bool get disableButton => throw _privateConstructorUsedError;
   List<InterestModel> get interests => throw _privateConstructorUsedError;
   AsyncValue<Map<InterestModel, bool>> get checkBoxList =>
       throw _privateConstructorUsedError;
   String get errorMessage => throw _privateConstructorUsedError;
-  String get errorMail => throw _privateConstructorUsedError;
-  String get errorPassword => throw _privateConstructorUsedError;
-  String get errorConfirmPassword => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $RegisterUIStateCopyWith<RegisterUIState> get copyWith =>
@@ -40,12 +38,10 @@ abstract class $RegisterUIStateCopyWith<$Res> {
   $Res call(
       {bool isTurnOn,
       bool isSuccess,
+      bool disableButton,
       List<InterestModel> interests,
       AsyncValue<Map<InterestModel, bool>> checkBoxList,
-      String errorMessage,
-      String errorMail,
-      String errorPassword,
-      String errorConfirmPassword});
+      String errorMessage});
 }
 
 /// @nodoc
@@ -63,12 +59,10 @@ class _$RegisterUIStateCopyWithImpl<$Res, $Val extends RegisterUIState>
   $Res call({
     Object? isTurnOn = null,
     Object? isSuccess = null,
+    Object? disableButton = null,
     Object? interests = null,
     Object? checkBoxList = null,
     Object? errorMessage = null,
-    Object? errorMail = null,
-    Object? errorPassword = null,
-    Object? errorConfirmPassword = null,
   }) {
     return _then(_value.copyWith(
       isTurnOn: null == isTurnOn
@@ -78,6 +72,10 @@ class _$RegisterUIStateCopyWithImpl<$Res, $Val extends RegisterUIState>
       isSuccess: null == isSuccess
           ? _value.isSuccess
           : isSuccess // ignore: cast_nullable_to_non_nullable
+              as bool,
+      disableButton: null == disableButton
+          ? _value.disableButton
+          : disableButton // ignore: cast_nullable_to_non_nullable
               as bool,
       interests: null == interests
           ? _value.interests
@@ -90,18 +88,6 @@ class _$RegisterUIStateCopyWithImpl<$Res, $Val extends RegisterUIState>
       errorMessage: null == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
-              as String,
-      errorMail: null == errorMail
-          ? _value.errorMail
-          : errorMail // ignore: cast_nullable_to_non_nullable
-              as String,
-      errorPassword: null == errorPassword
-          ? _value.errorPassword
-          : errorPassword // ignore: cast_nullable_to_non_nullable
-              as String,
-      errorConfirmPassword: null == errorConfirmPassword
-          ? _value.errorConfirmPassword
-          : errorConfirmPassword // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -118,12 +104,10 @@ abstract class _$$_RegisterUIStateCopyWith<$Res>
   $Res call(
       {bool isTurnOn,
       bool isSuccess,
+      bool disableButton,
       List<InterestModel> interests,
       AsyncValue<Map<InterestModel, bool>> checkBoxList,
-      String errorMessage,
-      String errorMail,
-      String errorPassword,
-      String errorConfirmPassword});
+      String errorMessage});
 }
 
 /// @nodoc
@@ -139,12 +123,10 @@ class __$$_RegisterUIStateCopyWithImpl<$Res>
   $Res call({
     Object? isTurnOn = null,
     Object? isSuccess = null,
+    Object? disableButton = null,
     Object? interests = null,
     Object? checkBoxList = null,
     Object? errorMessage = null,
-    Object? errorMail = null,
-    Object? errorPassword = null,
-    Object? errorConfirmPassword = null,
   }) {
     return _then(_$_RegisterUIState(
       isTurnOn: null == isTurnOn
@@ -154,6 +136,10 @@ class __$$_RegisterUIStateCopyWithImpl<$Res>
       isSuccess: null == isSuccess
           ? _value.isSuccess
           : isSuccess // ignore: cast_nullable_to_non_nullable
+              as bool,
+      disableButton: null == disableButton
+          ? _value.disableButton
+          : disableButton // ignore: cast_nullable_to_non_nullable
               as bool,
       interests: null == interests
           ? _value._interests
@@ -167,18 +153,6 @@ class __$$_RegisterUIStateCopyWithImpl<$Res>
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String,
-      errorMail: null == errorMail
-          ? _value.errorMail
-          : errorMail // ignore: cast_nullable_to_non_nullable
-              as String,
-      errorPassword: null == errorPassword
-          ? _value.errorPassword
-          : errorPassword // ignore: cast_nullable_to_non_nullable
-              as String,
-      errorConfirmPassword: null == errorConfirmPassword
-          ? _value.errorConfirmPassword
-          : errorConfirmPassword // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -189,12 +163,10 @@ class _$_RegisterUIState implements _RegisterUIState {
   _$_RegisterUIState(
       {this.isTurnOn = true,
       this.isSuccess = false,
+      this.disableButton = true,
       final List<InterestModel> interests = const [],
       this.checkBoxList = const AsyncValue.loading(),
-      this.errorMessage = '',
-      this.errorMail = '',
-      this.errorPassword = '',
-      this.errorConfirmPassword = ''})
+      this.errorMessage = ''})
       : _interests = interests;
 
   @override
@@ -203,6 +175,9 @@ class _$_RegisterUIState implements _RegisterUIState {
   @override
   @JsonKey()
   final bool isSuccess;
+  @override
+  @JsonKey()
+  final bool disableButton;
   final List<InterestModel> _interests;
   @override
   @JsonKey()
@@ -217,19 +192,10 @@ class _$_RegisterUIState implements _RegisterUIState {
   @override
   @JsonKey()
   final String errorMessage;
-  @override
-  @JsonKey()
-  final String errorMail;
-  @override
-  @JsonKey()
-  final String errorPassword;
-  @override
-  @JsonKey()
-  final String errorConfirmPassword;
 
   @override
   String toString() {
-    return 'RegisterUIState(isTurnOn: $isTurnOn, isSuccess: $isSuccess, interests: $interests, checkBoxList: $checkBoxList, errorMessage: $errorMessage, errorMail: $errorMail, errorPassword: $errorPassword, errorConfirmPassword: $errorConfirmPassword)';
+    return 'RegisterUIState(isTurnOn: $isTurnOn, isSuccess: $isSuccess, disableButton: $disableButton, interests: $interests, checkBoxList: $checkBoxList, errorMessage: $errorMessage)';
   }
 
   @override
@@ -241,18 +207,14 @@ class _$_RegisterUIState implements _RegisterUIState {
                 other.isTurnOn == isTurnOn) &&
             (identical(other.isSuccess, isSuccess) ||
                 other.isSuccess == isSuccess) &&
+            (identical(other.disableButton, disableButton) ||
+                other.disableButton == disableButton) &&
             const DeepCollectionEquality()
                 .equals(other._interests, _interests) &&
             (identical(other.checkBoxList, checkBoxList) ||
                 other.checkBoxList == checkBoxList) &&
             (identical(other.errorMessage, errorMessage) ||
-                other.errorMessage == errorMessage) &&
-            (identical(other.errorMail, errorMail) ||
-                other.errorMail == errorMail) &&
-            (identical(other.errorPassword, errorPassword) ||
-                other.errorPassword == errorPassword) &&
-            (identical(other.errorConfirmPassword, errorConfirmPassword) ||
-                other.errorConfirmPassword == errorConfirmPassword));
+                other.errorMessage == errorMessage));
   }
 
   @override
@@ -260,12 +222,10 @@ class _$_RegisterUIState implements _RegisterUIState {
       runtimeType,
       isTurnOn,
       isSuccess,
+      disableButton,
       const DeepCollectionEquality().hash(_interests),
       checkBoxList,
-      errorMessage,
-      errorMail,
-      errorPassword,
-      errorConfirmPassword);
+      errorMessage);
 
   @JsonKey(ignore: true)
   @override
@@ -278,29 +238,23 @@ abstract class _RegisterUIState implements RegisterUIState {
   factory _RegisterUIState(
       {final bool isTurnOn,
       final bool isSuccess,
+      final bool disableButton,
       final List<InterestModel> interests,
       final AsyncValue<Map<InterestModel, bool>> checkBoxList,
-      final String errorMessage,
-      final String errorMail,
-      final String errorPassword,
-      final String errorConfirmPassword}) = _$_RegisterUIState;
+      final String errorMessage}) = _$_RegisterUIState;
 
   @override
   bool get isTurnOn;
   @override
   bool get isSuccess;
   @override
+  bool get disableButton;
+  @override
   List<InterestModel> get interests;
   @override
   AsyncValue<Map<InterestModel, bool>> get checkBoxList;
   @override
   String get errorMessage;
-  @override
-  String get errorMail;
-  @override
-  String get errorPassword;
-  @override
-  String get errorConfirmPassword;
   @override
   @JsonKey(ignore: true)
   _$$_RegisterUIStateCopyWith<_$_RegisterUIState> get copyWith =>

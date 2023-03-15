@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:inabe/src/data/dto/request/forgot_password_request.dart';
 import 'package:inabe/src/navigation/routers.dart';
 import 'package:inabe/src/presenter/forgot_password/otp/forgot_password_otp_viewmodel.dart';
-import 'package:inabe/src/presenter/widget/inabe_text_input.dart';
+import 'package:inabe/src/presenter/widget/input_forms/inabe_otp_input_widget.dart';
 import 'package:inabe/src/presenter/widget/top_body_widget.dart';
 import 'package:inabe/src/state/riverpod_ui_support.dart';
 import 'package:inabe/src/utils/extensions/asset_extension.dart';
@@ -73,7 +73,7 @@ class ForgotPasswordOTPPage
         Text(
           str.change_email_and_password_guide,
           style: textStyle.underline.medium.w400.fill(ColorName.carbonGrey),
-        ).onPressedInkWell(() => buildShowPopupGuide(context)),
+        ).onPressedInkWell(() => PopupUtils.buildShowPopupGuide(context)),
         const SizedBox(
           height: Dimens.size40,
         ),
@@ -84,11 +84,7 @@ class ForgotPasswordOTPPage
         const SizedBox(
           height: Dimens.size10,
         ),
-        InabeTextInput(
-          controller: viewModel.otpController,
-          contentPadding: const EdgeInsets.symmetric(horizontal: Dimens.size6),
-          onValueChanged: (value) => {},
-        ),
+        InabeOTPInputWidget(controller: viewModel.otpController),
         const SizedBox(
           height: Dimens.size40,
         ),
@@ -124,54 +120,12 @@ class ForgotPasswordOTPPage
     );
   }
 
-  Future<void> buildShowPopupGuide(BuildContext context) {
-    return showCupertinoDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Center(
-            child: Text(
-              str.resend_forget_mail,
-              style: textStyle.large.w700.fill(ColorName.carbonGrey),
-            ),
-          ),
-          content: Column(
-            children: [
-              Text(
-                str.forget_check_mail,
-                style: textStyle.medium.w400.fill(ColorName.carbonGrey),
-              ),
-              const SizedBox(
-                height: Dimens.size40,
-              ),
-              Text(
-                str.resend_forget_mail_process_content,
-                style: textStyle.medium.w400.fill(ColorName.carbonGrey),
-              ),
-            ],
-          ),
-          actions: [
-            OutlinedButton(
-              onPressed: () => {context.pop()},
-              style: OutlinedButton.styleFrom(
-                side: const BorderSide(color: ColorName.dividerGray),
-              ),
-              child: Text(
-                "Close/閉じる",
-                style: textStyle.medium.w400.fill(ColorName.carbonGrey),
-              ),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   void addListenerValidOTP(BuildContext context, WidgetRef ref,
       ForgotPasswordOTPViewModel viewModel) {
     ref.listen(viewModel.errorMsg, (previous, next) {
       if (next.isNotEmpty) {
         PopupUtils.showErrorAlert(context, message: next);
+        viewModel.resetErrorMsg();
       }
     });
 

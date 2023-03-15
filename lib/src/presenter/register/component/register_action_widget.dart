@@ -1,11 +1,11 @@
 import 'package:aac_core/aac_core.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:inabe/src/navigation/routers.dart';
 import 'package:inabe/src/presenter/register/register_viewmodel.dart';
 import 'package:inabe/src/state/riverpod_ui_support.dart';
 import 'package:inabe/src/utils/extensions/asset_extension.dart';
+import 'package:inabe/src/utils/popup_utils.dart';
 import 'package:inabe_design/inabe_design.dart';
 
 class RegisterActionWidget extends ConsumerViewModelWidget<RegisterViewModel> {
@@ -14,15 +14,21 @@ class RegisterActionWidget extends ConsumerViewModelWidget<RegisterViewModel> {
   @override
   Widget buildWidget(
       BuildContext context, WidgetRef ref, RegisterViewModel viewModel) {
-    final errorMail = ref.watch(viewModel.errorEmail);
-    final errorPassWord = ref.watch(viewModel.errorPassword);
-    final errorConfirm = ref.watch(viewModel.errorConfirmPassword);
-    // print("ttt errorMail $errorMail");
+    bool disable = ref.watch(viewModel.disableButtonProvider);
+    print("ttt build RegisterActionWidget $disable");
 
     ref.listen(viewModel.isSuccess, (previous, next) {
       print("ttt isSuccess p=$previous:::n=$next");
       if (next == true) {
-        showDialogInformation();
+        _showDialogInformation();
+      }
+    });
+
+    ref.listen(viewModel.errorMsg, (previous, next) {
+      print("ttt isSuccess p=$previous:::n=$next");
+      if (next.isNotEmpty) {
+        PopupUtils.showErrorAlert(context, message: next);
+        viewModel.resetErrorMsg();
       }
     });
 
@@ -30,19 +36,9 @@ class RegisterActionWidget extends ConsumerViewModelWidget<RegisterViewModel> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(
-          height: Dimens.size20,
+          height: Dimens.size40,
         ),
-        Visibility(
-          visible: errorMail.isNotEmpty,
-          child: Text(
-            "$errorMail\n$errorPassWord\n$errorConfirm",
-            style: textStyle.xSmall.w400.fill(Colors.red),
-          ),
-        ),
-        const SizedBox(
-          height: Dimens.size20,
-        ),
-        Center(child: buildButtonRegister(viewModel)),
+        Center(child: buildButtonRegister(viewModel, disable)),
         const SizedBox(
           height: Dimens.size40,
         ),
@@ -55,11 +51,11 @@ class RegisterActionWidget extends ConsumerViewModelWidget<RegisterViewModel> {
     return registerPageControllerProvider;
   }
 
-  Widget buildButtonRegister(RegisterViewModel viewModel) {
+  Widget buildButtonRegister(RegisterViewModel viewModel, bool disable) {
     return SizedBox(
       width: Dimens.widthButton,
       child: ElevatedButton(
-        onPressed: () => {viewModel.doRegister()},
+        onPressed: disable ? null : () => {viewModel.doRegister()},
         style: ElevatedButton.styleFrom(backgroundColor: ColorName.greenSnake),
         child: Center(
           child: Text(
@@ -71,30 +67,55 @@ class RegisterActionWidget extends ConsumerViewModelWidget<RegisterViewModel> {
     );
   }
 
-  void showDialogInformation() {
-    showCupertinoDialog(
+  void _showDialogInformation() {
+    showDialog(
+      barrierDismissible: true,
       context: context!,
       builder: (BuildContext context) {
         return AlertDialog(
           title: Center(
             child: Text(
-              str.register,
+              str.register_success,
               style: textStyle.large.w700.fill(ColorName.carbonGrey),
             ),
           ),
-          content: Text(
-            str.choose_category_desc_more,
-            style: textStyle.medium.w700.fill(ColorName.carbonGrey),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                str.register_description_success,
+                textAlign: TextAlign.center,
+                style: textStyle.medium.w700.fill(ColorName.carbonGrey),
+              ),
+              const SizedBox(height: Dimens.size20),
+              Text(
+                str.change_email_and_password_guide,
+                style:
+                    textStyle.underline.medium.w400.fill(ColorName.carbonGrey),
+              ).onPressedInkWell(() {
+                context.pop();
+                PopupUtils.buildShowPopupGuide(context);
+              }),
+            ],
           ),
           actions: [
-            OutlinedButton(
-              onPressed: () => {context.go('/${RouterConstants.home}')},
-              style: OutlinedButton.styleFrom(
-                side: const BorderSide(color: ColorName.dividerGray),
-              ),
-              child: Text(
-                "Close/閉じる",
-                style: textStyle.medium.w400.fill(ColorName.carbonGrey),
+            Center(
+              child: SizedBox(
+                width: 170,
+                child: OutlinedButton(
+                  onPressed: () {
+                    context.pop();
+                    context.go('/${RouterConstants.home}');
+                  },
+                  style: OutlinedButton.styleFrom(
+                    side: const BorderSide(
+                        color: ColorName.dividerGray, width: 2),
+                  ),
+                  child: Text(
+                    str.close,
+                    style: textStyle.medium.w400.fill(ColorName.carbonGrey),
+                  ),
+                ),
               ),
             ),
           ],

@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart' as header;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:inabe/src/data/api/append_user_intercepter.dart';
 import 'package:inabe/src/data/api/retrofit_client.dart';
@@ -12,8 +13,6 @@ import 'package:inabe/src/data/dto/response/user_response.dart';
 import 'package:inabe/src/data/sources/local/key_data_source.dart';
 import 'package:inabe/src/di/di_config.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:dio/dio.dart' as header;
-
 
 abstract class UserRepository {
   Future<UserResponse> updateUser(UpdateUserRequest request);
@@ -44,6 +43,10 @@ abstract class UserRepository {
   Future<UserResponse> updateAccount(UpdateUserInfoRequest request);
 
   Future<UserResponse> doLogout();
+
+  void saveListCategory(List<String>? categories);
+
+  Future<List<String>> getCategoriesLocal();
 
   Future<void> clearDataUser();
 
@@ -158,5 +161,17 @@ class _UserRepositoryDefault extends UserRepository {
   @override
   Future<UserResponse> validForgotPasswordOTP(ForgotPasswordRequest request) {
     return restClient.validOTPPassword(request);
+  }
+
+  @override
+  void saveListCategory(List<String>? categories) {
+    if (categories != null) {
+      keyDataSource.setListCategory(categories);
+    }
+  }
+
+  @override
+  Future<List<String>> getCategoriesLocal() {
+    return keyDataSource.getListCategory();
   }
 }

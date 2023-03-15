@@ -3,10 +3,11 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:inabe/src/navigation/routers.dart';
 import 'package:inabe/src/presenter/forgot_password/forgot_password_viewmodel.dart';
-import 'package:inabe/src/presenter/widget/inabe_text_input.dart';
+import 'package:inabe/src/presenter/widget/input_forms/inabe_email_input_widget.dart';
 import 'package:inabe/src/presenter/widget/top_body_widget.dart';
 import 'package:inabe/src/state/riverpod_ui_support.dart';
 import 'package:inabe/src/utils/extensions/asset_extension.dart';
+import 'package:inabe/src/utils/popup_utils.dart';
 import 'package:inabe_design/inabe_design.dart';
 
 class ForgotPasswordPage
@@ -17,11 +18,16 @@ class ForgotPasswordPage
   Widget buildWidget(
       BuildContext context, WidgetRef ref, ForgotPasswordViewModel viewModel) {
     ref.listen(viewModel.isSuccess, (previous, next) {
-      context.go(
-          "/${RouterConstants.login}/${RouterConstants.forgotPwOTP}",
+      context.go("/${RouterConstants.login}/${RouterConstants.forgotPwOTP}",
           extra: viewModel.emailController.text);
     });
-    final errorEmail = ref.watch(viewModel.errorEmail);
+    ref.listen(viewModel.errorMsg, (previous, next) {
+      if (next.isNotEmpty) {
+        PopupUtils.showErrorAlert(context, message: next);
+        viewModel.resetErrorMsg();
+      }
+    });
+    print("ttt build Forgot password");
 
     return Scaffold(
       appBar: CustomAppBarWidget(
@@ -33,7 +39,7 @@ class ForgotPasswordPage
           padding: const EdgeInsets.all(Dimens.size10),
           child: Column(
             children: [
-              buildInputForm(viewModel, errorEmail),
+              buildInputForm(viewModel),
               buildAction(context, viewModel),
             ],
           ),
@@ -42,7 +48,7 @@ class ForgotPasswordPage
     );
   }
 
-  Widget buildInputForm(ForgotPasswordViewModel viewModel, String errorEmail) {
+  Widget buildInputForm(ForgotPasswordViewModel viewModel) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -64,21 +70,7 @@ class ForgotPasswordPage
         const SizedBox(
           height: Dimens.size10,
         ),
-        InabeTextInput(
-          hintText: str.email,
-          controller: viewModel.emailController,
-          contentPadding: const EdgeInsets.symmetric(horizontal: Dimens.size6),
-          onValueChanged: (value) => {viewModel.resetError()},
-        ),
-        const SizedBox(
-          height: Dimens.size4,
-        ),
-        Visibility(
-            visible: errorEmail.isNotEmpty,
-            child: Text(
-              errorEmail,
-              style: textStyle.xSmall.w400.fill(Colors.red),
-            )),
+        InabeEmailInputWidget(controller: viewModel.emailController),
       ],
     );
   }

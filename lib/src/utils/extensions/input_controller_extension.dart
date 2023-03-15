@@ -2,7 +2,6 @@ import 'package:aac_core/aac_core.dart';
 import 'package:inabe/src/utils/extensions/asset_extension.dart';
 
 const passwordRegexValidation =
-    // r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
     r'^(?=.*?[A-Za-z])(?=.*?[0-9])[A-Za-z0-9]{8,}$';
 
 extension TextEditingControllerX on TextEditingController {
@@ -80,7 +79,20 @@ extension TextEditingControllerX on TextEditingController {
 
   String validateEmpty() {
     String value = text;
-    if (value.isEmpty) return "str.field_required";
+    if (value.isEmpty) return str.error_otp_empty;
+    return '';
+  }
+
+
+  String validateNickname() {
+    String value = text;
+    if (value.isEmpty) return str.error_nickname_empty;
+    return '';
+  }
+
+  String validateOTP() {
+    String value = text;
+    if (value.isEmpty) return str.error_otp_empty;
     return '';
   }
 
@@ -89,17 +101,5 @@ extension TextEditingControllerX on TextEditingController {
     if (email.isEmpty) return str.error_email_empty;
     if (!isEmail(email)) return str.error_email_format;
     return '';
-
-
-
-    // return validate(
-    //     conditions: [email.isEmpty, !isEmail(email)],
-    //     validations: [str.field_required, str.invalid_email]);
   }
-
-  // update({String? text, String? validation}) {
-  //   textEditingController.text = text ?? textEditingController.text;
-  //   this.validation = validation ?? this.validation;
-  //   notifyListeners();
-  // }
 }

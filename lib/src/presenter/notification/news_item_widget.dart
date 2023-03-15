@@ -1,5 +1,6 @@
 import 'package:aac_core/aac_core.dart';
 import 'package:inabe/src/data/model/notification_model.dart';
+import 'package:inabe/src/utils/date_time_utils.dart';
 import 'package:inabe_design/inabe_design.dart';
 
 class NewsItemWidget extends StatelessWidget {
@@ -16,7 +17,11 @@ class NewsItemWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            notificationModel.date ?? '',
+            DateTimeUtils.convert(
+              notificationModel.date,
+              DateTimeUtils.utcFormat,
+              DateTimeUtils.formatJP,
+            ),
             style: textStyle.medium.w500.fill(ColorName.boulder),
           ),
           const SizedBox(height: Dimens.size4),

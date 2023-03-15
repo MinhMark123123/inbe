@@ -1,5 +1,5 @@
 import 'package:aac_core/aac_core.dart';
-import 'package:inabe_design/inabe_design.dart';
+import 'package:inabe/src/utils/extensions/asset_extension.dart';
 
 class InputFormController extends ChangeNotifier {
   String validation = '';
@@ -22,7 +22,7 @@ class InputFormController extends ChangeNotifier {
         validations == null ||
         validations.isEmpty) {
       if (required && text.isEmpty) {
-        validation = str.field_required;
+        validation = str.error_email_empty;
         notifyListeners();
         return false;
       } else {
@@ -49,7 +49,7 @@ class InputFormController extends ChangeNotifier {
     String? formattedPhone = await PhoneUtils.formatPhoneNumber(phone);
     bool valid = validate(
         conditions: [TextUtils.isEmpty(phone), formattedPhone == null],
-        validations: [str.please_input_phone, str.invalid_phone]);
+        validations: [str.error_email_empty, str.error_email_format]);
     if (valid) {
       return formattedPhone;
     }
@@ -62,8 +62,8 @@ class InputFormController extends ChangeNotifier {
       password.isEmpty,
       !TextUtils.verifyPasswordValid(password)
     ], validations: [
-      str.password_required,
-      str.invalid_password
+      str.error_password_empty,
+      str.error_password_format
     ]);
   }
 
@@ -71,7 +71,7 @@ class InputFormController extends ChangeNotifier {
     String email = text;
     return validate(
         conditions: [email.isEmpty, !isEmail(email)],
-        validations: [str.field_required, str.invalid_email]);
+        validations: [str.error_email_empty, str.error_email_format]);
   }
 
   update({String? text, String? validation}) {
