@@ -34,13 +34,13 @@ class _SplashPageState extends State<SplashPage> {
     var share = KeyDataSource();
     var data = await share.getListCategoryJson();
     print("ttt callCheckData ::: $data");
-  }
+  }now().day;
+  //   int hour = DateTim
 
   //
   // void callRegisterTask() {
   //   Workmanager().cancelAll();
-  //   int day = DateTime.now().day;
-  //   int hour = DateTime.now().hour;
+  //   int day = DateTime.e.now().hour;
   //   DateTime today = DateTime.now();
   //   DateTime triggerD;
   //   int d = DateTime.now().toUtc().millisecondsSinceEpoch;

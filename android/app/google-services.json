@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "598813713425",
+    "project_id": "inabetest",
+    "storage_bucket": "inabetest.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:598813713425:android:e7a6a4c3f7e88b38663db0",
+        "android_client_info": {
+          "package_name": "com.example.inabe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "598813713425-vabk8lafk2se71nnct999ebsflra7pdj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtNzaGIURiQSYyZS6MFirFHLRkKJeiIEs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "598813713425-vabk8lafk2se71nnct999ebsflra7pdj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "598813713425-bi97vrrhkj3nco6p7dtva8sqc1dl8ms1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.inabe"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

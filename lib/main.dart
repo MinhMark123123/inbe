@@ -1,24 +1,37 @@
+import 'dart:async';
+
 import 'package:aac_core/aac_core.dart';
 import 'package:alarm/alarm.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:inabe/gen_l10n/app_localizations.dart';
-import 'package:inabe/src/data/sources/local/key_data_source.dart';
 import 'package:inabe/src/navigation/app_routers.dart';
 import 'package:workmanager/workmanager.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
 const simpleTaskKey = "be.tramckrijte.workmanagerExample.simpleTask";
 const simplePeriodicTask =
     "be.tramckrijte.workmanagerExample.simplePeriodicTask";
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await ScreenUtil.ensureScreenSize();
-  await Alarm.init();
-  await Workmanager().initialize(callbackDispatcher);
-  callRegisterTask();
-  runApp(const ProviderScope(child: MyApp()));
+  runZonedGuarded<Future<void>>(() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    // Initialize Firebase.
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+    FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+    await ScreenUtil.ensureScreenSize();
+    await Alarm.init();
+    await Workmanager().initialize(callbackDispatcher);
+    callRegisterTask();
+    runApp(const ProviderScope(child: MyApp()));
+  }, (error, stack) => FirebaseCrashlytics.instance.recordError(error, stack));
+
 }
 
 void callbackDispatcher() {

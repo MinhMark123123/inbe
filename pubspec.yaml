@@ -76,6 +76,8 @@ dependencies:
     path: ./aac_core
   inabe_design:
     path: ./inabe_design
+  firebase_core: ^2.8.0
+  firebase_crashlytics: ^3.0.17
 
 dependency_overrides:
   xml: ^5.0.2

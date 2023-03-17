@@ -11,14 +11,14 @@ class AppConfigs {
   //   await PackageUtils.getPackageInfo();
   // }
   //
-  // static appInit(BuildContext context) {
-  //   /// System UI
-  //   SystemChrome.setSystemUIOverlayStyle(
-  //     const SystemUiOverlayStyle(
-  //       statusBarColor: Colors.transparent,
-  //       statusBarIconBrightness: Brightness.dark,
-  //     ),
-  //   );
+  static appInit(BuildContext context) {
+    /// System UI
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark,
+      ),
+    );
   //
   //   /// Cache large image
   //   ImageUtils.cache(context, [
@@ -31,7 +31,7 @@ class AppConfigs {
   //   if (Platform.isAndroid) {
   //     WebView.platform = AndroidWebView();
   //   }
-  // }
+  }
 
   static splashInit(BuildContext context) async {
 
