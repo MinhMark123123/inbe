@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:inabe/gen_l10n/app_localizations.dart';
+import 'package:inabe/src/data/sources/local/key_data_source.dart';
 import 'package:inabe/src/navigation/app_routers.dart';
 import 'package:workmanager/workmanager.dart';
 
@@ -15,7 +16,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await ScreenUtil.ensureScreenSize();
   await Alarm.init();
-  await Workmanager().initialize(callbackDispatcher, isInDebugMode: true);
+  await Workmanager().initialize(callbackDispatcher);
   callRegisterTask();
   runApp(const ProviderScope(child: MyApp()));
 }
@@ -25,7 +26,8 @@ void callbackDispatcher() {
     switch (taskName) {
       case simpleTaskKey:
         print("ttt $taskName run run run::: inputData = $inputData");
-        showAlarm();
+
+        // showAlarm();
         break;
       default:
         print("ttt default $taskName run:: inputData = $inputData");
@@ -44,8 +46,8 @@ void callRegisterTask() {
   int trigger;
   print("ttt time::: $hour::$d");
 
-  if (hour < 8) {
-    triggerD = today.copyWith(hour: 8, minute: 0, second: 0);
+  if (hour < 15) {
+    triggerD = today.copyWith(hour: 14, minute: 22, second: 0);
     trigger = triggerD.toUtc().millisecondsSinceEpoch;
   } else {
     triggerD = today

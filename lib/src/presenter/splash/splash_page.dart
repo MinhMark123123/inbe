@@ -25,6 +25,15 @@ class _SplashPageState extends State<SplashPage> {
     await AppConfigs.splashInit(context);
     // callRegisterTask();
     goToHome(context);
+    callCheckData();
+  }
+
+
+
+  Future<void> callCheckData() async {
+    var share = KeyDataSource();
+    var data = await share.getListCategoryJson();
+    print("ttt callCheckData ::: $data");
   }
 
   //

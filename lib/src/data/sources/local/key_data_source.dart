@@ -115,4 +115,12 @@ class KeyDataSource {
     var value = await getSecure(SecureKeys.keyListCategory);
     return jsonDecode(value);
   }
+
+  Future<List<String>> getListCategoryJson() async {
+    var value = await getSecure(SecureKeys.keyListCategory);
+    var data = jsonDecode(value);
+    print("ttt data list $data");
+
+    return List<String>.from(data);
+  }
 }
