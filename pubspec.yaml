@@ -103,6 +103,7 @@ dev_dependencies:
   build_runner: ^2.1.10
   # Asset gen
   flutter_gen_runner: ^4.2.0
+  flutter_secure_storage: ^8.0.0
 
 
 flutter_gen:

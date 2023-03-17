@@ -2,6 +2,7 @@ import 'package:aac_core/aac_core.dart';
 import 'package:inabe/src/data/constants/domains.dart';
 import 'package:inabe/src/navigation/routers.dart';
 import 'package:inabe/src/utils/extensions/asset_extension.dart';
+import 'package:inabe/src/utils/extensions/context_extesion.dart';
 
 class ConvenienceModel {
   int id;
@@ -20,39 +21,39 @@ class ConvenienceModel {
 }
 
 extension ConvenenceModelX on ConvenienceModel {
-  Map<UtilityItem, Image> _mapImages() {
+  Map<UtilityItem, Image> _mapImages(BuildContext context) {
     return {
       UtilityItem.EVENT: Assets.images.icEvent.image(
-        height: Configs.screenWidth * 55 / 375,
+        height: context.screenWidth * 55 / 375,
         fit: BoxFit.fitHeight,
       ),
       UtilityItem.BOOK: Assets.images.icBook.image(
-        height: Configs.screenWidth * 65 / 375,
+        height: context.screenWidth * 65 / 375,
         fit: BoxFit.fitHeight,
       ),
       UtilityItem.MAGAZING: Assets.images.icMagazine.image(
-        height: Configs.screenWidth * 65 / 375,
+        height: context.screenWidth * 65 / 375,
         fit: BoxFit.fitHeight,
       ),
       UtilityItem.ELECTRONIC_APP: Assets.images.icElectronicApp.image(
-        height: Configs.screenWidth * 65 / 375,
+        height: context.screenWidth * 65 / 375,
         fit: BoxFit.fitHeight,
       ),
       UtilityItem.ELECTRONIC_LIB: Assets.images.icElectronicLib.image(
-        height: Configs.screenWidth * 65 / 375,
+        height: context.screenWidth * 65 / 375,
         fit: BoxFit.fitHeight,
       ),
       UtilityItem.RELATED_APPS: Assets.images.icRelatedApps.image(
-        height: Configs.screenWidth * 65 / 375,
+        height: context.screenWidth * 65 / 375,
         fit: BoxFit.fitHeight,
       ),
     };
   }
 
-  Image getConvenienceImage() {
-    return _mapImages()[type] ??
+  Image getConvenienceImage(BuildContext context) {
+    return _mapImages(context)[type] ??
         Assets.images.icRelatedApps.image(
-          height: Configs.screenWidth * 65 / 375,
+          height: context.screenWidth * 65 / 375,
           fit: BoxFit.fitHeight,
         );
   }

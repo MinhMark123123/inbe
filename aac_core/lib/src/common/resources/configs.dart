@@ -6,10 +6,10 @@ class Configs {
   static bool get buildUAT =>
       AppEnvironment().environment == AppEnvironment.uat;
 
-  static Size screenSize = Size.zero;
+  /*static Size screenSize = Size.zero;
   static double screenWidth = 0;
   static double screenHeight = 0;
-  static EdgeInsets screenPadding = EdgeInsets.zero;
+  static EdgeInsets screenPadding = EdgeInsets.zero;*/
 
   // Global Navigator Key
   static final GlobalKey<NavigatorState> navigatorKey =

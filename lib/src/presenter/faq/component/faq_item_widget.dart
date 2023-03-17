@@ -1,5 +1,6 @@
 import 'package:aac_core/aac_core.dart';
 import 'package:inabe/src/data/model/faq_model.dart';
+import 'package:inabe/src/utils/extensions/context_extesion.dart';
 import 'package:inabe_design/inabe_design.dart';
 
 class FAQItemWidget extends StatelessWidget {
@@ -111,7 +112,7 @@ class FAQItemWidget extends StatelessWidget {
                     //   // ),
                     // ),
                     Container(
-                      width: Configs.screenWidth,
+                      width: context.screenWidth,
                       padding: const EdgeInsets.all(Dimens.size10),
                       child: Text(
                         item.answer ?? '',

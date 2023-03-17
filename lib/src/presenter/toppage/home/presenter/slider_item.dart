@@ -1,6 +1,5 @@
-import 'package:aac_core/aac_core.dart';
-import 'package:inabe/src/data/model/slider_model.dart';
 import 'package:inabe/src/data/model/top_slider_model.dart';
+import 'package:inabe/src/utils/extensions/context_extesion.dart';
 import 'package:inabe_design/inabe_design.dart';
 
 class SliderHomeItem extends StatelessWidget {
@@ -16,13 +15,13 @@ class SliderHomeItem extends StatelessWidget {
     return Container(
       color: Colors.red,
       child: SizedBox(
-        width: Configs.screenWidth,
+        width: context.screenWidth,
         child: Stack(
           children: <Widget>[
             ImageViewWidget(
               sliderModel.src ?? '',
-              width: Configs.screenWidth,
-              height: (Configs.screenWidth * 9 / 16),
+              width: context.screenWidth,
+              height: (context.screenWidth * 9 / 16),
               fit: BoxFit.cover,
               alignment: Alignment.center,
               onTapImage: (context, tag, image) {

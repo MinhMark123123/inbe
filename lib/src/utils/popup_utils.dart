@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:inabe/src/presenter/widget/rich_text_span_widget.dart';
 import 'package:inabe/src/utils/extensions/asset_extension.dart';
+import 'package:inabe/src/utils/extensions/context_extesion.dart';
 import 'package:inabe_design/inabe_design.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
@@ -83,7 +84,7 @@ class PopupUtils {
           // titlePadding: EdgeInsets.zero,
           // contentPadding: EdgeInsets.zero,
           // buttonPadding: EdgeInsets.zero,
-          insetPadding: EdgeInsets.all(Configs.screenWidth / 2 - 40),
+          insetPadding: EdgeInsets.all(context.screenWidth / 2 - 40),
           content: const SizedBox(
             width: 20,
             height: 20,

@@ -22,7 +22,6 @@ class _SplashPageState extends State<SplashPage> {
 
   Future<void> _initConfigs() async {
     await Future.delayed(Duration.zero);
-    await AppConfigs.splashInit(context);
     // callRegisterTask();
     goToHome(context);
     callCheckData();
@@ -34,13 +33,13 @@ class _SplashPageState extends State<SplashPage> {
     var share = KeyDataSource();
     var data = await share.getListCategoryJson();
     print("ttt callCheckData ::: $data");
-  }now().day;
-  //   int hour = DateTim
+  }
 
   //
   // void callRegisterTask() {
   //   Workmanager().cancelAll();
-  //   int day = DateTime.e.now().hour;
+  //   int day = DateTime.now().day;
+  //   int hour = DateTime.now().hour;
   //   DateTime today = DateTime.now();
   //   DateTime triggerD;
   //   int d = DateTime.now().toUtc().millisecondsSinceEpoch;

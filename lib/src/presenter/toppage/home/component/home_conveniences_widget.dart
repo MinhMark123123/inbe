@@ -45,7 +45,7 @@ class HomeConveniencesWidget
                 ),
                 Expanded(
                   child: Center(
-                    child: data.getConvenienceImage(),
+                    child: data.getConvenienceImage(_context),
                   ),
                 ),
                 Text(

@@ -1,5 +1,6 @@
 import 'package:aac_core/aac_core.dart';
 import 'package:inabe/src/data/model/living_guide_model.dart';
+import 'package:inabe/src/utils/extensions/context_extesion.dart';
 import 'package:inabe/src/utils/uri_utils.dart';
 import 'package:inabe_design/base_component/image_view_widget.dart';
 import 'package:inabe_design/dimens.dart';
@@ -24,7 +25,7 @@ class LivingBookItemWidget extends StatelessWidget {
           children: [
             ImageViewWidget(
               livingGuideModel.icon ?? '',
-              height: Configs.screenWidth * 60 / 375,
+              height: context.screenWidth * 60 / 375,
               fit: BoxFit.fitHeight,
               errorHolder: Assets.images.icLive.image(width: 80),
             ),

@@ -6,6 +6,7 @@ import 'package:inabe/src/presenter/setting/setting_viewmodel.dart';
 import 'package:inabe/src/presenter/widget/inabe_text_input.dart';
 import 'package:inabe/src/state/riverpod_ui_support.dart';
 import 'package:inabe/src/utils/extensions/asset_extension.dart';
+import 'package:inabe/src/utils/extensions/context_extesion.dart';
 import 'package:inabe_design/dimens.dart';
 
 class SettingFormWidget extends ConsumerViewModelWidget<SettingViewModel> {
@@ -23,7 +24,7 @@ class SettingFormWidget extends ConsumerViewModelWidget<SettingViewModel> {
           height: Dimens.size30,
         ),
         SizedBox(
-          width: Configs.screenWidth,
+          width: context.screenWidth,
           height: Dimens.size60,
           child: ElevatedButton(
             onPressed: () => viewModel.requestAccountOTP(),
