@@ -36,63 +36,6 @@ class ResetPasswordFormWidget
         ),
       ],
     );
-
-    // return Column(
-    //   crossAxisAlignment: CrossAxisAlignment.start,
-    //   children: [
-    //     const SizedBox(
-    //     height: Dimens.size20,
-    //   ),
-    //     Text(
-    //       str.forgot_password_enter_password,
-    //       style: textStyle.medium.w400.fill(ColorName.carbonGrey),
-    //     ),
-    //     const SizedBox(
-    //       height: Dimens.size30,
-    //     ),
-    //     Text(
-    //       str.password,
-    //       style: textStyle.medium.w700.fill(ColorName.carbonGrey),
-    //     ),
-    //     const SizedBox(
-    //       height: Dimens.size10,
-    //     ),
-    //     InabePasswordInputWidget(controller: viewModel.passwordController),
-    //     const SizedBox(
-    //       height: Dimens.size10,
-    //     ),
-    //     Text(
-    //       str.current_password_desc,
-    //       style: textStyle.xSmall.w400,
-    //     ),
-    //     const SizedBox(
-    //       height: Dimens.size40,
-    //     ),
-    //     Text(
-    //       str.confirm_password,
-    //       style: textStyle.medium.w700.fill(ColorName.carbonGrey),
-    //     ),
-    //     const SizedBox(
-    //       height: Dimens.size10,
-    //     ),
-    //     InabeTextInput(
-    //       hintText: str.confirm_password,
-    //       controller: viewModel.rePasswordController,
-    //       contentPadding: const EdgeInsets.symmetric(horizontal: Dimens.size6),
-    //       onValueChanged: (value) => {viewModel.onChangeConfirmPassword()},
-    //       obscure: true,
-    //     ),
-    //     const SizedBox(
-    //       height: Dimens.size4,
-    //     ),
-    //     Visibility(
-    //         visible: errorConfirmPw.isNotEmpty,
-    //         child: Text(
-    //           errorConfirmPw,
-    //           style: textStyle.xSmall.w400.fill(Colors.red),
-    //         )),
-    //   ],
-    // );
   }
 
   @override

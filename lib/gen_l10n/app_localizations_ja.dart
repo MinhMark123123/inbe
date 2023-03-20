@@ -104,7 +104,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get register_success => '新規登録が完了しました';
 
   @override
-  String get register_description_success => '登録完了メールをメールアドレスへ送信しました引き続き、いなべ市アプリをご利用下さい。';
+  String get register_description_success => '登録完了メールをメールアドレスへ送信しました。引き続き、いなべ市アプリをご利用下さい。';
 
   @override
   String get nickname => 'ニックネーム';
@@ -191,7 +191,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get email_tab => 'いなべ市生活情報\n    （まいめる）';
 
   @override
-  String get medicine_tab => '医療救急情報\n';
+  String get medicine_tab => '救急医療情報\n';
 
   @override
   String get menu_tab => 'メニュー\n';
@@ -261,6 +261,15 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get logout => 'ログアウト';
+
+  @override
+  String get confirm_logout => '本当にログアウトしますか？';
+
+  @override
+  String get cancel => 'いいえ';
+
+  @override
+  String get yes => 'はい';
 
   @override
   String get close => '閉じる';

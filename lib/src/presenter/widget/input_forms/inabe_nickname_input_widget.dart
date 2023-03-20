@@ -45,7 +45,7 @@ class InabeNicknameInputWidget extends StatelessWidget {
               controller: controller,
               contentPadding:
                   const EdgeInsets.symmetric(horizontal: Dimens.size6),
-              keyboardType: TextInputType.emailAddress,
+              keyboardType: TextInputType.text,
               errorBorder: errorBorder,
               onValueChanged: (value) {
                 isFirst = false;
@@ -69,7 +69,7 @@ class InabeNicknameInputWidget extends StatelessWidget {
           child: Align(
             alignment: Alignment.topLeft,
             child: Text(
-              controller.validateEmail(),
+              controller.validateNickname(),
               style: textStyle.xSmall.w400.fill(Colors.red),
             ),
           ),

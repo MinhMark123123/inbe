@@ -68,7 +68,7 @@ class InabeOTPInputWidget extends StatelessWidget {
           child: Align(
             alignment: Alignment.topLeft,
             child: Text(
-              controller.validateEmail(),
+              controller.validateOTP(),
               style: textStyle.xSmall.w400.fill(Colors.red),
             ),
           ),

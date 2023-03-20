@@ -1,12 +1,15 @@
 import 'package:aac_core/aac_core.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:inabe/src/data/constants/enums.dart';
 import 'package:inabe/src/navigation/routers.dart';
 import 'package:inabe/src/presenter/forgot_password/forgot_password_viewmodel.dart';
+import 'package:inabe/src/presenter/widget/button_state_widget.dart';
 import 'package:inabe/src/presenter/widget/input_forms/inabe_email_input_widget.dart';
 import 'package:inabe/src/presenter/widget/top_body_widget.dart';
 import 'package:inabe/src/state/riverpod_ui_support.dart';
 import 'package:inabe/src/utils/extensions/asset_extension.dart';
+import 'package:inabe/src/utils/extensions/input_controller_extension.dart';
 import 'package:inabe/src/utils/popup_utils.dart';
 import 'package:inabe_design/inabe_design.dart';
 
@@ -75,23 +78,6 @@ class ForgotPasswordPage
     );
   }
 
-  Widget buildButtonSend(
-      BuildContext context, ForgotPasswordViewModel viewModel) {
-    return SizedBox(
-      width: Dimens.widthButton,
-      child: ElevatedButton(
-        onPressed: () => {viewModel.doRecoverPassword()},
-        style: ElevatedButton.styleFrom(backgroundColor: ColorName.greenSnake),
-        child: Center(
-          child: Text(
-            str.send,
-            style: textStyle.medium.w700.fill(Colors.white),
-          ),
-        ),
-      ),
-    );
-  }
-
   Widget buildAction(BuildContext context, ForgotPasswordViewModel viewModel) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -99,7 +85,13 @@ class ForgotPasswordPage
         const SizedBox(
           height: Dimens.size40,
         ),
-        buildButtonSend(context, viewModel),
+        ButtonStateWidget(
+          str.send,
+          width: Dimens.widthButton,
+          onPress: () => {viewModel.doRecoverPassword()},
+          controller: viewModel.emailController,
+          type: ButtonStateType.EMAIL,
+        ),
         const SizedBox(
           height: Dimens.size40,
         ),

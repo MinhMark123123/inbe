@@ -54,7 +54,7 @@ class NewsViewModel extends ViewModel {
     }).catchError((error) {
       ApiError(error,
           errorData: (code, msg) => uiState
-              .update((state) => state.copyWith(errorMessage: "$code\n$msg")));
+              .update((state) => state.copyWith(errorMessage: "$msg")));
     });
   }
 }

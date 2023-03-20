@@ -88,7 +88,7 @@ class InabePasswordInputWidget extends StatelessWidget {
           child: Align(
             alignment: Alignment.topLeft,
             child: Text(
-              controller.validateEmail(),
+              controller.validatePassword(),
               style: textStyle.xSmall.w400.fill(Colors.red),
             ),
           ),

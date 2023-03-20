@@ -294,7 +294,7 @@ abstract class AppLocalizations {
   /// No description provided for @register_description_success.
   ///
   /// In en, this message translates to:
-  /// **'登録完了メールをメールアドレスへ送信しました引き続き、いなべ市アプリをご利用下さい。'**
+  /// **'登録完了メールをメールアドレスへ送信しました。引き続き、いなべ市アプリをご利用下さい。'**
   String get register_description_success;
 
   /// No description provided for @nickname.
@@ -468,7 +468,7 @@ abstract class AppLocalizations {
   /// No description provided for @medicine_tab.
   ///
   /// In en, this message translates to:
-  /// **'医療救急情報\n'**
+  /// **'救急医療情報\n'**
   String get medicine_tab;
 
   /// No description provided for @menu_tab.
@@ -608,6 +608,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'ログアウト'**
   String get logout;
+
+  /// No description provided for @confirm_logout.
+  ///
+  /// In en, this message translates to:
+  /// **'本当にログアウトしますか？'**
+  String get confirm_logout;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'いいえ'**
+  String get cancel;
+
+  /// No description provided for @yes.
+  ///
+  /// In en, this message translates to:
+  /// **'はい'**
+  String get yes;
 
   /// No description provided for @close.
   ///

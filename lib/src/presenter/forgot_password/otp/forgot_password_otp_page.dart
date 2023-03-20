@@ -2,13 +2,16 @@ import 'package:aac_core/aac_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/src/consumer.dart';
 import 'package:go_router/go_router.dart';
+import 'package:inabe/src/data/constants/enums.dart';
 import 'package:inabe/src/data/dto/request/forgot_password_request.dart';
 import 'package:inabe/src/navigation/routers.dart';
 import 'package:inabe/src/presenter/forgot_password/otp/forgot_password_otp_viewmodel.dart';
+import 'package:inabe/src/presenter/widget/button_state_widget.dart';
 import 'package:inabe/src/presenter/widget/input_forms/inabe_otp_input_widget.dart';
 import 'package:inabe/src/presenter/widget/top_body_widget.dart';
 import 'package:inabe/src/state/riverpod_ui_support.dart';
 import 'package:inabe/src/utils/extensions/asset_extension.dart';
+import 'package:inabe/src/utils/extensions/input_controller_extension.dart';
 import 'package:inabe/src/utils/popup_utils.dart';
 import 'package:inabe_design/inabe_design.dart';
 import 'package:riverpod/src/provider.dart';
@@ -96,27 +99,17 @@ class ForgotPasswordOTPPage
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        buildButtonUpdate(ref),
+        ButtonStateWidget(
+          str.send,
+          width: Dimens.widthButton,
+          onPress: () => {viewModel(ref).validatePasswordOTP()},
+          controller: viewModel(ref).otpController,
+          type: ButtonStateType.OTP,
+        ),
         const SizedBox(
           height: Dimens.size40,
         ),
       ],
-    );
-  }
-
-  Widget buildButtonUpdate(WidgetRef ref) {
-    return SizedBox(
-      width: Dimens.widthButton,
-      child: ElevatedButton(
-        onPressed: () => viewModel(ref).validatePasswordOTP(),
-        style: ElevatedButton.styleFrom(backgroundColor: ColorName.greenSnake),
-        child: Center(
-          child: Text(
-            str.update,
-            style: textStyle.medium.w700.fill(Colors.white),
-          ),
-        ),
-      ),
     );
   }
 

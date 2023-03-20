@@ -6,6 +6,7 @@ part 'login_ui_state.freezed.dart';
 class LoginUIState with _$LoginUIState {
   factory LoginUIState({
     @Default(false) bool isSuccess,
+    @Default(true) bool disableButton,
     @Default('') String errorMessage,
     @Default(false) bool isLoading,
   }) = _LoginUIState;

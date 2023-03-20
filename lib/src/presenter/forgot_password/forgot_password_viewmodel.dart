@@ -65,7 +65,7 @@ class ForgotPasswordViewModel extends ViewModel {
     ).catchError((obj) {
       ApiError(obj,
           errorData: (code, msg) => uiState
-              .update((state) => state.copyWith(errorMsg: "$code\n$msg")));
+              .update((state) => state.copyWith(errorMsg: "$msg")));
     });
   }
 

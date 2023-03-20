@@ -93,7 +93,7 @@ class ResetPasswordViewModel extends ViewModel {
         ApiError(obj,
             errorData: (code, msg) => {
                   uiState.update(
-                      (state) => state.copyWith(errorMessage: "$code\n$msg"))
+                      (state) => state.copyWith(errorMessage: "$msg"))
                 });
       });
     }

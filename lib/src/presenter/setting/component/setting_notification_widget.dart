@@ -1,8 +1,10 @@
 import 'package:aac_core/aac_core.dart';
 import 'package:flutter_riverpod/src/consumer.dart';
 import 'package:go_router/go_router.dart';
+import 'package:inabe/src/data/constants/enums.dart';
 import 'package:inabe/src/navigation/routers.dart';
 import 'package:inabe/src/presenter/setting/setting_viewmodel.dart';
+import 'package:inabe/src/presenter/widget/button_state_widget.dart';
 import 'package:inabe/src/state/riverpod_ui_support.dart';
 import 'package:inabe/src/utils/extensions/asset_extension.dart';
 import 'package:inabe/src/utils/popup_utils.dart';
@@ -70,18 +72,12 @@ class SettingNotificationWidget
           height: Dimens.size40,
         ),
         Center(
-          child: SizedBox(
+          child: ButtonStateWidget(
+            str.update,
             width: Dimens.widthButton,
-            child: ElevatedButton(
-              onPressed: () => {viewModel.doUpdateUser()},
-              style: ElevatedButton.styleFrom(backgroundColor: ColorName.greenSnake),
-              child: Center(
-                child: Text(
-                  str.update,
-                  style: textStyle.medium.w700.fill(Colors.white),
-                ),
-              ),
-            ),
+            onPress: () => {viewModel.doUpdateUser()},
+            controller: viewModel.nicknameController,
+            type: ButtonStateType.NICKNAME,
           ),
         ),
       ],

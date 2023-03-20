@@ -14,7 +14,7 @@ class DomainConst {
   static const topLibraryUrl = 'https://web.d-library.jp/inabe/g0101/top/';
 
   static const tabMedicineUrl =
-      'https://www.city.inabe.mie.jp/kosoate/kosodate/kenshin/1001630.html';
+      'https://www.catapoke.com/%0asearch/?keyword=inabe-city';
 
   static const libraryOverviewUrl =
       'https://www.city.inabe.mie.jp/onlineservice/denshishinsei/1011792.html';

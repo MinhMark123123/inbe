@@ -24,6 +24,9 @@ class LoginViewModel extends ViewModel {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
+  ProviderListenable<bool> get disableButtonProvider =>
+      ui.select((value) => value.disableButton);
+
   ProviderListenable<bool> get isLoadingProvider =>
       ui.select((value) => value.isLoading);
 
@@ -40,43 +43,19 @@ class LoginViewModel extends ViewModel {
     required this.repository,
   });
 
-  Future<void> doLogin() async {
-    bool isError = validateDataLogin();
-
-    if (isError) {
-      return;
-    } else {
-      final request = LoginRequest(
-          email: emailController.text, password: passwordController.text);
-
-      print("ttt resquest = $request\n"
-          "json = ${request.toJson()}");
-
-      repository.login(request).then((value) {
-        final headers = value.response.headers;
-        print("ttt $value ::: ${headers.value("access-token")}");
-        print("ttt $value ::: ${headers.value("uid")}");
-        print("ttt $value ::: ${headers.value("client")}");
-
-        if (value.data.data != null) {
-          uiState.update((state) => state.copyWith(isSuccess: true));
-        }
-      }).catchError((obj) {
-        ApiError(obj, errorData: (code, msg) {
-          uiState
-              .update((state) => state.copyWith(errorMessage: "$code\n$msg"));
-        });
-      });
-    }
-  }
-
-  bool validateDataLogin() {
-    return emailController.validateEmail().isNotEmpty ||
+  bool validateDataLogin({bool updateUI = false}) {
+    bool isError = emailController.validateEmail().isNotEmpty ||
         passwordController.validatePassword().isNotEmpty;
+    if (updateUI) {
+      print("ttt $isError");
+      uiState.update((state) => state.copyWith(disableButton: isError));
+    }
+    return isError;
   }
 
   Future<void> doLoginAndUpdate() async {
     bool isError = validateDataLogin();
+
 
     if (isError) {
       return;
@@ -92,10 +71,18 @@ class LoginViewModel extends ViewModel {
         _isShowLoading(false);
         ApiError(obj, errorData: (code, msg) {
           uiState
-              .update((state) => state.copyWith(errorMessage: "$code\n$msg"));
+              .update((state) => state.copyWith(errorMessage: "$msg"));
         });
       });
     }
+  }
+
+  void onChangeEmail() {
+    validateDataLogin(updateUI: true);
+  }
+
+  void onChangePassword() {
+    validateDataLogin(updateUI: true);
   }
 
   void _isShowLoading(bool isLoading) {

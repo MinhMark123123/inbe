@@ -16,6 +16,8 @@ class LoginActionWidget extends ConsumerViewModelWidget<LoginViewModel> {
       BuildContext context, WidgetRef ref, LoginViewModel viewModel) {
     addListener(ref, viewModel, context);
 
+    var isDisable = ref.watch(viewModel.disableButtonProvider);
+
     ref.listen(viewModel.isLoadingProvider, (previous, next) {
       if (next) {
         PopupUtils.showLoadingDialog(context);
@@ -30,7 +32,7 @@ class LoginActionWidget extends ConsumerViewModelWidget<LoginViewModel> {
         const SizedBox(
           height: Dimens.size40,
         ),
-        buildButtonLogin(viewModel),
+        buildButtonLogin(viewModel, isDisable),
         const SizedBox(
           height: Dimens.size30,
         ),
@@ -70,12 +72,12 @@ class LoginActionWidget extends ConsumerViewModelWidget<LoginViewModel> {
     });
   }
 
-  Widget buildButtonLogin(LoginViewModel viewModel) {
+  Widget buildButtonLogin(LoginViewModel viewModel, bool isDisable) {
     return SizedBox(
       width: Dimens.widthButton,
       height: Dimens.size40,
       child: ElevatedButton(
-        onPressed: () => {viewModel.doLoginAndUpdate()},
+        onPressed: isDisable ? null : () => {viewModel.doLoginAndUpdate()},
         style: ElevatedButton.styleFrom(
             minimumSize: Size.zero, backgroundColor: ColorName.greenSnake),
         child: Center(

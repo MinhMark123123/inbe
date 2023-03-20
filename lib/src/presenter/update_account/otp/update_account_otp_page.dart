@@ -1,8 +1,10 @@
 import 'package:aac_core/aac_core.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:inabe/src/data/constants/enums.dart';
 import 'package:inabe/src/navigation/routers.dart';
 import 'package:inabe/src/presenter/update_account/otp/update_account_otp_viewmodel.dart';
+import 'package:inabe/src/presenter/widget/button_state_widget.dart';
 import 'package:inabe/src/presenter/widget/inabe_text_input.dart';
 import 'package:inabe/src/presenter/widget/top_body_widget.dart';
 import 'package:inabe/src/state/riverpod_ui_support.dart';
@@ -95,27 +97,17 @@ class UpdateAccountOTPPage
     );
   }
 
-  Widget buildButtonUpdate(WidgetRef ref) {
-    return SizedBox(
-      width: Dimens.widthButton,
-      child: ElevatedButton(
-        onPressed: () => viewModel(ref).validOTP(),
-        style: ElevatedButton.styleFrom(backgroundColor: ColorName.greenSnake),
-        child: Center(
-          child: Text(
-            str.update,
-            style: textStyle.medium.w700.fill(Colors.white),
-          ),
-        ),
-      ),
-    );
-  }
-
   Widget buildAction(WidgetRef ref) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        buildButtonUpdate(ref),
+        ButtonStateWidget(
+          str.update,
+          width: Dimens.widthButton,
+          onPress: () => {viewModel(ref).validOTP()},
+          controller: viewModel(ref).otpController,
+          type: ButtonStateType.OTP,
+        ),
         const SizedBox(
           height: Dimens.size40,
         ),

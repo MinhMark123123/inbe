@@ -37,9 +37,7 @@ class LoginInputFormWidget extends ConsumerViewModelWidget<LoginViewModel> {
         ),
         InabeEmailInputWidget(
           controller: viewModel.emailController,
-          onValueChanged: (value) => {
-            // print("ttt $value")
-          },
+          onValueChanged: (value) => {viewModel.onChangeEmail()},
         ),
         const SizedBox(
           height: Dimens.size30,
@@ -53,9 +51,7 @@ class LoginInputFormWidget extends ConsumerViewModelWidget<LoginViewModel> {
         ),
         InabePasswordInputWidget(
           controller: viewModel.passwordController,
-          onValueChanged: (value) => {
-            // print("ttt $value")
-          },
+          onValueChanged: (value) => {viewModel.onChangePassword()},
         ),
       ],
     );

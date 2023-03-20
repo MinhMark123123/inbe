@@ -92,7 +92,7 @@ class RegisterViewModel extends ViewModel {
         obj,
         errorData: (int? code, String? message) {
           uiState.update(
-              (state) => state.copyWith(errorMessage: "$code\n$message"));
+              (state) => state.copyWith(errorMessage: "$message"));
         },
       );
     });
@@ -141,7 +141,6 @@ class RegisterViewModel extends ViewModel {
 
     print("ttt resquest = $request\n"
         "json = ${request.toJson()}");
-    // return;
 
     userRepository.register(request).then(
       (value) {
@@ -154,7 +153,7 @@ class RegisterViewModel extends ViewModel {
         obj,
         errorData: (int? code, String? message) {
           uiState.update(
-              (state) => state.copyWith(errorMessage: "$code\n$message"));
+              (state) => state.copyWith(errorMessage: "$message"));
         },
       );
     });

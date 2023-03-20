@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$LoginUIState {
   bool get isSuccess => throw _privateConstructorUsedError;
+  bool get disableButton => throw _privateConstructorUsedError;
   String get errorMessage => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
 
@@ -31,7 +32,11 @@ abstract class $LoginUIStateCopyWith<$Res> {
           LoginUIState value, $Res Function(LoginUIState) then) =
       _$LoginUIStateCopyWithImpl<$Res, LoginUIState>;
   @useResult
-  $Res call({bool isSuccess, String errorMessage, bool isLoading});
+  $Res call(
+      {bool isSuccess,
+      bool disableButton,
+      String errorMessage,
+      bool isLoading});
 }
 
 /// @nodoc
@@ -48,6 +53,7 @@ class _$LoginUIStateCopyWithImpl<$Res, $Val extends LoginUIState>
   @override
   $Res call({
     Object? isSuccess = null,
+    Object? disableButton = null,
     Object? errorMessage = null,
     Object? isLoading = null,
   }) {
@@ -55,6 +61,10 @@ class _$LoginUIStateCopyWithImpl<$Res, $Val extends LoginUIState>
       isSuccess: null == isSuccess
           ? _value.isSuccess
           : isSuccess // ignore: cast_nullable_to_non_nullable
+              as bool,
+      disableButton: null == disableButton
+          ? _value.disableButton
+          : disableButton // ignore: cast_nullable_to_non_nullable
               as bool,
       errorMessage: null == errorMessage
           ? _value.errorMessage
@@ -76,7 +86,11 @@ abstract class _$$_LoginUIStateCopyWith<$Res>
       __$$_LoginUIStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isSuccess, String errorMessage, bool isLoading});
+  $Res call(
+      {bool isSuccess,
+      bool disableButton,
+      String errorMessage,
+      bool isLoading});
 }
 
 /// @nodoc
@@ -91,6 +105,7 @@ class __$$_LoginUIStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isSuccess = null,
+    Object? disableButton = null,
     Object? errorMessage = null,
     Object? isLoading = null,
   }) {
@@ -98,6 +113,10 @@ class __$$_LoginUIStateCopyWithImpl<$Res>
       isSuccess: null == isSuccess
           ? _value.isSuccess
           : isSuccess // ignore: cast_nullable_to_non_nullable
+              as bool,
+      disableButton: null == disableButton
+          ? _value.disableButton
+          : disableButton // ignore: cast_nullable_to_non_nullable
               as bool,
       errorMessage: null == errorMessage
           ? _value.errorMessage
@@ -115,11 +134,17 @@ class __$$_LoginUIStateCopyWithImpl<$Res>
 
 class _$_LoginUIState implements _LoginUIState {
   _$_LoginUIState(
-      {this.isSuccess = false, this.errorMessage = '', this.isLoading = false});
+      {this.isSuccess = false,
+      this.disableButton = true,
+      this.errorMessage = '',
+      this.isLoading = false});
 
   @override
   @JsonKey()
   final bool isSuccess;
+  @override
+  @JsonKey()
+  final bool disableButton;
   @override
   @JsonKey()
   final String errorMessage;
@@ -129,7 +154,7 @@ class _$_LoginUIState implements _LoginUIState {
 
   @override
   String toString() {
-    return 'LoginUIState(isSuccess: $isSuccess, errorMessage: $errorMessage, isLoading: $isLoading)';
+    return 'LoginUIState(isSuccess: $isSuccess, disableButton: $disableButton, errorMessage: $errorMessage, isLoading: $isLoading)';
   }
 
   @override
@@ -139,6 +164,8 @@ class _$_LoginUIState implements _LoginUIState {
             other is _$_LoginUIState &&
             (identical(other.isSuccess, isSuccess) ||
                 other.isSuccess == isSuccess) &&
+            (identical(other.disableButton, disableButton) ||
+                other.disableButton == disableButton) &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage) &&
             (identical(other.isLoading, isLoading) ||
@@ -146,8 +173,8 @@ class _$_LoginUIState implements _LoginUIState {
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, isSuccess, errorMessage, isLoading);
+  int get hashCode => Object.hash(
+      runtimeType, isSuccess, disableButton, errorMessage, isLoading);
 
   @JsonKey(ignore: true)
   @override
@@ -159,11 +186,14 @@ class _$_LoginUIState implements _LoginUIState {
 abstract class _LoginUIState implements LoginUIState {
   factory _LoginUIState(
       {final bool isSuccess,
+      final bool disableButton,
       final String errorMessage,
       final bool isLoading}) = _$_LoginUIState;
 
   @override
   bool get isSuccess;
+  @override
+  bool get disableButton;
   @override
   String get errorMessage;
   @override

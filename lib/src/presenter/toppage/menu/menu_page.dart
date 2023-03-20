@@ -169,8 +169,8 @@ class MenuPage extends ConsumerViewModelWidget<MenuViewModel> {
   void showDialogConfirm(BuildContext context, WidgetRef ref) {
     PopupUtils.showSimpleAlert(
       context,
-      title: "Logout",
-      message: "Do you want to logout?",
+      title: str.logout,
+      message: str.confirm_logout,
       customButtonActions: [
         Center(
           child: SizedBox(
@@ -182,7 +182,7 @@ class MenuPage extends ConsumerViewModelWidget<MenuViewModel> {
                 side: const BorderSide(color: ColorName.dividerGray),
               ),
               child: Text(
-                "Cancel",
+                str.cancel,
                 style: textStyle.large.w400.fill(ColorName.carbonGrey),
               ),
             ),
@@ -203,7 +203,7 @@ class MenuPage extends ConsumerViewModelWidget<MenuViewModel> {
                   backgroundColor: ColorName.greenSnake),
               child: Center(
                 child: Text(
-                  "Yes",
+                  str.yes,
                   style: textStyle.large.w700.fill(Colors.white),
                 ),
               ),
