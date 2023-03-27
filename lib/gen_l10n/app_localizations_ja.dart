@@ -26,7 +26,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get convenience_book => 'くらしの便利帳';
 
   @override
-  String get magazine_link => '広報誌Link';
+  String get magazine_link => '情報誌';
 
   @override
   String get electronic_app => '電子申請';
@@ -228,6 +228,12 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get email_information => 'いなべ市生活情報（まいめる）';
+
+  @override
+  String get email_first_information => 'メールアドレスを登録していただくことでメールでの情報発信を受け取ることができます。\n登録を行う方はメニュー内の「設定」より、「まいめる」のチェックボックスにチェックをし、更新ボタンを押してください。\nまた、メール配信サービスの詳細情報はこちらよりご確認下さい。\nhttps://plus.sugumail.com/usr/inabe/home';
+
+  @override
+  String get email_first_information_link => 'https://plus.sugumail.com/usr/inabe/home';
 
   @override
   String get change_email_and_password => 'メールアドレス・パスワードの変更はこちら';

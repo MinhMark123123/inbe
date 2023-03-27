@@ -138,7 +138,7 @@ abstract class AppLocalizations {
   /// No description provided for @magazine_link.
   ///
   /// In en, this message translates to:
-  /// **'広報誌Link'**
+  /// **'情報誌'**
   String get magazine_link;
 
   /// No description provided for @electronic_app.
@@ -542,6 +542,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'いなべ市生活情報（まいめる）'**
   String get email_information;
+
+  /// No description provided for @email_first_information.
+  ///
+  /// In en, this message translates to:
+  /// **'メールアドレスを登録していただくことでメールでの情報発信を受け取ることができます。\n登録を行う方はメニュー内の「設定」より、「まいめる」のチェックボックスにチェックをし、更新ボタンを押してください。\nまた、メール配信サービスの詳細情報はこちらよりご確認下さい。\nhttps://plus.sugumail.com/usr/inabe/home'**
+  String get email_first_information;
+
+  /// No description provided for @email_first_information_link.
+  ///
+  /// In en, this message translates to:
+  /// **'https://plus.sugumail.com/usr/inabe/home'**
+  String get email_first_information_link;
 
   /// No description provided for @change_email_and_password.
   ///

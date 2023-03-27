@@ -100,7 +100,7 @@ dev_dependencies:
 
   freezed:
 
-  flutter_launcher_icons: ^0.9.2
+  flutter_launcher_icons: ^0.10.0
   # Build Runner
   build_runner: ^2.1.10
   # Asset gen
@@ -134,8 +134,9 @@ flutter_gen:
 flutter_icons:
   android: true
   ios: true
-  image_path: "assets/launchers/ic_launcher.png"
+  image_path: "assets/launchers/ic_app.png"
   remove_alpha_ios: true
+  min_sdk_android: 21
 
 flutter:
 

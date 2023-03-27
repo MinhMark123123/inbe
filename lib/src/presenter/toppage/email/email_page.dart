@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:inabe/src/data/model/email_model.dart';
 import 'package:inabe/src/navigation/routers.dart';
+import 'package:inabe/src/presenter/toppage/email/component/email_first_item_widget.dart';
 import 'package:inabe/src/presenter/toppage/email/component/email_item_widget.dart';
 import 'package:inabe/src/presenter/toppage/email/email_view_model.dart';
 import 'package:inabe/src/presenter/widget/top_body_widget.dart';
@@ -32,7 +33,7 @@ class EmailPage extends ConsumerViewModelWidget<EmailViewModel> {
       ),
       body: Column(
         children: [
-          TopBodyWidget(title: str.email_information),
+          TopBodyWidget(title: str.email_information, isLineBottom: false,),
           Expanded(
             child: dataList.isEmpty
                 ? _showLoading(context)
@@ -53,13 +54,19 @@ class EmailPage extends ConsumerViewModelWidget<EmailViewModel> {
     EmailViewModel viewModel,
     List<EmailModel> dataList,
   ) {
+    List<EmailModel> data = [];
+    data.insert(0, EmailModel());
+    data.addAll(dataList);
     PopupUtils.hideLoadingDialog(context);
     return RefreshIndicatorDataListWidget<EmailModel>(
       onRefresh: viewModel.refresh,
       onLoadMore: viewModel.loadMore,
       showScrollBar: true,
-      dataList: dataList,
+      dataList: data,
       itemBuilder: (index, data) {
+        if(index == 0) {
+          return EmailFirstItemWidget(emailModel: data);
+        }
         return EmailItemWidget(emailModel: data);
       },
       // emptyWidget: EmptyList(message: str.article_empty),

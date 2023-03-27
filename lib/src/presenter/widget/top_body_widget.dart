@@ -3,11 +3,15 @@ import 'package:inabe_design/inabe_design.dart';
 
 class TopBodyWidget extends StatelessWidget {
   final String title;
+  final bool? isLineBottom;
 
-  const TopBodyWidget({
+  TopBodyWidget({
     Key? key,
     required this.title,
-  }) : super(key: key);
+    this.isLineBottom,
+  }) : super(key: key) {
+    isLineBottom ?? true;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +30,7 @@ class TopBodyWidget extends StatelessWidget {
               ),
             ),
           ),
+          if(isLineBottom == true)
           const Divider(
             height: 2,
             color: ColorName.dividerGray,
