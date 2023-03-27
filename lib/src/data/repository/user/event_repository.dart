@@ -1,6 +1,8 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:inabe/src/data/api/retrofit_inabe_client.dart';
+import 'package:inabe/src/data/constants/constants.dart';
 import 'package:inabe/src/data/model/event_model.dart';
+import 'package:inabe/src/data/sources/local/key_data_source.dart';
 import 'package:inabe/src/di/di_config.dart';
 import 'package:xml/xml.dart';
 
@@ -9,11 +11,15 @@ abstract class EventRepository {
 }
 
 final eventRepositoryProvider = Provider.autoDispose<EventRepository>((ref) {
-  return _EventRepositoryDefault(restClient: ref.read(thirdClientProvider));
+  return _EventRepositoryDefault(
+    restClient: ref.read(thirdClientProvider),
+    keyDataSource: ref.read(keyDataSourceProvider),
+  );
 });
 
 class _EventRepositoryDefault extends EventRepository {
   final RestInabeClient restClient;
+  final KeyDataSource keyDataSource;
 
   final String example = '''<?xml version="1.0" encoding="UTF-8" ?>
 <events>
@@ -37,13 +43,22 @@ class _EventRepositoryDefault extends EventRepository {
 </event>
 </events>''';
 
-  _EventRepositoryDefault({required this.restClient});
+  _EventRepositoryDefault({
+    required this.restClient,
+    required this.keyDataSource,
+  });
 
   @override
   Future<List<EventModel>> getListEvent() {
-    return restClient
-        .getEventData()
-        .then((value) => _getData(value));
+    return restClient.getEventData().then((value) {
+      var list = _getData(value);
+      saveLastNews(list);
+      return list;
+    });
+  }
+
+  void saveLastNews(List<EventModel> list) {
+    keyDataSource.setSecure(SecureKeys.keyLastEvent, list.first.date);
   }
 
   List<EventModel> _getData(String value) {

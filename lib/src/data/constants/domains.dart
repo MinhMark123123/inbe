@@ -14,7 +14,7 @@ class DomainConst {
   static const topLibraryUrl = 'https://web.d-library.jp/inabe/g0101/top/';
 
   static const tabMedicineUrl =
-      'https://www.catapoke.com/%0asearch/?keyword=inabe-city';
+      'https://www.city.inabe.mie.jp/kenko/kenko/iryo/1000872.html';
 
   static const libraryOverviewUrl =
       'https://www.city.inabe.mie.jp/onlineservice/denshishinsei/1011792.html';
@@ -22,6 +22,8 @@ class DomainConst {
       'https://www.city.inabe.mie.jp/onlineservice/denshishinsei/1002826.html';
   static const libraryPolicyUrl =
       'https://www.city.inabe.mie.jp/onlineservice/denshishinsei/1012216.html';
+  static const libraryPolicyApp =
+      'http://35.77.55.121/policy.html';
   static const libraryServiceUrl =
       'https://myna.go.jp/SCK1501_02_001/SCK1501_02_001_Init.form';
 }

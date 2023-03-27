@@ -118,6 +118,8 @@ PODS:
   - Toast (4.0.0)
   - url_launcher_ios (0.0.1):
     - Flutter
+  - vibration (1.7.5):
+    - Flutter
   - webview_flutter_wkwebview (0.0.1):
     - Flutter
   - workmanager (0.0.1):
@@ -151,6 +153,7 @@ DEPENDENCIES:
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
   - store_checker (from `.symlinks/plugins/store_checker/ios`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
+  - vibration (from `.symlinks/plugins/vibration/ios`)
   - webview_flutter_wkwebview (from `.symlinks/plugins/webview_flutter_wkwebview/ios`)
   - workmanager (from `.symlinks/plugins/workmanager/ios`)
 
@@ -227,6 +230,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/store_checker/ios"
   url_launcher_ios:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
+  vibration:
+    :path: ".symlinks/plugins/vibration/ios"
   webview_flutter_wkwebview:
     :path: ".symlinks/plugins/webview_flutter_wkwebview/ios"
   workmanager:
@@ -275,6 +280,7 @@ SPEC CHECKSUMS:
   store_checker: 359c5051d9ec30ff0a8fa39eb5ec9df021bb745d
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
   url_launcher_ios: fb12c43172927bb5cf75aeebd073f883801f1993
+  vibration: 7d883d141656a1c1a6d8d238616b2042a51a1241
   webview_flutter_wkwebview: d08f59cde5e8402c345c0bdda35ac0031352dcae
   workmanager: 0afdcf5628bbde6924c21af7836fed07b42e30e6
 

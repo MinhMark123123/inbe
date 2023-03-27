@@ -95,6 +95,7 @@ class SettingViewModel extends ViewModel {
   }
 
   void setDataTurnOn(bool isTurnOn) {
+    userRepository.saveTurnOn(isTurnOn);
     uiState.update((state) => state.copyWith(isTurnOn: isTurnOn));
   }
 

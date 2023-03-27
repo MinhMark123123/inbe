@@ -2,19 +2,17 @@ import 'dart:async';
 
 import 'package:aac_core/aac_core.dart';
 import 'package:alarm/alarm.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:inabe/gen_l10n/app_localizations.dart';
+import 'package:inabe/src/domain/notification_task/notification_task.dart';
+import 'package:inabe/src/domain/notification_task/push_notification.dart';
 import 'package:inabe/src/navigation/app_routers.dart';
-import 'package:workmanager/workmanager.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
-const simpleTaskKey = "be.tramckrijte.workmanagerExample.simpleTask";
-const simplePeriodicTask =
-    "be.tramckrijte.workmanagerExample.simplePeriodicTask";
+import 'firebase_options.dart';
 
 void main() async {
   runZonedGuarded<Future<void>>(() async {
@@ -27,66 +25,12 @@ void main() async {
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
     await ScreenUtil.ensureScreenSize();
     await Alarm.init();
-    await Workmanager().initialize(callbackDispatcher);
-    callRegisterTask();
+    initNotification();
+    await NotificationTask().init();
+    // NotificationTask.callRegisterTask();
+    NotificationTask.showAlarm(hourStart: 8, minuteStart: 0);
     runApp(const ProviderScope(child: MyApp()));
   }, (error, stack) => FirebaseCrashlytics.instance.recordError(error, stack));
-
-}
-
-void callbackDispatcher() {
-  Workmanager().executeTask((taskName, inputData) async {
-    switch (taskName) {
-      case simpleTaskKey:
-        print("ttt $taskName run run run::: inputData = $inputData");
-
-        // showAlarm();
-        break;
-      default:
-        print("ttt default $taskName run:: inputData = $inputData");
-        break;
-    }
-    return Future.value(true);
-  });
-}
-
-void callRegisterTask() {
-  Workmanager().cancelAll();
-  int hour = DateTime.now().hour;
-  DateTime today = DateTime.now();
-  DateTime triggerD;
-  int d = DateTime.now().toUtc().millisecondsSinceEpoch;
-  int trigger;
-  print("ttt time::: $hour::$d");
-
-  if (hour < 15) {
-    triggerD = today.copyWith(hour: 14, minute: 22, second: 0);
-    trigger = triggerD.toUtc().millisecondsSinceEpoch;
-  } else {
-    triggerD = today
-        .copyWith(hour: 8, minute: 0, second: 0)
-        .add(const Duration(days: 1));
-    trigger = triggerD.toUtc().millisecondsSinceEpoch;
-  }
-  print("ttt time::: $hour::::${trigger - d}");
-
-  Workmanager().registerOneOffTask(
-    simpleTaskKey,
-    simpleTaskKey,
-    initialDelay: Duration(milliseconds: trigger - d),
-  );
-}
-
-Future<void> showAlarm() async {
-  final alarmSettings = AlarmSettings(
-    dateTime: DateTime.now().add(const Duration(minutes: 1)),
-    assetAudioPath: 'assets/sample.mp3',
-    loopAudio: true,
-    notificationTitle: 'This is the title',
-    notificationBody: 'This is the body',
-    enableNotificationOnKill: true,
-  );
-  await Alarm.set(settings: alarmSettings);
 }
 
 class MyApp extends StatelessWidget {

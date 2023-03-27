@@ -22,10 +22,11 @@ class RegisterActionWidget extends ConsumerViewModelWidget<RegisterViewModel> {
       if (next == true) {
         _showDialogInformation();
       }
+      viewModel.resetUIDefault();
     });
 
     ref.listen(viewModel.errorMsg, (previous, next) {
-      print("ttt isSuccess p=$previous:::n=$next");
+      print("ttt errorMsg p=$previous:::n=$next");
       if (next.isNotEmpty) {
         PopupUtils.showErrorAlert(context, message: next);
         viewModel.resetErrorMsg();
@@ -94,7 +95,10 @@ class RegisterActionWidget extends ConsumerViewModelWidget<RegisterViewModel> {
                     textStyle.underline.medium.w400.fill(ColorName.carbonGrey),
               ).onPressedInkWell(() {
                 context.pop();
-                PopupUtils.buildShowPopupGuide(context);
+                PopupUtils.buildShowPopupGuide(
+                  context,
+                  nextFunc: () => {context.go('/${RouterConstants.home}')},
+                );
               }),
             ],
           ),

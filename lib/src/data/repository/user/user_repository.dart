@@ -44,6 +44,8 @@ abstract class UserRepository {
 
   Future<UserResponse> doLogout();
 
+  void saveTurnOn(bool isTurnOn);
+
   void saveListCategory(List<String>? categories);
 
   Future<List<String>> getCategoriesLocal();
@@ -173,5 +175,11 @@ class _UserRepositoryDefault extends UserRepository {
   @override
   Future<List<String>> getCategoriesLocal() {
     return keyDataSource.getListCategory();
+  }
+
+  @override
+  void saveTurnOn(bool isTurnOn) {
+    keyDataSource.setBool(PrefKeys.keyTurnOnNotify, isTurnOn);
+    keyDataSource.setSecure(SecureKeys.keyTest, isTurnOn.toString());
   }
 }

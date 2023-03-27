@@ -107,21 +107,15 @@ class AppGoRouter {
                 return const FAQPage();
               },
             ),
-            // loginRouter,
+              webpage,
+
             // GoRoute(
-            //   name: "menu/${RouterConstants.login}",
-            //   path: RouterConstants.login,
+            //   name: RouterConstants.policy,
+            //   path: RouterConstants.policy,
             //   builder: (context, state) {
-            //     return const LoginPage();
+            //     return const PolicyPage();
             //   },
             // ),
-            GoRoute(
-              name: RouterConstants.policy,
-              path: RouterConstants.policy,
-              builder: (context, state) {
-                return const PolicyPage();
-              },
-            ),
             GoRoute(
               name: RouterConstants.accountOtp,
               path: RouterConstants.accountOtp,
@@ -154,14 +148,15 @@ class AppGoRouter {
                 routes: [
                   webpage,
                   GoRoute(
-                      name: "home/notificationList",
-                      path: RouterConstants.notificationList,
-                      builder: (context, state) {
-                        return const NewsPage();
-                      },
-                      routes: [
-                        webpage,
-                      ]),
+                    name: "home/notificationList",
+                    path: RouterConstants.notificationList,
+                    builder: (context, state) {
+                      return const NewsPage();
+                    },
+                    routes: [
+                      webpage,
+                    ],
+                  ),
                   GoRoute(
                     name: "home/detail",
                     path: RouterConstants.notificationDetail,

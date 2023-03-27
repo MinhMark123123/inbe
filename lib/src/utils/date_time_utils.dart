@@ -40,6 +40,18 @@ class DateTimeUtils {
     return null;
   }
 
+  static int convertToMilliseconds(String? dateTime) {
+    try {
+      if (dateTime != null) {
+        DateTime? dt = DateTime.tryParse(dateTime ?? '')?.toLocal();
+        return dt?.millisecondsSinceEpoch ?? 0;
+      }
+    } catch (e) {
+      print("ttt ---> convertToLong Exception: $e");
+    }
+    return 0;
+  }
+
   static DateTime? parseUTC(String? dateTime) =>
       parse(dateTime, format: utcFormat);
 

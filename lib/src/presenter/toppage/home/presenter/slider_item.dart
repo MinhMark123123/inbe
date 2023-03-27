@@ -1,5 +1,6 @@
 import 'package:inabe/src/data/model/top_slider_model.dart';
 import 'package:inabe/src/utils/extensions/context_extesion.dart';
+import 'package:inabe/src/utils/uri_utils.dart';
 import 'package:inabe_design/inabe_design.dart';
 
 class SliderHomeItem extends StatelessWidget {
@@ -25,6 +26,7 @@ class SliderHomeItem extends StatelessWidget {
               fit: BoxFit.cover,
               alignment: Alignment.center,
               onTapImage: (context, tag, image) {
+                UriUtils.launchActionOutside(data: sliderModel.href);
                 // HeroImageController.showGallery(
                 //   context,
                 //   image,

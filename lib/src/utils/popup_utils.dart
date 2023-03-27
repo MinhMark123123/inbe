@@ -100,8 +100,8 @@ class PopupUtils {
     });
   }
 
-
-  static Future<void> buildShowPopupGuide(BuildContext context) {
+  static Future<void> buildShowPopupGuide(BuildContext context,
+      {Function()? nextFunc}) {
     return showCupertinoDialog(
       context: context,
       builder: (BuildContext context) {
@@ -131,7 +131,7 @@ class PopupUtils {
                 textAlign: TextAlign.start,
                 richTextColor: ColorName.carbonGrey,
                 normalTextStyle:
-                textStyle.medium.w700.fill(ColorName.carbonGrey),
+                    textStyle.medium.w700.fill(ColorName.carbonGrey),
                 fontWeightRichText: FontWeight.w400,
                 spanTexts: [
                   str.resend_forget_mail_process_rich_1,
@@ -145,7 +145,10 @@ class PopupUtils {
               child: SizedBox(
                 width: 170,
                 child: OutlinedButton(
-                  onPressed: () => {context.pop()},
+                  onPressed: () {
+                    context.pop();
+                    nextFunc?.call();
+                  },
                   style: OutlinedButton.styleFrom(
                     side: const BorderSide(color: ColorName.dividerGray),
                   ),
@@ -162,18 +165,15 @@ class PopupUtils {
     );
   }
 
-
-  static showSimpleInformation(
-      BuildContext context, {
-        Color? colorTitle,
-        String? title,
-        Widget? content,
-        String? message,
-        Widget? logo,
-        bool barrierDismissible = true,
-        dynamic onDismiss,
-        List<Widget>? customButtonActions
-      }) async {
+  static showSimpleInformation(BuildContext context,
+      {Color? colorTitle,
+      String? title,
+      Widget? content,
+      String? message,
+      Widget? logo,
+      bool barrierDismissible = true,
+      dynamic onDismiss,
+      List<Widget>? customButtonActions}) async {
     final _newDialogId = 'id-simple-dialog-$title-$message';
     if (_currentDialogShowing(context, _newDialogId)) {
       return;
@@ -197,7 +197,8 @@ class PopupUtils {
               if (title != null)
                 Text(title,
                     textAlign: TextAlign.center,
-                    style: textStyle.xLarge.fill(colorTitle ?? ColorName.primaryColor)),
+                    style: textStyle.xLarge
+                        .fill(colorTitle ?? ColorName.primaryColor)),
             ],
           ),
           content: Text(message ?? '',
@@ -206,12 +207,12 @@ class PopupUtils {
           titlePadding: const EdgeInsets.all(Dimens.normalPadding),
           contentPadding: const EdgeInsets.all(Dimens.normalPadding),
           buttonPadding:
-          const EdgeInsets.symmetric(horizontal: Dimens.normalPadding / 2),
+              const EdgeInsets.symmetric(horizontal: Dimens.normalPadding / 2),
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(10))),
           actions: customButtonActions,
           actionsPadding:
-          const EdgeInsets.only(bottom: Dimens.normalPadding / 2),
+              const EdgeInsets.only(bottom: Dimens.normalPadding / 2),
           actionsAlignment: MainAxisAlignment.center,
         );
       },
@@ -225,7 +226,7 @@ class PopupUtils {
 
   static showSimpleAlert(
     BuildContext context, {
-      Color? colorTitle,
+    Color? colorTitle,
     String? title,
     String? message,
     Widget? logo,
@@ -295,7 +296,8 @@ class PopupUtils {
               if (title != null)
                 Text(title,
                     textAlign: TextAlign.center,
-                    style: textStyle.xLarge.fill(colorTitle ?? ColorName.primaryColor)),
+                    style: textStyle.xLarge
+                        .fill(colorTitle ?? ColorName.primaryColor)),
             ],
           ),
           content: Text(message ?? '',
@@ -321,51 +323,51 @@ class PopupUtils {
     });
   }
 
-  static AlertDialog _alertDialogHorizontal(Widget? logo, String? title, String? message, List<Widget>? finalActions) {
+  static AlertDialog _alertDialogHorizontal(Widget? logo, String? title,
+      String? message, List<Widget>? finalActions) {
     return AlertDialog(
-          title: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              if (logo != null)
-                Padding(
-                  padding: const EdgeInsets.all(Dimens.normalPadding * 2),
-                  child: logo,
-                ),
-              if (title != null)
-                Text(title,
-                    textAlign: TextAlign.center,
-                    style: textStyle.xLarge.fill(ColorName.primaryColor)),
-            ],
+      title: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (logo != null)
+            Padding(
+              padding: const EdgeInsets.all(Dimens.normalPadding * 2),
+              child: logo,
+            ),
+          if (title != null)
+            Text(title,
+                textAlign: TextAlign.center,
+                style: textStyle.xLarge.fill(ColorName.primaryColor)),
+        ],
+      ),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(
+                horizontal: Dimens.normalPadding / 2),
+            child: Text(message ?? '',
+                textAlign: TextAlign.center,
+                style: textStyle.large.w400.fill(ColorName.boulder)),
           ),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: Dimens.normalPadding / 2),
-                child: Text(message ?? '',
-                    textAlign: TextAlign.center,
-                    style: textStyle.large.w400.fill(ColorName.boulder)),
-              ),
-              const SizedBox(height: Dimens.normalPadding),
-              Row(
-                children:
-                    finalActions?.map((e) => Flexible(child: e)).toList() ??
-                        [],
-              ),
-            ],
+          const SizedBox(height: Dimens.normalPadding),
+          Row(
+            children:
+                finalActions?.map((e) => Flexible(child: e)).toList() ?? [],
           ),
-          titlePadding: const EdgeInsets.all(Dimens.normalPadding),
-          contentPadding: const EdgeInsets.all(Dimens.normalPadding / 2),
-          buttonPadding: const EdgeInsets.symmetric(
-              horizontal: Dimens.normalPadding / 2),
-          shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(10))),
-          actions: null,
-          actionsPadding: EdgeInsets.zero,
-          actionsAlignment: MainAxisAlignment.center,
-        );
+        ],
+      ),
+      titlePadding: const EdgeInsets.all(Dimens.normalPadding),
+      contentPadding: const EdgeInsets.all(Dimens.normalPadding / 2),
+      buttonPadding:
+          const EdgeInsets.symmetric(horizontal: Dimens.normalPadding / 2),
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10))),
+      actions: null,
+      actionsPadding: EdgeInsets.zero,
+      actionsAlignment: MainAxisAlignment.center,
+    );
   }
 
   // static showModalSheet(

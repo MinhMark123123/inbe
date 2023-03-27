@@ -88,4 +88,8 @@ abstract class RestClient {
   @GET("news")
   @Header("Content-Type: text/xml")
   Future<String> getNews();
+
+  @GET("events")
+  @Header("Content-Type: text/xml")
+  Future<String> getEvents();
 }

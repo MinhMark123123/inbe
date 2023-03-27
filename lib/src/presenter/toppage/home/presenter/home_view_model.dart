@@ -5,6 +5,7 @@ import 'package:inabe/src/data/model/convenience_model.dart';
 import 'package:inabe/src/data/model/notification_model.dart';
 import 'package:inabe/src/data/model/top_slider_model.dart';
 import 'package:inabe/src/data/repository/toppage/top_repository.dart';
+import 'package:inabe/src/data/repository/user/user_repository.dart';
 import 'package:inabe/src/presenter/toppage/home/presenter/ui_state.dart';
 
 final _homeUiStateProvider = StateProvider.autoDispose<HomeUIState>((ref) {
@@ -16,6 +17,7 @@ final homePageControllerProvider =
   return HomePageViewModel(
     uiState: ref.watch(_homeUiStateProvider.notifier),
     topRepository: ref.read(topRepositoryProvider),
+    userRepository: ref.read(userRepositoryProvider),
   );
 });
 
@@ -35,9 +37,12 @@ class HomePageViewModel extends ViewModel {
 
   final TopRepository topRepository;
 
+  final UserRepository userRepository;
+
   HomePageViewModel({
     required this.uiState,
     required this.topRepository,
+    required this.userRepository,
   }) {
     print("HomePageViewModel constructor");
   }
@@ -88,6 +93,15 @@ class HomePageViewModel extends ViewModel {
     super.onDetached();
   }
 
+  Future<void> _getBasicInfo() async {
+    userRepository.getBasicInfo().then((value) {
+      userRepository.saveTurnOn(value.data.pushNotifications ?? false);
+      userRepository.saveListCategory(value.data.interestCategories ?? []);
+    }).catchError((error) {
+      ApiError(error, errorData: (code, msg) => {});
+    });
+  }
+
   Future<void> _getTopSlides() async {
     topRepository
         .getTopSlides()
@@ -95,8 +109,8 @@ class HomePageViewModel extends ViewModel {
             uiState.update((state) => state.copyWith(topSlides: value)))
         .catchError((error) {
       ApiError(error,
-          errorData: (code, msg) => uiState
-              .update((state) => state.copyWith(errorMessage: "$code\n$msg")));
+          errorData: (code, msg) =>
+              uiState.update((state) => state.copyWith(errorMessage: "$msg")));
     });
   }
 
@@ -109,14 +123,7 @@ class HomePageViewModel extends ViewModel {
             (state) => state.copyWith(notifications: value.take(3).toList()));
       }
     }).catchError((error) {
-      final appError = ApiError(error, errorData: (_,__){}).pretty();
-      uiState.update((state) => state.copyWith(errorMessage: "${appError.code}\n${appError.message}"));
-      // ApiError(error, errorData: (code, msg) {
-      //   if (uiState.mounted) {
-      //     uiState
-      //         .update((state) => state.copyWith(errorMessage: "$code\n$msg"));
-      //   }
-      // });
+      ApiError(error, errorData: (_, __) {}).pretty();
     });
   }
 
@@ -126,6 +133,7 @@ class HomePageViewModel extends ViewModel {
   }
 
   Future<void> _getDataTop() async {
+    await _getBasicInfo();
     await _getTopSlides();
     await _getNews();
     await _getConvenience();

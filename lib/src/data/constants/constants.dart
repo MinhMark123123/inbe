@@ -6,6 +6,10 @@ class SecureKeys {
   static const keyLoginUser = 'keyLoginUser';
   static const keyLoginPassword = 'keyLoginPassword';
   static const keyListCategory = 'keyListCategory';
+  static const keyTest = 'keyTest';
+  static const keyLastNews = 'keyLastNews';
+  static const keyLastEmail = 'keyLastEmail';
+  static const keyLastEvent = 'keyLastEvent';
 }
 
 class PrefKeys {
@@ -24,4 +28,6 @@ class PrefKeys {
   static const keyEnableFeedback = 'keyEnableFeedback';
   static const keySelectedPropertyId = 'keySelectedPropertyId';
   static const keySessionHasExpired = 'keySessionHasExpired';
+  static const keyListCategory = 'keyListCategory';
+  static const keyTurnOnNotify = 'keyTurnOnNotify';
 }

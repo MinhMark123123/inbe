@@ -2,6 +2,7 @@ import 'package:aac_core/aac_core.dart';
 import 'package:go_router/go_router.dart';
 import 'package:inabe/src/data/constants/constants.dart';
 import 'package:inabe/src/data/sources/local/key_data_source.dart';
+import 'package:inabe/src/domain/notification_task/notification_task.dart';
 import 'package:inabe/src/navigation/routers.dart';
 
 class SplashPage extends StatefulWidget {
@@ -24,16 +25,11 @@ class _SplashPageState extends State<SplashPage> {
     await Future.delayed(Duration.zero);
     // callRegisterTask();
     goToHome(context);
-    callCheckData();
+    // await NotificationTask.init();
+    // NotificationTask.callRegisterTask();
   }
 
 
-
-  Future<void> callCheckData() async {
-    var share = KeyDataSource();
-    var data = await share.getListCategoryJson();
-    print("ttt callCheckData ::: $data");
-  }
 
   //
   // void callRegisterTask() {

@@ -187,4 +187,9 @@ class RegisterViewModel extends ViewModel {
   void resetErrorMsg() {
     uiState.update((state) => state.copyWith(errorMessage: ''));
   }
+
+  void resetUIDefault() {
+    uiState.update((state) => state.copyWith(errorMessage: ''));
+    uiState.update((state) => state.copyWith(isSuccess: false));
+  }
 }
