@@ -1,34 +1,30 @@
 import 'dart:async';
 
 import 'package:aac_core/aac_core.dart';
-import 'package:alarm/alarm.dart';
-import 'package:firebase_core/firebase_core.dart';
+// import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:inabe/gen_l10n/app_localizations.dart';
+// import 'package:inabe/src/data/constants/constants.dart';
+import 'package:inabe/src/domain/firebase/firebase_management.dart';
 import 'package:inabe/src/domain/notification_task/notification_task.dart';
 import 'package:inabe/src/domain/notification_task/push_notification.dart';
 import 'package:inabe/src/navigation/app_routers.dart';
 
-import 'firebase_options.dart';
+// import 'firebase_options.dart';
+// import 'package:firebase_messaging/firebase_messaging.dart';
+// import 'package:inabe/src/domain/notification_task/fcm_push.dart';
 
 void main() async {
   runZonedGuarded<Future<void>>(() async {
     WidgetsFlutterBinding.ensureInitialized();
     // Initialize Firebase.
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
-    FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
-    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+    FirebaseManagement.initializeApp();
     await ScreenUtil.ensureScreenSize();
-    await Alarm.init();
     initNotification();
-    await NotificationTask().init();
-    // NotificationTask.callRegisterTask();
-    NotificationTask.showAlarm(hourStart: 8, minuteStart: 0);
+    await WorkerUpdateInformation().init();
     runApp(const ProviderScope(child: MyApp()));
   }, (error, stack) => FirebaseCrashlytics.instance.recordError(error, stack));
 }

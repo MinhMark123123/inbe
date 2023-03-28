@@ -50,20 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCtNzaGIURiQSYyZS6MFirFHLRkKJeiIEs',
-    appId: '1:598813713425:android:e7a6a4c3f7e88b38663db0',
-    messagingSenderId: '598813713425',
-    projectId: 'inabetest',
-    storageBucket: 'inabetest.appspot.com',
+    apiKey: 'AIzaSyAjsRW_sViNIGH_GlgYvhm3FzBuVW2aOh4',
+    appId: '1:589746685000:android:ecfde38d1889a6e1e1847d',
+    messagingSenderId: '589746685000',
+    projectId: 'inabe-378810',
+    storageBucket: 'inabe-378810.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyArZEizeX65htZfI4p-pFjhsmR70hfM_9o',
-    appId: '1:598813713425:ios:b0ce2a87740fb90f663db0',
-    messagingSenderId: '598813713425',
-    projectId: 'inabetest',
-    storageBucket: 'inabetest.appspot.com',
-    iosClientId: '598813713425-bi97vrrhkj3nco6p7dtva8sqc1dl8ms1.apps.googleusercontent.com',
+    apiKey: 'AIzaSyCa39zFBPRhflKYmB_3MMe1dOoCqt-fr00',
+    appId: '1:589746685000:ios:4729052f267d9ce4e1847d',
+    messagingSenderId: '589746685000',
+    projectId: 'inabe-378810',
+    storageBucket: 'inabe-378810.appspot.com',
+    iosClientId: '589746685000-dreiteaqpj896lb4rjq73k6bsmcoui01.apps.googleusercontent.com',
     iosBundleId: 'com.example.inabe',
   );
 }

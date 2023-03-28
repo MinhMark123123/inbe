@@ -18,10 +18,10 @@ class HomeNewsWidget extends ConsumerViewModelWidget<HomePageViewModel> {
       BuildContext context, WidgetRef ref, HomePageViewModel viewModel) {
     _context = context;
     final data = ref.watch(viewModel.notifications);
-    return _buildNotification(data);
+    return _buildNews(data);
   }
 
-  Widget _buildNotification(List<NotificationModel> data) {
+  Widget _buildNews(List<NotificationModel> data) {
     return Container(
       color: ColorName.skinF7,
       child: Column(

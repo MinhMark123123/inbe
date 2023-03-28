@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:alarm/alarm.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:inabe/src/data/api/append_intercepter.dart';
 import 'package:inabe/src/data/api/append_user_intercepter.dart';
 import 'package:inabe/src/data/api/retrofit_client.dart';
@@ -9,6 +9,7 @@ import 'package:inabe/src/data/constants/constants.dart';
 import 'package:inabe/src/data/sources/local/key_data_source.dart';
 import 'package:inabe/src/di/di_config.dart';
 import 'package:inabe/src/domain/notification_task/push_notification.dart';
+import 'package:inabe/src/utils/date_time_utils.dart';
 import 'package:inabe/src/utils/parse_util.dart';
 import 'package:workmanager/workmanager.dart';
 
@@ -16,12 +17,12 @@ const simpleTaskKey = "simpleTask";
 const simplePeriodicTask =
     "be.tramckrijte.workmanagerExample.simplePeriodicTask";
 
-class NotificationTask {
-  static final NotificationTask _instance = NotificationTask._();
+class WorkerUpdateInformation {
+  static final WorkerUpdateInformation _instance = WorkerUpdateInformation._();
 
-  NotificationTask._();
+  WorkerUpdateInformation._();
 
-  factory NotificationTask() {
+  factory WorkerUpdateInformation() {
     return _instance;
   }
 
@@ -31,104 +32,23 @@ class NotificationTask {
 
   static Future<void> callRegisterTask() async {
     Workmanager().cancelAll();
-    _startNotify(
-      hourStart: 9,
-      minuteStart: 38,
-    );
-  }
-
-  static bool checkLoggedIn() {
-    return true;
-  }
-
-  static Future<void> _startNotify(
-      {int hourStart = 8, int minuteStart = 0}) async {
-    var sharePref = KeyDataSource();
-    var isTurnOn = sharePref.getBool(PrefKeys.keyTurnOnNotify);
-    print("ttt: notificatin_task --> break ::: turnOnNotify $isTurnOn");
-    var isTurnOn1 = await sharePref.getSecure(SecureKeys.keyTest);
-    print(
-        "ttt: notificatin_task --> break :::getSecure turnOnNotify $isTurnOn1");
-
-    int hour = DateTime
-        .now()
-        .hour;
-    DateTime today = DateTime.now();
-    DateTime triggerD;
-    int d = DateTime
-        .now()
-        .toUtc()
-        .millisecondsSinceEpoch;
-    int trigger;
-    print("ttt: notificatin_task --> time::: $hour::$d");
-
-    if (hour < hourStart + 1) {
-      triggerD =
-          today.copyWith(hour: hourStart, minute: minuteStart, second: 0);
-      trigger = triggerD
-          .toUtc()
-          .millisecondsSinceEpoch;
-    } else {
-      triggerD = today
-          .copyWith(hour: hourStart, minute: minuteStart, second: 0)
-          .add(const Duration(days: 1));
-      trigger = triggerD
-          .toUtc()
-          .millisecondsSinceEpoch;
-    }
-    print("ttt: notificatin_task --> time::: $hour::::${trigger - d}");
-
     Workmanager().registerOneOffTask(
       simpleTaskKey,
       simpleTaskKey,
-      initialDelay: Duration(milliseconds: trigger - d),
+      initialDelay: const Duration(seconds: 3),
       constraints: Constraints(networkType: NetworkType.connected),
       inputData: {"Key": "1"},
     );
   }
 
-  static Future<void> showAlarm(
-      {int hourStart = 8, int minuteStart = 0}) async {
-    Alarm.stop(11);
-    DateTime triggerDate;
-    DateTime today = DateTime.now();
-    int hour = today.hour;
-    int minute = today.minute;
+  static Future<void> foregroundFCM(RemoteMessage message) async {
+    await _checkShowNotify();
+    print('Got a message whilst in the foreground!');
+    print('Message data: ${message.data}');
 
-    if (hour < hourStart || (hour == hourStart && minute < minuteStart)) {
-      triggerDate =
-          today.copyWith(hour: hourStart, minute: minuteStart, second: 0);
-    } else {
-      triggerDate = today
-          .copyWith(hour: hourStart, minute: minuteStart, second: 0)
-          .add(const Duration(days: 1));
+    if (message.notification != null) {
+      print('Message also contained a notification: ${message.notification}');
     }
-    print("ttt time_notify : $triggerDate");
-
-    final alarmSettings = AlarmSettings(
-      id: 11,
-      dateTime: triggerDate,
-      assetAudioPath: 'assets/mozart.mp3',
-      loopAudio: true,
-      notificationTitle: 'Inabe',
-      notificationBody: '------',
-      enableNotificationOnKill: true,
-    );
-    await Alarm.set(alarmSettings: alarmSettings);
-    // await Alarm.setNotificationOnAppKillContent("lll", "ddd");
-
-    Alarm.ringStream.stream.listen((_) async {
-      flutterLocalNotificationsPlugin.cancelAll();
-      print("ttt ---> listen Alarm trigger");
-      await _checkShowNotify();
-      // Workmanager().registerOneOffTask(
-      //   simpleTaskKey,
-      //   simpleTaskKey,
-      //   initialDelay: const Duration(seconds: 1),
-      //   constraints: Constraints(networkType: NetworkType.connected),
-      //   inputData: {"Key": "1"},
-      // );
-    });
   }
 
   static Future<void> _checkShowNotify() async {
@@ -177,42 +97,51 @@ class NotificationTask {
     var listNewsModel = ParseUtils.getData(news);
 
     print(
-        "ttt: notificatin_task --> News ::: 1. ${listNewsModel!.first
-            .title}: ${listNewsModel.first.date}");
+        "ttt: notificatin_task --> News ::: 1. ${listNewsModel!.first.title}: ${listNewsModel.first.date}");
 
     print(
-        "ttt: notificatin_task --> Events ::: 1. ${eventList.first
-            .title} :::  ${eventList.first.date}");
+        "ttt: notificatin_task --> Events ::: 1. ${eventList.first.title} :::  ${eventList.first.date}");
 
     print(
-        "ttt: notificatin_task --> Email ::: 1. ${list.first
-            .title} :::  ${list.first.publishedAt}");
+        "ttt: notificatin_task --> Email ::: 1. ${list.first.title} :::  ${list.first.publishedAt}");
 
     categories.forEach((element) {
       if (element == "1") {
-        if (lastEmail == list.first.publishedAt) {
-          bodyNotify += "--Email not change";
-        } else {
-          bodyNotify += "--Email nnnn";
+        if (lastEmail != list.first.publishedAt) {
+          final title = DateTimeUtils.convert(
+            list.first.publishedAt,
+            DateTimeUtils.emailDateFormat,
+            DateTimeUtils.formatJP,
+          );
+          final body = list.first.title ?? "";
+          showNotification(title, body);
         }
       } else if (element == "2") {
-        if (lastEvent == eventList.first.date) {
-          bodyNotify += "--Event not change";
-        } else {
-          bodyNotify += "--Event nnnn";
+        if (lastEvent != eventList.first.date) {
+          final title = DateTimeUtils.convert(
+            eventList.first.date,
+            DateTimeUtils.eventDateFormat,
+            DateTimeUtils.formatJP,
+          );
+          final body = eventList.first.title ?? "";
+          showNotification(title, body);
         }
       } else {
-        if (lastNews == listNewsModel.first.date) {
-          bodyNotify += "--News not change";
-        } else {
-          bodyNotify += "--News nnnn";
+        if (lastNews != listNewsModel.first.date) {
+          final title = DateTimeUtils.convert(
+            listNewsModel.first.date,
+            DateTimeUtils.utcFormat,
+            DateTimeUtils.formatJP,
+          );
+          final body = listNewsModel.first.title ?? "";
+          showNotification(title, body);
         }
       }
     });
 
     print("ttt body $bodyNotify");
 
-    showNotification(bodyNotify);
+    showNotification("AAA", bodyNotify);
   }
 }
 
@@ -254,7 +183,6 @@ void callbackDispatcher() {
         dio.interceptors.add(AuthUserInterceptor(sharePref));
         var rest = RestClient(dio);
 
-        String bodyNotify = "";
         //Email
         var email = await rest.getMyEmails(0, 5);
         var list = email.data;
@@ -266,42 +194,47 @@ void callbackDispatcher() {
         var listNewsModel = ParseUtils.getData(news);
 
         print(
-            "ttt: notificatin_task --> News ::: 1. ${listNewsModel!.first
-                .title}: ${listNewsModel.first.date}");
+            "ttt: notificatin_task --> News ::: 1. ${listNewsModel!.first.title}: ${listNewsModel.first.date}");
 
         print(
-            "ttt: notificatin_task --> Events ::: 1. ${eventList.first
-                .title} :::  ${eventList.first.date}");
+            "ttt: notificatin_task --> Events ::: 1. ${eventList.first.title} :::  ${eventList.first.date}");
 
         print(
-            "ttt: notificatin_task --> Email ::: 1. ${list.first
-                .title} :::  ${list.first.publishedAt}");
+            "ttt: notificatin_task --> Email ::: 1. ${list.first.title} :::  ${list.first.publishedAt}");
 
         categories.forEach((element) {
           if (element == "1") {
-            if (lastEmail == list.first.publishedAt) {
-              bodyNotify += "--Email not change";
-            } else {
-              bodyNotify += "--Email nnnn";
+            if (lastEmail != list.first.publishedAt) {
+              final title = DateTimeUtils.convert(
+                list.first.publishedAt,
+                DateTimeUtils.emailDateFormat,
+                DateTimeUtils.formatJP,
+              );
+              final body = list.first.title ?? "";
+              showNotification(title, body);
             }
           } else if (element == "2") {
-            if (lastEvent == eventList.first.date) {
-              bodyNotify += "--Event not change";
-            } else {
-              bodyNotify += "--Event nnnn";
+            if (lastEvent != eventList.first.date) {
+              final title = DateTimeUtils.convert(
+                eventList.first.date,
+                DateTimeUtils.eventDateFormat,
+                DateTimeUtils.formatJP,
+              );
+              final body = eventList.first.title ?? "";
+              showNotification(title, body);
             }
           } else {
-            if (lastNews == listNewsModel.first.date) {
-              bodyNotify += "--News not change";
-            } else {
-              bodyNotify += "--News nnnn";
+            if (lastNews != listNewsModel.first.date) {
+              final title = DateTimeUtils.convert(
+                listNewsModel.first.date,
+                DateTimeUtils.utcFormat,
+                DateTimeUtils.formatJP,
+              );
+              final body = listNewsModel.first.title ?? "";
+              showNotification(title, body);
             }
           }
         });
-
-        print("ttt body $bodyNotify");
-
-        showNotification(bodyNotify);
         break;
 
       case Workmanager.iOSBackgroundTask:

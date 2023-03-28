@@ -2,7 +2,6 @@ import 'package:aac_core/aac_core.dart';
 import 'package:inabe/src/data/api/api_error.dart';
 import 'package:inabe/src/data/dto/request/login_request.dart';
 import 'package:inabe/src/data/repository/user/user_repository.dart';
-import 'package:inabe/src/domain/notification_task/local_notification_service.dart';
 import 'package:inabe/src/presenter/login/login_ui_state.dart';
 import 'package:inabe/src/utils/extensions/input_controller_extension.dart';
 import 'package:riverpod/riverpod.dart';

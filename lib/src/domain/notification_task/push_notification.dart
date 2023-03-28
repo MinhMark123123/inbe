@@ -49,7 +49,7 @@ const String darwinNotificationCategoryPlain = 'plainCategory';
 
 Future<void> initNotification() async {
   const AndroidInitializationSettings initializationSettingsAndroid =
-      AndroidInitializationSettings('@drawable/ic_stat_add_alert');
+      AndroidInitializationSettings('@drawable/ic_notify_mono');
 
   final List<DarwinNotificationCategory> darwinNotificationCategories =
       <DarwinNotificationCategory>[
@@ -139,7 +139,7 @@ Future<void> initNotification() async {
   );
 }
 
-Future<void> showNotification(String body) async {
+Future<void> showNotification(String title, String body) async {
   const AndroidNotificationDetails androidNotificationDetails =
   AndroidNotificationDetails('your channel id', 'your channel name',
       channelDescription: 'your channel description',
@@ -149,7 +149,7 @@ Future<void> showNotification(String body) async {
   const NotificationDetails notificationDetails =
   NotificationDetails(android: androidNotificationDetails);
   await flutterLocalNotificationsPlugin.show(
-      id++, 'Inabe', body, notificationDetails,
+      id++, title, body, notificationDetails,
       payload: 'item x');
 
 

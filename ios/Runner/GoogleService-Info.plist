@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>598813713425-bi97vrrhkj3nco6p7dtva8sqc1dl8ms1.apps.googleusercontent.com</string>
+	<string>589746685000-dreiteaqpj896lb4rjq73k6bsmcoui01.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.598813713425-bi97vrrhkj3nco6p7dtva8sqc1dl8ms1</string>
+	<string>com.googleusercontent.apps.589746685000-dreiteaqpj896lb4rjq73k6bsmcoui01</string>
 	<key>API_KEY</key>
-	<string>AIzaSyArZEizeX65htZfI4p-pFjhsmR70hfM_9o</string>
+	<string>AIzaSyCa39zFBPRhflKYmB_3MMe1dOoCqt-fr00</string>
 	<key>GCM_SENDER_ID</key>
-	<string>598813713425</string>
+	<string>589746685000</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.example.inabe</string>
 	<key>PROJECT_ID</key>
-	<string>inabetest</string>
+	<string>inabe-378810</string>
 	<key>STORAGE_BUCKET</key>
-	<string>inabetest.appspot.com</string>
+	<string>inabe-378810.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:598813713425:ios:b0ce2a87740fb90f663db0</string>
+	<string>1:589746685000:ios:4729052f267d9ce4e1847d</string>
 </dict>
 </plist>
