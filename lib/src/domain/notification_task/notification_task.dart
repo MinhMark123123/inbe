@@ -138,10 +138,6 @@ class WorkerUpdateInformation {
         }
       }
     });
-
-    print("ttt body $bodyNotify");
-
-    showNotification("AAA", bodyNotify);
   }
 }
 
