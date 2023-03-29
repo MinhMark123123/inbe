@@ -3,9 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:inabe/src/data/model/convenience_model.dart';
+import 'package:inabe/src/navigation/app_routers.dart';
+import 'package:inabe/src/navigation/routers.dart';
 import 'package:inabe/src/presenter/toppage/home/presenter/home_view_model.dart';
 import 'package:inabe/src/state/riverpod_ui_support.dart';
-import 'package:inabe/src/utils/uri_utils.dart';
 import 'package:inabe_design/inabe_design.dart';
 
 class HomeConveniencesWidget
@@ -71,7 +72,7 @@ class HomeConveniencesWidget
 
   void _handleClickConvenience(ConvenienceModel data) {
     if (data.id == 2 || data.id == 4) {
-      UriUtils.launchActionOutside(data: data.path);
+      launchWebPage(_context, RouterConstants.home, data.path);
     } else {
       _context.go(data.path);
     }

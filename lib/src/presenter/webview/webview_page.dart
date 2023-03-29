@@ -73,20 +73,5 @@ class _WebviewPageState extends State<WebviewPage> {
     return WebViewWidget(
       controller: _webViewController,
     );
-    // return Stack(
-    //   fit: StackFit.expand,
-    //   children: [
-    //     WebViewWidget(
-    //       controller: _webViewController,
-    //     )
-    //     // WebViewWidget(
-    //     //   url: widget.url,
-    //     //   zoomEnabled: false,
-    //     //   enableCache: false,
-    //     //   webViewController: _webViewController,
-    //     //   // javascriptChannels: getJavascriptChannels(),
-    //     // ),
-    //   ],
-    // );
   }
 }

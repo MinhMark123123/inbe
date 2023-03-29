@@ -61,9 +61,6 @@ class EventPage extends ConsumerViewModelWidget<EventViewModel> {
           dividerHeight: 1,
           dividerColor: ColorName.dividerGray,
           onClickItem: (index, item) {
-            // UriUtils.launchActionOutside(data: "${DomainConst.URL}${item.url}");
-            // context.go("/${RouterConstants.home}/${RouterConstants.webpage}",
-            //     extra: item.url ?? '');
             launchWebPage(
               context,
               "${RouterConstants.home}/${RouterConstants.event}",

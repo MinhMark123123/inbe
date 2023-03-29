@@ -100,7 +100,6 @@ final defaultConveniences = {
       name: str.magazine_link,
       type: UtilityItem.MAGAZING,
       path: DomainConst.topMagazineUrl),
-  // path: "/${RouterConstants.home}/${RouterConstants.magazine}"),
   ConvenienceModel(
       id: 3,
       name: str.electronic_app,

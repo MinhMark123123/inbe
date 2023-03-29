@@ -31,5 +31,4 @@ class RouterConstants{
   static const accountOtp = "accountOtp";
   static const updateAccount = "updateAccount";
   static const webpage = "webpage";
-  static String  webpageChild(String prePath) => "/${prePath}/$webpage";
 }

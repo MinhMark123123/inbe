@@ -3,6 +3,8 @@ class DomainConst {
 
   static const URL = 'https://www.city.inabe.mie.jp';
 
+  // https://www.city.inabe.mie.jp/index.html
+
   static const topLiveUrl =
       'https://www.city.inabe.mie.jp/shisei/koho/1002546.html';
   static const topInstagramUrl = 'https://www.city.inabe.mie.jp/photo.html';

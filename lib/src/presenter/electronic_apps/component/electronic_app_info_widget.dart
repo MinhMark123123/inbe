@@ -1,7 +1,8 @@
 import 'package:aac_core/aac_core.dart';
 import 'package:inabe/src/data/constants/domains.dart';
+import 'package:inabe/src/navigation/app_routers.dart';
+import 'package:inabe/src/navigation/routers.dart';
 import 'package:inabe/src/utils/extensions/asset_extension.dart';
-import 'package:inabe/src/utils/uri_utils.dart';
 import 'package:inabe_design/inabe_design.dart';
 
 class ElectronicAppInfoWidget extends StatelessWidget {
@@ -15,12 +16,12 @@ class ElectronicAppInfoWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: _buildListLink(),
+        children: _buildListLink(context),
       ),
     );
   }
 
-  List<Widget> _buildListLink() {
+  List<Widget> _buildListLink(BuildContext context) {
     return [
       Padding(
         padding: const EdgeInsets.symmetric(vertical: Dimens.size10),
@@ -40,8 +41,12 @@ class ElectronicAppInfoWidget extends StatelessWidget {
           str.electronic_app_overview_system,
           style: textStyle.medium.w400.fill(ColorName.carbonGrey),
         ),
-      ).onPressedInkWell(() =>
-          {UriUtils.launchActionOutside(data: DomainConst.libraryOverviewUrl)}),
+      ).onPressedInkWell(() => {
+            launchWebPage(
+                context,
+                "${RouterConstants.home}/${RouterConstants.electronic_app}",
+                DomainConst.libraryOverviewUrl)
+          }),
       const Divider(
         height: 1,
         color: ColorName.dividerGray,
@@ -53,8 +58,12 @@ class ElectronicAppInfoWidget extends StatelessWidget {
           str.electronic_app_term_of_use,
           style: textStyle.medium.w400.fill(ColorName.carbonGrey),
         ),
-      ).onPressedInkWell(() =>
-          {UriUtils.launchActionOutside(data: DomainConst.libraryTermUrl)}),
+      ).onPressedInkWell(() => {
+            launchWebPage(
+                context,
+                "${RouterConstants.home}/${RouterConstants.electronic_app}",
+                DomainConst.libraryTermUrl)
+          }),
       const Divider(
         height: 1,
         color: ColorName.dividerGray,
@@ -66,17 +75,19 @@ class ElectronicAppInfoWidget extends StatelessWidget {
           str.electronic_app_policy,
           style: textStyle.medium.w400.fill(ColorName.carbonGrey),
         ),
-      ).onPressedInkWell(() =>
-          {UriUtils.launchActionOutside(data: DomainConst.libraryPolicyUrl)}),
+      ).onPressedInkWell(() => launchWebPage(
+          context,
+          "${RouterConstants.home}/${RouterConstants.electronic_app}",
+          DomainConst.libraryPolicyUrl)),
       const Divider(
         height: 1,
         color: ColorName.dividerGray,
       ),
-      _buildItemServiceLink(),
+      _buildItemServiceLink(context),
     ];
   }
 
-  Widget _buildItemServiceLink() {
+  Widget _buildItemServiceLink(BuildContext context) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(vertical: Dimens.size20),
@@ -90,7 +101,10 @@ class ElectronicAppInfoWidget extends StatelessWidget {
           Assets.images.icLinkLibrary.image(width: Dimens.materialMedium)
         ],
       ),
-    ).onPressedInkWell(() =>
-        {UriUtils.launchActionOutside(data: DomainConst.libraryServiceUrl)});
+    ).onPressedInkWell(() => launchWebPage(
+          context,
+          "${RouterConstants.home}/${RouterConstants.electronic_app}",
+          DomainConst.libraryServiceUrl,
+        ));
   }
 }

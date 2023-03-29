@@ -76,13 +76,16 @@ class MenuPage extends ConsumerViewModelWidget<MenuViewModel> {
                 str.privacy_policy,
                 Assets.images.icPolicy.image(width: Dimens.size26, height: 22),
                     () {
+                      context.go(
+                        "/${RouterConstants.menu}/${RouterConstants.policy}",
+                      );
                   // launchWebPage(
                   //   context,
                   //   RouterConstants.menu,
                   //   DomainConst.libraryPolicyApp,
                   // );
-                  UriUtils.launchActionOutside(
-                      data: DomainConst.libraryPolicyApp);
+                  // UriUtils.launchActionOutside(
+                  //     data: DomainConst.libraryPolicyApp);
                 },
               ),
               _rowMenu(

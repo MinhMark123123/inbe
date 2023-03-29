@@ -1,6 +1,9 @@
 import 'package:aac_core/aac_core.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:inabe/src/data/constants/domains.dart';
 import 'package:inabe/src/data/model/electronic_app_model.dart';
+import 'package:inabe/src/navigation/app_routers.dart';
+import 'package:inabe/src/navigation/routers.dart';
 import 'package:inabe/src/presenter/electronic_apps/electronic_apps_view_model.dart';
 import 'package:inabe/src/presenter/widget/custom_dropdown.dart';
 import 'package:inabe/src/state/riverpod_ui_support.dart';
@@ -81,7 +84,7 @@ class ElectronicAppDropdownWidget
                     child: Assets.images.icDropdownBottom.image()),
               ),
           if (selectMidCategory.isNotEmpty && listProcedure != null)
-            _buildProcedures(listProcedure, ref),
+            _buildProcedures(context, listProcedure, ref),
         ],
       );
     }, error: (error, strace) {
@@ -136,7 +139,8 @@ class ElectronicAppDropdownWidget
     );
   }
 
-  Widget _buildProcedures(List<Procedures> procedures, WidgetRef ref) {
+  Widget _buildProcedures(
+      BuildContext context, List<Procedures> procedures, WidgetRef ref) {
     return Container(
       margin: const EdgeInsets.all(Dimens.size10),
       child: Column(
@@ -173,13 +177,13 @@ class ElectronicAppDropdownWidget
                 style: textStyle.medium.w400.fill(ColorName.carbonGrey),
               ),
             ),
-          ...procedures.map((e) => _buildItemProcedure(e)).toList(),
+          ...procedures.map((e) => _buildItemProcedure(e, context)).toList(),
         ],
       ),
     );
   }
 
-  Widget _buildItemProcedure(Procedures procedures) {
+  Widget _buildItemProcedure(Procedures procedures, BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -193,8 +197,7 @@ class ElectronicAppDropdownWidget
           children: [
             Expanded(
               child: OutlinedButton(
-                onPressed: () =>
-                    {UriUtils.launchActionOutside(data: procedures.detailUrl)},
+                onPressed: () => openUrl(context, procedures.detailUrl),
                 style: OutlinedButton.styleFrom(
                   side: const BorderSide(color: ColorName.dividerGray),
                 ),
@@ -209,8 +212,7 @@ class ElectronicAppDropdownWidget
             const SizedBox(width: Dimens.normalPadding),
             Expanded(
               child: ElevatedButton(
-                onPressed: () =>
-                    {UriUtils.launchActionOutside(data: procedures.formUrl)},
+                onPressed: () => openUrl(context, procedures.formUrl),
                 style: ElevatedButton.styleFrom(
                     backgroundColor: ColorName.greenSnake),
                 child: Center(
@@ -230,5 +232,17 @@ class ElectronicAppDropdownWidget
         ),
       ],
     );
+  }
+
+  void openUrl(BuildContext context, String? url) {
+    if (url?.contains(DomainConst.URL) == true) {
+      launchWebPage(
+        context,
+        "${RouterConstants.home}/${RouterConstants.electronic_app}",
+        url,
+      );
+    } else {
+      UriUtils.launchActionOutside(data: url);
+    }
   }
 }

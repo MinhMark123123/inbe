@@ -52,7 +52,7 @@ class LoginActionWidget extends ConsumerViewModelWidget<LoginViewModel> {
         const SizedBox(
           height: Dimens.size40,
         ),
-        buildButtonRegister(viewModel),
+        buildButtonRegister(viewModel, context),
       ],
     );
   }
@@ -90,14 +90,14 @@ class LoginActionWidget extends ConsumerViewModelWidget<LoginViewModel> {
     );
   }
 
-  Widget buildButtonRegister(LoginViewModel viewModel) {
+  Widget buildButtonRegister(LoginViewModel viewModel, BuildContext context) {
     return SizedBox(
       width: Dimens.widthButton,
       height: Dimens.size40,
       child: OutlinedButton(
         onPressed: () {
           viewModel.resetFormLogin();
-          context?.go("/${RouterConstants.login}/${RouterConstants.register}");
+          context.go("/${RouterConstants.login}/${RouterConstants.register}");
         },
         style: OutlinedButton.styleFrom(
           minimumSize: Size.zero,

@@ -2,6 +2,7 @@ import 'package:aac_core/aac_core.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:inabe/src/data/model/notification_model.dart';
+import 'package:inabe/src/navigation/app_routers.dart';
 import 'package:inabe/src/navigation/routers.dart';
 import 'package:inabe/src/presenter/toppage/home/presenter/home_view_model.dart';
 import 'package:inabe/src/presenter/toppage/home/presenter/notification_item.dart';
@@ -54,10 +55,7 @@ class HomeNewsWidget extends ConsumerViewModelWidget<HomePageViewModel> {
             key: Key("${data.id}"),
             notificationModel: data,
             onItemClick: (data, index) async {
-              _context.go(
-                RouterConstants.webpageChild(RouterConstants.home),
-                extra: data.link,
-              );
+              launchWebPage(_context, RouterConstants.home, data.link);
             },
           );
         },

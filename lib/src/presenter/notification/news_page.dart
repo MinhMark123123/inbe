@@ -56,7 +56,6 @@ class NewsPage extends ConsumerViewModelWidget<NewsViewModel> {
           dividerHeight: 1,
           dividerColor: ColorName.dividerGray,
           onClickItem: (index, item) {
-            // UriUtils.launchActionOutside(data: item.link ?? '');
             launchWebPage(
               context,
               "${RouterConstants.home}/${RouterConstants.notificationList}",

@@ -107,15 +107,15 @@ class AppGoRouter {
                 return const FAQPage();
               },
             ),
-              webpage,
+              // webpage,
 
-            // GoRoute(
-            //   name: RouterConstants.policy,
-            //   path: RouterConstants.policy,
-            //   builder: (context, state) {
-            //     return const PolicyPage();
-            //   },
-            // ),
+            GoRoute(
+              name: RouterConstants.policy,
+              path: RouterConstants.policy,
+              builder: (context, state) {
+                return const PolicyPage();
+              },
+            ),
             GoRoute(
               name: RouterConstants.accountOtp,
               path: RouterConstants.accountOtp,
@@ -181,6 +181,9 @@ class AppGoRouter {
                     builder: (context, state) {
                       return const ConvenienceBookPage();
                     },
+                    routes:[
+                      webpage
+                    ]
                   ),
                   GoRoute(
                     name: "home/electronic_app",
@@ -188,6 +191,9 @@ class AppGoRouter {
                     builder: (context, state) {
                       return const ElectronicAppPage();
                     },
+                    routes: [
+                      webpage
+                    ]
                   ),
                   // GoRoute(
                   //   name: "home/electronic_lib",
@@ -247,7 +253,7 @@ class AppGoRouter {
             name: "splash",
             path: RouterConstants.splash,
             // builder: (context, state) => const MyHomePage(title: 'Flutter Demo Home Page'),
-            builder: (context, state) => SplashPage(),
+            builder: (context, state) => const SplashPage(),
             routes: [
               // GoRoute(
               //   name: "settings",
@@ -275,12 +281,10 @@ class AppGoRouter {
           topRouter,
           loginRouter,
         ],
-        errorBuilder: (context, state) => SplashPage(),
+        errorBuilder: (context, state) => const SplashPage(),
       );
 }
 
 void launchWebPage(BuildContext context, String from, String? url) {
-  // context.push("/${RouterConstants.home}/${RouterConstants.webpage}",
-  //     extra: url ?? '');
   context.go("/$from/${RouterConstants.webpage}", extra: url ?? '');
 }

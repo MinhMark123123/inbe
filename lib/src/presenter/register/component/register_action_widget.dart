@@ -20,7 +20,7 @@ class RegisterActionWidget extends ConsumerViewModelWidget<RegisterViewModel> {
     ref.listen(viewModel.isSuccess, (previous, next) {
       print("ttt isSuccess p=$previous:::n=$next");
       if (next == true) {
-        _showDialogInformation();
+        _showDialogInformation(context);
       }
       viewModel.resetUIDefault();
     });
@@ -39,7 +39,12 @@ class RegisterActionWidget extends ConsumerViewModelWidget<RegisterViewModel> {
         const SizedBox(
           height: Dimens.size40,
         ),
-        Center(child: buildButtonRegister(viewModel, disable)),
+        Center(
+            child: buildButtonRegister(
+          viewModel,
+          disable,
+          context,
+        )),
         const SizedBox(
           height: Dimens.size40,
         ),
@@ -52,7 +57,8 @@ class RegisterActionWidget extends ConsumerViewModelWidget<RegisterViewModel> {
     return registerPageControllerProvider;
   }
 
-  Widget buildButtonRegister(RegisterViewModel viewModel, bool disable) {
+  Widget buildButtonRegister(
+      RegisterViewModel viewModel, bool disable, BuildContext context) {
     return SizedBox(
       width: Dimens.widthButton,
       child: ElevatedButton(
@@ -68,10 +74,10 @@ class RegisterActionWidget extends ConsumerViewModelWidget<RegisterViewModel> {
     );
   }
 
-  void _showDialogInformation() {
+  void _showDialogInformation(BuildContext ct) {
     showDialog(
       barrierDismissible: true,
-      context: context!,
+      context: ct,
       builder: (BuildContext context) {
         return AlertDialog(
           title: Center(
@@ -97,7 +103,7 @@ class RegisterActionWidget extends ConsumerViewModelWidget<RegisterViewModel> {
                 context.pop();
                 PopupUtils.buildShowPopupGuide(
                   context,
-                  nextFunc: () => {context.go('/${RouterConstants.home}')},
+                  nextFunc: () => {ct.go('/${RouterConstants.home}')},
                 );
               }),
             ],
