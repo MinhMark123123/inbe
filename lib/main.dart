@@ -50,6 +50,9 @@ class MyApp extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
           ],
           theme: CustomAppTheme.lightTheme,
+          supportedLocales: const [
+            Locale('ja', 'JP'),
+          ],
         );
       },
     );

@@ -15,6 +15,7 @@ class EmailFirstItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.topLeft,
+      margin: const EdgeInsets.only(bottom: Dimens.size10),
       padding: const EdgeInsets.all(Dimens.size10),
       decoration: BoxDecoration(
         border: Border.all(color: ColorName.greenSnake),

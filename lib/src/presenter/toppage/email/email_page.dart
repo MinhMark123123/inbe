@@ -33,12 +33,14 @@ class EmailPage extends ConsumerViewModelWidget<EmailViewModel> {
       ),
       body: Column(
         children: [
-          TopBodyWidget(title: str.email_information, isLineBottom: false,),
-          Expanded(
-            child: dataList.isEmpty
-                ? _showLoading(context)
-                : _hideLoading(context, viewModel, dataList)
+          TopBodyWidget(
+            title: str.email_information,
+            hideLineBottom: true,
           ),
+          Expanded(
+              child: dataList.isEmpty
+                  ? _showLoading(context)
+                  : _hideLoading(context, viewModel, dataList)),
         ],
       ),
     );
@@ -64,7 +66,7 @@ class EmailPage extends ConsumerViewModelWidget<EmailViewModel> {
       showScrollBar: true,
       dataList: data,
       itemBuilder: (index, data) {
-        if(index == 0) {
+        if (index == 0) {
           return EmailFirstItemWidget(emailModel: data);
         }
         return EmailItemWidget(emailModel: data);

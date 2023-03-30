@@ -2,7 +2,6 @@ import 'package:aac_core/aac_core.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:inabe/src/data/constants/domains.dart';
-import 'package:inabe/src/navigation/app_routers.dart';
 import 'package:inabe/src/navigation/routers.dart';
 import 'package:inabe/src/presenter/controller/top_page_controller.dart';
 import 'package:inabe/src/utils/extensions/asset_extension.dart';
@@ -70,13 +69,12 @@ class _BottomNavigationWidgetState
         context?.go("/${RouterConstants.email}");
         break;
       case 2:
-        launchWebPage(
-            context!, RouterConstants.home, DomainConst.tabMedicineUrl);
+        context?.push('/${RouterConstants.home}/${RouterConstants.webpage}',
+            extra: DomainConst.tabMedicineUrl ?? '');
         break;
       case 3:
         if (context != null) {
           var path = GoRouter.of(context!).location;
-          print("ttt path : $path");
           if (path.contains(RouterConstants.menu)) {
             context?.go("/${RouterConstants.home}");
           } else {
