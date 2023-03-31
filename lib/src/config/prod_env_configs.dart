@@ -1,26 +1,27 @@
-import 'package:aac_core/src/flavor/env/base_env_configs.dart';
 
-class UATEnvConfigs implements BaseEnvConfigs {
+
+import 'package:inabe/src/config/base_env_configs.dart';
+
+class ProdEnvConfigs implements BaseEnvConfigs {
   @override
   // TODO: implement API_BASE_URL
-  String get API_BASE_URL => 'https://api.uat.novaid.vn/graphql';
+  String get API_BASE_URL => 'http://35.77.55.121/api/';
 
   @override
   // TODO: implement BASE_URL_WEBVIEW
-  String get BASE_URL_WEBVIEW => 'https://api.uat.novaid.vn';
+  String get BASE_URL_WEBVIEW => 'https://api.novaid.vn';
 
   @override
   // TODO: implement DOMAIN_LEGACY_URL
-  String get DOMAIN_LEGACY_URL => 'https://api.uat.novaid.vn';
+  String get DOMAIN_LEGACY_URL => 'https://api.novaid.vn';
 
   @override
   // TODO: implement DOMAIN_LEGACY_URL_PREFIX
-  String get DOMAIN_LEGACY_URL_PREFIX =>
-      'https://api.uat.novaid.vn/api/v2/file/';
+  String get DOMAIN_LEGACY_URL_PREFIX => 'https://api.novaid.vn/api/v2/file/';
 
   @override
   // TODO: implement DOMAIN_MEDIA
-  String get DOMAIN_MEDIA => 'https://api.uat.novaid.vn/media/';
+  String get DOMAIN_MEDIA => 'https://api.novaid.vn/media/';
 
   @override
   // TODO: implement DOMAIN_NVP_STAGE
@@ -28,15 +29,15 @@ class UATEnvConfigs implements BaseEnvConfigs {
 
   @override
   // TODO: implement NID_LOGIN_URL
-  String get NID_LOGIN_URL => 'https://www.uat.novaid.vn/login-asc';
+  String get NID_LOGIN_URL => 'https://www.novaid.vn/login-asc';
 
   @override
   // TODO: implement ASC_COMMUNITY_API_BASE_URL
   String get ASC_COMMUNITY_API_BASE_URL =>
-      'https://aquacity.uat.novaid.vn/app/api';
+      'https://aquacity.novaid.vn/app/api';
 
   @override
   // TODO: implement ASC_OPERATION_API_BASE_URL
   String get ASC_OPERATION_API_BASE_URL =>
-      'https://aquacity.uat.novaid.vn/web/api';
+      'https://aquacity.novaid.vn/web/api';
 }

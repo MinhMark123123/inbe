@@ -1,6 +1,7 @@
 import 'package:aac_core/aac_core.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:go_router/go_router.dart';
+import 'package:inabe/src/config/env_config.dart';
 import 'package:inabe/src/data/constants/constants.dart';
 import 'package:inabe/src/data/sources/local/key_data_source.dart';
 import 'package:inabe/src/navigation/routers.dart';
@@ -27,6 +28,7 @@ class _SplashPageState extends State<SplashPage> {
 
   Future<void> _initConfigs() async {
     await Future.delayed(Duration.zero);
+    EnvironmentConfig().initConfig(environment: EnvironmentConfig.dev);
     setState(() {
       _visible = true;
     });
@@ -57,21 +59,6 @@ class _SplashPageState extends State<SplashPage> {
         });
   }
 
-  Future<void> _checkNotification(BuildContext context) async {
-    context.go("/${RouterConstants.home}");
-    // final NotificationAppLaunchDetails? notificationAppLaunchDetails =
-    //     await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
-    //
-    // String? payload =
-    //     notificationAppLaunchDetails!.notificationResponse?.payload;
-    // print("payload=$payload");
-    //
-    // if (payload == null || payload.isEmpty) {
-    //   context.go("/${RouterConstants.home}");
-    // } else {
-    //   context.go("/$payload");
-    // }
-  }
 
   void _goToHome(BuildContext context) {
     Future.delayed(const Duration(milliseconds: 3000), () async {
@@ -82,7 +69,7 @@ class _SplashPageState extends State<SplashPage> {
         if (token.isEmpty) {
           context.go("/${RouterConstants.login}");
         } else {
-          _checkNotification(context);
+          context.go("/${RouterConstants.home}");
         }
       }
     });

@@ -35,6 +35,7 @@ class RegisterNotificationWidget
           return Container(
             margin: const EdgeInsets.only(top: Dimens.size20),
             child: Row(
+              mainAxisSize: MainAxisSize.max,
               children: [
                 SizedBox(
                   width: Dimens.size20,
@@ -56,7 +57,9 @@ class RegisterNotificationWidget
                   style: textStyle.medium.w400.fill(ColorName.carbonGrey),
                 ),
               ],
-            ),
+            ).onPressedInkWell(() {
+              viewModel.checkTurnOnNotification(!isTurnOn);
+            }),
           );
         }),
         const SizedBox(

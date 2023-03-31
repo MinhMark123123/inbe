@@ -44,6 +44,7 @@ class SettingNotificationWidget
           return Container(
             margin: const EdgeInsets.only(top: Dimens.size20),
             child: Row(
+              mainAxisSize: MainAxisSize.max,
               children: [
                 SizedBox(
                   width: Dimens.size20,
@@ -65,6 +66,8 @@ class SettingNotificationWidget
                   style: textStyle.medium.w400.fill(ColorName.carbonGrey),
                 ),
               ],
+            ).onPressedInkWell(
+              () => viewModel.checkTurnOnNotification(!isTurnOn),
             ),
           );
         }),
@@ -97,8 +100,6 @@ class SettingNotificationWidget
       context.go("/${RouterConstants.menu}");
     });
   }
-
-
 
   @override
   AutoDisposeProvider<SettingViewModel> viewModelProvider() {

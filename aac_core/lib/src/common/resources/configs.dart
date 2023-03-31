@@ -1,34 +1,16 @@
-import 'package:flutter/material.dart';
-import 'package:money_formatter/money_formatter.dart';
 import 'package:aac_core/aac_core.dart';
+import 'package:money_formatter/money_formatter.dart';
 
 class Configs {
-  static bool get buildUAT =>
-      AppEnvironment().environment == AppEnvironment.uat;
-
-  /*static Size screenSize = Size.zero;
-  static double screenWidth = 0;
-  static double screenHeight = 0;
-  static EdgeInsets screenPadding = EdgeInsets.zero;*/
-
   // Global Navigator Key
   static final GlobalKey<NavigatorState> navigatorKey =
       GlobalKey<NavigatorState>();
 
   // Global BuildContext
   static final BuildContext globalContext = navigatorKey.currentContext!;
-  //
-  // // Theme
-  // static const ThemeMode defaultTheme = ThemeMode.light;
 
   // Font
   static const String defaultFont = FontFamily.inter;
-
-  //
-  // Localization
-  // static const localizationsDelegates = AppLocalizations.localizationsDelegates;
-  // static AppLocalizations currentAppLocalizations =
-  //     AppLocalizations.of(globalContext);
 
   // Locale
   static const List<Locale> supportedLocales = [Locale('vi'), Locale('en')];
@@ -72,37 +54,15 @@ class Configs {
   // Set style iOS for widgets
   static const bool widgetStyleIOS = true;
 
-  // App Store NovaID Link
-  static const appStoreNovaIDLink =
-      'https://apps.apple.com/vn/app/nova-one/id1605584998';
-
-  // App Store ASC Community Link
-  static const appStoreASCCommunityLink =
-      'https://appstoreconnect.apple.com/apps/1636279172';
-
-  // App Store ASC Operation Link
-  static const appStoreASCOperationLink =
-      'https://appstoreconnect.apple.com/apps/1636317368';
-
-  // NovaID Open Link
-  static const novaIDOpenLink = 'https://applink.novaid.vn/open';
-
   // Use Map
   static const bool useGoogleMap = true;
 
   // Enable Tracking
   static const bool enableTracking = false;
 
-  // static const String mapLink =
-  //     'https://www.openstreetmap.org/?mlat=%s&mlon=%s';
-
-  // comgooglemaps://?center=37.759748,-122.427135&q=Pizza
-  // https://www.google.com/maps/search/?api=1&query=37.759748,-122.427135+(Pizza);
   static const String mapLink =
       'https://www.google.com/maps/search/?api=1&query=%s,%s+(%s)';
 
-  // comgooglemaps://?center=37.759748,-122.427135&daddr=Pizza
-  // https://www.google.com/maps/dir/?api=1&destination=37.759748,-122.427135
   static const String mapDirectionLink =
       'https://www.google.com/maps/dir/?api=1&destination=%s,%s';
 

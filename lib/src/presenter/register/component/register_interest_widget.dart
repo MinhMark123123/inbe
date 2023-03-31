@@ -58,6 +58,7 @@ class RegisterInterestWidget
       MapEntry<InterestModel, bool> entry, RegisterViewModel viewModel) {
     return Container(
       height: 30,
+      width: double.infinity,
       margin: const EdgeInsets.only(top: Dimens.size20),
       // color: Colors.yellow,
       child: Row(
@@ -88,7 +89,10 @@ class RegisterInterestWidget
             style: textStyle.medium.w400.fill(ColorName.carbonGrey),
           ),
         ],
-      ),
+      ).onPressedInkWell(() {
+          print("ttt ----> ${entry.value}");
+          viewModel.selectedCategory(entry.key, !entry.value);
+      }),
     );
   }
 

@@ -31,8 +31,6 @@ export 'src/extensions/color_extension.dart';
 export 'src/common/resources/configs.dart';
 export 'src/common/app_configs.dart';
 export 'src/common/resources/theme.dart';
-//Enviroment
-export 'src/flavor/environment.dart';
 
 //Validator input text
 export 'package:validators/sanitizers.dart';

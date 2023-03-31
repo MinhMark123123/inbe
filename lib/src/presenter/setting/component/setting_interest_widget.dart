@@ -60,6 +60,7 @@ class SettingInterestWidget extends ConsumerViewModelWidget<SettingViewModel> {
       margin: const EdgeInsets.only(top: Dimens.size20),
       // color: Colors.yellow,
       child: Row(
+        mainAxisSize: MainAxisSize.max,
         children: [
           SizedBox(
             width: Dimens.size20,
@@ -87,6 +88,8 @@ class SettingInterestWidget extends ConsumerViewModelWidget<SettingViewModel> {
             style: textStyle.medium.w400.fill(ColorName.carbonGrey),
           ),
         ],
+      ).onPressedInkWell(
+        () => viewModel.selectedCategory(entry.key, !entry.value),
       ),
     );
   }
