@@ -1,6 +1,8 @@
 import 'package:aac_core/aac_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:inabe/src/data/api/api_error.dart';
+import 'package:inabe/src/data/constants/constants.dart';
 import 'package:inabe/src/data/model/convenience_model.dart';
 import 'package:inabe/src/data/model/notification_model.dart';
 import 'package:inabe/src/data/model/top_slider_model.dart';
@@ -54,6 +56,7 @@ class HomePageViewModel extends ViewModel {
   void onInitState() {
     super.onInitState();
     print("on init state");
+    FirebaseMessaging.instance.subscribeToTopic(NotificationConstant.keyTopic);
     viewModelScope(() => _getDataTop());
   }
 

@@ -19,7 +19,7 @@ class RouterConstants{
   static const second = "second";
   static const emailDetail = "emailDetail";
   static const notificationDetail = "notificationDetail";
-  static const notificationList = "notificationList";
+  static const newsList = "newsList";
 
   static const event = "event";
   static const book = "book";

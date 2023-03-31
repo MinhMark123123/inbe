@@ -1,8 +1,11 @@
 import 'package:aac_core/aac_core.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:go_router/go_router.dart';
 import 'package:inabe/src/data/constants/constants.dart';
 import 'package:inabe/src/data/sources/local/key_data_source.dart';
 import 'package:inabe/src/navigation/routers.dart';
+
+import '../../domain/notification_task/push_notification.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -14,6 +17,8 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   late Future<void> initBuilder;
 
+  bool _visible = false;
+
   @override
   void initState() {
     initBuilder = _initConfigs();
@@ -22,6 +27,9 @@ class _SplashPageState extends State<SplashPage> {
 
   Future<void> _initConfigs() async {
     await Future.delayed(Duration.zero);
+    setState(() {
+      _visible = true;
+    });
     _goToHome(context);
   }
 
@@ -34,15 +42,35 @@ class _SplashPageState extends State<SplashPage> {
             body: Column(
               children: [
                 Expanded(
-                  child: Container(
-                    color: Colors.white,
-                    child: Assets.images.icLogoBig.image(),
+                  child: AnimatedOpacity(
+                    opacity: _visible ? 1.0 : 0.4,
+                    duration: const Duration(seconds: 2),
+                    child: Container(
+                      color: Colors.white,
+                      child: Assets.images.icLogoBig.image(),
+                    ),
                   ),
                 ),
               ],
             ),
           );
         });
+  }
+
+  Future<void> _checkNotification(BuildContext context) async {
+    context.go("/${RouterConstants.home}");
+    // final NotificationAppLaunchDetails? notificationAppLaunchDetails =
+    //     await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
+    //
+    // String? payload =
+    //     notificationAppLaunchDetails!.notificationResponse?.payload;
+    // print("payload=$payload");
+    //
+    // if (payload == null || payload.isEmpty) {
+    //   context.go("/${RouterConstants.home}");
+    // } else {
+    //   context.go("/$payload");
+    // }
   }
 
   void _goToHome(BuildContext context) {
@@ -54,7 +82,7 @@ class _SplashPageState extends State<SplashPage> {
         if (token.isEmpty) {
           context.go("/${RouterConstants.login}");
         } else {
-          context.go("/${RouterConstants.home}");
+          _checkNotification(context);
         }
       }
     });

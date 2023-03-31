@@ -19,9 +19,9 @@ class FirebaseManagement {
     //FCM
     FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
     FirebaseMessaging.onMessage.listen(WorkerUpdateInformation.foregroundFCM);
-    String? token = await FirebaseMessaging.instance.getToken();
-    print("ttt --- token FirebaseMessaging: $token");
-    await FirebaseMessaging.instance
+    // String? token = await FirebaseMessaging.instance.getToken();
+    // print("ttt --- token FirebaseMessaging: $token");
+    FirebaseMessaging.instance
         .subscribeToTopic(NotificationConstant.keyTopic);
   }
 }

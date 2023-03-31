@@ -58,7 +58,7 @@ class NewsPage extends ConsumerViewModelWidget<NewsViewModel> {
           onClickItem: (index, item) {
             launchWebPage(
               context,
-              "${RouterConstants.home}/${RouterConstants.notificationList}",
+              "${RouterConstants.home}/${RouterConstants.newsList}",
               item.link,
             );
           },

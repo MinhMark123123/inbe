@@ -139,31 +139,32 @@ Future<void> initNotification() async {
   );
 }
 
-Future<void> showNotification(String title, String body) async {
+Future<void> showNotification(
+  String title,
+  String body,
+  String routerPath,
+) async {
   const AndroidNotificationDetails androidNotificationDetails =
-  AndroidNotificationDetails('your channel id', 'your channel name',
-      channelDescription: 'your channel description',
-      importance: Importance.max,
-      priority: Priority.high,
-      ticker: 'ticker');
+      AndroidNotificationDetails('your channel id', 'your channel name',
+          channelDescription: 'your channel description',
+          importance: Importance.max,
+          priority: Priority.high,
+          ticker: 'ticker');
   const NotificationDetails notificationDetails =
-  NotificationDetails(android: androidNotificationDetails);
-  await flutterLocalNotificationsPlugin.show(
-      id++, title, body, notificationDetails,
-      payload: 'item x');
-
-
+      NotificationDetails(android: androidNotificationDetails);
+  await flutterLocalNotificationsPlugin
+      .show(id++, title, body, notificationDetails, payload: routerPath);
 }
 
 @pragma('vm:entry-point')
 void notificationTapBackground(NotificationResponse notificationResponse) {
   // ignore: avoid_print
-  print('notification(${notificationResponse.id}) action tapped: '
+  print('ttt --> notification(${notificationResponse.id}) action tapped: '
       '${notificationResponse.actionId} with'
       ' payload: ${notificationResponse.payload}');
   if (notificationResponse.input?.isNotEmpty ?? false) {
     // ignore: avoid_print
     print(
-        'notification action tapped with input: ${notificationResponse.input}');
+        'ttt --> notification action tapped with input: ${notificationResponse.input}');
   }
 }

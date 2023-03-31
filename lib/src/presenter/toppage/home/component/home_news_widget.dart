@@ -84,7 +84,7 @@ class HomeNewsWidget extends ConsumerViewModelWidget<HomePageViewModel> {
               ),
               onPressed: () => {
                 _context.go(
-                  "/home/${RouterConstants.notificationList}",
+                  "/home/${RouterConstants.newsList}",
                 )
               },
               child: Text(

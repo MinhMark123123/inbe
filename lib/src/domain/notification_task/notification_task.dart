@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:inabe/src/data/api/append_intercepter.dart';
 import 'package:inabe/src/data/api/append_user_intercepter.dart';
 import 'package:inabe/src/data/api/retrofit_client.dart';
@@ -9,6 +10,7 @@ import 'package:inabe/src/data/constants/constants.dart';
 import 'package:inabe/src/data/sources/local/key_data_source.dart';
 import 'package:inabe/src/di/di_config.dart';
 import 'package:inabe/src/domain/notification_task/push_notification.dart';
+import 'package:inabe/src/navigation/routers.dart';
 import 'package:inabe/src/utils/date_time_utils.dart';
 import 'package:inabe/src/utils/parse_util.dart';
 import 'package:workmanager/workmanager.dart';
@@ -85,7 +87,6 @@ class WorkerUpdateInformation {
     dio.interceptors.add(AuthUserInterceptor(sharePref));
     var rest = RestClient(dio);
 
-    String bodyNotify = "";
     //Email
     var email = await rest.getMyEmails(0, 5);
     var list = email.data;
@@ -114,7 +115,11 @@ class WorkerUpdateInformation {
             DateTimeUtils.formatJP,
           );
           final body = list.first.title ?? "";
-          showNotification(title, body);
+          showNotification(
+            title,
+            body,
+            RouterConstants.email,
+          );
         }
       } else if (element == "2") {
         if (lastEvent != eventList.first.date) {
@@ -124,7 +129,11 @@ class WorkerUpdateInformation {
             DateTimeUtils.formatJP,
           );
           final body = eventList.first.title ?? "";
-          showNotification(title, body);
+          showNotification(
+            title,
+            body,
+            "${RouterConstants.home}/${RouterConstants.event}",
+          );
         }
       } else {
         if (lastNews != listNewsModel.first.date) {
@@ -134,10 +143,27 @@ class WorkerUpdateInformation {
             DateTimeUtils.formatJP,
           );
           final body = listNewsModel.first.title ?? "";
-          showNotification(title, body);
+          showNotification(
+            title,
+            body,
+            "${RouterConstants.home}/${RouterConstants.newsList}",
+          );
         }
       }
     });
+  }
+}
+
+@pragma('vm:entry-point')
+void notificationTapBackground(NotificationResponse notificationResponse) {
+  // ignore: avoid_print
+  print('notification(${notificationResponse.id}) action tapped: '
+      '${notificationResponse.actionId} with'
+      ' payload: ${notificationResponse.payload}');
+  if (notificationResponse.input?.isNotEmpty ?? false) {
+    // ignore: avoid_print
+    print(
+        'notification action tapped with input: ${notificationResponse.input}');
   }
 }
 
@@ -207,7 +233,7 @@ void callbackDispatcher() {
                 DateTimeUtils.formatJP,
               );
               final body = list.first.title ?? "";
-              showNotification(title, body);
+              showNotification(title, body, RouterConstants.email);
             }
           } else if (element == "2") {
             if (lastEvent != eventList.first.date) {
@@ -217,7 +243,11 @@ void callbackDispatcher() {
                 DateTimeUtils.formatJP,
               );
               final body = eventList.first.title ?? "";
-              showNotification(title, body);
+              showNotification(
+                title,
+                body,
+                "${RouterConstants.home}/${RouterConstants.event}",
+              );
             }
           } else {
             if (lastNews != listNewsModel.first.date) {
@@ -227,7 +257,11 @@ void callbackDispatcher() {
                 DateTimeUtils.formatJP,
               );
               final body = listNewsModel.first.title ?? "";
-              showNotification(title, body);
+              showNotification(
+                title,
+                body,
+                "${RouterConstants.home}/${RouterConstants.newsList}",
+              );
             }
           }
         });

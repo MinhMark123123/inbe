@@ -9,7 +9,7 @@
 
    <application
        android:allowBackup="false"
-        android:label="inabe"
+        android:label="いなべ市"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
 

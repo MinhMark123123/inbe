@@ -148,6 +148,8 @@ class Assets {
 
   static const $AssetsFontsGen fonts = $AssetsFontsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
+  static const String mozart = 'assets/mozart.mp3';
+  static const String policy = 'assets/policy.html';
 }
 
 class AssetGenImage {

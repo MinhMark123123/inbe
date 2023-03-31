@@ -76,7 +76,7 @@ class RegisterActionWidget extends ConsumerViewModelWidget<RegisterViewModel> {
 
   void _showDialogInformation(BuildContext ct) {
     showDialog(
-      barrierDismissible: true,
+      barrierDismissible: false,
       context: ct,
       builder: (BuildContext context) {
         return AlertDialog(

@@ -149,7 +149,7 @@ class AppGoRouter {
                   webpage,
                   GoRoute(
                     name: "home/notificationList",
-                    path: RouterConstants.notificationList,
+                    path: RouterConstants.newsList,
                     builder: (context, state) {
                       return const NewsPage();
                     },
@@ -245,6 +245,7 @@ class AppGoRouter {
         navigatorKey: Configs.navigatorKey,
         initialLocation: RouterConstants.splash,
         // initialLocation: "/${RouterConstants.home}",
+    debugLogDiagnostics: true,
         observers: [
           GoRouterObserver(),
         ],
