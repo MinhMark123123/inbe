@@ -131,13 +131,16 @@ class RegisterViewModel extends ViewModel {
   }
 
   Future<void> doRegister() async {
+    final fcmToken = await userRepository.getFCMToken();
     final categories = convertCategories();
     final request = UserRequest(
         email: emailController.text,
         nickname: nicknameController.text,
         password: passwordController.text,
         pushNotifications: uiState.state.isTurnOn.toString(),
-        interestCategories: categories);
+        interestCategories: categories,
+        fcmDeviseToken: fcmToken,
+    );
 
     print("ttt resquest = $request\n"
         "json = ${request.toJson()}");

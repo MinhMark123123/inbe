@@ -14,6 +14,7 @@ UserRequest _$UserRequestFromJson(Map<String, dynamic> json) => UserRequest(
       interestCategories: (json['interest_categories'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
+      fcmDeviseToken: json['fcm_devise_token'] as String,
     );
 
 Map<String, dynamic> _$UserRequestToJson(UserRequest instance) =>
@@ -23,4 +24,5 @@ Map<String, dynamic> _$UserRequestToJson(UserRequest instance) =>
       'password': instance.password,
       'push_notifications': instance.pushNotifications,
       'interest_categories': instance.interestCategories,
+      'fcm_devise_token': instance.fcmDeviseToken,
     };

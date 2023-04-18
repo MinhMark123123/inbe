@@ -11,6 +11,8 @@ class UserRequest {
   String pushNotifications;
   @JsonKey(name: "interest_categories")
   List<String> interestCategories;
+  @JsonKey(name: "fcm_devise_token")
+  String fcmDeviseToken;
 
   UserRequest({
     required this.email,
@@ -18,6 +20,7 @@ class UserRequest {
     required this.password,
     required this.pushNotifications,
     required this.interestCategories,
+    required this.fcmDeviseToken,
   });
 
   factory UserRequest.fromJson(Map<String, dynamic> json) =>

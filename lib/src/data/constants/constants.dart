@@ -1,4 +1,5 @@
 class SecureKeys {
+  static const keyFCMToken = 'keyFCMToken';
   static const keyToken = 'keyToken';
   static const keyUid = 'keyUid';
   static const keyClient = 'keyClient';

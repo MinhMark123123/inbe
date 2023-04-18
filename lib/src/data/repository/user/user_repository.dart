@@ -53,6 +53,8 @@ abstract class UserRepository {
   Future<void> clearDataUser();
 
   Future<void> saveDataLogin(header.Headers headers);
+
+  Future<String> getFCMToken();
 }
 
 final userRepositoryProvider = Provider.autoDispose<UserRepository>((ref) {
@@ -181,5 +183,10 @@ class _UserRepositoryDefault extends UserRepository {
   void saveTurnOn(bool isTurnOn) {
     keyDataSource.setBool(PrefKeys.keyTurnOnNotify, isTurnOn);
     keyDataSource.setSecure(SecureKeys.keyTest, isTurnOn.toString());
+  }
+
+  @override
+  Future<String> getFCMToken() {
+    return keyDataSource.getFCMToken();
   }
 }

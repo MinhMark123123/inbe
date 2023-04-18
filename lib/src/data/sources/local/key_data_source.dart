@@ -75,6 +75,15 @@ class KeyDataSource {
     return await _secureStorage?.get(key) ?? '';
   }
 
+  Future<void> setFCMToken(String? fcmToken) async {
+    return await setSecure(SecureKeys.keyFCMToken, fcmToken);
+  }
+
+  Future<String> getFCMToken() async {
+    return await getSecure(SecureKeys.keyFCMToken);
+  }
+
+
   Future<void> setToken(String? token) async {
     return await setSecure(SecureKeys.keyToken, token);
   }

@@ -54,6 +54,7 @@ class LoginViewModel extends ViewModel {
   }
 
   Future<void> doLoginAndUpdate() async {
+    final fcmToken = await repository.getFCMToken();
     bool isError = validateDataLogin();
 
     if (isError) {
@@ -61,7 +62,11 @@ class LoginViewModel extends ViewModel {
     } else {
       _isShowLoading(true);
       final request = LoginRequest(
-          email: emailController.text, password: passwordController.text);
+        email: emailController.text,
+        password: passwordController.text,
+        fcmDeviseToken: fcmToken,
+      );
+      print("ttt fcm : $fcmToken");
 
       repository.loginApi(request, (userResponse) {
         uiState.update((state) => state.copyWith(isSuccess: true));
@@ -69,8 +74,7 @@ class LoginViewModel extends ViewModel {
       }, (obj) {
         _isShowLoading(false);
         ApiError(obj, errorData: (code, msg) {
-          uiState
-              .update((state) => state.copyWith(errorMessage: "$msg"));
+          uiState.update((state) => state.copyWith(errorMessage: "$msg"));
         });
       });
     }
