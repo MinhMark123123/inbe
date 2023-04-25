@@ -20,6 +20,10 @@ class FirebaseManagement {
     //FCM
     FirebaseMessaging.instance.requestPermission();
     String? token = await FirebaseMessaging.instance.getToken();
+    if (token.isEmpty) {
+      print("ttt --- getAPNSToken FirebaseMessaging");
+      token = await FirebaseMessaging.instance.getAPNSToken();
+    }
     print("ttt --- token FirebaseMessaging: $token");
     KeyDataSource sharePref = KeyDataSource();
     sharePref.setFCMToken(token);
