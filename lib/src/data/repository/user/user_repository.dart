@@ -148,8 +148,9 @@ class _UserRepositoryDefault extends UserRepository {
 
   @override
   Future<void> clearDataUser() {
-    keyDataSource.delete(PrefKeys.keyToken);
-    return keyDataSource.clear();
+    keyDataSource.delete(PrefKeys.keyClient);
+    keyDataSource.delete(PrefKeys.keyUid);
+    return keyDataSource.delete(PrefKeys.keyToken);
   }
 
   @override

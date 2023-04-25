@@ -64,6 +64,8 @@ class _SplashPageState extends State<SplashPage> {
     Future.delayed(const Duration(milliseconds: 3000), () async {
       final keyDataSource = KeyDataSource();
       final token = await keyDataSource.getSecure(PrefKeys.keyToken);
+      final tokenFCM = await keyDataSource.getSecure(SecureKeys.keyFCMToken);
+      print("ttt: tokenKey  $token ::: FCM --> $tokenFCM");
 
       if (mounted) {
         if (token.isEmpty) {

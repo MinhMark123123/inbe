@@ -18,6 +18,7 @@ class FirebaseManagement {
     FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
     //FCM
+    FirebaseMessaging.instance.requestPermission();
     String? token = await FirebaseMessaging.instance.getToken();
     print("ttt --- token FirebaseMessaging: $token");
     KeyDataSource sharePref = KeyDataSource();
