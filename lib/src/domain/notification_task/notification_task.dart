@@ -29,12 +29,13 @@ class WorkerUpdateInformation {
   }
 
   Future<void> init() async {
-    Workmanager().initialize(callbackDispatcher);
+    Workmanager().initialize(callbackDispatcher, isInDebugMode: true);
   }
 
   static Future<void> callRegisterTask() async {
-    Workmanager().cancelAll();
-    Workmanager().registerOneOffTask(
+    // await Workmanager().cancelAll();
+
+    await Workmanager().registerOneOffTask(
       simpleTaskKey,
       simpleTaskKey,
       initialDelay: const Duration(seconds: 3),
@@ -54,6 +55,7 @@ class WorkerUpdateInformation {
   }
 
   static Future<void> _checkShowNotify() async {
+    var startTime = DateTime.now();
     KeyDataSource sharePref = KeyDataSource();
     var isLogin = await sharePref.getToken();
     if (isLogin.isEmpty) {
@@ -151,25 +153,32 @@ class WorkerUpdateInformation {
         }
       }
     });
+
+    print("ttt int time");
+    final timeEnd = DateTime.now();
+    // print("ttt time---> ${timeEnd.subtract(timeStart.timeZoneOffset)}");
+    print("ttt time---> ${timeEnd.difference(startTime).inMilliseconds}");
+
   }
 }
 
-@pragma('vm:entry-point')
-void notificationTapBackground(NotificationResponse notificationResponse) {
-  // ignore: avoid_print
-  print('notification(${notificationResponse.id}) action tapped: '
-      '${notificationResponse.actionId} with'
-      ' payload: ${notificationResponse.payload}');
-  if (notificationResponse.input?.isNotEmpty ?? false) {
-    // ignore: avoid_print
-    print(
-        'notification action tapped with input: ${notificationResponse.input}');
-  }
-}
+// @pragma('vm:entry-point')
+// void notificationTapBackground(NotificationResponse notificationResponse) {
+//   // ignore: avoid_print
+//   print('notification(${notificationResponse.id}) action tapped: '
+//       '${notificationResponse.actionId} with'
+//       ' payload: ${notificationResponse.payload}');
+//   if (notificationResponse.input?.isNotEmpty ?? false) {
+//     // ignore: avoid_print
+//     print(
+//         'notification action tapped with input: ${notificationResponse.input}');
+//   }
+// }
 
 @pragma('vm:entry-point')
 void callbackDispatcher() {
   Workmanager().executeTask((taskName, inputData) async {
+    final timeStart = DateTime.now();
     switch (taskName) {
       case simpleTaskKey:
         KeyDataSource sharePref = KeyDataSource();
@@ -223,6 +232,12 @@ void callbackDispatcher() {
 
         print(
             "ttt: notificatin_task --> Email ::: 1. ${list.first.title} :::  ${list.first.publishedAt}");
+
+
+        print("ttt int time");
+        final timeEnd = DateTime.now();
+        // print("ttt time---> ${timeEnd.subtract(timeStart.timeZoneOffset)}");
+        print("ttt time---> ${timeEnd.difference(timeStart).inMilliseconds}");
 
         categories.forEach((element) {
           if (element == "1") {

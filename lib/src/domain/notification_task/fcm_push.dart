@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
@@ -7,20 +9,25 @@ import 'package:inabe/src/domain/notification_task/notification_task.dart';
 
 @pragma('vm:entry-point')
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-
   if (Firebase.apps.isEmpty) {
-    await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+    await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform);
   }
-  // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  await WorkerUpdateInformation().init();
   await setupFlutterNotifications();
-  // showFlutterNotification(message);
-  WorkerUpdateInformation.callRegisterTask();
+  print('fcm call work manager ${message.messageId}');
+
+  if (Platform.isAndroid) {
+    await WorkerUpdateInformation.callRegisterTask();
+  } else if (Platform.isIOS) {
+    await WorkerUpdateInformation.foregroundFCM(message);
+  }
+
   // If you're going to use other Firebase services in the background, such as Firestore,
   // make sure you call `initializeApp` before using other Firebase services.
   print('Handling a background message ${message.messageId}');
 }
-
-
 
 // Create a [AndroidNotificationChannel] for heads up notifications
 late AndroidNotificationChannel channel;
@@ -35,7 +42,7 @@ Future<void> setupFlutterNotifications() async {
     'high_importance_channel', // id
     'High Importance Notifications', // title
     description:
-    'This channel is used for important notifications.', // description
+        'This channel is used for important notifications.', // description
     importance: Importance.high,
   );
 
@@ -47,7 +54,7 @@ Future<void> setupFlutterNotifications() async {
   /// default FCM channel to enable heads up notifications.
   await flutterLocalNotificationsPlugin
       .resolvePlatformSpecificImplementation<
-      AndroidFlutterLocalNotificationsPlugin>()
+          AndroidFlutterLocalNotificationsPlugin>()
       ?.createNotificationChannel(channel);
 
   /// Update the iOS foreground notification presentation options to allow
