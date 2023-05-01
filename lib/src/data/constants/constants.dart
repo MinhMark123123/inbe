@@ -1,4 +1,5 @@
 class SecureKeys {
+  static const keyFirstLaunch = 'keyFirstLaunch';
   static const keyFCMToken = 'keyFCMToken';
   static const keyToken = 'keyToken';
   static const keyUid = 'keyUid';
@@ -14,6 +15,7 @@ class SecureKeys {
 }
 
 class PrefKeys {
+  static const keyFirstLaunch = 'keyFirstLaunch';
   static const keyToken = 'keyToken';
   static const keyUid = 'keyUid';
   static const keyClient = 'keyClient';

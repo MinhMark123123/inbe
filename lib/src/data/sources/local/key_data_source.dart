@@ -35,7 +35,7 @@ class KeyDataSource {
     await _prefStorage?.set(key, value) ?? false;
   }
 
-  String get(String key) {
+  Future<String> get(String key) async {
     return _prefStorage?.get(key) ?? '';
   }
 
@@ -57,7 +57,7 @@ class KeyDataSource {
   Future<void> clear() async {
     print('KeyDataSource ---- clear');
     await _prefStorage?.clear();
-    await _secureStorage?.clear();
+    return await _secureStorage?.clear();
   }
 
   Future<void> clearUserInfo() async {
@@ -73,6 +73,16 @@ class KeyDataSource {
 
   Future<String> getSecure(String key) async {
     return await _secureStorage?.get(key) ?? '';
+  }
+
+  Future<void> setFirstLaunch(String isFirst) async {
+    return await set(PrefKeys.keyFirstLaunch, isFirst);
+  }
+
+  Future<bool> getFirstLaunch() async {
+    String isFirst = await get(PrefKeys.keyFirstLaunch);
+    print("ttt isFirst = $isFirst");
+    return isFirst.isEmpty;
   }
 
   Future<void> setFCMToken(String? fcmToken) async {

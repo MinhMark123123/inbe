@@ -7,18 +7,25 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:inabe/gen_l10n/app_localizations.dart';
+import 'package:inabe/src/data/constants/constants.dart';
+import 'package:inabe/src/data/sources/local/key_data_source.dart';
+import 'package:inabe/src/data/sources/local/share_pref.dart';
 import 'package:inabe/src/domain/firebase/firebase_management.dart';
 import 'package:inabe/src/domain/notification_task/notification_task.dart';
 import 'package:inabe/src/domain/notification_task/push_notification.dart';
 import 'package:inabe/src/navigation/app_routers.dart';
 import 'package:inabe/src/state/riverpod_ui_support.dart';
+import 'package:inabe/src/utils/auth_utils.dart';
 
 import 'app_viewmodel.dart';
 
 void main() async {
   runZonedGuarded<Future<void>>(() async {
     WidgetsFlutterBinding.ensureInitialized();
-    // Initialize Firebase.
+    SharePref sharePref = SharePref();
+    KeyDataSource keyDataSource = KeyDataSource();
+    await AuthUtils.firstLaunch(sharePref, keyDataSource);
+
     FirebaseManagement.initializeApp();
     await ScreenUtil.ensureScreenSize();
     initNotification();

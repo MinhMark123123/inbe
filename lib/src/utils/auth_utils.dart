@@ -1,5 +1,7 @@
 import 'package:aac_core/aac_core.dart';
+import 'package:inabe/src/data/constants/constants.dart';
 import 'package:inabe/src/data/sources/local/key_data_source.dart';
+import 'package:inabe/src/data/sources/local/share_pref.dart';
 
 class AuthUtils {
   static updateToken(
@@ -17,6 +19,16 @@ class AuthUtils {
     // await DBDataSource.clear();
     // await GraphQLConfig.reset();
     // await RestfulConfig.reset();
+  }
+
+  static Future<dynamic> firstLaunch(SharePref sharePref, KeyDataSource keyDataSource) async {
+    // Initialize Firebase.
+    String? isFirst = await sharePref.get(PrefKeys.keyFirstLaunch);
+    if (isFirst == null || isFirst.isEmpty) {
+      print("ttt start isFirst = $isFirst");
+      await keyDataSource.clear();
+      await sharePref.set(PrefKeys.keyFirstLaunch, "aaa");
+    }
   }
 
   static Future<dynamic> logout(KeyDataSource keyDataSource,

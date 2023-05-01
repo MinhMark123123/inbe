@@ -18,18 +18,19 @@ class FirebaseManagement {
     FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
     //FCM
-    FirebaseMessaging.instance.requestPermission();
-    String? token = await FirebaseMessaging.instance.getToken();
+    FirebaseMessaging firebaseMessaging;
+    firebaseMessaging = FirebaseMessaging.instance;
+    firebaseMessaging.requestPermission();
+    String? token = await firebaseMessaging.getToken();
     if (token.isEmpty) {
       print("ttt --- getAPNSToken FirebaseMessaging");
-      token = await FirebaseMessaging.instance.getAPNSToken();
+      token = await firebaseMessaging.getAPNSToken();
     }
     print("ttt --- token FirebaseMessaging: $token");
     KeyDataSource sharePref = KeyDataSource();
     sharePref.setFCMToken(token);
     FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
     FirebaseMessaging.onMessage.listen(WorkerUpdateInformation.foregroundFCM);
-    FirebaseMessaging.instance
-        .subscribeToTopic(NotificationConstant.keyTopic);
+    firebaseMessaging.subscribeToTopic(NotificationConstant.keyTopic);
   }
 }

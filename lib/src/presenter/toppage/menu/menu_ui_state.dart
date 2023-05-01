@@ -11,6 +11,7 @@ class MenuUIState with _$MenuUIState {
   factory MenuUIState({
     @Default(false) bool isSignOut,
     @Default(false) bool isSuccess,
+    @Default('') String tokenFCM,
     @Default('') String errorMsg,
   }) = _MenuUIState;
 }

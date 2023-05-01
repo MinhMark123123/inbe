@@ -244,8 +244,7 @@ class AppGoRouter {
   GoRouter get router => GoRouter(
         navigatorKey: Configs.navigatorKey,
         initialLocation: RouterConstants.splash,
-        // initialLocation: "/${RouterConstants.home}",
-    debugLogDiagnostics: true,
+    // debugLogDiagnostics: true,
         observers: [
           GoRouterObserver(),
         ],
