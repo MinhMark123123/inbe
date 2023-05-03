@@ -20,7 +20,7 @@ class FirebaseManagement {
     //FCM
     FirebaseMessaging firebaseMessaging;
     firebaseMessaging = FirebaseMessaging.instance;
-    firebaseMessaging.requestPermission();
+    await firebaseMessaging.requestPermission();
     String? token = await firebaseMessaging.getToken();
     if (token.isEmpty) {
       print("ttt --- getAPNSToken FirebaseMessaging");
