@@ -2,11 +2,15 @@ import 'package:aac_core/aac_core.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:go_router/go_router.dart';
 import 'package:inabe/firebase_options.dart';
 import 'package:inabe/src/data/constants/constants.dart';
+import 'package:inabe/src/data/model/data_push_model.dart';
 import 'package:inabe/src/data/sources/local/key_data_source.dart';
 import 'package:inabe/src/domain/notification_task/fcm_push.dart';
 import 'package:inabe/src/domain/notification_task/notification_task.dart';
+import 'package:inabe/src/navigation/routers.dart';
+import 'package:inabe/src/utils/extensions/asset_extension.dart';
 
 class FirebaseManagement {
   FirebaseManagement._();
@@ -32,5 +36,22 @@ class FirebaseManagement {
     FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
     FirebaseMessaging.onMessage.listen(WorkerUpdateInformation.foregroundFCM);
     firebaseMessaging.subscribeToTopic(NotificationConstant.keyTopic);
+    Stream<RemoteMessage> _stream = FirebaseMessaging.onMessageOpenedApp;
+    _stream.listen((RemoteMessage message) async {
+      DataPushModel dataPushModel = DataPushModel.fromJson(message.data);
+
+      if (message.notification != null) {
+        print('onMessageOpenedApp Message a notification: ${message.notification}');
+        var path = "${RouterConstants.home}/${RouterConstants.newsList}";
+        if (dataPushModel.id != null) {
+          path = RouterConstants.email;
+        } else if (dataPushModel.href != null) {
+          path = "${RouterConstants.home}/${RouterConstants.event}";
+        } else {
+          path = "${RouterConstants.home}/${RouterConstants.newsList}";
+        }
+        context?.go(path);
+      }
+    });
   }
 }

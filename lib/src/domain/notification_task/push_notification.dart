@@ -156,6 +156,10 @@ Future<void> showNotification(
       .show(id++, title, body, notificationDetails, payload: routerPath);
 }
 
+Future onSelectNotification(String payload) async {
+  print('onSelectNotification Message data: $payload');
+}
+
 @pragma('vm:entry-point')
 void notificationTapBackground(NotificationResponse notificationResponse) {
   // ignore: avoid_print

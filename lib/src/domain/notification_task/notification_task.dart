@@ -7,6 +7,7 @@ import 'package:inabe/src/data/api/append_intercepter.dart';
 import 'package:inabe/src/data/api/append_user_intercepter.dart';
 import 'package:inabe/src/data/api/retrofit_client.dart';
 import 'package:inabe/src/data/constants/constants.dart';
+import 'package:inabe/src/data/model/data_push_model.dart';
 import 'package:inabe/src/data/sources/local/key_data_source.dart';
 import 'package:inabe/src/di/di_config.dart';
 import 'package:inabe/src/domain/notification_task/push_notification.dart';
@@ -45,12 +46,31 @@ class WorkerUpdateInformation {
   }
 
   static Future<void> foregroundFCM(RemoteMessage message) async {
-    await _checkShowNotify();
+    // await _checkShowNotify();
+
     print('Got a message whilst in the foreground!');
+
     print('Message data: ${message.data}');
+
+    DataPushModel dataPushModel = DataPushModel.fromJson(message.data);
+
+    print('Message data: id = ${dataPushModel.id} ; href = ${dataPushModel.href} ');
 
     if (message.notification != null) {
       print('Message also contained a notification: ${message.notification}');
+      var path = "${RouterConstants.home}/${RouterConstants.newsList}";
+      if (dataPushModel.id != null) {
+        path = RouterConstants.email;
+      } else if (dataPushModel.href != null) {
+        path = "${RouterConstants.home}/${RouterConstants.event}";
+      } else {
+        path = "${RouterConstants.home}/${RouterConstants.newsList}";
+      }
+      showNotification(
+        message.notification?.title ?? "AAA",
+        message.notification?.body ?? "BBB",
+        path,
+      );
     }
   }
 

@@ -5,7 +5,9 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:inabe/firebase_options.dart';
+import 'package:inabe/src/data/model/data_push_model.dart';
 import 'package:inabe/src/domain/notification_task/notification_task.dart';
+import 'package:inabe/src/navigation/routers.dart';
 
 @pragma('vm:entry-point')
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -16,17 +18,23 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 
   await WorkerUpdateInformation().init();
   await setupFlutterNotifications();
-  print('fcm call work manager ${message.messageId}');
+  print('FCM background call work manager ${message.messageId}');
 
-  if (Platform.isAndroid) {
-    await WorkerUpdateInformation.callRegisterTask();
-  } else if (Platform.isIOS) {
-    await WorkerUpdateInformation.foregroundFCM(message);
-  }
+
+  print("ttt ---> FCM background showFlutterNotification data  ::: ${message.data}");
+
+
+  // await WorkerUpdateInformation.foregroundFCM(message);
+
+  // if (Platform.isAndroid) {
+  //   await WorkerUpdateInformation.callRegisterTask();
+  // } else if (Platform.isIOS) {
+  //   await WorkerUpdateInformation.foregroundFCM(message);
+  // }
 
   // If you're going to use other Firebase services in the background, such as Firestore,
   // make sure you call `initializeApp` before using other Firebase services.
-  print('Handling a background message ${message.messageId}');
+  print('Handling a FCM background message ${message.messageId}');
 }
 
 // Create a [AndroidNotificationChannel] for heads up notifications
@@ -71,6 +79,15 @@ void showFlutterNotification(RemoteMessage message) {
   RemoteNotification? notification = message.notification;
   AndroidNotification? android = message.notification?.android;
   print("ttt ---> showFlutterNotification ::: $message : $kIsWeb");
+  DataPushModel dataPushModel = DataPushModel.fromJson(message.data);
+  var path = "${RouterConstants.home}/${RouterConstants.newsList}";
+  if (dataPushModel.id != null) {
+    path = RouterConstants.email;
+  } else if (dataPushModel.href != null) {
+    path = "${RouterConstants.home}/${RouterConstants.event}";
+  } else {
+    path = "${RouterConstants.home}/${RouterConstants.newsList}";
+  }
   if (notification != null && android != null && !kIsWeb) {
     flutterLocalNotificationsPlugin.show(
       notification.hashCode,
@@ -86,6 +103,7 @@ void showFlutterNotification(RemoteMessage message) {
           icon: 'launch_background',
         ),
       ),
+      payload: path
     );
   }
 }
