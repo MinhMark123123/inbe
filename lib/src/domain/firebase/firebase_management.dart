@@ -33,25 +33,45 @@ class FirebaseManagement {
     print("ttt --- token FirebaseMessaging: $token");
     KeyDataSource sharePref = KeyDataSource();
     sharePref.setFCMToken(token);
-    FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+    // Get any messages which caused the application to open from
+    // a terminated state.
+    RemoteMessage? initialMessage = await FirebaseMessaging.instance.getInitialMessage();
+    // If the message also contains a data property with a "type" of "chat",
+    // navigate to a chat screen
+    if (initialMessage != null) {
+      print('onMessageOpenedApp at initialMessage: ');
+      handleDataMessage(initialMessage);
+    }
+    //
     FirebaseMessaging.onMessage.listen(WorkerUpdateInformation.foregroundFCM);
-    firebaseMessaging.subscribeToTopic(NotificationConstant.keyTopic);
-    Stream<RemoteMessage> _stream = FirebaseMessaging.onMessageOpenedApp;
-    _stream.listen((RemoteMessage message) async {
-      DataPushModel dataPushModel = DataPushModel.fromJson(message.data);
+    // FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+    // firebaseMessaging.subscribeToTopic(NotificationConstant.keyTopic);
+    //background
+    FirebaseMessaging.onMessageOpenedApp.listen(handleDataMessage);
+  }
 
-      if (message.notification != null) {
-        print('onMessageOpenedApp Message a notification: ${message.notification}');
-        var path = "${RouterConstants.home}/${RouterConstants.newsList}";
-        if (dataPushModel.id != null) {
-          path = RouterConstants.email;
-        } else if (dataPushModel.href != null) {
-          path = "${RouterConstants.home}/${RouterConstants.event}";
-        } else {
-          path = "${RouterConstants.home}/${RouterConstants.newsList}";
-        }
-        context?.go(path);
-      }
-    });
+  static void handleDataMessage(RemoteMessage message) {
+
+    DataPushModel dataPushModel = DataPushModel.fromJson(message.data);
+    print('ttt -----> _handleDataMessage');
+    if (message.notification != null) {
+      print('onMessageOpenedApp Message a notification: ${message.notification?.toMap().toString()}');
+      var path = "/${RouterConstants.home}/${RouterConstants.newsList}";
+      print('ttt -----> _handleDataMessage 2');
+      /*if (dataPushModel.id != null) {
+        path = RouterConstants.email;
+      } else if (dataPushModel.href != null) {
+        path = "${RouterConstants.home}/${RouterConstants.event}";
+      } else {
+        path = "${RouterConstants.home}/${RouterConstants.newsList}";
+      }*/
+      //await Future.delayed(Duration.zero);
+      navigateFromPush(path);
+    }
+  }
+
+  static void navigateFromPush(String path) {
+    print("go with context ${Configs.navigatorKey.currentContext != null} path : $path");
+    Configs.navigatorKey.currentContext?.go(path);
   }
 }

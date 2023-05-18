@@ -80,8 +80,7 @@ class AppGoRouter {
           name: RouterConstants.resetPw,
           path: RouterConstants.resetPw,
           builder: (context, state) {
-            return ResetPasswordPage(
-                request: state.extra as ForgotPasswordRequest);
+            return ResetPasswordPage(request: state.extra as ForgotPasswordRequest);
           },
         ),
       ]);
@@ -107,7 +106,7 @@ class AppGoRouter {
                 return const FAQPage();
               },
             ),
-              // webpage,
+            // webpage,
 
             GoRoute(
               name: RouterConstants.policy,
@@ -176,25 +175,19 @@ class AppGoRouter {
                         webpage,
                       ]),
                   GoRoute(
-                    name: "home/book",
-                    path: RouterConstants.book,
-                    builder: (context, state) {
-                      return const ConvenienceBookPage();
-                    },
-                    routes:[
-                      webpage
-                    ]
-                  ),
+                      name: "home/book",
+                      path: RouterConstants.book,
+                      builder: (context, state) {
+                        return const ConvenienceBookPage();
+                      },
+                      routes: [webpage]),
                   GoRoute(
-                    name: "home/electronic_app",
-                    path: RouterConstants.electronic_app,
-                    builder: (context, state) {
-                      return const ElectronicAppPage();
-                    },
-                    routes: [
-                      webpage
-                    ]
-                  ),
+                      name: "home/electronic_app",
+                      path: RouterConstants.electronic_app,
+                      builder: (context, state) {
+                        return const ElectronicAppPage();
+                      },
+                      routes: [webpage]),
                   // GoRoute(
                   //   name: "home/electronic_lib",
                   //   path: RouterConstants.electronic_lib,
@@ -244,7 +237,7 @@ class AppGoRouter {
   GoRouter get router => GoRouter(
         navigatorKey: Configs.navigatorKey,
         initialLocation: RouterConstants.splash,
-    // debugLogDiagnostics: true,
+        debugLogDiagnostics: true,
         observers: [
           GoRouterObserver(),
         ],

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:aac_core/aac_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -18,6 +19,7 @@ import 'package:inabe/src/state/riverpod_ui_support.dart';
 import 'package:inabe/src/utils/auth_utils.dart';
 
 import 'app_viewmodel.dart';
+import 'src/navigation/routers.dart';
 
 void main() async {
   runZonedGuarded<Future<void>>(() async {
@@ -26,7 +28,7 @@ void main() async {
     KeyDataSource keyDataSource = KeyDataSource();
     await AuthUtils.firstLaunch(sharePref, keyDataSource);
 
-    FirebaseManagement.initializeApp();
+
     await ScreenUtil.ensureScreenSize();
     initNotification();
     await WorkerUpdateInformation().init();
@@ -40,13 +42,23 @@ class MyApp extends ConsumerViewModelWidget<AppViewModel> {
   const MyApp({super.key});
 
   @override
+  void aWake(WidgetRef ref, AppViewModel viewModel) {
+    FirebaseManagement.initializeApp();
+    selectNotificationStream.stream.listen((path){
+      var newPath = "/${RouterConstants.home}/${RouterConstants.newsList}";
+      FirebaseManagement.navigateFromPush(newPath);
+    });
+    super.aWake(ref, viewModel);
+  }
+
+  @override
   Widget buildWidget(BuildContext context, WidgetRef ref, viewModel) {
-    ref.listen(viewModel.pathNotificationProvider, (previous, next) {
+    /*ref.listen(viewModel.pathNotificationProvider, (previous, next) {
       if (next.isNotEmpty) {
         Configs.navigatorKey.currentContext?.go("/$next");
         viewModel.resetState();
       }
-    });
+    });*/
 
     return ScreenUtilInit(
       designSize: const Size(375, 812),

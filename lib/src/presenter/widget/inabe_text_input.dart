@@ -50,6 +50,7 @@ class InabeTextInput extends StatelessWidget {
     return SizedBox(
       height: height,
       child: TextFormField(
+        onTapOutside: (_) => FocusManager.instance.primaryFocus?.unfocus(),
         onChanged: (value) {
           if (onValueChanged != null) {
             onValueChanged!(value);

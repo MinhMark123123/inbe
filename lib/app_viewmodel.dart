@@ -38,7 +38,7 @@ class AppViewModel extends ViewModel {
   @override
   void onResumed() {
     print("ttt --- onResumed --- AppViewmodel ");
-    _isHasNotification();
+    //_isHasNotification();
   }
 
   Future<void> _isHasNotification() async {
