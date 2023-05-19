@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -59,12 +60,17 @@ class WorkerUpdateInformation {
     if (message.notification != null) {
       print('Message also contained a notification: ${message.notification}');
       var path = "${RouterConstants.home}/${RouterConstants.newsList}";
-      if (dataPushModel.id != null) {
-        path = RouterConstants.email;
-      } else if (dataPushModel.href != null) {
-        path = "${RouterConstants.home}/${RouterConstants.event}";
+      /*if (dataPushModel.id != null) {
+        // path = RouterConstants.email;
+        // path = RouterConstants.email;
+        // path = message.data.toString();
+        path = jsonEncode(message.data);
+      } else */if (dataPushModel.href != null) {
+        // path = "${RouterConstants.home}/${RouterConstants.event}";
+        path = jsonEncode(message.data);
       } else {
-        path = "${RouterConstants.home}/${RouterConstants.newsList}";
+        path = jsonEncode(message.data);
+        // path = "${RouterConstants.home}/${RouterConstants.newsList}";
       }
       showNotification(
         message.notification?.title ?? "AAA",

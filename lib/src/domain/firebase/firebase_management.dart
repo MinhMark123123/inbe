@@ -45,7 +45,6 @@ class FirebaseManagement {
     //
     FirebaseMessaging.onMessage.listen(WorkerUpdateInformation.foregroundFCM);
     // FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
-    // firebaseMessaging.subscribeToTopic(NotificationConstant.keyTopic);
     //background
     FirebaseMessaging.onMessageOpenedApp.listen(handleDataMessage);
   }
@@ -68,6 +67,11 @@ class FirebaseManagement {
       //await Future.delayed(Duration.zero);
       navigateFromPush(path);
     }
+  }
+
+  static void navigateFromPushData(String path, Object data) {
+    print("go with context ${Configs.navigatorKey.currentContext != null} path : $path");
+    Configs.navigatorKey.currentContext?.go(path, extra: data);
   }
 
   static void navigateFromPush(String path) {

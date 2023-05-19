@@ -34,7 +34,3 @@ class PrefKeys {
   static const keyListCategory = 'keyListCategory';
   static const keyTurnOnNotify = 'keyTurnOnNotify';
 }
-
-class NotificationConstant {
-  static const keyTopic = 'push_notifications';
-}

@@ -147,6 +147,14 @@ class AppGoRouter {
                 routes: [
                   webpage,
                   GoRoute(
+                    path: RouterConstants.emailDetail,
+                    builder: (context, state) {
+                      return EmailDetailPage(
+                        emailModel: state.extra! as EmailModel,
+                      );
+                    },
+                  ),
+                  GoRoute(
                     name: "home/notificationList",
                     path: RouterConstants.newsList,
                     builder: (context, state) {

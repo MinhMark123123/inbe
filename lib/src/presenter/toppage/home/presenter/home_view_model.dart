@@ -56,7 +56,6 @@ class HomePageViewModel extends ViewModel {
   void onInitState() {
     super.onInitState();
     print("on init state");
-    FirebaseMessaging.instance.subscribeToTopic(NotificationConstant.keyTopic);
     viewModelScope(() => _getDataTop());
   }
 
